@@ -183,7 +183,7 @@
  
  #define FLAG_NO_POLL 8
 
-class RF24;
+//class RF24;
 
 /**
  * Header which is sent with each message

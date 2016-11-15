@@ -47,7 +47,7 @@ bool is_valid_address( uint16_t node );
 /******************************************************************/
 #if defined (RF24_LINUX) 
   #if !defined (DUAL_HEAD_RADIO)
-  RF24Network::RF24Network( RF24& _radio ): radio(_radio), frame_size(MAX_FRAME_SIZE)
+  RF24Network::RF24Network( RF24& _radio): radio(_radio), frame_size(MAX_FRAME_SIZE)
   #else
   RF24Network::RF24Network( RF24& _radio, RF24& _radio1 ): radio(_radio), radio1(_radio1),frame_size(MAX_FRAME_SIZE)
   #endif
@@ -82,32 +82,32 @@ void RF24Network::begin(uint8_t _channel, uint16_t _node_address )
 
   node_address = _node_address;
 
-  if ( ! radio.isValid() ){
+  if ( ! RF24_isValid(&radio) ){
     return;
   }
 
-  // Set up the radio the way we want it to look
+  // Set up the RF24_the way we want it to look
   if(_channel != USE_CURRENT_CHANNEL){
-    radio.setChannel(_channel);
+    RF24_setChannel(&radio,_channel);
   }
-  //radio.enableDynamicAck();
-  radio.setAutoAck(0,0);
+  //RF24_enableDynamicAck();
+  RF24_setAutoAck_p(&radio,0,0);
   
   #if defined (ENABLE_DYNAMIC_PAYLOADS)
-  radio.enableDynamicPayloads();
+  RF24_enableDynamicPayloads(&radio);
   #endif
   
   // Use different retry periods to reduce data collisions
   uint8_t retryVar = (((node_address % 6)+1) *2) + 3;
-  radio.setRetries(retryVar, 5); // max about 85ms per attempt
+  RF24_setRetries(&radio,retryVar, 5); // max about 85ms per attempt
   txTimeout = 25;
   routeTimeout = txTimeout*3; // Adjust for max delay per node within a single chain
 
 
 #if defined (DUAL_HEAD_RADIO)
-  radio1.setChannel(_channel);
-  radio1.enableDynamicAck();
-  radio1.enableDynamicPayloads();
+  RF24_setChannel(&radio,_channel);
+  RF24_enableDynamicAck(&radio);
+  RF24_enableDynamicPayloads(&radio);
 #endif
 
   // Setup our address helper cache
@@ -116,9 +116,9 @@ void RF24Network::begin(uint8_t _channel, uint16_t _node_address )
   // Open up all listening pipes
   uint8_t i = 6;
   while (i--){
-    radio.openReadingPipe(i,pipe_address(_node_address,i));	
+    RF24_openReadingPipe_d(&radio,i,pipe_address(_node_address,i));	
   }
-  radio.startListening();
+  RF24_startListening(&radio);
 
 }
 
@@ -155,10 +155,10 @@ uint8_t RF24Network::update(void)
   }
   #endif
   
-  while ( radio.isValid() && radio.available(&pipe_num) ){
+  while ( RF24_isValid(&radio) && RF24_available_p(&radio,&pipe_num) ){
 
     #if defined (ENABLE_DYNAMIC_PAYLOADS)
-      if( (frame_size = radio.getDynamicPayloadSize() ) < sizeof(RF24NetworkHeader)){
+      if( (frame_size = RF24_getDynamicPayloadSize(&radio) ) < sizeof(RF24NetworkHeader)){
 	    delay(10);
 		continue;
 	  }
@@ -167,7 +167,7 @@ uint8_t RF24Network::update(void)
     #endif
       // Dump the payloads until we've gotten everything
       // Fetch the payload, and see if this was the last one.
-	  radio.read( frame_buffer, frame_size );
+	  RF24_read(&radio, frame_buffer, frame_size );
 	  
       // Read the beginning of the frame as the header
 	  RF24NetworkHeader *header = (RF24NetworkHeader*)(&frame_buffer);
@@ -458,7 +458,7 @@ uint8_t RF24Network::enqueue(RF24NetworkHeader* header)
         
         if( (header->reserved * 24) > (MAX_PAYLOAD_SIZE - (next_frame-frame_queue)) ){
           networkFlags |= FLAG_HOLD_INCOMING;
-          radio.stopListening();
+          RF24_stopListening();
         }
   		  
 		memcpy(&frag_queue,&frame_buffer,8);
@@ -526,7 +526,7 @@ IF_SERIAL_DEBUG_FRAGMENTATION_L2(for(int i=0; i< frag_queue.message_size;i++){ S
           IF_SERIAL_DEBUG_FRAGMENTATION( printf_P(PSTR("enq size %d\n"),frag_queue.message_size); );
 		  return true;
 		}else{
-          radio.stopListening();
+          RF24_stopListening();
           networkFlags |= FLAG_HOLD_INCOMING;          
         }
         IF_SERIAL_DEBUG_FRAGMENTATION( printf_P(PSTR("Drop frag payload, queue full\n")); );
@@ -728,7 +728,7 @@ bool RF24Network::write(RF24NetworkHeader& header,const void* message, uint16_t 
   if(header.to_node != 0100){
     networkFlags |= FLAG_FAST_FRAG;
 	#if !defined (DUAL_HEAD_RADIO)
-	radio.stopListening();
+	RF24_stopListening(&radio);
 	#endif
   }
 
@@ -787,9 +787,9 @@ bool RF24Network::write(RF24NetworkHeader& header,const void* message, uint16_t 
   header.type = type;
   #if !defined (DUAL_HEAD_RADIO)
   if(networkFlags & FLAG_FAST_FRAG){	
-    ok = radio.txStandBy(txTimeout);  
-    radio.startListening();
-    radio.setAutoAck(0,0);
+    ok = RF24_txStandBy_t(&radio,txTimeout,0);  
+    RF24_startListening(&radio);
+    RF24_setAutoAck_p(&radio,0,0);
   }  
   networkFlags &= ~FLAG_FAST_FRAG;
   
@@ -934,11 +934,11 @@ bool RF24Network::write(uint16_t to_node, uint8_t directTo)  // Direct To: 0 = F
 	    #if !defined (DUAL_HEAD_RADIO)
           // Now, continue listening
 		  if(networkFlags & FLAG_FAST_FRAG){
-			 radio.txStandBy(txTimeout);
+			 RF24_txStandBy_t(&radio,txTimeout,0);
              networkFlags &= ~FLAG_FAST_FRAG;
-             radio.setAutoAck(0,0); 
+             RF24_setAutoAck_p(&radio,0,0); 
 		  }
-          radio.startListening();
+          RF24_startListening(&radio);
         #endif
 		uint32_t reply_time = millis(); 
 
@@ -960,7 +960,7 @@ bool RF24Network::write(uint16_t to_node, uint8_t directTo)  // Direct To: 0 = F
     if( !(networkFlags & FLAG_FAST_FRAG) ){
 	   #if !defined (DUAL_HEAD_RADIO)
          // Now, continue listening
-         radio.startListening();
+         RF24_startListening(&radio);
        #endif	
 	}
 
@@ -1036,24 +1036,24 @@ bool RF24Network::write_to_pipe( uint16_t node, uint8_t pipe, bool multicast )
   // First, stop listening so we can talk
 
   if(!(networkFlags & FLAG_FAST_FRAG)){
-    radio.stopListening();
+    RF24_stopListening(&radio);
   }
   
-  if(multicast){ radio.setAutoAck(0,0);}else{radio.setAutoAck(0,1);}
+  if(multicast){ RF24_setAutoAck_p(&radio,0,0);}else{RF24_setAutoAck_p(&radio,0,1);}
   
-  radio.openWritingPipe(out_pipe);
+  RF24_openWritingPipe_d(&radio,out_pipe);
 
-  ok = radio.writeFast(frame_buffer, frame_size,0);
+  ok = RF24_writeFast_m(&radio,frame_buffer, frame_size,0);
   
   if(!(networkFlags & FLAG_FAST_FRAG)){
-    ok = radio.txStandBy(txTimeout);
-    radio.setAutoAck(0,0);
+    ok = RF24_txStandBy_t(&radio,txTimeout,0);
+    RF24_setAutoAck_p(&radio,0,0);
   }
   
 #else
-  radio1.openWritingPipe(out_pipe);
-  radio1.writeFast(frame_buffer, frame_size);
-  ok = radio1.txStandBy(txTimeout,multicast);
+  RF24_openWritingPipe(&radio,out_pipe);
+  RF24_writeFast(&radio,frame_buffer, frame_size);
+  ok = RF24_txStandBy(&radio,txTimeout,multicast);
 
 #endif
 
@@ -1218,9 +1218,9 @@ bool RF24Network::is_valid_address( uint16_t node )
 #if defined (RF24NetworkMulticast)
 void RF24Network::multicastLevel(uint8_t level){
   multicast_level = level;
-  //radio.stopListening();  
-  radio.openReadingPipe(0,pipe_address(levelToAddress(level),0));
-  //radio.startListening();
+  //RF24_stopListening();  
+  RF24_openReadingPipe_d(&radio,0,pipe_address(levelToAddress(level),0));
+  //RF24_startListening();
   }
   
 uint16_t levelToAddress(uint8_t level){
