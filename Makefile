@@ -35,6 +35,9 @@ ifneq "${RPI}" "1"
 RPI=$(shell cat /proc/cpuinfo | grep Hardware | grep -c BCM2709)
 endif
 
+
+CCFLAGS=-ggdb
+
 ifeq "$(RPI)" "1"
 # The recommended compiler flags for the Raspberry Pi
 CCFLAGS=-Ofast -mfpu=vfp -mfloat-abi=hard -march=$(ARCH) -mtune=arm1176jzf-s -std=c++0x
@@ -49,7 +52,7 @@ librf24network: RF24Network.o
 	g++ -shared -Wl,-soname,$@.so.1 ${CCFLAGS} -o ${LIBNAME_RFN} $^ -lrf24-bcm
 
 # Library parts
-RF24Network.o: RF24Network.cpp
+RF24Network.o: RF24Network.c
 	g++ -Wall -fPIC ${CCFLAGS} -c $^
 
 # clear build files

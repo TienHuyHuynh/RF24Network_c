@@ -31,9 +31,9 @@ using namespace std;
 //RF24 radio(RPI_V2_GPIO_P1_15, BCM2835_SPI_CS0, BCM2835_SPI_SPEED_4MHZ); 
 
 // Setup for GPIO 22 CE and CE1 CSN with SPI Speed @ 8Mhz
-RF24 radio(RPI_V2_GPIO_P1_15, BCM2835_SPI_CS0, BCM2835_SPI_SPEED_8MHZ);  
+RF24 radio;
 
-RF24Network network(radio);
+RF24Network network;
 
 // Address of our node in Octal format (01,021, etc)
 const uint16_t this_node = 01;
@@ -48,31 +48,35 @@ unsigned long packets_sent;          // How many have we sent already
 
 
 struct payload_t {                  // Structure of our payload
-  unsigned long ms;
-  unsigned long counter;
+  uint32_t ms;
+  uint32_t counter;
 };
 
 int main(int argc, char** argv) 
 {
 	// Refer to RF24.h or nRF24L01 DS for settings
 
-	radio.begin();
+	RF24_init2(&radio,RPI_V2_GPIO_P1_15, BCM2835_SPI_CS0, BCM2835_SPI_SPEED_8MHZ);  
+        RF24N_init(&network,&radio);
+
+	RF24_begin(&radio);
 	
 	delay(5);
-	network.begin(/*channel*/ 90, /*node address*/ this_node);
-	radio.printDetails();
+	RF24N_begin_d(&network,/*channel*/ 90, /*node address*/ this_node);
+	RF24_printDetails(&radio);
 	
 	while(1){
 
-		network.update();
+		RF24N_update(&network);
 		unsigned long now = millis();              // If it's time to send a message, send it!
 		if ( now - last_sent >= interval  ){
     			last_sent = now;
 
     			printf("Sending ..\n");
 			payload_t payload = { millis(), packets_sent++ };
-		        RF24NetworkHeader header(/*to node*/ other_node);
-			bool ok = network.write(header,&payload,sizeof(payload));
+		        RF24NetworkHeader header;
+			RF24NH_init(&header,/*to node*/ other_node,0);
+			bool ok = RF24N_write_m(&network,&header,&payload,sizeof(payload));
 		        if (ok){
 		        	printf("ok.\n");
 		        }else{ 
