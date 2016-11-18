@@ -21,7 +21,7 @@
 void Sync::update(void)
 {
   // Pump the network
-  network.update();
+  RF24N_update(&network);
 
   // Look for changes to the data
   uint8_t message[32];
@@ -49,24 +49,25 @@ void Sync::update(void)
   {
     // TODO handle the case where this has to be broken into
     // multiple messages
-    RF24NetworkHeader header(/*to node*/ to_node, /*type*/ 'S' /*Sync*/);
-    network.write(header,message,sizeof(message));
+    RF24NetworkHeader header;
+    RF24NH_init(&header,/*to node*/ to_node, /*type*/ 'S' /*Sync*/);
+    RF24N_write_m(&network,&header,message,sizeof(message));
   }
 
   // Look for messages from the network
   // Is there anything ready for us?
-  if ( network.available() )
+  if ( RF24N_available(&network) )
   {
     // If so, take a look at it
     RF24NetworkHeader header;
-    network.peek(header);
+    RF24N_peek(&network,&header);
 
     switch (header.type)
     {
     case 'S':
       IF_SERIAL_DEBUG(printf_P(PSTR("%lu: SYN Received sync message\n\r"),millis()));
 
-      network.read(header,&message,sizeof(message));
+      RF24N_read(&network,&header,&message,sizeof(message));
       // Parse the message and update the vars
       mptr = message;
       at = 0;

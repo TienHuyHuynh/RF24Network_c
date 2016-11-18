@@ -77,9 +77,9 @@ int main(int argc, char** argv)
   			 RF24N_read(&network,&header,&payload,sizeof(payload));
 			
 			printf("Received payload # %lu at %lu \n",payload.counter,payload.ms);
-  }		  
+                  }		  
 		 //sleep(2);
-		 delay(2000);
+		 delay(200);
 		 //fclose(pFile);
 	}
 

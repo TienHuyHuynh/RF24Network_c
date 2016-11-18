@@ -1,3 +1,6 @@
+
+
+
 /*
  Copyright (C) 2011 James Coliz, Jr. <maniacbug@ymail.com>
 
@@ -186,6 +189,7 @@
  #define FLAG_NO_POLL 8
 
 //class RF24;
+
 
 /**
  * Header which is sent with each message
@@ -503,9 +507,9 @@ typedef struct
 
   
  
-  RF24 * radio; /**< Underlying radio driver, provides link/physical layers */
+   RF24* radio; /**< Underlying radio driver, provides link/physical layers */
 #if defined (DUAL_HEAD_RADIO)
-  RF24 * radio1;
+   RF24* radio1;
 #endif
 #if defined (RF24NetworkMulticast)  
   uint8_t multicast_level;  
