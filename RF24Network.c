@@ -17,8 +17,6 @@
   #include <sys/time.h>
   #include <time.h>
   #include <unistd.h>
-  //#include <iostream>
-  //#include <algorithm>
   #include <RF24/RF24.h>
   #include "RF24Network.h"
 #else  
@@ -52,12 +50,15 @@ void RF24NH_init(RF24NetworkHeader *rnh, uint16_t _to, unsigned char _type)
 
 /******************************************************************/
 #if defined (RF24_LINUX) 
+
   #if !defined (DUAL_HEAD_RADIO)
   void RF24N_init(RF24Network * rn, RF24* _radio )
   #else
   RF24N_RF24Network( RF24& _radio, RF24& _radio1 ): radio(_radio), radio1(_radio1),frame_size(MAX_FRAME_SIZE)
   #endif
 {
+  int i;
+
   rn->radio=_radio;
   rn->frame_size= MAX_FRAME_SIZE;    
   rn->txTime=0; 
@@ -70,6 +71,13 @@ void RF24NH_init(RF24NetworkHeader *rnh, uint16_t _to, unsigned char _type)
   rn->nFails = 0;
   rn->nOK = 0;
 #endif
+    
+  rn->external_queue_c=0;
+    
+  rn->frame_queue_c=0;
+  
+  for(i=0;i<256;i++)
+    rn->frameFragmentsCache[i].message_size=0;
 }
 #elif !defined (DUAL_HEAD_RADIO)
 void RF24N_init(RF24Network *rn, RF24* _radio )
@@ -101,7 +109,57 @@ RF24N_RF24Network( RF24& _radio, RF24& _radio1 ): radio(_radio), radio1(_radio1)
 }
 #endif
 /******************************************************************/
+    
 
+#if defined (RF24_LINUX) 
+//map functions
+
+uint16_t mapcount(RF24NetworkFrame * fc, uint16_t key)
+{
+
+  if(fc[key].message_size > 0)	
+    return 1;
+  else
+    return 0;
+}
+
+
+void maperase(RF24NetworkFrame * fc, uint16_t key)
+{
+   fc[key].message_size=0;	
+}
+//queue functions
+
+void qpush(RF24NetworkFrame * fc,uint16_t * cont, RF24NetworkFrame frame)
+{
+ fc[(*cont)++]=frame;
+};
+
+
+RF24NetworkFrame qpop(RF24NetworkFrame * fc,uint16_t * cont)
+{
+ return fc[--(*cont)];
+};
+
+RF24NetworkFrame qfront(RF24NetworkFrame * fc,uint16_t * cont)
+{
+ return fc[(*cont)-1];
+};
+
+uint16_t qempty(RF24NetworkFrame * fc,uint16_t * cont)
+{
+  return !(*cont);
+};
+
+uint16_t qsize(RF24NetworkFrame * fc,uint16_t * cont)
+{
+  return (*cont);
+};
+
+#endif
+
+
+/******************************************************************/
 void RF24N_begin_d(RF24Network * rn, uint8_t _channel, uint16_t _node_address )
 {
   if (! RF24N_is_valid_address(rn, _node_address) )
@@ -318,7 +376,7 @@ uint8_t RF24N_enqueue(RF24Network * rn, RF24NetworkHeader* header) {
       printf("Cannot enqueue multi-payload frames to self\n");
       result = 0;
     }else{
-    rn->frame_queue.push(frame);
+    qpush(rn->frame_queue,&rn->frame_queue_c,frame);
     result = 1;
 	}
   }else  
@@ -335,18 +393,18 @@ uint8_t RF24N_enqueue(RF24Network * rn, RF24NetworkHeader* header) {
 	  IF_SERIAL_DEBUG_FRAGMENTATION(printf("%u: FRG Last fragment received. \n",millis() ););
       IF_SERIAL_DEBUG(printf_P(PSTR("%u: NET Enqueue assembled frame @%x "),millis(),rn->frame_queue.size()));
 
-	  RF24NetworkFrame *f = &(rn->frameFragmentsCache[ frame.header.from_node ] );
+	  RF24NetworkFrame *f = &rn->frameFragmentsCache[frame.header.from_node];
 	  
 	  
 	  result=f->header.type == EXTERNAL_DATA_TYPE ? 2 : 1;
 	  
 	  //Load external payloads into a separate queue on linux
 	  if(result == 2){
-	    rn->external_queue.push( rn->frameFragmentsCache[ frame.header.from_node ] );
+	    qpush(rn->external_queue,&rn->external_queue_c, rn->frameFragmentsCache[frame.header.from_node] );
 	  }else{
-        rn->frame_queue.push( rn->frameFragmentsCache[ frame.header.from_node ] );
+            qpush(rn->frame_queue,&rn->frame_queue_c, rn->frameFragmentsCache[frame.header.from_node] );
 	  }
-      rn->frameFragmentsCache.erase( frame.header.from_node );
+        maperase(rn->frameFragmentsCache, frame.header.from_node );
 	}
 
   }else{//  if (frame.header.type <= MAX_USER_DEFINED_HEADER_TYPE) {
@@ -357,9 +415,9 @@ uint8_t RF24N_enqueue(RF24Network * rn, RF24NetworkHeader* header) {
 	result=frame.header.type == EXTERNAL_DATA_TYPE ? 2 : 1;
     //Load external payloads into a separate queue on linux
 	if(result == 2){
-	  rn->external_queue.push( frame );
+	  qpush(rn->external_queue,&rn->external_queue_c, frame );
 	}else{
-      rn->frame_queue.push( frame );
+          qpush(rn->frame_queue,&rn->frame_queue_c, frame );
 	}
 	
 
@@ -385,8 +443,8 @@ bool RF24N_appendFragmentToFrame(RF24Network * rn, RF24NetworkFrame frame) {
 
   // This is the first of 2 or more fragments.
   if (frame.header.type == NETWORK_FIRST_FRAGMENT){
-      if( rn->frameFragmentsCache.count(frame.header.from_node) != 0 ){
-	    RF24NetworkFrame *f = &(rn->frameFragmentsCache[ frame.header.from_node ]);
+      if( mapcount(rn->frameFragmentsCache, frame.header.from_node) != 0 ){
+	    RF24NetworkFrame *f = &rn->frameFragmentsCache[frame.header.from_node];
 	    //Already rcvd first frag
 	    if (f->header.id == frame.header.id){
 	      return 0;
@@ -397,16 +455,16 @@ bool RF24N_appendFragmentToFrame(RF24Network * rn, RF24NetworkFrame frame) {
 		// If there are more fragments than we can possibly handle, return
 		return 0;
 	  }
-	  rn->frameFragmentsCache[ frame.header.from_node ] = frame;
+	  rn->frameFragmentsCache[frame.header.from_node]=frame;
 	  return 1;
   }else
   
   if ( frame.header.type == NETWORK_MORE_FRAGMENTS || frame.header.type == NETWORK_MORE_FRAGMENTS_NACK ){
 	
-	if( rn->frameFragmentsCache.count(frame.header.from_node) < 1 ){
+	if( mapcount(rn->frameFragmentsCache,frame.header.from_node) < 1 ){
 	  return 0;
     }	
-	RF24NetworkFrame *f = &(rn->frameFragmentsCache[ frame.header.from_node ]);	
+	RF24NetworkFrame *f = &rn->frameFragmentsCache[frame.header.from_node];	
 	if( f->header.reserved - 1 == frame.header.reserved && f->header.id == frame.header.id){	
       // Cache the fragment
       memcpy(f->message_buffer+f->message_size, frame.message_buffer, frame.message_size);
@@ -423,11 +481,11 @@ bool RF24N_appendFragmentToFrame(RF24Network * rn, RF24NetworkFrame frame) {
   if ( frame.header.type == NETWORK_LAST_FRAGMENT ){
   
     //We have received the last fragment
-	if(rn->frameFragmentsCache.count(frame.header.from_node) < 1){
+	if(mapcount(rn->frameFragmentsCache,frame.header.from_node) < 1){
 		return 0;
 	}	
 	//Create pointer to the cached frame
-    RF24NetworkFrame *f = &(rn->frameFragmentsCache[ frame.header.from_node ]);
+    RF24NetworkFrame *f = &rn->frameFragmentsCache[frame.header.from_node];
 
 	if( f->message_size + frame.message_size > MAX_PAYLOAD_SIZE){
 		IF_SERIAL_DEBUG_FRAGMENTATION( printf("%u FRG Frame of size %u plus enqueued frame of size %u exceeds max payload size \n",millis(),frame.message_size,f->message_size); );
@@ -614,7 +672,7 @@ IF_SERIAL_DEBUG_FRAGMENTATION_L2(for(int i=0; i< frag_queue.message_size;i++){ S
 bool RF24N_available(RF24Network * rn)
 {
 #if defined (RF24_LINUX)
-  return (!rn->frame_queue.empty());
+  return (!qempty(rn->frame_queue,&rn->frame_queue_c));
 #else
   // Are there frames on the queue for us?
   return (rn->next_frame > rn->frame_queue);
@@ -642,7 +700,7 @@ uint16_t RF24N_peek(RF24Network * rn, RF24NetworkHeader* header)
   if ( RF24N_available(rn) )
   {
 #if defined (RF24_LINUX)
-    RF24NetworkFrame frame = rn->frame_queue.front();
+    RF24NetworkFrame frame = qfront(rn->frame_queue,&rn->frame_queue_c);
     memcpy(header,&frame.header,sizeof(RF24NetworkHeader));
     return frame.message_size;
   #else
@@ -664,7 +722,7 @@ uint16_t RF24N_read(RF24Network * rn, RF24NetworkHeader* header,void* message, u
 
  #if defined (RF24_LINUX)
    if ( RF24N_available(rn) ) {
-    RF24NetworkFrame frame = rn->frame_queue.front();
+    RF24NetworkFrame frame = qfront(rn->frame_queue,&rn->frame_queue_c);
 
     // How much buffer size should we actually copy?
     bufsize = rf24_min(frame.message_size,maxlen);
@@ -676,7 +734,7 @@ uint16_t RF24N_read(RF24Network * rn, RF24NetworkHeader* header,void* message, u
 	
     IF_SERIAL_DEBUG(printf_P(PSTR("%u: NET read %s\n\r"),millis(),RF24NH_toString(header)));
 
-    rn->frame_queue.pop();
+    qpop(rn->frame_queue,&rn->frame_queue_c);
   }
 #else  
   if ( RF24N_available(rn) )

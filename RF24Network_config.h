@@ -72,13 +72,13 @@
 
 #endif //RF24_NETWORK_CONFIG_H
 
-#ifdef __cplusplus
 
 #if (defined (__linux) || defined (linux)) && !defined (__ARDUINO_X86__)
     #include <RF24/RF24_config.h>
 #else
     #include <RF24_config.h>
 #endif
+
 
   #if !defined (ARDUINO_ARCH_AVR)
     #define sprintf_P sprintf    
@@ -109,5 +109,4 @@
     #endif
     
 
-#endif //RF24_CONFIG_H
 

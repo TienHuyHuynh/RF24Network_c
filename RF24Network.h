@@ -12,6 +12,10 @@
 #ifndef __RF24NETWORK_H__
 #define __RF24NETWORK_H__
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * @file RF24Network.h
  *
@@ -30,12 +34,6 @@
   #include <sys/time.h>
   #include <stddef.h>
   #include <assert.h>
-
-//FIXME remove for c code
-  #include <map>
-  #include <utility>      // std::pair
-  #include <queue>
-  
 #endif
 
 
@@ -358,7 +356,18 @@ typedef struct
 	bool multicast;
  }logicalToPhysicalStruct;
   
-/**
+
+//queue emulation on c
+#if defined (RF24_LINUX)
+  #define MAX_QUEUE 1024
+  void qpush(RF24NetworkFrame * fc,uint16_t * cont, RF24NetworkFrame frame);
+  RF24NetworkFrame qpop(RF24NetworkFrame * fc,uint16_t * cont);
+  RF24NetworkFrame qfront(RF24NetworkFrame * fc,uint16_t * cont);
+  uint16_t qempty(RF24NetworkFrame * fc,uint16_t * cont);
+  uint16_t qsize(RF24NetworkFrame * fc,uint16_t * cont);
+#endif
+
+ /**
  * 2014-2015 - Optimized Network Layer for RF24 Radios
  *
  * This class implements an OSI Network Layer using nRF24L01(+) radios driven
@@ -440,7 +449,8 @@ typedef struct
    * @endcode
    */
   #if defined (RF24_LINUX)
-    std::queue<RF24NetworkFrame> external_queue;
+    RF24NetworkFrame external_queue[MAX_QUEUE];
+    uint16_t external_queue_c;
   #endif
   
   #if !defined ( DISABLE_FRAGMENTATION ) &&  !defined (RF24_LINUX)
@@ -535,9 +545,11 @@ typedef struct
 //public:
 
 #if defined (RF24_LINUX) 
-    std::queue<RF24NetworkFrame> frame_queue;
-    std::map< uint16_t, RF24NetworkFrame> frameFragmentsCache;
-  
+    RF24NetworkFrame  frame_queue[MAX_QUEUE];
+    uint16_t frame_queue_c;
+
+    RF24NetworkFrame frameFragmentsCache[256];
+
   #else
     #if  defined(__AVR_ATtiny25__) || defined(__AVR_ATtiny45__) || defined(__AVR_ATtiny85__) || defined(__AVR_ATtiny24__) || defined(__AVR_ATtiny44__) || defined(__AVR_ATtiny84__)
 	  #if !defined (NUM_USER_PAYLOADS)
@@ -1316,6 +1328,10 @@ void  RF24N_init2(RF24Network * rn,  RF24 * _radio, RF24 * _radio1);
  *
  *
  */
+
+#ifdef __cplusplus
+ }
+#endif
 
 #endif // __RF24NETWORK_H__
 
