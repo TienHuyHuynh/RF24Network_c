@@ -5,7 +5,7 @@
  modify it under the terms of the GNU General Public License
  version 2 as published by the Free Software Foundation.
  */
-#include "RF24Network_config.h"
+#include "RF24Network_c_config.h"
 
  #if defined (RF24_LINUX)
   #include <stdlib.h>
@@ -17,11 +17,11 @@
   #include <sys/time.h>
   #include <time.h>
   #include <unistd.h>
-  #include <RF24/RF24.h>
-  #include "RF24Network.h"
+  #include <RF24_c/RF24_c.h>
+  #include "RF24Network_c.h"
 #else  
-  #include "RF24.h"
-  #include "RF24Network.h"
+  #include "RF24_c.h"
+  #include "RF24Network_c.h"
 #endif
 
 #if defined (ENABLE_SLEEP_MODE) && !defined (RF24_LINUX) && !defined (__ARDUINO_X86__)

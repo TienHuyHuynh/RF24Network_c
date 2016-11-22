@@ -25,7 +25,6 @@ ifneq "${RPI}" "1"
 RPI=$(shell cat /proc/cpuinfo | grep Hardware | grep -c BCM2709)
 endif
 
-CCFLAGS=-ggdb
 
 ifeq "$(RPI)" "1"
 # The recommended compiler flags for the Raspberry Pi
@@ -40,7 +39,7 @@ SOURCES = ${PROGRAMS:=.cpp}
 all: ${PROGRAMS}
 
 ${PROGRAMS}: ${SOURCES}
-	g++ ${CCFLAGS} -Wall -I../ $@.cpp -lrf24-bcm -lrf24network -o $@
+	g++ ${CCFLAGS} -Wall -I../ $@.cpp -lrf24-bcm -lrf24network_c -o $@
 
 clean:
 	rm -rf $(PROGRAMS)

@@ -24,7 +24,7 @@ extern "C" {
 
 #include <stddef.h>
 #include <stdint.h>
-#include "RF24Network_config.h"
+#include "RF24Network_c_config.h"
 
 #if (defined (__linux) || defined (linux)) && !defined (__ARDUINO_X86__)
   #include <stdint.h>
