@@ -354,7 +354,7 @@ typedef struct
  typedef struct {
 	uint16_t send_node; 
 	uint8_t send_pipe;
-	bool multicast;
+	uint8_t multicast;
  }logicalToPhysicalStruct;
   
 
@@ -395,7 +395,7 @@ typedef struct
 	* @see multicastLevel
 	*/
 	
-	bool multicastRelay;
+	uint8_t multicastRelay;
 
  
 
@@ -493,7 +493,7 @@ typedef struct
   * | NETWORK_REQ_ADDRESS   |  
   *
   */  
-  bool returnSysMsgs;
+  uint8_t returnSysMsgs;
 
   /**
   * Network Flags allow control of data flow
@@ -630,7 +630,7 @@ typedef struct
    *
    * @return Whether there is a message available for this node
    */
-  bool RF24N_available(RF24Network * rn);
+  uint8_t RF24N_available(RF24Network * rn);
 
   /**
    * Read the next available header
@@ -685,7 +685,7 @@ typedef struct
    * @param len The size of the message
    * @return Whether the message was successfully received
    */
-  bool RF24N_write_m(RF24Network * rn, RF24NetworkHeader* header,const void* message, uint16_t len);
+  uint8_t RF24N_write_m(RF24Network * rn, RF24NetworkHeader* header,const void* message, uint16_t len);
 
   /**@}*/
   /**
@@ -750,7 +750,7 @@ void  RF24N_init2(RF24Network * rn,  RF24 * _radio, RF24 * _radio1);
    * @note This needs to be enabled via #define ENABLE_NETWORK_STATS in RF24Network_config.h
    *
    *   @code  
-   * bool fails, success;  
+   * uint8_t fails, success;  
    * network.failures(&fails,&success);  
    * @endcode  
    *
@@ -773,7 +773,7 @@ void  RF24N_init2(RF24Network * rn,  RF24 * _radio, RF24 * _radio1);
    * @return Whether the message was successfully sent
    */
    
-   bool RF24N_multicast(RF24Network * rn, RF24NetworkHeader * header,const void* message, uint16_t len, uint8_t level);
+   uint8_t RF24N_multicast(RF24Network * rn, RF24NetworkHeader * header,const void* message, uint16_t len, uint8_t level);
    
 	
    #endif
@@ -783,7 +783,7 @@ void  RF24N_init2(RF24Network * rn,  RF24 * _radio, RF24 * _radio1);
    * The same as write, but a physical address is specified as the last option.
    * The payload will be written to the physical address, and routed as necessary by the recipient
    */
-   bool RF24N_write_(RF24Network * rn, RF24NetworkHeader * header,const void* message, uint16_t len, uint16_t writeDirect);
+   uint8_t RF24N_write_(RF24Network * rn, RF24NetworkHeader * header,const void* message, uint16_t len, uint16_t writeDirect);
 
    /**
    * Sleep this node - For AVR devices only
@@ -808,7 +808,7 @@ void  RF24N_init2(RF24Network * rn,  RF24 * _radio, RF24 * _radio1);
    * @param interruptPin: The interrupt number to use (0,1) for pins two and three on Uno,Nano. More available on Mega etc.
    * @return True if sleepNode completed normally, after the specified number of cycles. False if sleep was interrupted
    */
- bool RF24N_sleepNode(RF24Network * rn,  unsigned int cycles, int interruptPin );
+ uint8_t RF24N_sleepNode(RF24Network * rn,  unsigned int cycles, int interruptPin );
 
 
   /**
@@ -827,7 +827,7 @@ void  RF24N_init2(RF24Network * rn,  RF24 * _radio, RF24 * _radio1);
     * @note Addresses are specified in octal: 011, 034
     * @return True if a supplied address is valid
 	*/
-   bool RF24N_is_valid_address(RF24Network * rn,  uint16_t node );
+   uint8_t RF24N_is_valid_address(RF24Network * rn,  uint16_t node );
 
  /**@}*/
   /**
@@ -861,23 +861,23 @@ void  RF24N_init2(RF24Network * rn,  RF24 * _radio, RF24 * _radio1);
   void RF24N_begin_d(RF24Network * rn, uint8_t _channel, uint16_t _node_address );  
 
 
- bool RF24N_write(RF24Network * rn, uint16_t, uint8_t directTo);
-  bool RF24N_write_to_pipe(RF24Network * rn,  uint16_t node, uint8_t pipe, bool multicast );
+ uint8_t RF24N_write(RF24Network * rn, uint16_t, uint8_t directTo);
+  uint8_t RF24N_write_to_pipe(RF24Network * rn,  uint16_t node, uint8_t pipe, uint8_t multicast );
   uint8_t RF24N_enqueue(RF24Network * rn, RF24NetworkHeader *header);
 
-  bool RF24N_is_direct_child(RF24Network * rn,  uint16_t node );
-  bool RF24N_is_descendant(RF24Network * rn,  uint16_t node );
+  uint8_t RF24N_is_direct_child(RF24Network * rn,  uint16_t node );
+  uint8_t RF24N_is_descendant(RF24Network * rn,  uint16_t node );
   
   uint16_t RF24N_direct_child_route_to(RF24Network * rn,  uint16_t node );
   //uint8_t RF24N_pipe_to_descendant(RF24Network * rn,  uint16_t node );
   void RF24N_setup_address(RF24Network * rn);
-  bool RF24N__write(RF24Network * rn, RF24NetworkHeader * header,const void* message, uint16_t len, uint16_t writeDirect);
+  uint8_t RF24N__write(RF24Network * rn, RF24NetworkHeader * header,const void* message, uint16_t len, uint16_t writeDirect);
     
-  bool RF24N_logicalToPhysicalAddress(RF24Network * rn, logicalToPhysicalStruct *conversionInfo);
+  uint8_t RF24N_logicalToPhysicalAddress(RF24Network * rn, logicalToPhysicalStruct *conversionInfo);
   
 
 #if defined (RF24_LINUX) 
-    bool RF24N_appendFragmentToFrame(RF24Network * rn, RF24NetworkFrame frame);
+    uint8_t RF24N_appendFragmentToFrame(RF24Network * rn, RF24NetworkFrame frame);
 #endif
     
 /**
