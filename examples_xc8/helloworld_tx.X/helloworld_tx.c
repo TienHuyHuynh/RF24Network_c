@@ -17,6 +17,7 @@
 
 #include <RF24Network_c.h>
 #include <RF24_c.h>
+#include "serial.h"
 
 RF24 radio;                    // nRF24L01(+) radio attached using Getting Started board 
 
@@ -31,42 +32,48 @@ unsigned long last_sent;             // When did we last send?
 unsigned long packets_sent;          // How many have we sent already
 
 
-struct payload_t {                  // Structure of our payload
+typedef struct  {                  // Structure of our payload
    uint32_t  ms;
    uint32_t  counter;
-};
+}payload_t;
 
 void setup(void)
 {
-  RF24_init(&radio,7,8);
+  RF24_init(&radio,36,35);
   RF24N_init(&network,&radio);
   
-  Serial.begin(57600);
-  Serial.println("RF24Network/examples/helloworld_tx/");
+  Serial_begin(57600);
+  Serial_println("RF24Network/examples/helloworld_tx/");
  
   RF24_begin(&radio);
   RF24N_begin_d(&network,/*channel*/ 90, /*node address*/ this_node);
 }
 
 void loop() {
-  
+  unsigned long now ;
   RF24N_update(&network);                          // Check the network regularly
 
   
-  unsigned long now = millis();              // If it's time to send a message, send it!
+  now = millis();              // If it's time to send a message, send it!
   if ( now - last_sent >= interval  )
   {
+    payload_t payload;
+    uint8_t ok;
+    RF24NetworkHeader header;
+        
     last_sent = now;
 
-    Serial.print("Sending...");
-    payload_t payload = { millis(), packets_sent++ };
-    RF24NetworkHeader header;
+    Serial_print("Sending...");
+
+    payload.ms=  millis();
+    payload.counter=packets_sent++;
+
     RF24NH_init(&header,/*to node*/ other_node,0);
-    bool ok = RF24N_write_m(&network,&header,&payload,sizeof(payload));
+    ok = RF24N_write_m(&network,&header,&payload,sizeof(payload));
     if (ok)
-      Serial.println("ok.");
+      Serial_println("ok.");
     else
-      Serial.println("failed.");
+      Serial_println("failed.");
   }
 }
 

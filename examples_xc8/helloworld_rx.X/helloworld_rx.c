@@ -19,6 +19,7 @@
 
 #include <RF24Network_c.h>
 #include <RF24_c.h>
+#include "serial.h"
 
 RF24 radio;                // nRF24L01(+) radio attached using Getting Started board 
 
@@ -26,19 +27,19 @@ RF24Network network;      // Network uses that radio
 const uint16_t this_node = 00;    // Address of our node in Octal format ( 04,031, etc)
 const uint16_t other_node = 01;   // Address of the other node in Octal format
 
-struct payload_t {                 // Structure of our payload
+typedef struct  {                 // Structure of our payload
   uint32_t  ms;
   uint32_t  counter;
-};
+}payload_t;
 
 
 void setup(void)
 {
-  RF24_init(&radio,7,8);
+  RF24_init(&radio,36,35);
   RF24N_init(&network,&radio);
   
-  Serial.begin(57600);
-  Serial.println("RF24Network/examples/helloworld_rx/");
+  Serial_begin(57600);
+  Serial_println("RF24Network/examples/helloworld_rx/");
  
   //SPI.begin();
   RF24_begin(&radio);
@@ -55,10 +56,10 @@ void loop(void){
     RF24NetworkHeader header;        // If so, grab it and print it out
     payload_t payload;
     RF24N_read(&network, &header,&payload,sizeof(payload));
-    Serial.print("Received packet #");
-    Serial.print(payload.counter);
-    Serial.print(" at ");
-    Serial.println(payload.ms);
+    Serial_print("Received packet #");
+    Serial_print(itoa_(payload.counter));
+    Serial_print(" at ");
+    Serial_println(itoa_(payload.ms));
   }
 }
 

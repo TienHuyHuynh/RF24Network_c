@@ -33,9 +33,8 @@
  */
 
 #include <avr/pgmspace.h>
-#include <RF24Network.h>
-#include <RF24.h>
-#include <SPI.h>
+#include <RF24Network_c.h>
+#include <RF24_c.h>
 #include "printf.h"
 #include <avr/sleep.h>
 #include <avr/power.h>
@@ -60,8 +59,8 @@ uint8_t NODE_ADDRESS = 1; // Use numbers 0 through 9 to select an address from t
 /***********************************************************************/
 
 
-RF24 radio(7,8);                                    // CE & CS pins to use (Using 7,8 on Uno,Nano)
-RF24Network network(radio); 
+RF24 radio;                                    // CE & CS pins to use (Using 7,8 on Uno,Nano)
+RF24Network network; 
 
 uint16_t this_node;                                  // Our node address
 
@@ -88,30 +87,30 @@ unsigned long awakeTime = 500;                          // How long in ms the ra
 unsigned long sleepTimer = 0;                           // Used to keep track of how long the system has been awake
 
 void setup(){
-  
+  RF24_init(&radio,7,8);
+  RF24N_init(&network,&radio);
   Serial.begin(115200);
   printf_begin();
   printf_P(PSTR("\n\rRF24Network/examples/meshping/\n\r"));
 
   this_node = node_address_set[NODE_ADDRESS];            // Which node are we?
   
-  SPI.begin();                                           // Bring up the RF network
-  radio.begin();
-  radio.setPALevel(RF24_PA_HIGH);
-  network.begin(/*channel*/ 100, /*node address*/ this_node );
+  RF24_begin(&radio);
+  RF24_setPALevel(&radio,RF24_PA_HIGH);
+  RF24N_begin_d(&network,/*channel*/ 100, /*node address*/ this_node );
 
 /******************************** This is the configuration for sleep mode ***********************/
-  network.setup_watchdog(wdt_1s);                       //The watchdog timer will wake the MCU and radio every second to send a sleep payload, then go back to sleep
+  RF24N_setup_watchdog(&network,wdt_1s);                       //The watchdog timer will wake the MCU and radio every second to send a sleep payload, then go back to sleep
 }
 
 void loop(){
     
-  network.update();                                      // Pump the network regularly
+  RF24N_update(&network);                                      // Pump the network regularly
 
-   while ( network.available() )  {                      // Is there anything ready for us?
+   while ( RF24N_available(&network) )  {                      // Is there anything ready for us?
      
     RF24NetworkHeader header;                            // If so, take a look at it
-    network.peek(header);
+    RF24N_peek(&network,&header);
 
     
       switch (header.type){                              // Dispatch the message to the correct handler.
@@ -124,7 +123,7 @@ void loop(){
          case 'S': /*This is a sleep payload, do nothing*/ break;
         
         default:  printf_P(PSTR("*** WARNING *** Unknown message type %c\n\r"),header.type);
-                  network.read(header,0,0);
+                  RF24N_read(&network,&header,0,0);
                   break;
       };
     }
@@ -135,8 +134,8 @@ void loop(){
      Serial.println("Sleep");
      sleepTimer = millis();                           // Reset the timer value
      delay(100);                                      // Give the Serial print some time to finish up
-     radio.stopListening();                           // Switch to PTX mode. Payloads will be seen as ACK payloads, and the radio will wake up
-     network.sleepNode(8,0);                          // Sleep the node for 8 cycles of 1second intervals
+     RF24_stopListening(&radio);                           // Switch to PTX mode. Payloads will be seen as ACK payloads, and the radio will wake up
+     RF24N_sleepNode(&network,8,0);                          // Sleep the node for 8 cycles of 1second intervals
      Serial.println("Awake"); 
   }
   
@@ -187,13 +186,14 @@ void loop(){
  */
 bool send_T(uint16_t to)
 {
-  RF24NetworkHeader header(/*to node*/ to, /*type*/ 'T' /*Time*/);
+  RF24NetworkHeader header;
+  RF24NH_init(&header,/*to node*/ to, /*type*/ 'T' /*Time*/);
   
   // The 'T' message that we send is just a ulong, containing the time
   unsigned long message = millis();
   printf_P(PSTR("---------------------------------\n\r"));
   printf_P(PSTR("%lu: APP Sending %lu to 0%o...\n\r"),millis(),message,to);
-  return network.write(header,&message,sizeof(unsigned long));
+  return RF24N_write_m(&network,&header,&message,sizeof(unsigned long));
 }
 
 /**
@@ -201,11 +201,12 @@ bool send_T(uint16_t to)
  */
 bool send_N(uint16_t to)
 {
-  RF24NetworkHeader header(/*to node*/ to, /*type*/ 'N' /*Time*/);
+  RF24NetworkHeader header;
+  RF24NH_init(&header,/*to node*/ to, /*type*/ 'N' /*Time*/);
   
   printf_P(PSTR("---------------------------------\n\r"));
   printf_P(PSTR("%lu: APP Sending active nodes to 0%o...\n\r"),millis(),to);
-  return network.write(header,active_nodes,sizeof(active_nodes));
+  return RF24N_write_m(&network,&header,active_nodes,sizeof(active_nodes));
 }
 
 /**
@@ -215,7 +216,7 @@ bool send_N(uint16_t to)
 void handle_T(RF24NetworkHeader& header){
 
   unsigned long message;                                                                      // The 'T' message is just a ulong, containing the time
-  network.read(header,&message,sizeof(unsigned long));
+  RF24N_read(&network,&header,&message,sizeof(unsigned long));
   printf_P(PSTR("%lu: APP Received %lu from 0%o\n\r"),millis(),message,header.from_node);
 
 
@@ -230,7 +231,7 @@ void handle_N(RF24NetworkHeader& header)
 {
   static uint16_t incoming_nodes[max_active_nodes];
 
-  network.read(header,&incoming_nodes,sizeof(incoming_nodes));
+  RF24N_read(&network,&header,&incoming_nodes,sizeof(incoming_nodes));
   printf_P(PSTR("%lu: APP Received nodes from 0%o\n\r"),millis(),header.from_node);
 
   int i = 0;

@@ -42,9 +42,8 @@
  */
 
 #include <avr/pgmspace.h>
-#include <RF24Network.h>
-#include <RF24.h>
-#include <SPI.h>
+#include <RF24Network_c.h>
+#include <RF24_c.h>
 #include "printf.h"
 
 /***********************************************************************
@@ -67,8 +66,8 @@ uint8_t NODE_ADDRESS = 0;  // Use numbers 0 through to select an address from th
 /***********************************************************************/
 
 
-RF24 radio(7,8);                              // CE & CS pins to use (Using 7,8 on Uno,Nano)
-RF24Network network(radio); 
+RF24 radio;                              // CE & CS pins to use (Using 7,8 on Uno,Nano)
+RF24Network network; 
 
 uint16_t this_node;                           // Our node address
 
@@ -90,6 +89,8 @@ void add_node(uint16_t node);
 
 
 void setup(){
+  RF24_init(&radio,7,8);
+  RF24N_init(&network,&radio);
   
   Serial.begin(115200);
   printf_begin();
@@ -97,28 +98,27 @@ void setup(){
 
   this_node = node_address_set[NODE_ADDRESS];            // Which node are we?
   
-  SPI.begin();                                           // Bring up the RF network
-  radio.begin();
-  radio.setPALevel(RF24_PA_HIGH);
-  network.begin(/*channel*/ 100, /*node address*/ this_node );
+  RF24_begin(&radio);
+  RF24_setPALevel(&radio,RF24_PA_HIGH);
+  RF24N_begin_d(&network,/*channel*/ 100, /*node address*/ this_node );
 
 }
 
 void loop(){
     
-  network.update();                                      // Pump the network regularly
+  RF24N_update(&network);                                      // Pump the network regularly
 
-   while ( network.available() )  {                      // Is there anything ready for us?
+   while ( RF24N_available(&network) )  {                      // Is there anything ready for us?
      
     RF24NetworkHeader header;                            // If so, take a look at it
-    network.peek(header);
+    RF24N_peek(&network,&header);
 
     
       switch (header.type){                              // Dispatch the message to the correct handler.
         case 'T': handle_T(header); break;
         case 'N': handle_N(header); break;
         default:  printf_P(PSTR("*** WARNING *** Unknown message type %c\n\r"),header.type);
-                  network.read(header,0,0);
+                  RF24N_read(&network,&header,0,0);
                   break;
       };
     }
@@ -169,13 +169,14 @@ void loop(){
  */
 bool send_T(uint16_t to)
 {
-  RF24NetworkHeader header(/*to node*/ to, /*type*/ 'T' /*Time*/);
+  RF24NetworkHeader header;
+  RF24NH_init(&header,/*to node*/ to, /*type*/ 'T' /*Time*/);
   
   // The 'T' message that we send is just a ulong, containing the time
   unsigned long message = millis();
   printf_P(PSTR("---------------------------------\n\r"));
   printf_P(PSTR("%lu: APP Sending %lu to 0%o...\n\r"),millis(),message,to);
-  return network.write(header,&message,sizeof(unsigned long));
+  return RF24N_write_m(&network,&header,&message,sizeof(unsigned long));
 }
 
 /**
@@ -183,11 +184,12 @@ bool send_T(uint16_t to)
  */
 bool send_N(uint16_t to)
 {
-  RF24NetworkHeader header(/*to node*/ to, /*type*/ 'N' /*Time*/);
+  RF24NetworkHeader header;
+  RF24NH_init(&header,/*to node*/ to, /*type*/ 'N' /*Time*/);
   
   printf_P(PSTR("---------------------------------\n\r"));
   printf_P(PSTR("%lu: APP Sending active nodes to 0%o...\n\r"),millis(),to);
-  return network.write(header,active_nodes,sizeof(active_nodes));
+  return RF24N_write_m(&network,&header,active_nodes,sizeof(active_nodes));
 }
 
 /**
@@ -197,7 +199,7 @@ bool send_N(uint16_t to)
 void handle_T(RF24NetworkHeader& header){
 
   unsigned long message;                                                                      // The 'T' message is just a ulong, containing the time
-  network.read(header,&message,sizeof(unsigned long));
+  RF24N_read(&network, &header,&message,sizeof(unsigned long));
   printf_P(PSTR("%lu: APP Received %lu from 0%o\n\r"),millis(),message,header.from_node);
 
 
@@ -212,7 +214,7 @@ void handle_N(RF24NetworkHeader& header)
 {
   static uint16_t incoming_nodes[max_active_nodes];
 
-  network.read(header,&incoming_nodes,sizeof(incoming_nodes));
+  RF24N_read(&network,&header,&incoming_nodes,sizeof(incoming_nodes));
   printf_P(PSTR("%lu: APP Received nodes from 0%o\n\r"),millis(),header.from_node);
 
   int i = 0;

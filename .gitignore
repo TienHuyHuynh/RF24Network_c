@@ -11,3 +11,13 @@ version.h
 *.orig
 *.bak
 PINS_*/
+/examples_xc8/helloworld_tx.X/nbproject/private/
+/examples_xc8/helloworld_rx.X/nbproject/private/
+/examples_xc8/helloworld_tx.X/build/default/
+/examples_xc8/helloworld_tx.X/dist/default/
+/examples_xc8/helloworld_rx.X/build/default/
+/examples_xc8/helloworld_rx.X/dist/default/
+/examples_xc8/helloworld_tx.X/build/xc8/
+/examples_xc8/helloworld_tx.X/dist/xc8/
+/examples_xc8/helloworld_tx.X/build/sdcc/
+/examples_xc8/helloworld_tx.X/dist/sdcc/

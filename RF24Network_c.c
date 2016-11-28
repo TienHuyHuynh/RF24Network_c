@@ -33,7 +33,7 @@
 #endif
 
 
-raddr_t RF24N_pipe_address(RF24Network * rn, uint16_t node, uint8_t pipe );
+void RF24N_pipe_address(RF24Network * rn, uint16_t node, uint8_t pipe, raddr_t * address );
 #if defined (RF24NetworkMulticast)
 uint16_t RF24N_levelToAddress(RF24Network * rn,  uint8_t level );
 #endif
@@ -205,7 +205,9 @@ void RF24N_begin_d(RF24Network * rn, uint8_t _channel, uint16_t _node_address )
   // Open up all listening pipes
   i = 6;
   while (i--){
-    RF24_openReadingPipe_d(rn->radio,i,RF24N_pipe_address(rn,_node_address,i));	
+    raddr_t addr[5];
+    RF24N_pipe_address(rn,_node_address,i,addr);	
+    RF24_openReadingPipe_d(rn->radio,i,addr);	
   }
   RF24_startListening(rn->radio);
 
@@ -1142,7 +1144,8 @@ uint8_t RF24N_logicalToPhysicalAddress(RF24Network * rn, logicalToPhysicalStruct
 uint8_t RF24N_write_to_pipe(RF24Network * rn,  uint16_t node, uint8_t pipe, uint8_t multicast )
 {
   uint8_t ok = 0;
-  raddr_t out_pipe = RF24N_pipe_address(rn, node, pipe );
+  raddr_t out_pipe[5];
+  RF24N_pipe_address(rn, node, pipe, out_pipe);
   
   #if !defined (DUAL_HEAD_RADIO)
   // Open the correct pipe for writing.
@@ -1333,9 +1336,11 @@ uint8_t RF24N_is_valid_address(RF24Network * rn,  uint16_t node )
 /******************************************************************/
 #if defined (RF24NetworkMulticast)
 void RF24N_multicastLevel(RF24Network * rn, uint8_t level){
+  raddr_t addr[5];
   rn->multicast_level = level;
   //radio.stopListening();  
-  RF24_openReadingPipe_d(rn->radio,0,RF24N_pipe_address(rn,RF24N_levelToAddress(rn,level),0));
+  RF24N_pipe_address(rn,RF24N_levelToAddress(rn,level),0,addr);
+  RF24_openReadingPipe_d(rn->radio,0,addr);
   //radio.startListening();
   }
   
@@ -1352,16 +1357,14 @@ uint16_t RF24N_levelToAddress(RF24Network * rn, uint8_t level){
 #endif
 /******************************************************************/
 
-raddr_t RF24N_pipe_address(RF24Network * rn,  uint16_t node, uint8_t pipe )
+void RF24N_pipe_address(RF24Network * rn,  uint16_t node, uint8_t pipe ,raddr_t * address)
 {
   
   static uint8_t address_translation[] = { 0xc3,0x3c,0x33,0xce,0x3e,0xe3,0xec };
-  //raddr_t result = 0xCCCCCCCCCCLL;
-  raddr_t result = {{0xCC,0xCC,0xCC,0xCC,0xCC}};
-  uint8_t* out = (uint8_t*)(&result);
+  raddr_t result[5] = {0xCC,0xCC,0xCC,0xCC,0xCC};
+  uint8_t* out = (uint8_t*)(result);
 
   uint8_t i;
-  raddr_t result_;
   
   // Translate the address to use our optimally chosen radio address bytes
 	uint8_t count = 1; uint16_t dec = node;
@@ -1396,10 +1399,9 @@ raddr_t RF24N_pipe_address(RF24Network * rn,  uint16_t node, uint8_t pipe )
 
   for(i=0;i<5;i++)
   {
-    result_.bytes[i]=result.bytes[4-i];
+    address[i]=result[4-i];
   }
  
-  return result_;
 }
 
  void RF24N_begin(RF24Network * rn, uint16_t _node_address){
