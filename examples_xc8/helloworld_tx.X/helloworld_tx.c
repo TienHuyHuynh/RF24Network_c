@@ -15,13 +15,13 @@
  * Every 2 seconds, send a payload to the receiver node.
  */
 
-#include <RF24Network_c.h>
-#include <RF24_c.h>
+#include <RF24Network_cg.h>
+#include <RF24_cg.h>
 #include "serial.h"
 
-RF24 radio;                    // nRF24L01(+) radio attached using Getting Started board 
+//RF24 radio;                    // nRF24L01(+) radio attached using Getting Started board 
 
-RF24Network network;          // Network uses that radio
+//RF24Network network;          // Network uses that radio
 
 const uint16_t this_node = 01;        // Address of our node in Octal format
 const uint16_t other_node = 00;       // Address of the other node in Octal format
@@ -39,19 +39,19 @@ typedef struct  {                  // Structure of our payload
 
 void setup(void)
 {
-  RF24_init(&radio,36,35);
-  RF24N_init(&network,&radio);
+  RF24_init(36,35);
+  RF24N_init();
   
   Serial_begin(57600);
   Serial_println("RF24Network/examples/helloworld_tx/");
  
-  RF24_begin(&radio);
-  RF24N_begin_d(&network,/*channel*/ 90, /*node address*/ this_node);
+  RF24_begin();
+  RF24N_begin_d(/*channel*/ 90, /*node address*/ this_node);
 }
 
 void loop() {
   unsigned long now ;
-  RF24N_update(&network);                          // Check the network regularly
+  RF24N_update();                          // Check the network regularly
 
   
   now = millis();              // If it's time to send a message, send it!
@@ -69,7 +69,7 @@ void loop() {
     payload.counter=packets_sent++;
 
     RF24NH_init(&header,/*to node*/ other_node,0);
-    ok = RF24N_write_m(&network,&header,&payload,sizeof(payload));
+    ok = RF24N_write_m(&header,&payload,sizeof(payload));
     if (ok)
       Serial_println("ok.");
     else

@@ -1,0 +1,1077 @@
+gpasm-1.4.0 #1107 (May  9 2015) build/sdcc/pr   12-2-2016  22:01:24         PAGE  1
+
+
+LOC    OBJECT CODE    LINE  SOURCE TEXT
+  VALUE
+
+                      00001 ;--------------------------------------------------------
+                      00002 ; File Created by SDCC : free open source ANSI-C Compiler
+                      00003 ; Version 3.6.0 #9615 (Linux)
+                      00004 ;--------------------------------------------------------
+                      00005 ; PIC16 port for the Microchip 16-bit core micros
+                      00006 ;--------------------------------------------------------
+                      00007 
+                      00008         .ident "SDCC version 3.6.0 #9615 [pic16 port]"
+                      00009         .file   "serial.c"
+                      00010         list    p=18f4620
+                      00011         radix   dec
+                      00012 
+                      00013 
+                      00014 ;--------------------------------------------------------
+                      00015 ; public variables in this module
+                      00016 ;--------------------------------------------------------
+  0000                00017         global  _buff
+  0000                00018         global  _Serial_begin
+  0000                00019         global  _Serial_tx
+  0000                00020         global  _Serial_print
+  0000                00021         global  _Serial_println
+  0000                00022         global  _Serial_rx
+  0000                00023         global  _itoa_
+                      00024 
+                      00025 ;--------------------------------------------------------
+                      00026 ; extern variables in this module
+                      00027 ;--------------------------------------------------------
+  0000                00028         extern  __gptrget1
+  0000                00029         extern  _PORTAbits
+  0000                00030         extern  _PORTBbits
+  0000                00031         extern  _PORTCbits
+  0000                00032         extern  _PORTDbits
+  0000                00033         extern  _PORTEbits
+  0000                00034         extern  _LATAbits
+  0000                00035         extern  _LATBbits
+  0000                00036         extern  _LATCbits
+  0000                00037         extern  _LATDbits
+  0000                00038         extern  _LATEbits
+  0000                00039         extern  _DDRAbits
+  0000                00040         extern  _TRISAbits
+  0000                00041         extern  _DDRBbits
+  0000                00042         extern  _TRISBbits
+  0000                00043         extern  _DDRCbits
+  0000                00044         extern  _TRISCbits
+  0000                00045         extern  _DDRDbits
+  0000                00046         extern  _TRISDbits
+  0000                00047         extern  _DDREbits
+  0000                00048         extern  _TRISEbits
+  0000                00049         extern  _OSCTUNEbits
+  0000                00050         extern  _PIE1bits
+  0000                00051         extern  _PIR1bits
+  0000                00052         extern  _IPR1bits
+  0000                00053         extern  _PIE2bits
+gpasm-1.4.0 #1107 (May  9 2015) build/sdcc/pr   12-2-2016  22:01:24         PAGE  2
+
+
+LOC    OBJECT CODE    LINE  SOURCE TEXT
+  VALUE
+
+  0000                00054         extern  _PIR2bits
+  0000                00055         extern  _IPR2bits
+  0000                00056         extern  _EECON1bits
+  0000                00057         extern  _RCSTAbits
+  0000                00058         extern  _TXSTAbits
+  0000                00059         extern  _T3CONbits
+  0000                00060         extern  _CMCONbits
+  0000                00061         extern  _CVRCONbits
+  0000                00062         extern  _ECCP1ASbits
+  0000                00063         extern  _PWM1CONbits
+  0000                00064         extern  _BAUDCONbits
+  0000                00065         extern  _BAUDCTLbits
+  0000                00066         extern  _CCP2CONbits
+  0000                00067         extern  _CCP1CONbits
+  0000                00068         extern  _ADCON2bits
+  0000                00069         extern  _ADCON1bits
+  0000                00070         extern  _ADCON0bits
+  0000                00071         extern  _SSPCON2bits
+  0000                00072         extern  _SSPCON1bits
+  0000                00073         extern  _SSPSTATbits
+  0000                00074         extern  _T2CONbits
+  0000                00075         extern  _T1CONbits
+  0000                00076         extern  _RCONbits
+  0000                00077         extern  _WDTCONbits
+  0000                00078         extern  _HLVDCONbits
+  0000                00079         extern  _LVDCONbits
+  0000                00080         extern  _OSCCONbits
+  0000                00081         extern  _T0CONbits
+  0000                00082         extern  _STATUSbits
+  0000                00083         extern  _INTCON3bits
+  0000                00084         extern  _INTCON2bits
+  0000                00085         extern  _INTCONbits
+  0000                00086         extern  _STKPTRbits
+  0000                00087         extern  _stdin
+  0000                00088         extern  _stdout
+  0000                00089         extern  _mtime
+  0000                00090         extern  _PORTA
+  0000                00091         extern  _PORTB
+  0000                00092         extern  _PORTC
+  0000                00093         extern  _PORTD
+  0000                00094         extern  _PORTE
+  0000                00095         extern  _LATA
+  0000                00096         extern  _LATB
+  0000                00097         extern  _LATC
+  0000                00098         extern  _LATD
+  0000                00099         extern  _LATE
+  0000                00100         extern  _DDRA
+  0000                00101         extern  _TRISA
+  0000                00102         extern  _DDRB
+  0000                00103         extern  _TRISB
+  0000                00104         extern  _DDRC
+  0000                00105         extern  _TRISC
+  0000                00106         extern  _DDRD
+gpasm-1.4.0 #1107 (May  9 2015) build/sdcc/pr   12-2-2016  22:01:24         PAGE  3
+
+
+LOC    OBJECT CODE    LINE  SOURCE TEXT
+  VALUE
+
+  0000                00107         extern  _TRISD
+  0000                00108         extern  _DDRE
+  0000                00109         extern  _TRISE
+  0000                00110         extern  _OSCTUNE
+  0000                00111         extern  _PIE1
+  0000                00112         extern  _PIR1
+  0000                00113         extern  _IPR1
+  0000                00114         extern  _PIE2
+  0000                00115         extern  _PIR2
+  0000                00116         extern  _IPR2
+  0000                00117         extern  _EECON1
+  0000                00118         extern  _EECON2
+  0000                00119         extern  _EEDATA
+  0000                00120         extern  _EEADR
+  0000                00121         extern  _EEADRH
+  0000                00122         extern  _RCSTA
+  0000                00123         extern  _TXSTA
+  0000                00124         extern  _TXREG
+  0000                00125         extern  _RCREG
+  0000                00126         extern  _SPBRG
+  0000                00127         extern  _SPBRGH
+  0000                00128         extern  _T3CON
+  0000                00129         extern  _TMR3
+  0000                00130         extern  _TMR3L
+  0000                00131         extern  _TMR3H
+  0000                00132         extern  _CMCON
+  0000                00133         extern  _CVRCON
+  0000                00134         extern  _ECCP1AS
+  0000                00135         extern  _PWM1CON
+  0000                00136         extern  _BAUDCON
+  0000                00137         extern  _BAUDCTL
+  0000                00138         extern  _CCP2CON
+  0000                00139         extern  _CCPR2
+  0000                00140         extern  _CCPR2L
+  0000                00141         extern  _CCPR2H
+  0000                00142         extern  _CCP1CON
+  0000                00143         extern  _CCPR1
+  0000                00144         extern  _CCPR1L
+  0000                00145         extern  _CCPR1H
+  0000                00146         extern  _ADCON2
+  0000                00147         extern  _ADCON1
+  0000                00148         extern  _ADCON0
+  0000                00149         extern  _ADRES
+  0000                00150         extern  _ADRESL
+  0000                00151         extern  _ADRESH
+  0000                00152         extern  _SSPCON2
+  0000                00153         extern  _SSPCON1
+  0000                00154         extern  _SSPSTAT
+  0000                00155         extern  _SSPADD
+  0000                00156         extern  _SSPBUF
+  0000                00157         extern  _T2CON
+  0000                00158         extern  _PR2
+  0000                00159         extern  _TMR2
+gpasm-1.4.0 #1107 (May  9 2015) build/sdcc/pr   12-2-2016  22:01:24         PAGE  4
+
+
+LOC    OBJECT CODE    LINE  SOURCE TEXT
+  VALUE
+
+  0000                00160         extern  _T1CON
+  0000                00161         extern  _TMR1
+  0000                00162         extern  _TMR1L
+  0000                00163         extern  _TMR1H
+  0000                00164         extern  _RCON
+  0000                00165         extern  _WDTCON
+  0000                00166         extern  _HLVDCON
+  0000                00167         extern  _LVDCON
+  0000                00168         extern  _OSCCON
+  0000                00169         extern  _T0CON
+  0000                00170         extern  _TMR0
+  0000                00171         extern  _TMR0L
+  0000                00172         extern  _TMR0H
+  0000                00173         extern  _STATUS
+  0000                00174         extern  _FSR2L
+  0000                00175         extern  _FSR2H
+  0000                00176         extern  _PLUSW2
+  0000                00177         extern  _PREINC2
+  0000                00178         extern  _POSTDEC2
+  0000                00179         extern  _POSTINC2
+  0000                00180         extern  _INDF2
+  0000                00181         extern  _BSR
+  0000                00182         extern  _FSR1L
+  0000                00183         extern  _FSR1H
+  0000                00184         extern  _PLUSW1
+  0000                00185         extern  _PREINC1
+  0000                00186         extern  _POSTDEC1
+  0000                00187         extern  _POSTINC1
+  0000                00188         extern  _INDF1
+  0000                00189         extern  _WREG
+  0000                00190         extern  _FSR0L
+  0000                00191         extern  _FSR0H
+  0000                00192         extern  _PLUSW0
+  0000                00193         extern  _PREINC0
+  0000                00194         extern  _POSTDEC0
+  0000                00195         extern  _POSTINC0
+  0000                00196         extern  _INDF0
+  0000                00197         extern  _INTCON3
+  0000                00198         extern  _INTCON2
+  0000                00199         extern  _INTCON
+  0000                00200         extern  _PROD
+  0000                00201         extern  _PRODL
+  0000                00202         extern  _PRODH
+  0000                00203         extern  _TABLAT
+  0000                00204         extern  _TBLPTR
+  0000                00205         extern  _TBLPTRL
+  0000                00206         extern  _TBLPTRH
+  0000                00207         extern  _TBLPTRU
+  0000                00208         extern  _PC
+  0000                00209         extern  _PCL
+  0000                00210         extern  _PCLATH
+  0000                00211         extern  _PCLATU
+  0000                00212         extern  _STKPTR
+gpasm-1.4.0 #1107 (May  9 2015) build/sdcc/pr   12-2-2016  22:01:24         PAGE  5
+
+
+LOC    OBJECT CODE    LINE  SOURCE TEXT
+  VALUE
+
+  0000                00213         extern  _TOS
+  0000                00214         extern  _TOSL
+  0000                00215         extern  _TOSH
+  0000                00216         extern  _TOSU
+  0000                00217         extern  _ultoa
+  0000                00218         extern  _delay
+  0000                00219         extern  __mullong
+  0000                00220         extern  __divulong
+                      00221 
+                      00222 ;--------------------------------------------------------
+                      00223 ;       Equates to used internal registers
+                      00224 ;--------------------------------------------------------
+  00000FD8            00225 STATUS  equ     0xfd8
+  00000FE8            00226 WREG    equ     0xfe8
+  00000FE9            00227 FSR0L   equ     0xfe9
+  00000FE1            00228 FSR1L   equ     0xfe1
+  00000FD9            00229 FSR2L   equ     0xfd9
+  00000FE6            00230 POSTINC1        equ     0xfe6
+  00000FE5            00231 POSTDEC1        equ     0xfe5
+  00000FE4            00232 PREINC1 equ     0xfe4
+  00000FDB            00233 PLUSW2  equ     0xfdb
+  00000FF3            00234 PRODL   equ     0xff3
+  00000FF4            00235 PRODH   equ     0xff4
+                      00236 
+                      00237 
+                      00238 ; Internal registers
+                      00239 .registers      udata_ovr       0x0000
+000000                00240 r0x00   res     1
+000001                00241 r0x01   res     1
+000002                00242 r0x02   res     1
+000003                00243 r0x03   res     1
+000004                00244 r0x04   res     1
+000005                00245 r0x05   res     1
+000006                00246 r0x06   res     1
+000007                00247 r0x07   res     1
+                      00248 
+                      00249 udata_serial_0  udata
+000000                00250 _buff   res     10
+                      00251 
+                      00252 ;--------------------------------------------------------
+                      00253 ; global & static initialisations
+                      00254 ;--------------------------------------------------------
+                      00255 ; I code from now on!
+                      00256 ; ; Starting pCode block
+                      00257 S_serial__itoa_ code
+000000                00258 _itoa_:
+                      00259         .line   106; serial.c   const char * itoa_(uint32_t val)
+000000 CFD9 FFE5      00260         MOVFF   FSR2L, POSTDEC1
+000004 CFE1 FFD9      00261         MOVFF   FSR1L, FSR2L
+000008 C??? F???      00262         MOVFF   r0x00, POSTDEC1
+00000C C??? F???      00263         MOVFF   r0x01, POSTDEC1
+000010 C??? F???      00264         MOVFF   r0x02, POSTDEC1
+000014 C??? F???      00265         MOVFF   r0x03, POSTDEC1
+gpasm-1.4.0 #1107 (May  9 2015) build/sdcc/pr   12-2-2016  22:01:24         PAGE  6
+
+
+LOC    OBJECT CODE    LINE  SOURCE TEXT
+  VALUE
+
+000018 0E02           00266         MOVLW   0x02
+00001A CFDB F000      00267         MOVFF   PLUSW2, r0x00
+00001E 0E03           00268         MOVLW   0x03
+000020 CFDB F000      00269         MOVFF   PLUSW2, r0x01
+000024 0E04           00270         MOVLW   0x04
+000026 CFDB F000      00271         MOVFF   PLUSW2, r0x02
+00002A 0E05           00272         MOVLW   0x05
+00002C CFDB F000      00273         MOVFF   PLUSW2, r0x03
+                      00274         .line   111; serial.c   ultoa(val,buff,10);
+000030 0E0A           00275         MOVLW   0x0a
+Message[1301]: Using default destination of 0 (Access Bank).
+000032 6EE5           00276         MOVWF   POSTDEC1
+000034 0E??           00277         MOVLW   HIGH(_buff)
+Message[1301]: Using default destination of 0 (Access Bank).
+000036 6EE5           00278         MOVWF   POSTDEC1
+000038 0E??           00279         MOVLW   LOW(_buff)
+Message[1301]: Using default destination of 0 (Access Bank).
+00003A 6EE5           00280         MOVWF   POSTDEC1
+00003C 50??           00281         MOVF    r0x03, W
+Message[1301]: Using default destination of 0 (Access Bank).
+00003E 6EE5           00282         MOVWF   POSTDEC1
+000040 50??           00283         MOVF    r0x02, W
+Message[1301]: Using default destination of 0 (Access Bank).
+000042 6EE5           00284         MOVWF   POSTDEC1
+000044 50??           00285         MOVF    r0x01, W
+Message[1301]: Using default destination of 0 (Access Bank).
+000046 6EE5           00286         MOVWF   POSTDEC1
+000048 50??           00287         MOVF    r0x00, W
+Message[1301]: Using default destination of 0 (Access Bank).
+00004A 6EE5           00288         MOVWF   POSTDEC1
+00004C EC?? F0??      00289         CALL    _ultoa
+000050 0E07           00290         MOVLW   0x07
+000052 26E1           00291         ADDWF   FSR1L, F
+                      00292         .line   113; serial.c   return buff;
+000054 0E??           00293         MOVLW   HIGH(_buff)
+Message[1301]: Using default destination of 0 (Access Bank).
+000056 6E??           00294         MOVWF   r0x01
+000058 0E??           00295         MOVLW   LOW(_buff)
+Message[1301]: Using default destination of 0 (Access Bank).
+00005A 6E??           00296         MOVWF   r0x00
+00005C 0E80           00297         MOVLW   0x80
+Message[1301]: Using default destination of 0 (Access Bank).
+00005E 6E??           00298         MOVWF   r0x02
+000060 C??? F???      00299         MOVFF   r0x02, PRODH
+000064 C??? F???      00300         MOVFF   r0x01, PRODL
+000068 50??           00301         MOVF    r0x00, W
+00006A CFE4 F000      00302         MOVFF   PREINC1, r0x03
+00006E CFE4 F000      00303         MOVFF   PREINC1, r0x02
+000072 CFE4 F000      00304         MOVFF   PREINC1, r0x01
+000076 CFE4 F000      00305         MOVFF   PREINC1, r0x00
+00007A CFE4 FFD9      00306         MOVFF   PREINC1, FSR2L
+00007E 0012           00307         RETURN  
+                      00308 
+gpasm-1.4.0 #1107 (May  9 2015) build/sdcc/pr   12-2-2016  22:01:24         PAGE  7
+
+
+LOC    OBJECT CODE    LINE  SOURCE TEXT
+  VALUE
+
+                      00309 ; ; Starting pCode block
+                      00310 S_serial__Serial_rx     code
+000000                00311 _Serial_rx:
+                      00312         .line   82; serial.c    unsigned char Serial_rx(unsigned int timeout)
+000000 CFD9 FFE5      00313         MOVFF   FSR2L, POSTDEC1
+000004 CFE1 FFD9      00314         MOVFF   FSR1L, FSR2L
+000008 C??? F???      00315         MOVFF   r0x00, POSTDEC1
+00000C C??? F???      00316         MOVFF   r0x01, POSTDEC1
+000010 C??? F???      00317         MOVFF   r0x02, POSTDEC1
+000014 C??? F???      00318         MOVFF   r0x03, POSTDEC1
+000018 0E02           00319         MOVLW   0x02
+00001A CFDB F000      00320         MOVFF   PLUSW2, r0x00
+00001E 0E03           00321         MOVLW   0x03
+000020 CFDB F000      00322         MOVFF   PLUSW2, r0x01
+                      00323         .line   86; serial.c    if(RCSTAbits.FERR || RCSTAbits.OERR)//trata erro
+000024 B4??           00324         BTFSC   _RCSTAbits, 2
+000026 D???           00325         BRA     _00131_DS_
+000028 A2??           00326         BTFSS   _RCSTAbits, 1
+00002A D???           00327         BRA     _00147_DS_
+00002C                00328 _00131_DS_:
+                      00329         .line   88; serial.c    RCSTAbits.CREN=0;
+00002C 98??           00330         BCF     _RCSTAbits, 4
+                      00331         .line   89; serial.c    RCSTAbits.CREN=1;
+00002E 88??           00332         BSF     _RCSTAbits, 4
+000030                00333 _00147_DS_:
+                      00334         .line   92; serial.c    while(((to < timeout)||(!timeout))&&(!PIR1bits.RCIF))
+Message[1301]: Using default destination of 0 (Access Bank).
+000030 6A??           00335         CLRF    r0x02
+Message[1301]: Using default destination of 0 (Access Bank).
+000032 6A??           00336         CLRF    r0x03
+000034                00337 _00136_DS_:
+000034 50??           00338         MOVF    r0x01, W
+000036 5C??           00339         SUBWF   r0x03, W
+000038 E1??           00340         BNZ     _00160_DS_
+00003A 50??           00341         MOVF    r0x00, W
+00003C 5C??           00342         SUBWF   r0x02, W
+00003E                00343 _00160_DS_:
+00003E E3??           00344         BNC     _00135_DS_
+000040 50??           00345         MOVF    r0x00, W
+000042 10??           00346         IORWF   r0x01, W
+000044 E1??           00347         BNZ     _00138_DS_
+000046                00348 _00135_DS_:
+000046 BA??           00349         BTFSC   _PIR1bits, 5
+000048 D???           00350         BRA     _00138_DS_
+                      00351         .line   94; serial.c    delay(20);
+00004A 0E00           00352         MOVLW   0x00
+Message[1301]: Using default destination of 0 (Access Bank).
+00004C 6EE5           00353         MOVWF   POSTDEC1
+00004E 0E14           00354         MOVLW   0x14
+Message[1301]: Using default destination of 0 (Access Bank).
+000050 6EE5           00355         MOVWF   POSTDEC1
+000052 EC?? F0??      00356         CALL    _delay
+000056 52E6           00357         MOVF    POSTINC1, F
+gpasm-1.4.0 #1107 (May  9 2015) build/sdcc/pr   12-2-2016  22:01:24         PAGE  8
+
+
+LOC    OBJECT CODE    LINE  SOURCE TEXT
+  VALUE
+
+000058 52E6           00358         MOVF    POSTINC1, F
+                      00359         .line   95; serial.c    to+=20; 
+00005A 0E14           00360         MOVLW   0x14
+00005C 26??           00361         ADDWF   r0x02, F
+00005E B0D8           00362         BTFSC   STATUS, 0
+000060 2A??           00363         INCF    r0x03, F
+000062 D???           00364         BRA     _00136_DS_
+000064                00365 _00138_DS_:
+                      00366         .line   97; serial.c    if(PIR1bits.RCIF)
+000064 AA??           00367         BTFSS   _PIR1bits, 5
+000066 D???           00368         BRA     _00140_DS_
+                      00369         .line   98; serial.c    return RCREG;
+000068 50??           00370         MOVF    _RCREG, W
+00006A D???           00371         BRA     _00142_DS_
+00006C                00372 _00140_DS_:
+                      00373         .line   100; serial.c   return 0xA5;
+00006C 0EA5           00374         MOVLW   0xa5
+00006E                00375 _00142_DS_:
+00006E CFE4 F000      00376         MOVFF   PREINC1, r0x03
+000072 CFE4 F000      00377         MOVFF   PREINC1, r0x02
+000076 CFE4 F000      00378         MOVFF   PREINC1, r0x01
+00007A CFE4 F000      00379         MOVFF   PREINC1, r0x00
+00007E CFE4 FFD9      00380         MOVFF   PREINC1, FSR2L
+000082 0012           00381         RETURN  
+                      00382 
+                      00383 ; ; Starting pCode block
+                      00384 S_serial__Serial_println        code
+000000                00385 _Serial_println:
+                      00386         .line   76; serial.c    void Serial_println(const char* val)
+000000 CFD9 FFE5      00387         MOVFF   FSR2L, POSTDEC1
+000004 CFE1 FFD9      00388         MOVFF   FSR1L, FSR2L
+000008 C??? F???      00389         MOVFF   r0x00, POSTDEC1
+00000C C??? F???      00390         MOVFF   r0x01, POSTDEC1
+000010 C??? F???      00391         MOVFF   r0x02, POSTDEC1
+000014 0E02           00392         MOVLW   0x02
+000016 CFDB F000      00393         MOVFF   PLUSW2, r0x00
+00001A 0E03           00394         MOVLW   0x03
+00001C CFDB F000      00395         MOVFF   PLUSW2, r0x01
+000020 0E04           00396         MOVLW   0x04
+000022 CFDB F000      00397         MOVFF   PLUSW2, r0x02
+                      00398         .line   78; serial.c    Serial_print(val);
+000026 50??           00399         MOVF    r0x02, W
+Message[1301]: Using default destination of 0 (Access Bank).
+000028 6EE5           00400         MOVWF   POSTDEC1
+00002A 50??           00401         MOVF    r0x01, W
+Message[1301]: Using default destination of 0 (Access Bank).
+00002C 6EE5           00402         MOVWF   POSTDEC1
+00002E 50??           00403         MOVF    r0x00, W
+Message[1301]: Using default destination of 0 (Access Bank).
+000030 6EE5           00404         MOVWF   POSTDEC1
+000032 EC?? F0??      00405         CALL    _Serial_print
+000036 0E03           00406         MOVLW   0x03
+000038 26E1           00407         ADDWF   FSR1L, F
+gpasm-1.4.0 #1107 (May  9 2015) build/sdcc/pr   12-2-2016  22:01:24         PAGE  9
+
+
+LOC    OBJECT CODE    LINE  SOURCE TEXT
+  VALUE
+
+                      00408         .line   79; serial.c    Serial_print("\r\n");
+00003A 0E??           00409         MOVLW   UPPER(___str_0)
+Message[1301]: Using default destination of 0 (Access Bank).
+00003C 6E??           00410         MOVWF   r0x02
+00003E 0E??           00411         MOVLW   HIGH(___str_0)
+Message[1301]: Using default destination of 0 (Access Bank).
+000040 6E??           00412         MOVWF   r0x01
+000042 0E??           00413         MOVLW   LOW(___str_0)
+Message[1301]: Using default destination of 0 (Access Bank).
+000044 6E??           00414         MOVWF   r0x00
+000046 50??           00415         MOVF    r0x02, W
+Message[1301]: Using default destination of 0 (Access Bank).
+000048 6EE5           00416         MOVWF   POSTDEC1
+00004A 50??           00417         MOVF    r0x01, W
+Message[1301]: Using default destination of 0 (Access Bank).
+00004C 6EE5           00418         MOVWF   POSTDEC1
+00004E 50??           00419         MOVF    r0x00, W
+Message[1301]: Using default destination of 0 (Access Bank).
+000050 6EE5           00420         MOVWF   POSTDEC1
+000052 EC?? F0??      00421         CALL    _Serial_print
+000056 0E03           00422         MOVLW   0x03
+000058 26E1           00423         ADDWF   FSR1L, F
+00005A CFE4 F000      00424         MOVFF   PREINC1, r0x02
+00005E CFE4 F000      00425         MOVFF   PREINC1, r0x01
+000062 CFE4 F000      00426         MOVFF   PREINC1, r0x00
+000066 CFE4 FFD9      00427         MOVFF   PREINC1, FSR2L
+00006A 0012           00428         RETURN  
+                      00429 
+                      00430 ; ; Starting pCode block
+                      00431 S_serial__Serial_print  code
+000000                00432 _Serial_print:
+                      00433         .line   65; serial.c    void Serial_print(const char* val)
+000000 CFD9 FFE5      00434         MOVFF   FSR2L, POSTDEC1
+000004 CFE1 FFD9      00435         MOVFF   FSR1L, FSR2L
+000008 C??? F???      00436         MOVFF   r0x00, POSTDEC1
+00000C C??? F???      00437         MOVFF   r0x01, POSTDEC1
+000010 C??? F???      00438         MOVFF   r0x02, POSTDEC1
+000014 C??? F???      00439         MOVFF   r0x03, POSTDEC1
+000018 C??? F???      00440         MOVFF   r0x04, POSTDEC1
+00001C C??? F???      00441         MOVFF   r0x05, POSTDEC1
+000020 C??? F???      00442         MOVFF   r0x06, POSTDEC1
+000024 C??? F???      00443         MOVFF   r0x07, POSTDEC1
+000028 0E02           00444         MOVLW   0x02
+00002A CFDB F000      00445         MOVFF   PLUSW2, r0x00
+00002E 0E03           00446         MOVLW   0x03
+000030 CFDB F000      00447         MOVFF   PLUSW2, r0x01
+000034 0E04           00448         MOVLW   0x04
+000036 CFDB F000      00449         MOVFF   PLUSW2, r0x02
+                      00450         .line   69; serial.c    while(val[i])
+Message[1301]: Using default destination of 0 (Access Bank).
+00003A 6A??           00451         CLRF    r0x03
+Message[1301]: Using default destination of 0 (Access Bank).
+00003C 6A??           00452         CLRF    r0x04
+gpasm-1.4.0 #1107 (May  9 2015) build/sdcc/pr   12-2-2016  22:01:24         PAGE 10
+
+
+LOC    OBJECT CODE    LINE  SOURCE TEXT
+  VALUE
+
+00003E                00453 _00118_DS_:
+00003E 50??           00454         MOVF    r0x03, W
+000040 24??           00455         ADDWF   r0x00, W
+Message[1301]: Using default destination of 0 (Access Bank).
+000042 6E??           00456         MOVWF   r0x05
+000044 50??           00457         MOVF    r0x04, W
+000046 20??           00458         ADDWFC  r0x01, W
+Message[1301]: Using default destination of 0 (Access Bank).
+000048 6E??           00459         MOVWF   r0x06
+Message[1301]: Using default destination of 0 (Access Bank).
+00004A 6AE8           00460         CLRF    WREG
+00004C 20??           00461         ADDWFC  r0x02, W
+Message[1301]: Using default destination of 0 (Access Bank).
+00004E 6E??           00462         MOVWF   r0x07
+000050 C??? F???      00463         MOVFF   r0x05, FSR0L
+000054 C??? F???      00464         MOVFF   r0x06, PRODL
+000058 50??           00465         MOVF    r0x07, W
+00005A EC?? F0??      00466         CALL    __gptrget1
+Message[1301]: Using default destination of 0 (Access Bank).
+00005E 6E??           00467         MOVWF   r0x05
+000060 50??           00468         MOVF    r0x05, W
+000062 E0??           00469         BZ      _00121_DS_
+                      00470         .line   71; serial.c    Serial_tx(val[i]);
+000064 50??           00471         MOVF    r0x05, W
+Message[1301]: Using default destination of 0 (Access Bank).
+000066 6EE5           00472         MOVWF   POSTDEC1
+000068 EC?? F0??      00473         CALL    _Serial_tx
+00006C 52E6           00474         MOVF    POSTINC1, F
+                      00475         .line   72; serial.c    i++; 
+00006E 4A??           00476         INFSNZ  r0x03, F
+000070 2A??           00477         INCF    r0x04, F
+000072 D???           00478         BRA     _00118_DS_
+000074                00479 _00121_DS_:
+000074 CFE4 F000      00480         MOVFF   PREINC1, r0x07
+000078 CFE4 F000      00481         MOVFF   PREINC1, r0x06
+00007C CFE4 F000      00482         MOVFF   PREINC1, r0x05
+000080 CFE4 F000      00483         MOVFF   PREINC1, r0x04
+000084 CFE4 F000      00484         MOVFF   PREINC1, r0x03
+000088 CFE4 F000      00485         MOVFF   PREINC1, r0x02
+00008C CFE4 F000      00486         MOVFF   PREINC1, r0x01
+000090 CFE4 F000      00487         MOVFF   PREINC1, r0x00
+000094 CFE4 FFD9      00488         MOVFF   PREINC1, FSR2L
+000098 0012           00489         RETURN  
+                      00490 
+                      00491 ; ; Starting pCode block
+                      00492 S_serial__Serial_tx     code
+000000                00493 _Serial_tx:
+                      00494         .line   59; serial.c    void Serial_tx(const unsigned char val)
+000000 CFD9 FFE5      00495         MOVFF   FSR2L, POSTDEC1
+000004 CFE1 FFD9      00496         MOVFF   FSR1L, FSR2L
+000008 0E02           00497         MOVLW   0x02
+00000A CFDB F000      00498         MOVFF   PLUSW2, _TXREG
+00000E                00499 _00110_DS_:
+gpasm-1.4.0 #1107 (May  9 2015) build/sdcc/pr   12-2-2016  22:01:24         PAGE 11
+
+
+LOC    OBJECT CODE    LINE  SOURCE TEXT
+  VALUE
+
+                      00500         .line   62; serial.c    while(!TXSTAbits.TRMT);
+00000E A2??           00501         BTFSS   _TXSTAbits, 1
+000010 D???           00502         BRA     _00110_DS_
+000012 CFE4 FFD9      00503         MOVFF   PREINC1, FSR2L
+000016 0012           00504         RETURN  
+                      00505 
+                      00506 ; ; Starting pCode block
+                      00507 S_serial__Serial_begin  code
+000000                00508 _Serial_begin:
+                      00509         .line   31; serial.c    void Serial_begin(unsigned long baud)
+000000 CFD9 FFE5      00510         MOVFF   FSR2L, POSTDEC1
+000004 CFE1 FFD9      00511         MOVFF   FSR1L, FSR2L
+000008 C??? F???      00512         MOVFF   r0x00, POSTDEC1
+00000C C??? F???      00513         MOVFF   r0x01, POSTDEC1
+000010 C??? F???      00514         MOVFF   r0x02, POSTDEC1
+000014 C??? F???      00515         MOVFF   r0x03, POSTDEC1
+000018 C??? F???      00516         MOVFF   r0x04, POSTDEC1
+00001C C??? F???      00517         MOVFF   r0x05, POSTDEC1
+000020 C??? F???      00518         MOVFF   r0x06, POSTDEC1
+000024 C??? F???      00519         MOVFF   r0x07, POSTDEC1
+000028 0E02           00520         MOVLW   0x02
+00002A CFDB F000      00521         MOVFF   PLUSW2, r0x00
+00002E 0E03           00522         MOVLW   0x03
+000030 CFDB F000      00523         MOVFF   PLUSW2, r0x01
+000034 0E04           00524         MOVLW   0x04
+000036 CFDB F000      00525         MOVFF   PLUSW2, r0x02
+00003A 0E05           00526         MOVLW   0x05
+00003C CFDB F000      00527         MOVFF   PLUSW2, r0x03
+                      00528         .line   33; serial.c    TRISCbits.TRISC6=1;
+000040 8C??           00529         BSF     _TRISCbits, 6
+                      00530         .line   34; serial.c    TRISCbits.TRISC7=1;
+000042 8E??           00531         BSF     _TRISCbits, 7
+                      00532         .line   36; serial.c    baud=((_XTAL_FREQ/(4*baud))-1);
+000044 50??           00533         MOVF    r0x03, W
+Message[1301]: Using default destination of 0 (Access Bank).
+000046 6EE5           00534         MOVWF   POSTDEC1
+000048 50??           00535         MOVF    r0x02, W
+Message[1301]: Using default destination of 0 (Access Bank).
+00004A 6EE5           00536         MOVWF   POSTDEC1
+00004C 50??           00537         MOVF    r0x01, W
+Message[1301]: Using default destination of 0 (Access Bank).
+00004E 6EE5           00538         MOVWF   POSTDEC1
+000050 50??           00539         MOVF    r0x00, W
+Message[1301]: Using default destination of 0 (Access Bank).
+000052 6EE5           00540         MOVWF   POSTDEC1
+000054 0E00           00541         MOVLW   0x00
+Message[1301]: Using default destination of 0 (Access Bank).
+000056 6EE5           00542         MOVWF   POSTDEC1
+000058 0E00           00543         MOVLW   0x00
+Message[1301]: Using default destination of 0 (Access Bank).
+00005A 6EE5           00544         MOVWF   POSTDEC1
+00005C 0E00           00545         MOVLW   0x00
+Message[1301]: Using default destination of 0 (Access Bank).
+gpasm-1.4.0 #1107 (May  9 2015) build/sdcc/pr   12-2-2016  22:01:24         PAGE 12
+
+
+LOC    OBJECT CODE    LINE  SOURCE TEXT
+  VALUE
+
+00005E 6EE5           00546         MOVWF   POSTDEC1
+000060 0E04           00547         MOVLW   0x04
+Message[1301]: Using default destination of 0 (Access Bank).
+000062 6EE5           00548         MOVWF   POSTDEC1
+000064 EC?? F0??      00549         CALL    __mullong
+Message[1301]: Using default destination of 0 (Access Bank).
+000068 6E??           00550         MOVWF   r0x04
+00006A CFF3 F000      00551         MOVFF   PRODL, r0x05
+00006E CFF4 F000      00552         MOVFF   PRODH, r0x06
+000072 CFE9 F000      00553         MOVFF   FSR0L, r0x07
+000076 0E08           00554         MOVLW   0x08
+000078 26E1           00555         ADDWF   FSR1L, F
+00007A 50??           00556         MOVF    r0x07, W
+Message[1301]: Using default destination of 0 (Access Bank).
+00007C 6EE5           00557         MOVWF   POSTDEC1
+00007E 50??           00558         MOVF    r0x06, W
+Message[1301]: Using default destination of 0 (Access Bank).
+000080 6EE5           00559         MOVWF   POSTDEC1
+000082 50??           00560         MOVF    r0x05, W
+Message[1301]: Using default destination of 0 (Access Bank).
+000084 6EE5           00561         MOVWF   POSTDEC1
+000086 50??           00562         MOVF    r0x04, W
+Message[1301]: Using default destination of 0 (Access Bank).
+000088 6EE5           00563         MOVWF   POSTDEC1
+00008A 0E01           00564         MOVLW   0x01
+Message[1301]: Using default destination of 0 (Access Bank).
+00008C 6EE5           00565         MOVWF   POSTDEC1
+00008E 0EE8           00566         MOVLW   0xe8
+Message[1301]: Using default destination of 0 (Access Bank).
+000090 6EE5           00567         MOVWF   POSTDEC1
+000092 0E48           00568         MOVLW   0x48
+Message[1301]: Using default destination of 0 (Access Bank).
+000094 6EE5           00569         MOVWF   POSTDEC1
+000096 0E00           00570         MOVLW   0x00
+Message[1301]: Using default destination of 0 (Access Bank).
+000098 6EE5           00571         MOVWF   POSTDEC1
+00009A EC?? F0??      00572         CALL    __divulong
+Message[1301]: Using default destination of 0 (Access Bank).
+00009E 6E??           00573         MOVWF   r0x04
+0000A0 CFF3 F000      00574         MOVFF   PRODL, r0x05
+0000A4 CFF4 F000      00575         MOVFF   PRODH, r0x06
+0000A8 CFE9 F000      00576         MOVFF   FSR0L, r0x07
+0000AC 0E08           00577         MOVLW   0x08
+0000AE 26E1           00578         ADDWF   FSR1L, F
+0000B0 50??           00579         MOVF    r0x04, W
+0000B2 0FFF           00580         ADDLW   0xff
+Message[1301]: Using default destination of 0 (Access Bank).
+0000B4 6E??           00581         MOVWF   r0x00
+0000B6 0EFF           00582         MOVLW   0xff
+0000B8 20??           00583         ADDWFC  r0x05, W
+Message[1301]: Using default destination of 0 (Access Bank).
+0000BA 6E??           00584         MOVWF   r0x01
+0000BC 0EFF           00585         MOVLW   0xff
+gpasm-1.4.0 #1107 (May  9 2015) build/sdcc/pr   12-2-2016  22:01:24         PAGE 13
+
+
+LOC    OBJECT CODE    LINE  SOURCE TEXT
+  VALUE
+
+0000BE 20??           00586         ADDWFC  r0x06, W
+Message[1301]: Using default destination of 0 (Access Bank).
+0000C0 6E??           00587         MOVWF   r0x02
+0000C2 0EFF           00588         MOVLW   0xff
+0000C4 20??           00589         ADDWFC  r0x07, W
+Message[1301]: Using default destination of 0 (Access Bank).
+0000C6 6E??           00590         MOVWF   r0x03
+                      00591         .line   42; serial.c    SPBRG= (0x00FF & baud); //baud rate de 115200 - 32MHz
+0000C8 50??           00592         MOVF    r0x00, W
+Message[1301]: Using default destination of 0 (Access Bank).
+0000CA 6E??           00593         MOVWF   r0x04
+Message[1301]: Using default destination of 0 (Access Bank).
+0000CC 6A??           00594         CLRF    r0x05
+Message[1301]: Using default destination of 0 (Access Bank).
+0000CE 6A??           00595         CLRF    r0x06
+Message[1301]: Using default destination of 0 (Access Bank).
+0000D0 6A??           00596         CLRF    r0x07
+0000D2 50??           00597         MOVF    r0x04, W
+Message[1301]: Using default destination of 0 (Access Bank).
+0000D4 6E??           00598         MOVWF   _SPBRG
+                      00599         .line   43; serial.c    SPBRGH=(0xFF00 & baud)>>8; 
+Message[1301]: Using default destination of 0 (Access Bank).
+0000D6 6A??           00600         CLRF    r0x00
+Message[1301]: Using default destination of 0 (Access Bank).
+0000D8 6A??           00601         CLRF    r0x02
+Message[1301]: Using default destination of 0 (Access Bank).
+0000DA 6A??           00602         CLRF    r0x03
+0000DC 50??           00603         MOVF    r0x01, W
+Message[1301]: Using default destination of 0 (Access Bank).
+0000DE 6E??           00604         MOVWF   r0x00
+0000E0 50??           00605         MOVF    r0x02, W
+Message[1301]: Using default destination of 0 (Access Bank).
+0000E2 6E??           00606         MOVWF   r0x01
+0000E4 50??           00607         MOVF    r0x03, W
+Message[1301]: Using default destination of 0 (Access Bank).
+0000E6 6E??           00608         MOVWF   r0x02
+Message[1301]: Using default destination of 0 (Access Bank).
+0000E8 6A??           00609         CLRF    r0x03
+0000EA 50??           00610         MOVF    r0x00, W
+Message[1301]: Using default destination of 0 (Access Bank).
+0000EC 6E??           00611         MOVWF   _SPBRGH
+                      00612         .line   46; serial.c    TXSTAbits.TX9=0;    //transmissao em 8 bits
+0000EE 9C??           00613         BCF     _TXSTAbits, 6
+                      00614         .line   47; serial.c    TXSTAbits.SYNC=0;  //modo assincrono
+0000F0 98??           00615         BCF     _TXSTAbits, 4
+                      00616         .line   48; serial.c    TXSTAbits.BRGH=1;  //high baud rate
+0000F2 84??           00617         BSF     _TXSTAbits, 2
+                      00618         .line   49; serial.c    BAUDCONbits.BRG16=1; //16 bits baud rate
+0000F4 86??           00619         BSF     _BAUDCONbits, 3
+                      00620         .line   50; serial.c    RCSTAbits.RX9=0;   //recepcao em 8 bits
+0000F6 9C??           00621         BCF     _RCSTAbits, 6
+                      00622         .line   51; serial.c    RCSTAbits.CREN=1;  //recepcao continua
+0000F8 88??           00623         BSF     _RCSTAbits, 4
+gpasm-1.4.0 #1107 (May  9 2015) build/sdcc/pr   12-2-2016  22:01:24         PAGE 14
+
+
+LOC    OBJECT CODE    LINE  SOURCE TEXT
+  VALUE
+
+                      00624         .line   52; serial.c    TXSTAbits.TXEN=1;  //habilita transmissao
+0000FA 8A??           00625         BSF     _TXSTAbits, 5
+                      00626         .line   53; serial.c    RCSTAbits.SPEN=1;  //habilita porta serial - rx
+0000FC 8E??           00627         BSF     _RCSTAbits, 7
+0000FE CFE4 F000      00628         MOVFF   PREINC1, r0x07
+000102 CFE4 F000      00629         MOVFF   PREINC1, r0x06
+000106 CFE4 F000      00630         MOVFF   PREINC1, r0x05
+00010A CFE4 F000      00631         MOVFF   PREINC1, r0x04
+00010E CFE4 F000      00632         MOVFF   PREINC1, r0x03
+000112 CFE4 F000      00633         MOVFF   PREINC1, r0x02
+000116 CFE4 F000      00634         MOVFF   PREINC1, r0x01
+00011A CFE4 F000      00635         MOVFF   PREINC1, r0x00
+00011E CFE4 FFD9      00636         MOVFF   PREINC1, FSR2L
+000122 0012           00637         RETURN  
+                      00638 
+                      00639 ; ; Starting pCode block
+000124                00640 ___str_0:
+000124 0A0D 0000      00641         DB      0x0d, 0x0a, 0x00
+                      00642 
+                      00643 
+                      00644 ; Statistics:
+                      00645 ; code size:      840 (0x0348) bytes ( 0.64%)
+                      00646 ;                 420 (0x01a4) words
+                      00647 ; udata size:      10 (0x000a) bytes ( 0.26%)
+                      00648 ; access size:      8 (0x0008) bytes
+                      00649 
+                      00650 
+                      00651         end
+gpasm-1.4.0 #1107 (May  9 2015) build/sdcc/pr   12-2-2016  22:01:24         PAGE 15
+
+
+SYMBOL TABLE
+  LABEL                             VALUE
+
+FSR0L                             00000FE9
+FSR1L                             00000FE1
+FSR2L                             00000FD9
+PLUSW2                            00000FDB
+POSTDEC1                          00000FE5
+POSTINC1                          00000FE6
+PREINC1                           00000FE4
+PRODH                             00000FF4
+PRODL                             00000FF3
+STATUS                            00000FD8
+WREG                              00000FE8
+_00110_DS_                        0000000E
+_00118_DS_                        0000003E
+_00121_DS_                        00000074
+_00131_DS_                        0000002C
+_00135_DS_                        00000046
+_00136_DS_                        00000034
+_00138_DS_                        00000064
+_00140_DS_                        0000006C
+_00142_DS_                        0000006E
+_00147_DS_                        00000030
+_00160_DS_                        0000003E
+_ADCON0                           00000000
+_ADCON0bits                       00000000
+_ADCON1                           00000000
+_ADCON1bits                       00000000
+_ADCON2                           00000000
+_ADCON2bits                       00000000
+_ADRES                            00000000
+_ADRESH                           00000000
+_ADRESL                           00000000
+_BAUDCON                          00000000
+_BAUDCONbits                      00000000
+_BAUDCTL                          00000000
+_BAUDCTLbits                      00000000
+_BSR                              00000000
+_CCP1CON                          00000000
+_CCP1CONbits                      00000000
+_CCP2CON                          00000000
+_CCP2CONbits                      00000000
+_CCPR1                            00000000
+_CCPR1H                           00000000
+_CCPR1L                           00000000
+_CCPR2                            00000000
+_CCPR2H                           00000000
+_CCPR2L                           00000000
+_CMCON                            00000000
+_CMCONbits                        00000000
+_CVRCON                           00000000
+_CVRCONbits                       00000000
+_DDRA                             00000000
+_DDRAbits                         00000000
+_DDRB                             00000000
+gpasm-1.4.0 #1107 (May  9 2015) build/sdcc/pr   12-2-2016  22:01:24         PAGE 16
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_DDRBbits                         00000000
+_DDRC                             00000000
+_DDRCbits                         00000000
+_DDRD                             00000000
+_DDRDbits                         00000000
+_DDRE                             00000000
+_DDREbits                         00000000
+_ECCP1AS                          00000000
+_ECCP1ASbits                      00000000
+_EEADR                            00000000
+_EEADRH                           00000000
+_EECON1                           00000000
+_EECON1bits                       00000000
+_EECON2                           00000000
+_EEDATA                           00000000
+_FSR0H                            00000000
+_FSR0L                            00000000
+_FSR1H                            00000000
+_FSR1L                            00000000
+_FSR2H                            00000000
+_FSR2L                            00000000
+_HLVDCON                          00000000
+_HLVDCONbits                      00000000
+_INDF0                            00000000
+_INDF1                            00000000
+_INDF2                            00000000
+_INTCON                           00000000
+_INTCON2                          00000000
+_INTCON2bits                      00000000
+_INTCON3                          00000000
+_INTCON3bits                      00000000
+_INTCONbits                       00000000
+_IPR1                             00000000
+_IPR1bits                         00000000
+_IPR2                             00000000
+_IPR2bits                         00000000
+_LATA                             00000000
+_LATAbits                         00000000
+_LATB                             00000000
+_LATBbits                         00000000
+_LATC                             00000000
+_LATCbits                         00000000
+_LATD                             00000000
+_LATDbits                         00000000
+_LATE                             00000000
+_LATEbits                         00000000
+_LVDCON                           00000000
+_LVDCONbits                       00000000
+_OSCCON                           00000000
+_OSCCONbits                       00000000
+_OSCTUNE                          00000000
+_OSCTUNEbits                      00000000
+_PC                               00000000
+gpasm-1.4.0 #1107 (May  9 2015) build/sdcc/pr   12-2-2016  22:01:24         PAGE 17
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_PCL                              00000000
+_PCLATH                           00000000
+_PCLATU                           00000000
+_PIE1                             00000000
+_PIE1bits                         00000000
+_PIE2                             00000000
+_PIE2bits                         00000000
+_PIR1                             00000000
+_PIR1bits                         00000000
+_PIR2                             00000000
+_PIR2bits                         00000000
+_PLUSW0                           00000000
+_PLUSW1                           00000000
+_PLUSW2                           00000000
+_PORTA                            00000000
+_PORTAbits                        00000000
+_PORTB                            00000000
+_PORTBbits                        00000000
+_PORTC                            00000000
+_PORTCbits                        00000000
+_PORTD                            00000000
+_PORTDbits                        00000000
+_PORTE                            00000000
+_PORTEbits                        00000000
+_POSTDEC0                         00000000
+_POSTDEC1                         00000000
+_POSTDEC2                         00000000
+_POSTINC0                         00000000
+_POSTINC1                         00000000
+_POSTINC2                         00000000
+_PR2                              00000000
+_PREINC0                          00000000
+_PREINC1                          00000000
+_PREINC2                          00000000
+_PROD                             00000000
+_PRODH                            00000000
+_PRODL                            00000000
+_PWM1CON                          00000000
+_PWM1CONbits                      00000000
+_RCON                             00000000
+_RCONbits                         00000000
+_RCREG                            00000000
+_RCSTA                            00000000
+_RCSTAbits                        00000000
+_SPBRG                            00000000
+_SPBRGH                           00000000
+_SSPADD                           00000000
+_SSPBUF                           00000000
+_SSPCON1                          00000000
+_SSPCON1bits                      00000000
+_SSPCON2                          00000000
+_SSPCON2bits                      00000000
+_SSPSTAT                          00000000
+gpasm-1.4.0 #1107 (May  9 2015) build/sdcc/pr   12-2-2016  22:01:24         PAGE 18
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_SSPSTATbits                      00000000
+_STATUS                           00000000
+_STATUSbits                       00000000
+_STKPTR                           00000000
+_STKPTRbits                       00000000
+_Serial_begin                     00000000
+_Serial_print                     00000000
+_Serial_println                   00000000
+_Serial_rx                        00000000
+_Serial_tx                        00000000
+_T0CON                            00000000
+_T0CONbits                        00000000
+_T1CON                            00000000
+_T1CONbits                        00000000
+_T2CON                            00000000
+_T2CONbits                        00000000
+_T3CON                            00000000
+_T3CONbits                        00000000
+_TABLAT                           00000000
+_TBLPTR                           00000000
+_TBLPTRH                          00000000
+_TBLPTRL                          00000000
+_TBLPTRU                          00000000
+_TMR0                             00000000
+_TMR0H                            00000000
+_TMR0L                            00000000
+_TMR1                             00000000
+_TMR1H                            00000000
+_TMR1L                            00000000
+_TMR2                             00000000
+_TMR3                             00000000
+_TMR3H                            00000000
+_TMR3L                            00000000
+_TOS                              00000000
+_TOSH                             00000000
+_TOSL                             00000000
+_TOSU                             00000000
+_TRISA                            00000000
+_TRISAbits                        00000000
+_TRISB                            00000000
+_TRISBbits                        00000000
+_TRISC                            00000000
+_TRISCbits                        00000000
+_TRISD                            00000000
+_TRISDbits                        00000000
+_TRISE                            00000000
+_TRISEbits                        00000000
+_TXREG                            00000000
+_TXSTA                            00000000
+_TXSTAbits                        00000000
+_WDTCON                           00000000
+_WDTCONbits                       00000000
+_WREG                             00000000
+gpasm-1.4.0 #1107 (May  9 2015) build/sdcc/pr   12-2-2016  22:01:24         PAGE 19
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+__18F4620                         00000001
+__ACC_RAM_LOW_END                 0000007F
+__CODE_END                        0000FFFF
+__CODE_START                      00000000
+__EEPROM_END                      00F003FF
+__EEPROM_START                    00F00000
+__VECTOR_INT_HIGH                 00000008
+__VECTOR_INT_LOW                  00000018
+__VECTOR_RESET                    00000000
+___str_0                          00000124
+__divulong                        00000000
+__gptrget1                        00000000
+__mullong                         00000000
+_buff                             00000000
+_delay                            00000000
+_itoa_                            00000000
+_mtime                            00000000
+_stdin                            00000000
+_stdout                           00000000
+_ultoa                            00000000
+r0x00                             00000000
+r0x01                             00000001
+r0x02                             00000002
+r0x03                             00000003
+r0x04                             00000004
+r0x05                             00000005
+r0x06                             00000006
+r0x07                             00000007
+
+Errors   :     0
+Warnings :     0 reported,     0 suppressed
+Messages :    66 reported,     0 suppressed
+
+

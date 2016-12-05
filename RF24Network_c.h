@@ -516,9 +516,7 @@ typedef struct
   uint32_t txTime;
 
 
-  
- 
-   RF24* radio; /**< Underlying radio driver, provides link/physical layers */
+   //RF24* radio; /**< Underlying radio driver, provides link/physical layers */
 #if defined (DUAL_HEAD_RADIO)
    RF24* radio1;
 #endif
@@ -585,7 +583,8 @@ typedef struct
    *
    */
 
-  void RF24N_init(RF24Network * rn,  RF24 * _radio );
+
+  void RF24N_init(void);
 
   /**
    * Bring up the network using the current radio frequency/channel.
@@ -611,7 +610,7 @@ typedef struct
    *
    */
    
-   void RF24N_begin(RF24Network * rn, uint16_t _node_address);
+   void RF24N_begin( uint16_t _node_address);
 
   /**
    * Main layer loop
@@ -623,14 +622,14 @@ typedef struct
    * 
    * @return Returns the type of the last received payload.
    */
-  uint8_t RF24N_update(RF24Network * rn);
+  uint8_t RF24N_update(void);
 
   /**
    * Test whether there is a message available for this node
    *
    * @return Whether there is a message available for this node
    */
-  uint8_t RF24N_available(RF24Network * rn);
+  uint8_t RF24N_available(void);
 
   /**
    * Read the next available header
@@ -642,7 +641,7 @@ typedef struct
    *
    * @param[out] header The header (envelope) of the next message
    */
-  uint16_t RF24N_peek(RF24Network * rn, RF24NetworkHeader * header);
+  uint16_t RF24N_peek(RF24NetworkHeader * header);
 
   /**
    * Read a message
@@ -664,7 +663,7 @@ typedef struct
    * @param maxlen The largest message size which can be held in @p message
    * @return The total number of bytes copied into @p message
    */
-  uint16_t RF24N_read(RF24Network * rn, RF24NetworkHeader * header, void* message, uint16_t maxlen);
+  uint16_t RF24N_read(RF24NetworkHeader * header, void* message, uint16_t maxlen);
 
   /**
    * Send a message
@@ -685,7 +684,7 @@ typedef struct
    * @param len The size of the message
    * @return Whether the message was successfully received
    */
-  uint8_t RF24N_write_m(RF24Network * rn, RF24NetworkHeader* header,const void* message, uint16_t len);
+  uint8_t RF24N_write_m( RF24NetworkHeader* header,const void* message, uint16_t len);
 
   /**@}*/
   /**
@@ -708,7 +707,7 @@ typedef struct
    * @param _radio1 The second underlying radio driver instance
    */
    
-void  RF24N_init2(RF24Network * rn,  RF24 * _radio, RF24 * _radio1); 
+void  RF24N_init2(RF24Network * rn_,  RF24 * _radio, RF24 * _radio1); 
   
 	/**
 	* By default, multicast addresses are divided into levels. 
@@ -724,7 +723,7 @@ void  RF24N_init2(RF24Network * rn,  RF24 * _radio, RF24 * _radio1);
 	* master node (00) at multicast Level 0
 	*/
 	
-	void RF24N_multicastLevel(RF24Network * rn, uint8_t level);
+	void RF24N_multicastLevel( uint8_t level);
 
 
 /**
@@ -735,7 +734,7 @@ void  RF24N_init2(RF24Network * rn,  RF24 * _radio, RF24 * _radio1);
    * @endcode
    * @param prescalar The WDT prescaler to define how often the node will wake up. When defining sleep mode cycles, this time period is 1 cycle.
    */
- void RF24N_setup_watchdog(RF24Network * rn, uint8_t prescalar);
+ void RF24N_setup_watchdog( uint8_t prescalar);
 
 /**@}*/
   /**
@@ -755,7 +754,7 @@ void  RF24N_init2(RF24Network * rn,  RF24 * _radio, RF24 * _radio1);
    * @endcode  
    *
    */
-  void RF24N_failures(RF24Network * rn, uint32_t *_fails, uint32_t *_ok);
+  void RF24N_failures( uint32_t *_fails, uint32_t *_ok);
   
    #if defined (RF24NetworkMulticast)
   
@@ -773,7 +772,7 @@ void  RF24N_init2(RF24Network * rn,  RF24 * _radio, RF24 * _radio1);
    * @return Whether the message was successfully sent
    */
    
-   uint8_t RF24N_multicast(RF24Network * rn, RF24NetworkHeader * header,const void* message, uint16_t len, uint8_t level);
+   uint8_t RF24N_multicast( RF24NetworkHeader * header,const void* message, uint16_t len, uint8_t level);
    
 	
    #endif
@@ -783,7 +782,7 @@ void  RF24N_init2(RF24Network * rn,  RF24 * _radio, RF24 * _radio1);
    * The same as write, but a physical address is specified as the last option.
    * The payload will be written to the physical address, and routed as necessary by the recipient
    */
-   uint8_t RF24N_write_(RF24Network * rn, RF24NetworkHeader * header,const void* message, uint16_t len, uint16_t writeDirect);
+   uint8_t RF24N_write_( RF24NetworkHeader * header,const void* message, uint16_t len, uint16_t writeDirect);
 
    /**
    * Sleep this node - For AVR devices only
@@ -808,7 +807,7 @@ void  RF24N_init2(RF24Network * rn,  RF24 * _radio, RF24 * _radio1);
    * @param interruptPin: The interrupt number to use (0,1) for pins two and three on Uno,Nano. More available on Mega etc.
    * @return True if sleepNode completed normally, after the specified number of cycles. False if sleep was interrupted
    */
- uint8_t RF24N_sleepNode(RF24Network * rn,  unsigned int cycles, int interruptPin );
+ uint8_t RF24N_sleepNode(  unsigned int cycles, int interruptPin );
 
 
   /**
@@ -816,18 +815,18 @@ void  RF24N_init2(RF24Network * rn,  RF24 * _radio, RF24 * _radio1);
    *
    * @return This node's parent address, or -1 if this is the base
    */
-  uint16_t RF24N_parent(RF24Network * rn);
+  uint16_t RF24N_parent(void);
   
    /**
    * Provided a node address and a pipe number, will return the RF24Network address of that child pipe for that node
    */
-   uint16_t RF24N_addressOfPipe(RF24Network * rn,  uint16_t node,uint8_t pipeNo );
+   uint16_t RF24N_addressOfPipe( uint16_t node,uint8_t pipeNo );
    
    /**
     * @note Addresses are specified in octal: 011, 034
     * @return True if a supplied address is valid
 	*/
-   uint8_t RF24N_is_valid_address(RF24Network * rn,  uint16_t node );
+   uint8_t RF24N_is_valid_address( uint16_t node );
 
  /**@}*/
   /**
@@ -858,28 +857,41 @@ void  RF24N_init2(RF24Network * rn,  RF24 * _radio, RF24 * _radio1);
    * @param _node_address The logical address of this node
    *
    */
-  void RF24N_begin_d(RF24Network * rn, uint8_t _channel, uint16_t _node_address );  
+  void RF24N_begin_d( uint8_t _channel, uint16_t _node_address );  
 
 
- uint8_t RF24N_write(RF24Network * rn, uint16_t, uint8_t directTo);
-  uint8_t RF24N_write_to_pipe(RF24Network * rn,  uint16_t node, uint8_t pipe, uint8_t multicast );
-  uint8_t RF24N_enqueue(RF24Network * rn, RF24NetworkHeader *header);
+ uint8_t RF24N_write( uint16_t, uint8_t directTo);
+  uint8_t RF24N_write_to_pipe( uint16_t node, uint8_t pipe, uint8_t multicast );
+  uint8_t RF24N_enqueue(RF24NetworkHeader *header);
 
-  uint8_t RF24N_is_direct_child(RF24Network * rn,  uint16_t node );
-  uint8_t RF24N_is_descendant(RF24Network * rn,  uint16_t node );
+  uint8_t RF24N_is_direct_child(uint16_t node );
+  uint8_t RF24N_is_descendant(uint16_t node );
   
-  uint16_t RF24N_direct_child_route_to(RF24Network * rn,  uint16_t node );
+  uint16_t RF24N_direct_child_route_to(uint16_t node );
   //uint8_t RF24N_pipe_to_descendant(RF24Network * rn,  uint16_t node );
-  void RF24N_setup_address(RF24Network * rn);
-  uint8_t RF24N__write(RF24Network * rn, RF24NetworkHeader * header,const void* message, uint16_t len, uint16_t writeDirect);
+  void RF24N_setup_address(void);
+  uint8_t RF24N__write(RF24NetworkHeader * header,const void* message, uint16_t len, uint16_t writeDirect);
     
-  uint8_t RF24N_logicalToPhysicalAddress(RF24Network * rn, logicalToPhysicalStruct *conversionInfo);
+  uint8_t RF24N_logicalToPhysicalAddress(logicalToPhysicalStruct *conversionInfo);
   
 
 #if defined (RF24_LINUX) 
-    uint8_t RF24N_appendFragmentToFrame(RF24Network * rn, RF24NetworkFrame frame);
+    uint8_t RF24N_appendFragmentToFrame(RF24NetworkFrame frame);
 #endif
-    
+  
+ 
+   uint8_t * RF24N_getFrame_buffer(void);  
+
+   void    RF24N_setReturnSysMsgs(void); 
+
+
+   uint8_t RF24N_getNetworkFlags(void); 
+   void RF24N_setNetworkFlags(uint8_t); 
+
+   uint16_t RF24N_getRouteTimeout(void);
+  
+   RF24NetworkFrame* RF24N_getFrag_ptr(void);
+
 /**
  * @example helloworld_tx.ino
  *
