@@ -1183,7 +1183,7 @@ uint8_t RF24N_write_to_pipe(RF24Network * rn,  uint16_t node, uint8_t pipe, uint
 }
 
 /******************************************************************/
-
+#if !defined (MINIMAL)
 const char* RF24NH_toString(RF24NetworkHeader *rnh)
 {
   static char buffer[45];
@@ -1191,7 +1191,7 @@ const char* RF24NH_toString(RF24NetworkHeader *rnh)
   sprintf_P(buffer,PSTR("id %u from 0%o to 0%o type %d"),rnh->id,rnh->from_node,rnh->to_node,rnh->type);
   return buffer;
 }
-
+#endif
 /******************************************************************/
 
 uint8_t RF24N_is_direct_child(RF24Network * rn,  uint16_t node )
