@@ -1440,6 +1440,34 @@ return rn.frame_buffer;
    return rn.frag_ptr;
    }
   #endif
+   
+
+/******************************************************************/
+void  RF24N_setMulticastRelay(void)
+{
+  rn.multicastRelay=1;
+}	
+
+/******************************************************************/
+uint8_t  RF24N_getMulticastRelay(void)
+{
+  return rn.multicastRelay;
+}
+
+#if defined (RF24_LINUX)
+/******************************************************************/
+RF24NetworkFrame * RF24N_getExternalQueue(void)
+{
+  return rn.external_queue;
+}  
+
+/******************************************************************/
+uint16_t * RF24N_getExternalQueue_c(void)
+{
+  return &rn.external_queue_c;
+}  
+#endif
+
 /************************ Sleep Mode ******************************************/
 
 

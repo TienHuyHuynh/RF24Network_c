@@ -892,6 +892,16 @@ void  RF24N_init2(RF24Network * rn_,  RF24 * _radio, RF24 * _radio1);
   
    RF24NetworkFrame* RF24N_getFrag_ptr(void);
 
+
+   void    RF24N_setMulticastRelay(void); 
+   
+   uint8_t  RF24N_getMulticastRelay(void); 
+
+  #if defined (RF24_LINUX)
+   RF24NetworkFrame * RF24N_getExternalQueue(void);  
+   uint16_t * RF24N_getExternalQueue_c(void);  
+  #endif
+
 /**
  * @example helloworld_tx.ino
  *

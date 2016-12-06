@@ -265,10 +265,10 @@ udata_helloworld_tx_1	udata
 _packets_sent	res	4
 
 udata_helloworld_tx_2	udata
-_loop_payload_2_176	res	8
+_loop_payload_2_183	res	8
 
 udata_helloworld_tx_3	udata
-_loop_header_2_176	res	8
+_loop_header_2_183	res	8
 
 ;--------------------------------------------------------
 ; global & static initialisations
@@ -373,17 +373,17 @@ _00123_DS_:
 	MOVFF	PRODH, r0x02
 	MOVFF	FSR0L, r0x03
 	MOVF	r0x00, W
-	BANKSEL	_loop_payload_2_176
-	MOVWF	_loop_payload_2_176, B
+	BANKSEL	_loop_payload_2_183
+	MOVWF	_loop_payload_2_183, B
 	MOVF	r0x01, W
-	BANKSEL	(_loop_payload_2_176 + 1)
-	MOVWF	(_loop_payload_2_176 + 1), B
+	BANKSEL	(_loop_payload_2_183 + 1)
+	MOVWF	(_loop_payload_2_183 + 1), B
 	MOVF	r0x02, W
-	BANKSEL	(_loop_payload_2_176 + 2)
-	MOVWF	(_loop_payload_2_176 + 2), B
+	BANKSEL	(_loop_payload_2_183 + 2)
+	MOVWF	(_loop_payload_2_183 + 2), B
 	MOVF	r0x03, W
-	BANKSEL	(_loop_payload_2_176 + 3)
-	MOVWF	(_loop_payload_2_176 + 3), B
+	BANKSEL	(_loop_payload_2_183 + 3)
+	MOVWF	(_loop_payload_2_183 + 3), B
 	.line	69; helloworld_tx.c	payload.counter=packets_sent++;
 	MOVFF	_packets_sent, r0x00
 	MOVFF	(_packets_sent + 1), r0x01
@@ -403,21 +403,21 @@ _00123_DS_:
 _10110_DS_:
 _00124_DS_:
 	MOVF	r0x00, W
-	BANKSEL	(_loop_payload_2_176 + 4)
-	MOVWF	(_loop_payload_2_176 + 4), B
+	BANKSEL	(_loop_payload_2_183 + 4)
+	MOVWF	(_loop_payload_2_183 + 4), B
 	MOVF	r0x01, W
-	BANKSEL	(_loop_payload_2_176 + 5)
-	MOVWF	(_loop_payload_2_176 + 5), B
+	BANKSEL	(_loop_payload_2_183 + 5)
+	MOVWF	(_loop_payload_2_183 + 5), B
 	MOVF	r0x02, W
-	BANKSEL	(_loop_payload_2_176 + 6)
-	MOVWF	(_loop_payload_2_176 + 6), B
+	BANKSEL	(_loop_payload_2_183 + 6)
+	MOVWF	(_loop_payload_2_183 + 6), B
 	MOVF	r0x03, W
-	BANKSEL	(_loop_payload_2_176 + 7)
-	MOVWF	(_loop_payload_2_176 + 7), B
+	BANKSEL	(_loop_payload_2_183 + 7)
+	MOVWF	(_loop_payload_2_183 + 7), B
 	.line	71; helloworld_tx.c	RF24NH_init(&header,/*to node*/ other_node,0);
-	MOVLW	HIGH(_loop_header_2_176)
+	MOVLW	HIGH(_loop_header_2_183)
 	MOVWF	r0x01
-	MOVLW	LOW(_loop_header_2_176)
+	MOVLW	LOW(_loop_header_2_183)
 	MOVWF	r0x00
 	MOVLW	0x80
 	MOVWF	r0x02
@@ -447,15 +447,15 @@ _00124_DS_:
 	MOVLW	0x06
 	ADDWF	FSR1L, F
 	.line	72; helloworld_tx.c	ok = RF24N_write_m(&header,&payload,sizeof(payload));
-	MOVLW	HIGH(_loop_header_2_176)
+	MOVLW	HIGH(_loop_header_2_183)
 	MOVWF	r0x01
-	MOVLW	LOW(_loop_header_2_176)
+	MOVLW	LOW(_loop_header_2_183)
 	MOVWF	r0x00
 	MOVLW	0x80
 	MOVWF	r0x02
-	MOVLW	HIGH(_loop_payload_2_176)
+	MOVLW	HIGH(_loop_payload_2_183)
 	MOVWF	r0x04
-	MOVLW	LOW(_loop_payload_2_176)
+	MOVLW	LOW(_loop_payload_2_183)
 	MOVWF	r0x03
 	MOVLW	0x80
 	MOVWF	r0x05

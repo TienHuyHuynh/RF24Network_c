@@ -1,5 +1,5 @@
 
-# 1 "../../RF24Network_cg.c"
+# 1 "../../RF24Network_c.c"
 
 # 26 "/opt/microchip/xc8/v1.36/include/htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -4058,7 +4058,7 @@ uint8_t RF24_failureDetected;
 
 }RF24;
 
-# 38 "../../../RF24_c/RF24_cg.h"
+# 38 "../../../RF24_c/RF24_c.h"
 typedef enum { RF24_PA_MIN = 0,RF24_PA_LOW, RF24_PA_HIGH, RF24_PA_MAX, RF24_PA_ERROR } rf24_pa_dbm_e ;
 
 # 45
@@ -4369,7 +4369,7 @@ typedef int16_t intptr_t;
 
 typedef uint16_t uintptr_t;
 
-# 202 "../../RF24Network_cg.h"
+# 202 "../../RF24Network_c.h"
 typedef struct
 {
 uint16_t from_node;
@@ -4533,7 +4533,23 @@ uint8_t RF24N__write(RF24NetworkHeader * header,const void* message, uint16_t le
 
 uint8_t RF24N_logicalToPhysicalAddress(logicalToPhysicalStruct *conversionInfo);
 
-# 36 "../../RF24Network_cg.c"
+# 883
+uint8_t * RF24N_getFrame_buffer(void);
+
+void RF24N_setReturnSysMsgs(void);
+
+
+uint8_t RF24N_getNetworkFlags(void);
+void RF24N_setNetworkFlags(uint8_t);
+
+uint16_t RF24N_getRouteTimeout(void);
+
+RF24NetworkFrame* RF24N_getFrag_ptr(void);
+
+
+void RF24N_setMulticastRelay(void);
+
+# 36 "../../RF24Network_c.c"
 static RF24Network rn;
 
 void RF24N_pipe_address( uint16_t node, uint8_t pipe, raddr_t * address );
@@ -5474,7 +5490,48 @@ address[i]=result[4-i];
 
 }
 
+
 void RF24N_begin(uint16_t _node_address){
 RF24N_begin_d(255,_node_address);
+}
+
+
+
+uint8_t * RF24N_getFrame_buffer(void){
+return rn.frame_buffer;
+
+}
+
+
+void RF24N_setReturnSysMsgs(void){
+rn.returnSysMsgs=1;
+}
+
+
+uint8_t RF24N_getNetworkFlags(void){
+return rn.networkFlags;
+}
+
+void RF24N_setNetworkFlags(uint8_t nf){
+rn.networkFlags=nf;
+}
+
+
+uint16_t RF24N_getRouteTimeout(void){
+return rn.routeTimeout;
+}
+
+
+
+RF24NetworkFrame* RF24N_getFrag_ptr(void){
+return rn.frag_ptr;
+}
+
+
+
+
+void RF24N_setMulticastRelay(void)
+{
+rn.multicastRelay=1;
 }
 

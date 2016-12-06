@@ -5,7 +5,7 @@ Linker command line:
 -W-3 --edf=/opt/microchip/xc8/v1.36/dat/en_msgs.txt -cs \
   -h+dist/xc8/production/helloworld_tx.X.production.sym \
   --cmf=dist/xc8/production/helloworld_tx.X.production.cmf -z -Q18F4620 \
-  -o/tmp/xcXFuxSyZ -Mdist/xc8/production/helloworld_tx.X.production.map -E1 \
+  -o/tmp/xcXnH8gD1 -Mdist/xc8/production/helloworld_tx.X.production.map -E1 \
   -ver=XC8 -ASTACK=0247h-0f7fh -pstack=STACK -ACODE=00h-0FFFFh \
   -ACONST=00h-0FFFFh -ASMALLCONST=01000h-010FFhx240 \
   -AMEDIUMCONST=01000h-0FFFFh -ACOMRAM=01h-07Fh -AABS1=00h-0F7Fh \
@@ -25,7 +25,7 @@ Linker command line:
   -pfarbss=FARRAM,fardata=FARRAM,nvFARRAM=FARRAM \
   -pintsave_regs=BIGRAM,bigbss=BIGRAM,bigdata=BIGRAM -pbss=RAM \
   -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE -prparam=COMRAM \
-  /tmp/xcXAs4tcI.obj dist/xc8/production/helloworld_tx.X.production.obj 
+  /tmp/xcXnN67fH.obj dist/xc8/production/helloworld_tx.X.production.obj 
 
 Object code version is 3.11
 
@@ -37,7 +37,7 @@ Call graph: (short form)
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-/tmp/xcXAs4tcI.obj
+/tmp/xcXnN67fH.obj
                 stack                               247      247      D39      247       2
                 end_init                             18       18        4        4       0
                 init                                 14       14        4        4       0
@@ -59,40 +59,40 @@ dist/xc8/production/helloworld_tx.X.production.obj
                 text64                             1B20     1B20      316      82D       0
                 text63                             35A8     35A8       4A      82D       0
                 text62                             15CE     15CE      552      82D       0
-                text61                             3854     3854       36      82D       0
-                text60                             3AF6     3AF6       1C      82D       0
-                text59                             3A16     3A16       26      82D       0
-                text58                             3BE4     3BE4        8      82D       0
+                text61                             3A16     3A16       26      82D       0
+                text60                             3BE4     3BE4        8      82D       0
+                text59                             3AF6     3AF6       1C      82D       0
+                text58                             36F4     36F4       40      82D       0
                 text57                             3ADA     3ADA       1C      82D       0
-                text56                             36F4     36F4       40      82D       0
-                text55                             277E     277E      11E      82D       0
-                text54                             388A     388A       34      82D       0
-                text53                             3B46     3B46       18      82D       0
-                text52                             3BDC     3BDC        8      82D       0
-                text51                             3BD4     3BD4        8      82D       0
-                text50                             3B9C     3B9C       10      82D       0
-                text49                             2EB4     2EB4       94      82D       0
-                text48                             381E     381E       36      82D       0
-                text47                             3922     3922       2E      82D       0
-                text46                             32A2     32A2       64      82D       0
-                text45                             29AE     29AE       E2      82D       0
-                text44                             3512     3512       4C      82D       0
-                text43                             3472     3472       52      82D       0
-                text42                             36B4     36B4       40      82D       0
-                text41                             105A     105A      574      82D       0
-                text40                             3A5E     3A5E       22      82D       0
-                text39                             315C     315C       76      82D       0
-                text38                             3ABE     3ABE       1C      82D       0
+                text56                             3854     3854       36      82D       0
+                text55                             36B4     36B4       40      82D       0
+                text54                             3B46     3B46       18      82D       0
+                text53                             3BDC     3BDC        8      82D       0
+                text52                             3BD4     3BD4        8      82D       0
+                text51                             3B9C     3B9C       10      82D       0
+                text50                             3B74     3B74       16      82D       0
+                text49                             3BCC     3BCC        8      82D       0
+                text48                             388A     388A       34      82D       0
+                text47                             277E     277E      11E      82D       0
+                text46                             315C     315C       76      82D       0
+                text45                             2F48     2F48       92      82D       0
+                text44                             37E6     37E6       38      82D       0
+                text43                             3674     3674       40      82D       0
+                text42                             2EB4     2EB4       94      82D       0
+                text41                             381E     381E       36      82D       0
+                text40                             3922     3922       2E      82D       0
+                text39                             32A2     32A2       64      82D       0
+                text38                             29AE     29AE       E2      82D       0
                 text37                             38F0     38F0       32      82D       0
-                text36                             3BCC     3BCC        8      82D       0
-                text35                             37E6     37E6       38      82D       0
-                text34                             3674     3674       40      82D       0
-                text33                             37AE     37AE       38      82D       0
-                text32                             3634     3634       40      82D       0
-                text31                             3BC4     3BC4        8      82D       0
-                text30                             3B74     3B74       16      82D       0
-                text29                             2FDA     2FDA       86      82D       0
-                text28                             2F48     2F48       92      82D       0
+                text36                             3512     3512       4C      82D       0
+                text35                             3472     3472       52      82D       0
+                text34                             3634     3634       40      82D       0
+                text33                             105A     105A      574      82D       0
+                text32                             2FDA     2FDA       86      82D       0
+                text31                             3ABE     3ABE       1C      82D       0
+                text30                             3BC4     3BC4        8      82D       0
+                text29                             37AE     37AE       38      82D       0
+                text28                             3A5E     3A5E       22      82D       0
                 text27                             23B0     23B0      27E      82D       0
                 text26                             3734     3734       3E      82D       0
                 text25                             2D22     2D22       D6      82D       0
@@ -151,40 +151,40 @@ TOTAL           Name                               Link     Load   Length     Sp
                 text64                             1B20     1B20      316         0
                 text63                             35A8     35A8       4A         0
                 text62                             15CE     15CE      552         0
-                text61                             3854     3854       36         0
-                text60                             3AF6     3AF6       1C         0
-                text59                             3A16     3A16       26         0
-                text58                             3BE4     3BE4        8         0
+                text61                             3A16     3A16       26         0
+                text60                             3BE4     3BE4        8         0
+                text59                             3AF6     3AF6       1C         0
+                text58                             36F4     36F4       40         0
                 text57                             3ADA     3ADA       1C         0
-                text56                             36F4     36F4       40         0
-                text55                             277E     277E      11E         0
-                text54                             388A     388A       34         0
-                text53                             3B46     3B46       18         0
-                text52                             3BDC     3BDC        8         0
-                text51                             3BD4     3BD4        8         0
-                text50                             3B9C     3B9C       10         0
-                text49                             2EB4     2EB4       94         0
-                text48                             381E     381E       36         0
-                text47                             3922     3922       2E         0
-                text46                             32A2     32A2       64         0
-                text45                             29AE     29AE       E2         0
-                text44                             3512     3512       4C         0
-                text43                             3472     3472       52         0
-                text42                             36B4     36B4       40         0
-                text41                             105A     105A      574         0
-                text40                             3A5E     3A5E       22         0
-                text39                             315C     315C       76         0
-                text38                             3ABE     3ABE       1C         0
+                text56                             3854     3854       36         0
+                text55                             36B4     36B4       40         0
+                text54                             3B46     3B46       18         0
+                text53                             3BDC     3BDC        8         0
+                text52                             3BD4     3BD4        8         0
+                text51                             3B9C     3B9C       10         0
+                text50                             3B74     3B74       16         0
+                text49                             3BCC     3BCC        8         0
+                text48                             388A     388A       34         0
+                text47                             277E     277E      11E         0
+                text46                             315C     315C       76         0
+                text45                             2F48     2F48       92         0
+                text44                             37E6     37E6       38         0
+                text43                             3674     3674       40         0
+                text42                             2EB4     2EB4       94         0
+                text41                             381E     381E       36         0
+                text40                             3922     3922       2E         0
+                text39                             32A2     32A2       64         0
+                text38                             29AE     29AE       E2         0
                 text37                             38F0     38F0       32         0
-                text36                             3BCC     3BCC        8         0
-                text35                             37E6     37E6       38         0
-                text34                             3674     3674       40         0
-                text33                             37AE     37AE       38         0
-                text32                             3634     3634       40         0
-                text31                             3BC4     3BC4        8         0
-                text30                             3B74     3B74       16         0
-                text29                             2FDA     2FDA       86         0
-                text28                             2F48     2F48       92         0
+                text36                             3512     3512       4C         0
+                text35                             3472     3472       52         0
+                text34                             3634     3634       40         0
+                text33                             105A     105A      574         0
+                text32                             2FDA     2FDA       86         0
+                text31                             3ABE     3ABE       1C         0
+                text30                             3BC4     3BC4        8         0
+                text29                             37AE     37AE       38         0
+                text28                             3A5E     3A5E       22         0
                 text27                             23B0     23B0      27E         0
                 text26                             3734     3734       3E         0
                 text25                             2D22     2D22       D6         0
@@ -294,7 +294,7 @@ SEGMENTS        Name                           Load    Length   Top    Selector 
                 bssBIGRAM                      0000D5  000172  000247        D5       1  BIGRAM  
                 stack                          000247  000D39  000F80       247       2  STACK   
                 smallconst                     001000  00005A  00105A       800       0  SMALLCON
-                text41                         00105A  002B94  003BEE       82D       0  CODE    
+                text33                         00105A  002B94  003BEE       82D       0  CODE    
                 idloc                          200000  000008  200008    200000       0  IDLOC   
                 config                         300000  00000E  30000E    300000       0  CONFIG  
 
@@ -359,7 +359,7 @@ RF24N_enqueue@header                                    cstackCOMRAM 000013
 RF24N_enqueue@isFragment                                cstackCOMRAM 000023
 RF24N_enqueue@message_size                              cstackCOMRAM 000028
 RF24N_enqueue@padding                                   cstackCOMRAM 000024
-RF24N_enqueue@padding_2297                              cstackCOMRAM 000025
+RF24N_enqueue@padding_2049                              cstackCOMRAM 000025
 RF24N_enqueue@result                                    cstackCOMRAM 000027
 RF24N_is_descendant@node                                cstackCOMRAM 000003
 RF24N_is_direct_child@child_node_mask                   cstackCOMRAM 000012
@@ -376,7 +376,7 @@ RF24N_logicalToPhysicalAddress@multicast                cstackCOMRAM 000021
 RF24N_logicalToPhysicalAddress@pre_conversion_send_node cstackCOMRAM 000023
 RF24N_logicalToPhysicalAddress@pre_conversion_send_pipe cstackCOMRAM 000027
 RF24N_logicalToPhysicalAddress@to_node                  cstackCOMRAM 000028
-RF24N_pipe_address@F3842                                dataBANK0    0000D0
+RF24N_pipe_address@F3856                                dataBANK0    0000D0
 RF24N_pipe_address@address                              cstackCOMRAM 000006
 RF24N_pipe_address@address_translation                  dataBANK0    0000C9
 RF24N_pipe_address@count                                cstackCOMRAM 00001E
@@ -494,69 +494,69 @@ _RCREG                                                  (abs)        000FAE
 _RCSTAbits                                              (abs)        000FAB
 _RF24NH_init                                            text26       003734
 _RF24N__write                                           text25       002D22
-_RF24N_available                                        text40       003A5E
+_RF24N_available                                        text28       003A5E
 _RF24N_begin_d                                          text11       002C4A
-_RF24N_direct_child_route_to                            text48       00381E
-_RF24N_enqueue                                          text41       00105A
-_RF24N_enqueue$2295                                     cstackCOMRAM 000026
+_RF24N_direct_child_route_to                            text41       00381E
+_RF24N_enqueue                                          text33       00105A
+_RF24N_enqueue$2047                                     cstackCOMRAM 000026
 _RF24N_init                                             text10       003368
-_RF24N_is_descendant                                    text47       003922
-_RF24N_is_direct_child                                  text46       0032A2
-_RF24N_is_valid_address                                 text61       003854
-_RF24N_levelToAddress                                   text44       003512
-_RF24N_logicalToPhysicalAddress                         text45       0029AE
-_RF24N_pipe_address                                     text55       00277E
+_RF24N_is_descendant                                    text40       003922
+_RF24N_is_direct_child                                  text39       0032A2
+_RF24N_is_valid_address                                 text56       003854
+_RF24N_levelToAddress                                   text36       003512
+_RF24N_logicalToPhysicalAddress                         text38       0029AE
+_RF24N_pipe_address                                     text47       00277E
 _RF24N_setup_address                                    text16       002B6E
 _RF24N_update                                           text62       0015CE
 _RF24N_write                                            text64       001B20
 _RF24N_write_                                           text22       001E36
 _RF24N_write_m                                          text21       0039CA
-_RF24N_write_to_pipe                                    text49       002EB4
+_RF24N_write_to_pipe                                    text42       002EB4
 _RF24_available_p                                       text37       0038F0
 _RF24_begin                                             text5        002A90
-_RF24_begin$1938                                        cstackCOMRAM 000015
-_RF24_beginTransaction                                  text52       003BDC
-_RF24_ce_d                                              text57       003ADA
-_RF24_closeReadingPipe                                  text32       003634
-_RF24_csn_d                                             text53       003B46
+_RF24_begin$2356                                        cstackCOMRAM 000015
+_RF24_beginTransaction                                  text53       003BDC
+_RF24_ce_d                                              text59       003AF6
+_RF24_closeReadingPipe                                  text55       0036B4
+_RF24_csn_d                                             text54       003B46
 _RF24_enableDynamicPayloads                             text15       00397C
-_RF24_endTransaction                                    text51       003BD4
-_RF24_flush_rx                                          text36       003BCC
-_RF24_flush_tx                                          text58       003BE4
-_RF24_getDynamicPayloadSize                             text35       0037E6
-_RF24_get_status                                        text31       003BC4
+_RF24_endTransaction                                    text52       003BD4
+_RF24_flush_rx                                          text30       003BC4
+_RF24_flush_tx                                          text60       003BE4
+_RF24_getDynamicPayloadSize                             text29       0037AE
+_RF24_get_status                                        text49       003BCC
 _RF24_init                                              text4        003772
-_RF24_isValid                                           text60       003AF6
-_RF24_isValid$2052                                      cstackCOMRAM 000004
+_RF24_isValid                                           text57       003ADA
+_RF24_isValid$2468                                      cstackCOMRAM 000004
 _RF24_openReadingPipe_d                                 text14       00289C
-_RF24_openWritingPipe_d                                 text39       00315C
-_RF24_powerUp                                           text59       003A16
-_RF24_read                                              text38       003ABE
-_RF24_read_payload                                      text29       002FDA
-_RF24_read_payload$1908                                 cstackCOMRAM 00001A
+_RF24_openWritingPipe_d                                 text46       00315C
+_RF24_powerUp                                           text61       003A16
+_RF24_read                                              text31       003ABE
+_RF24_read_payload                                      text32       002FDA
+_RF24_read_payload$2327                                 cstackCOMRAM 00001A
 _RF24_read_register_d                                   text70       003AA0
 _RF24_setAutoAck_p                                      text71       00341C
 _RF24_setChannel                                        text13       0039A4
-_RF24_setChannel$1923                                   cstackCOMRAM 000011
+_RF24_setChannel$2342                                   cstackCOMRAM 000011
 _RF24_setDataRate                                       text9        0031D2
 _RF24_setRetries                                        text12       003A3C
-_RF24_spiTrans                                          text30       003B74
-_RF24_startFastWrite                                    text33       0037AE
-_RF24_startFastWrite$1976                               cstackCOMRAM 000029
+_RF24_spiTrans                                          text50       003B74
+_RF24_startFastWrite                                    text44       0037E6
+_RF24_startFastWrite$2393                               cstackCOMRAM 000029
 _RF24_startListening                                    text69       0033C4
 _RF24_stopListening                                     text68       00323C
 _RF24_toggle_features_d                                 text8        003B5E
 _RF24_txStandBy_t                                       text65       002DF8
-_RF24_writeFast_m                                       text34       003674
-_RF24_write_payload                                     text28       002F48
-_RF24_write_payload$1900                                cstackCOMRAM 00001D
-_RF24_write_payload$1901                                cstackCOMRAM 00001F
-_RF24_write_register_c_d                                text54       00388A
+_RF24_writeFast_m                                       text43       003674
+_RF24_write_payload                                     text45       002F48
+_RF24_write_payload$2319                                cstackCOMRAM 00001D
+_RF24_write_payload$2320                                cstackCOMRAM 00001F
+_RF24_write_register_c_d                                text48       00388A
 _RF24_write_register_d                                  text67       003A80
 _SPBRG                                                  (abs)        000FAF
 _SPBRGH                                                 (abs)        000FB0
 _SPI_begin                                              text7        003B12
-_SPI_transfer                                           text50       003B9C
+_SPI_transfer                                           text51       003B9C
 _SSPBUF                                                 (abs)        000FC9
 _SSPCON1bits                                            (abs)        000FC6
 _SSPSTATbits                                            (abs)        000FC7
@@ -909,7 +909,7 @@ ___lldiv@counter                                        cstackCOMRAM 00000F
 ___lldiv@dividend                                       cstackCOMRAM 000003
 ___lldiv@divisor                                        cstackCOMRAM 000007
 ___lldiv@quotient                                       cstackCOMRAM 00000B
-___lwdiv                                                text43       003472
+___lwdiv                                                text35       003472
 ___lwdiv@counter                                        cstackCOMRAM 000009
 ___lwdiv@dividend                                       cstackCOMRAM 000003
 ___lwdiv@divisor                                        cstackCOMRAM 000005
@@ -929,65 +929,65 @@ __accesstop                                             (abs)        000080
 __activetblptr                                          (abs)        000002
 __end_of_RF24NH_init                                    text26       003772
 __end_of_RF24N__write                                   text25       002DF8
-__end_of_RF24N_available                                text40       003A80
+__end_of_RF24N_available                                text28       003A80
 __end_of_RF24N_begin_d                                  text11       002D22
-__end_of_RF24N_direct_child_route_to                    text48       003854
-__end_of_RF24N_enqueue                                  text41       0015CE
+__end_of_RF24N_direct_child_route_to                    text41       003854
+__end_of_RF24N_enqueue                                  text33       0015CE
 __end_of_RF24N_init                                     text10       0033C4
-__end_of_RF24N_is_descendant                            text47       003950
-__end_of_RF24N_is_direct_child                          text46       003306
-__end_of_RF24N_is_valid_address                         text61       00388A
-__end_of_RF24N_levelToAddress                           text44       00355E
-__end_of_RF24N_logicalToPhysicalAddress                 text45       002A90
-__end_of_RF24N_pipe_address                             text55       00289C
+__end_of_RF24N_is_descendant                            text40       003950
+__end_of_RF24N_is_direct_child                          text39       003306
+__end_of_RF24N_is_valid_address                         text56       00388A
+__end_of_RF24N_levelToAddress                           text36       00355E
+__end_of_RF24N_logicalToPhysicalAddress                 text38       002A90
+__end_of_RF24N_pipe_address                             text47       00289C
 __end_of_RF24N_setup_address                            text16       002C4A
 __end_of_RF24N_update                                   text62       001B20
 __end_of_RF24N_write                                    text64       001E36
 __end_of_RF24N_write_                                   text22       002132
 __end_of_RF24N_write_m                                  text21       0039F0
-__end_of_RF24N_write_to_pipe                            text49       002F48
+__end_of_RF24N_write_to_pipe                            text42       002F48
 __end_of_RF24_available_p                               text37       003922
 __end_of_RF24_begin                                     text5        002B6E
-__end_of_RF24_beginTransaction                          text52       003BE4
-__end_of_RF24_ce_d                                      text57       003AF6
-__end_of_RF24_closeReadingPipe                          text32       003674
-__end_of_RF24_csn_d                                     text53       003B5E
+__end_of_RF24_beginTransaction                          text53       003BE4
+__end_of_RF24_ce_d                                      text59       003B12
+__end_of_RF24_closeReadingPipe                          text55       0036F4
+__end_of_RF24_csn_d                                     text54       003B5E
 __end_of_RF24_enableDynamicPayloads                     text15       0039A4
-__end_of_RF24_endTransaction                            text51       003BDC
-__end_of_RF24_flush_rx                                  text36       003BD4
-__end_of_RF24_flush_tx                                  text58       003BEC
-__end_of_RF24_getDynamicPayloadSize                     text35       00381E
-__end_of_RF24_get_status                                text31       003BCC
+__end_of_RF24_endTransaction                            text52       003BDC
+__end_of_RF24_flush_rx                                  text30       003BCC
+__end_of_RF24_flush_tx                                  text60       003BEC
+__end_of_RF24_getDynamicPayloadSize                     text29       0037E6
+__end_of_RF24_get_status                                text49       003BD4
 __end_of_RF24_init                                      text4        0037AE
-__end_of_RF24_isValid                                   text60       003B12
+__end_of_RF24_isValid                                   text57       003AF6
 __end_of_RF24_openReadingPipe_d                         text14       0029AE
-__end_of_RF24_openWritingPipe_d                         text39       0031D2
-__end_of_RF24_powerUp                                   text59       003A3C
-__end_of_RF24_read                                      text38       003ADA
-__end_of_RF24_read_payload                              text29       003060
+__end_of_RF24_openWritingPipe_d                         text46       0031D2
+__end_of_RF24_powerUp                                   text61       003A3C
+__end_of_RF24_read                                      text31       003ADA
+__end_of_RF24_read_payload                              text32       003060
 __end_of_RF24_read_register_d                           text70       003ABE
 __end_of_RF24_setAutoAck_p                              text71       003472
 __end_of_RF24_setChannel                                text13       0039CA
 __end_of_RF24_setDataRate                               text9        00323C
 __end_of_RF24_setRetries                                text12       003A5E
-__end_of_RF24_spiTrans                                  text30       003B8A
-__end_of_RF24_startFastWrite                            text33       0037E6
+__end_of_RF24_spiTrans                                  text50       003B8A
+__end_of_RF24_startFastWrite                            text44       00381E
 __end_of_RF24_startListening                            text69       00341C
 __end_of_RF24_stopListening                             text68       0032A2
 __end_of_RF24_toggle_features_d                         text8        003B74
 __end_of_RF24_txStandBy_t                               text65       002EB4
-__end_of_RF24_writeFast_m                               text34       0036B4
-__end_of_RF24_write_payload                             text28       002FDA
-__end_of_RF24_write_register_c_d                        text54       0038BE
+__end_of_RF24_writeFast_m                               text43       0036B4
+__end_of_RF24_write_payload                             text45       002FDA
+__end_of_RF24_write_register_c_d                        text48       0038BE
 __end_of_RF24_write_register_d                          text67       003AA0
 __end_of_SPI_begin                                      text7        003B2C
-__end_of_SPI_transfer                                   text50       003BAC
+__end_of_SPI_transfer                                   text51       003BAC
 __end_of_Serial_begin                                   text2        00315C
 __end_of_Serial_print                                   text19       0035A8
 __end_of_Serial_println                                 text18       003B46
 __end_of_Serial_tx                                      text20       003BC4
 __end_of___lldiv                                        text3        0030E2
-__end_of___lwdiv                                        text43       0034C4
+__end_of___lwdiv                                        text35       0034C4
 __end_of___lwmod                                        text24       003634
 __end_of___wmul                                         text23       003A16
 __end_of__initialization                                cinit        00335E
@@ -995,13 +995,13 @@ __end_of_child_payload_size                             smallconst   001007
 __end_of_child_pipe                                     smallconst   00100D
 __end_of_child_pipe_enable                              smallconst   001013
 __end_of_delay                                          text63       0035F2
-__end_of_delayMicroseconds                              text56       003734
+__end_of_delayMicroseconds                              text58       003734
 __end_of_digitalWrite                                   text27       00262E
 __end_of_interval                                       smallconst   001017
 __end_of_isr                                            intcode_body 00397C
 __end_of_loop                                           text17       00277E
 __end_of_main                                           text0        0038F0
-__end_of_memcpy                                         text42       0036F4
+__end_of_memcpy                                         text34       003674
 __end_of_millis                                         text66       003B9C
 __end_of_other_node                                     smallconst   001019
 __end_of_pinMode                                        text6        0023B0
@@ -1042,44 +1042,44 @@ __ptext24                                               text24       0035F2
 __ptext25                                               text25       002D22
 __ptext26                                               text26       003734
 __ptext27                                               text27       0023B0
-__ptext28                                               text28       002F48
-__ptext29                                               text29       002FDA
+__ptext28                                               text28       003A5E
+__ptext29                                               text29       0037AE
 __ptext3                                                text3        003060
-__ptext30                                               text30       003B74
-__ptext31                                               text31       003BC4
-__ptext32                                               text32       003634
-__ptext33                                               text33       0037AE
-__ptext34                                               text34       003674
-__ptext35                                               text35       0037E6
-__ptext36                                               text36       003BCC
+__ptext30                                               text30       003BC4
+__ptext31                                               text31       003ABE
+__ptext32                                               text32       002FDA
+__ptext33                                               text33       00105A
+__ptext34                                               text34       003634
+__ptext35                                               text35       003472
+__ptext36                                               text36       003512
 __ptext37                                               text37       0038F0
-__ptext38                                               text38       003ABE
-__ptext39                                               text39       00315C
+__ptext38                                               text38       0029AE
+__ptext39                                               text39       0032A2
 __ptext4                                                text4        003772
-__ptext40                                               text40       003A5E
-__ptext41                                               text41       00105A
-__ptext42                                               text42       0036B4
-__ptext43                                               text43       003472
-__ptext44                                               text44       003512
-__ptext45                                               text45       0029AE
-__ptext46                                               text46       0032A2
-__ptext47                                               text47       003922
-__ptext48                                               text48       00381E
-__ptext49                                               text49       002EB4
+__ptext40                                               text40       003922
+__ptext41                                               text41       00381E
+__ptext42                                               text42       002EB4
+__ptext43                                               text43       003674
+__ptext44                                               text44       0037E6
+__ptext45                                               text45       002F48
+__ptext46                                               text46       00315C
+__ptext47                                               text47       00277E
+__ptext48                                               text48       00388A
+__ptext49                                               text49       003BCC
 __ptext5                                                text5        002A90
-__ptext50                                               text50       003B9C
-__ptext51                                               text51       003BD4
-__ptext52                                               text52       003BDC
-__ptext53                                               text53       003B46
-__ptext54                                               text54       00388A
-__ptext55                                               text55       00277E
-__ptext56                                               text56       0036F4
+__ptext50                                               text50       003B74
+__ptext51                                               text51       003B9C
+__ptext52                                               text52       003BD4
+__ptext53                                               text53       003BDC
+__ptext54                                               text54       003B46
+__ptext55                                               text55       0036B4
+__ptext56                                               text56       003854
 __ptext57                                               text57       003ADA
-__ptext58                                               text58       003BE4
-__ptext59                                               text59       003A16
+__ptext58                                               text58       0036F4
+__ptext59                                               text59       003AF6
 __ptext6                                                text6        002132
-__ptext60                                               text60       003AF6
-__ptext61                                               text61       003854
+__ptext60                                               text60       003BE4
+__ptext61                                               text61       003A16
 __ptext62                                               text62       0015CE
 __ptext63                                               text63       0035A8
 __ptext64                                               text64       001B20
@@ -1173,14 +1173,14 @@ _child_payload_size                                     smallconst   001001
 _child_pipe                                             smallconst   001007
 _child_pipe_enable                                      smallconst   00100D
 _delay                                                  text63       0035A8
-_delayMicroseconds                                      text56       0036F4
+_delayMicroseconds                                      text58       0036F4
 _digitalWrite                                           text27       0023B0
 _interval                                               smallconst   001013
 _isr                                                    intcode      000008
 _last_sent                                              bssBANK0     000080
 _loop                                                   text17       00262E
 _main                                                   text0        0038BE
-_memcpy                                                 text42       0036B4
+_memcpy                                                 text34       003634
 _millis                                                 text66       003B8A
 _mtime                                                  bssBANK0     000084
 _next_id                                                dataCOMRAM   000076
@@ -1355,7 +1355,7 @@ Total ram usage:       13 bytes
 
  *************** function _RF24_init *****************
  Defined at:
-		line 433 in file "../../../RF24_c/RF24_cg.c"
+		line 433 in file "../../../RF24_c/RF24_c.c"
  Parameters:    Size  Location     Type
   _cepin          1    wreg     unsigned char 
   _cspin          1    2[COMRAM] unsigned char 
@@ -1386,7 +1386,7 @@ Total ram usage:        2 bytes
 
  *************** function _RF24_begin *****************
  Defined at:
-		line 598 in file "../../../RF24_c/RF24_cg.c"
+		line 598 in file "../../../RF24_c/RF24_c.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -1490,7 +1490,7 @@ Total ram usage:        0 bytes
 
  *************** function _RF24_toggle_features_d *****************
  Defined at:
-		line 1266 in file "../../../RF24_c/RF24_cg.c"
+		line 1266 in file "../../../RF24_c/RF24_c.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -1522,7 +1522,7 @@ Total ram usage:        0 bytes
 
  *************** function _RF24_setDataRate *****************
  Defined at:
-		line 1453 in file "../../../RF24_c/RF24_cg.c"
+		line 1453 in file "../../../RF24_c/RF24_c.c"
  Parameters:    Size  Location     Type
   speed           1    wreg     enum E3388
  Auto vars:     Size  Location     Type
@@ -1555,7 +1555,7 @@ Total ram usage:        3 bytes
 
  *************** function _RF24N_init *****************
  Defined at:
-		line 84 in file "../../RF24Network_cg.c"
+		line 84 in file "../../RF24Network_c.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -1585,7 +1585,7 @@ Total ram usage:        0 bytes
 
  *************** function _RF24N_begin_d *****************
  Defined at:
-		line 163 in file "../../RF24Network_cg.c"
+		line 163 in file "../../RF24Network_c.c"
  Parameters:    Size  Location     Type
   _channel        1    wreg     unsigned char 
   _node_addres    2   33[COMRAM] unsigned int 
@@ -1631,7 +1631,7 @@ Total ram usage:       10 bytes
 
  *************** function _RF24_setRetries *****************
  Defined at:
-		line 1580 in file "../../../RF24_c/RF24_cg.c"
+		line 1580 in file "../../../RF24_c/RF24_c.c"
  Parameters:    Size  Location     Type
   delay           1    wreg     unsigned char 
   count           1   16[COMRAM] unsigned char 
@@ -1656,14 +1656,14 @@ Total ram usage:        4 bytes
  This function calls:
 		_RF24_write_register_d
  This function is called by:
-		_RF24_begin
 		_RF24N_begin_d
+		_RF24_begin
  This function uses a non-reentrant model
 
 
  *************** function _RF24_setChannel *****************
  Defined at:
-		line 464 in file "../../../RF24_c/RF24_cg.c"
+		line 464 in file "../../../RF24_c/RF24_c.c"
  Parameters:    Size  Location     Type
   channel         1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
@@ -1688,14 +1688,14 @@ Total ram usage:        4 bytes
  This function calls:
 		_RF24_write_register_d
  This function is called by:
-		_RF24_begin
 		_RF24N_begin_d
+		_RF24_begin
  This function uses a non-reentrant model
 
 
  *************** function _RF24_openReadingPipe_d *****************
  Defined at:
-		line 1187 in file "../../../RF24_c/RF24_cg.c"
+		line 1187 in file "../../../RF24_c/RF24_c.c"
  Parameters:    Size  Location     Type
   child           1    wreg     unsigned char 
   address_        2   16[COMRAM] PTR const unsigned char 
@@ -1733,7 +1733,7 @@ Total ram usage:       11 bytes
 
  *************** function _RF24_enableDynamicPayloads *****************
  Defined at:
-		line 1276 in file "../../../RF24_c/RF24_cg.c"
+		line 1276 in file "../../../RF24_c/RF24_c.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -1764,7 +1764,7 @@ Total ram usage:        0 bytes
 
  *************** function _RF24N_setup_address *****************
  Defined at:
-		line 1225 in file "../../RF24Network_cg.c"
+		line 1225 in file "../../RF24Network_c.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -1931,7 +1931,7 @@ Total ram usage:        1 bytes
 
  *************** function _RF24N_write_m *****************
  Defined at:
-		line 791 in file "../../RF24Network_cg.c"
+		line 791 in file "../../RF24Network_c.c"
  Parameters:    Size  Location     Type
   header          2   99[COMRAM] PTR struct .
 		 -> loop@header(8), 
@@ -1965,7 +1965,7 @@ Total ram usage:        6 bytes
 
  *************** function _RF24N_write_ *****************
  Defined at:
-		line 795 in file "../../RF24Network_cg.c"
+		line 795 in file "../../RF24Network_c.c"
  Parameters:    Size  Location     Type
   header          2   74[COMRAM] PTR struct .
 		 -> loop@header(8), 
@@ -2082,7 +2082,7 @@ Total ram usage:        5 bytes
 
  *************** function _RF24N__write *****************
  Defined at:
-		line 925 in file "../../RF24Network_cg.c"
+		line 925 in file "../../RF24Network_c.c"
  Parameters:    Size  Location     Type
   header          2   63[COMRAM] PTR struct .
 		 -> loop@header(8), 
@@ -2118,7 +2118,7 @@ Total ram usage:       11 bytes
 
  *************** function _RF24NH_init *****************
  Defined at:
-		line 47 in file "../../RF24Network_cg.c"
+		line 47 in file "../../RF24Network_c.c"
  Parameters:    Size  Location     Type
   rnh             2    2[COMRAM] PTR struct .
 		 -> loop@header(8), 
@@ -2181,21 +2181,114 @@ Total ram usage:        3 bytes
  This function uses a non-reentrant model
 
 
- *************** function _RF24_write_payload *****************
+ *************** function _RF24N_available *****************
  Defined at:
-		line 224 in file "../../../RF24_c/RF24_cg.c"
+		line 679 in file "../../RF24Network_c.c"
  Parameters:    Size  Location     Type
-  buf             2   11[COMRAM] PTR const void 
-		 -> rn.frame_buffer(32), rn(370), 
-  data_len        1   13[COMRAM] unsigned char 
-  writeType       1   14[COMRAM] const unsigned char 
+		None
  Auto vars:     Size  Location     Type
-  current         2   26[COMRAM] PTR const unsigned char 
-		 -> rn.frame_buffer(32), rn(370), 
-  blank_len       1   32[COMRAM] unsigned char 
-  status          1   25[COMRAM] unsigned char 
+		None
  Return value:  Size  Location     Type
                   1    wreg      unsigned char 
+ Registers used:
+		wreg, fsr2l, fsr2h, status,2, status,0
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
+      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Temps:          2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Totals:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+Total ram usage:        2 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    1
+ This function calls:
+		Nothing
+ This function is called by:
+		_RF24N_update
+		_RF24N_peek
+		_RF24N_read
+ This function uses a non-reentrant model
+
+
+ *************** function _RF24_getDynamicPayloadSize *****************
+ Defined at:
+		line 1067 in file "../../../RF24_c/RF24_c.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+  result          1   16[COMRAM] unsigned char 
+ Return value:  Size  Location     Type
+                  1    wreg      unsigned char 
+ Registers used:
+		wreg, status,2, status,0, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
+      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Locals:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Totals:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+Total ram usage:        2 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    6
+ This function calls:
+		_RF24_beginTransaction
+		_RF24_endTransaction
+		_RF24_flush_rx
+		_SPI_transfer
+		_delay
+ This function is called by:
+		_RF24N_update
+ This function uses a non-reentrant model
+
+
+ *************** function _RF24_flush_rx *****************
+ Defined at:
+		line 341 in file "../../../RF24_c/RF24_c.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+                  1    wreg      unsigned char 
+ Registers used:
+		wreg, status,2, status,0, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
+      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    5
+ This function calls:
+		_RF24_spiTrans
+ This function is called by:
+		_RF24_begin
+		_RF24_getDynamicPayloadSize
+ This function uses a non-reentrant model
+
+
+ *************** function _RF24_read *****************
+ Defined at:
+		line 1118 in file "../../../RF24_c/RF24_c.c"
+ Parameters:    Size  Location     Type
+  buf             2   28[COMRAM] PTR void 
+		 -> rn(370), 
+  len             1   30[COMRAM] unsigned char 
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+                  1    wreg      void 
  Registers used:
 		wreg, fsr2l, fsr2h, status,2, status,0, cstack
  Tracked objects:
@@ -2203,26 +2296,24 @@ Total ram usage:        3 bytes
 		On exit  : 
 		Unchanged: 
  Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         4       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:        16       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:        22       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:       22 bytes
+      Params:         3       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Totals:         3       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+Total ram usage:        3 bytes
  Hardware stack levels used:    1
- Hardware stack levels required when called:    4
+ Hardware stack levels required when called:    5
  This function calls:
-		_RF24_beginTransaction
-		_RF24_endTransaction
-		_SPI_transfer
+		_RF24_read_payload
+		_RF24_write_register_d
  This function is called by:
-		_RF24_startFastWrite
-		_RF24_startWrite
+		_RF24N_update
  This function uses a non-reentrant model
 
 
  *************** function _RF24_read_payload *****************
  Defined at:
-		line 272 in file "../../../RF24_c/RF24_cg.c"
+		line 272 in file "../../../RF24_c/RF24_c.c"
  Parameters:    Size  Location     Type
   buf             2   11[COMRAM] PTR void 
 		 -> rn(370), 
@@ -2257,380 +2348,9 @@ Total ram usage:       17 bytes
  This function uses a non-reentrant model
 
 
- *************** function _RF24_spiTrans *****************
- Defined at:
-		line 327 in file "../../../RF24_c/RF24_cg.c"
- Parameters:    Size  Location     Type
-  cmd             1    wreg     unsigned char 
- Auto vars:     Size  Location     Type
-  cmd             1   13[COMRAM] unsigned char 
-  status          1   14[COMRAM] unsigned char 
- Return value:  Size  Location     Type
-                  1    wreg      unsigned char 
- Registers used:
-		wreg, status,2, status,0, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         4       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         4       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        4 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    4
- This function calls:
-		_RF24_beginTransaction
-		_RF24_endTransaction
-		_SPI_transfer
- This function is called by:
-		_RF24_flush_rx
-		_RF24_flush_tx
-		_RF24_get_status
-		_RF24_reUseTX
- This function uses a non-reentrant model
-
-
- *************** function _RF24_get_status *****************
- Defined at:
-		line 355 in file "../../../RF24_c/RF24_cg.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-                  1    wreg      unsigned char 
- Registers used:
-		wreg, status,2, status,0, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        0 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    5
- This function calls:
-		_RF24_spiTrans
- This function is called by:
-		_RF24_writeFast_m
-		_RF24_txStandBy_t
-		_RF24_available_p
-		_RF24_write_m
-		_RF24_writeBlocking
-		_RF24_txStandBy
- This function uses a non-reentrant model
-
-
- *************** function _RF24_closeReadingPipe *****************
- Defined at:
-		line 1259 in file "../../../RF24_c/RF24_cg.c"
- Parameters:    Size  Location     Type
-  pipe            1    wreg     unsigned char 
- Auto vars:     Size  Location     Type
-  pipe            1   20[COMRAM] unsigned char 
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg, status,2, status,0, tblptrl, tblptrh, tblptru, prodl, prodh, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          3       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         5       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        5 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    5
- This function calls:
-		_RF24_read_register_d
-		_RF24_write_register_d
- This function is called by:
-		_RF24_startListening
- This function uses a non-reentrant model
-
-
- *************** function _RF24_startFastWrite *****************
- Defined at:
-		line 954 in file "../../../RF24_c/RF24_cg.c"
- Parameters:    Size  Location     Type
-  buf             2   33[COMRAM] PTR const void 
-		 -> rn.frame_buffer(32), rn(370), 
-  len             1   35[COMRAM] unsigned char 
-  multicast       1   36[COMRAM] const unsigned char 
-  startTx         1   37[COMRAM] unsigned char 
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg, fsr2l, fsr2h, status,2, status,0, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         5       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         4       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         9       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        9 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    5
- This function calls:
-		_RF24_ce_d
-		_RF24_write_payload
- This function is called by:
-		_RF24_writeFast_m
-		_RF24_write_m
-		_RF24_writeBlocking
- This function uses a non-reentrant model
-
-
- *************** function _RF24_writeFast_m *****************
- Defined at:
-		line 909 in file "../../../RF24_c/RF24_cg.c"
- Parameters:    Size  Location     Type
-  buf             2   42[COMRAM] PTR const void 
-		 -> rn.frame_buffer(32), rn(370), 
-  len             1   44[COMRAM] unsigned char 
-  multicast       1   45[COMRAM] const unsigned char 
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-                  1    wreg      unsigned char 
- Registers used:
-		wreg, fsr2l, fsr2h, status,2, status,0, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         4       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          1       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         5       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        5 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    6
- This function calls:
-		_RF24_get_status
-		_RF24_startFastWrite
-		_RF24_write_register_d
- This function is called by:
-		_RF24N_write_to_pipe
-		_RF24_writeFast
- This function uses a non-reentrant model
-
-
- *************** function _RF24_getDynamicPayloadSize *****************
- Defined at:
-		line 1067 in file "../../../RF24_c/RF24_cg.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-  result          1   16[COMRAM] unsigned char 
- Return value:  Size  Location     Type
-                  1    wreg      unsigned char 
- Registers used:
-		wreg, status,2, status,0, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        2 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    6
- This function calls:
-		_RF24_beginTransaction
-		_RF24_endTransaction
-		_RF24_flush_rx
-		_SPI_transfer
-		_delay
- This function is called by:
-		_RF24N_update
- This function uses a non-reentrant model
-
-
- *************** function _RF24_flush_rx *****************
- Defined at:
-		line 341 in file "../../../RF24_c/RF24_cg.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-                  1    wreg      unsigned char 
- Registers used:
-		wreg, status,2, status,0, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        0 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    5
- This function calls:
-		_RF24_spiTrans
- This function is called by:
-		_RF24_begin
-		_RF24_getDynamicPayloadSize
- This function uses a non-reentrant model
-
-
- *************** function _RF24_available_p *****************
- Defined at:
-		line 1098 in file "../../../RF24_c/RF24_cg.c"
- Parameters:    Size  Location     Type
-  pipe_num        2   15[COMRAM] PTR unsigned char 
-		 -> RF24N_update@pipe_num(1), NULL(0), 
- Auto vars:     Size  Location     Type
-  status          1   19[COMRAM] unsigned char 
- Return value:  Size  Location     Type
-                  1    wreg      unsigned char 
- Registers used:
-		wreg, fsr2l, fsr2h, status,2, status,0, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          1       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         5       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        5 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    6
- This function calls:
-		_RF24_get_status
-		_RF24_read_register_d
- This function is called by:
-		_RF24N_update
-		_RF24_available
- This function uses a non-reentrant model
-
-
- *************** function _RF24_read *****************
- Defined at:
-		line 1118 in file "../../../RF24_c/RF24_cg.c"
- Parameters:    Size  Location     Type
-  buf             2   28[COMRAM] PTR void 
-		 -> rn(370), 
-  len             1   30[COMRAM] unsigned char 
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg, fsr2l, fsr2h, status,2, status,0, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         3       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         3       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        3 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    5
- This function calls:
-		_RF24_read_payload
-		_RF24_write_register_d
- This function is called by:
-		_RF24N_update
- This function uses a non-reentrant model
-
-
- *************** function _RF24_openWritingPipe_d *****************
- Defined at:
-		line 1144 in file "../../../RF24_c/RF24_cg.c"
- Parameters:    Size  Location     Type
-  value_          2   16[COMRAM] PTR const unsigned char 
-		 -> RF24N_write_to_pipe@out_pipe(5), 
- Auto vars:     Size  Location     Type
-  value           5   26[COMRAM] unsigned char [5]
-  i               1   31[COMRAM] unsigned char 
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg, fsr0l, fsr0h, fsr2l, fsr2h, status,2, status,0, prodl, prodh, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:        12       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:        16       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:       16 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    5
- This function calls:
-		_RF24_write_register_c_d
-		_RF24_write_register_d
- This function is called by:
-		_RF24N_write_to_pipe
- This function uses a non-reentrant model
-
-
- *************** function _RF24N_available *****************
- Defined at:
-		line 679 in file "../../RF24Network_cg.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-                  1    wreg      unsigned char 
- Registers used:
-		wreg, fsr2l, fsr2h, status,2, status,0
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        2 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    1
- This function calls:
-		Nothing
- This function is called by:
-		_RF24N_update
-		_RF24N_peek
-		_RF24N_read
- This function uses a non-reentrant model
-
-
  *************** function _RF24N_enqueue *****************
  Defined at:
-		line 527 in file "../../RF24Network_cg.c"
+		line 527 in file "../../RF24Network_c.c"
  Parameters:    Size  Location     Type
   header          2   18[COMRAM] PTR struct .
 		 -> rn.frame_buffer(32), rn(370), 
@@ -2670,21 +2390,21 @@ Total ram usage:       23 bytes
 		line 11 in file "/opt/microchip/xc8/v1.36/sources/common/memcpy.c"
  Parameters:    Size  Location     Type
   d1              2    2[COMRAM] PTR void 
-		 -> RF24N_read@bufsize(2), RF24N_peek@msg_size(2), rn.frame_buffer(32), rn.frag_queue_message_buffer(144), 
-		 -> rn.frame_queue(154), rn(370), rf(22), 
+		 -> rf(22), RF24N_read@bufsize(2), RF24N_peek@msg_size(2), rn.frame_buffer(32), 
+		 -> rn.frag_queue_message_buffer(144), rn.frame_queue(154), rn(370), 
   s1              2    4[COMRAM] PTR const void 
-		 -> rn.header(8), rn.frame_queue.header(8), RF24N_enqueue@message_size(2), rn.frame_buffer(32), 
-		 -> rn.frag_queue_message_buffer(144), rn.frag_queue(13), rn.frame_queue(154), rn(370), 
-		 -> RF24_openReadingPipe_d@address(5), loop@header(8), loop@payload(8), 
+		 -> rn.header(8), rn.frame_queue.header(8), RF24_openReadingPipe_d@address(5), RF24N_enqueue@message_size(2), 
+		 -> rn.frame_buffer(32), rn.frag_queue_message_buffer(144), rn.frag_queue(13), rn.frame_queue(154), 
+		 -> rn(370), loop@header(8), loop@payload(8), 
   n               2    6[COMRAM] unsigned int 
  Auto vars:     Size  Location     Type
   s               2   10[COMRAM] PTR const unsigned char 
-		 -> rn.header(8), rn.frame_queue.header(8), RF24N_enqueue@message_size(2), rn.frame_buffer(32), 
-		 -> rn.frag_queue_message_buffer(144), rn.frag_queue(13), rn.frame_queue(154), rn(370), 
-		 -> RF24_openReadingPipe_d@address(5), loop@header(8), loop@payload(8), 
+		 -> rn.header(8), rn.frame_queue.header(8), RF24_openReadingPipe_d@address(5), RF24N_enqueue@message_size(2), 
+		 -> rn.frame_buffer(32), rn.frag_queue_message_buffer(144), rn.frag_queue(13), rn.frame_queue(154), 
+		 -> rn(370), loop@header(8), loop@payload(8), 
   d               2    8[COMRAM] PTR unsigned char 
-		 -> RF24N_read@bufsize(2), RF24N_peek@msg_size(2), rn.frame_buffer(32), rn.frag_queue_message_buffer(144), 
-		 -> rn.frame_queue(154), rn(370), rf(22), 
+		 -> rf(22), RF24N_read@bufsize(2), RF24N_peek@msg_size(2), rn.frame_buffer(32), 
+		 -> rn.frag_queue_message_buffer(144), rn.frame_queue(154), rn(370), 
  Return value:  Size  Location     Type
                   2    2[COMRAM] PTR void 
  Registers used:
@@ -2704,12 +2424,12 @@ Total ram usage:       10 bytes
  This function calls:
 		Nothing
  This function is called by:
-		_RF24_openReadingPipe_d
 		_RF24N_enqueue
 		_RF24N__write
-		_RF24_openReadingPipe
+		_RF24_openReadingPipe_d
 		_RF24N_peek
 		_RF24N_read
+		_RF24_openReadingPipe
  This function uses a non-reentrant model
 
 
@@ -2748,7 +2468,7 @@ Total ram usage:        7 bytes
 
  *************** function _RF24N_levelToAddress *****************
  Defined at:
-		line 1346 in file "../../RF24Network_cg.c"
+		line 1346 in file "../../RF24Network_c.c"
  Parameters:    Size  Location     Type
   level           1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
@@ -2779,9 +2499,42 @@ Total ram usage:       11 bytes
  This function uses a non-reentrant model
 
 
+ *************** function _RF24_available_p *****************
+ Defined at:
+		line 1098 in file "../../../RF24_c/RF24_c.c"
+ Parameters:    Size  Location     Type
+  pipe_num        2   15[COMRAM] PTR unsigned char 
+		 -> NULL(0), RF24N_update@pipe_num(1), 
+ Auto vars:     Size  Location     Type
+  status          1   19[COMRAM] unsigned char 
+ Return value:  Size  Location     Type
+                  1    wreg      unsigned char 
+ Registers used:
+		wreg, fsr2l, fsr2h, status,2, status,0, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
+      Params:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Locals:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Temps:          1       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Totals:         5       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+Total ram usage:        5 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    6
+ This function calls:
+		_RF24_get_status
+		_RF24_read_register_d
+ This function is called by:
+		_RF24N_update
+		_RF24_available
+ This function uses a non-reentrant model
+
+
  *************** function _RF24N_logicalToPhysicalAddress *****************
  Defined at:
-		line 1093 in file "../../RF24Network_cg.c"
+		line 1093 in file "../../RF24Network_c.c"
  Parameters:    Size  Location     Type
   conversionIn    2   20[COMRAM] PTR struct .
 		 -> RF24N_write@conversion(4), 
@@ -2821,7 +2574,7 @@ Total ram usage:       21 bytes
 
  *************** function _RF24N_is_direct_child *****************
  Defined at:
-		line 1196 in file "../../RF24Network_cg.c"
+		line 1196 in file "../../RF24Network_c.c"
  Parameters:    Size  Location     Type
   node            2    8[COMRAM] unsigned int 
  Auto vars:     Size  Location     Type
@@ -2852,7 +2605,7 @@ Total ram usage:       12 bytes
 
  *************** function _RF24N_is_descendant *****************
  Defined at:
-		line 1218 in file "../../RF24Network_cg.c"
+		line 1218 in file "../../RF24Network_c.c"
  Parameters:    Size  Location     Type
   node            2    2[COMRAM] unsigned int 
  Auto vars:     Size  Location     Type
@@ -2883,7 +2636,7 @@ Total ram usage:        6 bytes
 
  *************** function _RF24N_direct_child_route_to *****************
  Defined at:
-		line 1286 in file "../../RF24Network_cg.c"
+		line 1286 in file "../../RF24Network_c.c"
  Parameters:    Size  Location     Type
   node            2    2[COMRAM] unsigned int 
  Auto vars:     Size  Location     Type
@@ -2913,7 +2666,7 @@ Total ram usage:        8 bytes
 
  *************** function _RF24N_write_to_pipe *****************
  Defined at:
-		line 1143 in file "../../RF24Network_cg.c"
+		line 1143 in file "../../RF24Network_c.c"
  Parameters:    Size  Location     Type
   node            2   47[COMRAM] unsigned int 
   pipe            1   49[COMRAM] unsigned char 
@@ -2946,6 +2699,302 @@ Total ram usage:       16 bytes
 		_RF24_writeFast_m
  This function is called by:
 		_RF24N_write
+ This function uses a non-reentrant model
+
+
+ *************** function _RF24_writeFast_m *****************
+ Defined at:
+		line 909 in file "../../../RF24_c/RF24_c.c"
+ Parameters:    Size  Location     Type
+  buf             2   42[COMRAM] PTR const void 
+		 -> rn.frame_buffer(32), rn(370), 
+  len             1   44[COMRAM] unsigned char 
+  multicast       1   45[COMRAM] const unsigned char 
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+                  1    wreg      unsigned char 
+ Registers used:
+		wreg, fsr2l, fsr2h, status,2, status,0, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
+      Params:         4       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Temps:          1       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Totals:         5       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+Total ram usage:        5 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    6
+ This function calls:
+		_RF24_get_status
+		_RF24_startFastWrite
+		_RF24_write_register_d
+ This function is called by:
+		_RF24N_write_to_pipe
+		_RF24_writeFast
+ This function uses a non-reentrant model
+
+
+ *************** function _RF24_startFastWrite *****************
+ Defined at:
+		line 954 in file "../../../RF24_c/RF24_c.c"
+ Parameters:    Size  Location     Type
+  buf             2   33[COMRAM] PTR const void 
+		 -> rn.frame_buffer(32), rn(370), 
+  len             1   35[COMRAM] unsigned char 
+  multicast       1   36[COMRAM] const unsigned char 
+  startTx         1   37[COMRAM] unsigned char 
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+                  1    wreg      void 
+ Registers used:
+		wreg, fsr2l, fsr2h, status,2, status,0, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
+      Params:         5       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Locals:         4       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Totals:         9       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+Total ram usage:        9 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    5
+ This function calls:
+		_RF24_ce_d
+		_RF24_write_payload
+ This function is called by:
+		_RF24_writeFast_m
+		_RF24_write_m
+		_RF24_writeBlocking
+ This function uses a non-reentrant model
+
+
+ *************** function _RF24_write_payload *****************
+ Defined at:
+		line 224 in file "../../../RF24_c/RF24_c.c"
+ Parameters:    Size  Location     Type
+  buf             2   11[COMRAM] PTR const void 
+		 -> rn.frame_buffer(32), rn(370), 
+  data_len        1   13[COMRAM] unsigned char 
+  writeType       1   14[COMRAM] const unsigned char 
+ Auto vars:     Size  Location     Type
+  current         2   26[COMRAM] PTR const unsigned char 
+		 -> rn.frame_buffer(32), rn(370), 
+  blank_len       1   32[COMRAM] unsigned char 
+  status          1   25[COMRAM] unsigned char 
+ Return value:  Size  Location     Type
+                  1    wreg      unsigned char 
+ Registers used:
+		wreg, fsr2l, fsr2h, status,2, status,0, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
+      Params:         4       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Locals:        16       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Temps:          2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Totals:        22       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+Total ram usage:       22 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    4
+ This function calls:
+		_RF24_beginTransaction
+		_RF24_endTransaction
+		_SPI_transfer
+ This function is called by:
+		_RF24_startFastWrite
+		_RF24_startWrite
+ This function uses a non-reentrant model
+
+
+ *************** function _RF24_openWritingPipe_d *****************
+ Defined at:
+		line 1144 in file "../../../RF24_c/RF24_c.c"
+ Parameters:    Size  Location     Type
+  value_          2   16[COMRAM] PTR const unsigned char 
+		 -> RF24N_write_to_pipe@out_pipe(5), 
+ Auto vars:     Size  Location     Type
+  value           5   26[COMRAM] unsigned char [5]
+  i               1   31[COMRAM] unsigned char 
+ Return value:  Size  Location     Type
+                  1    wreg      void 
+ Registers used:
+		wreg, fsr0l, fsr0h, fsr2l, fsr2h, status,2, status,0, prodl, prodh, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
+      Params:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Locals:        12       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Temps:          2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Totals:        16       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+Total ram usage:       16 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    5
+ This function calls:
+		_RF24_write_register_c_d
+		_RF24_write_register_d
+ This function is called by:
+		_RF24N_write_to_pipe
+ This function uses a non-reentrant model
+
+
+ *************** function _RF24N_pipe_address *****************
+ Defined at:
+		line 1359 in file "../../RF24Network_c.c"
+ Parameters:    Size  Location     Type
+  node            2    2[COMRAM] unsigned int 
+  pipe            1    4[COMRAM] unsigned char 
+  address         2    5[COMRAM] PTR unsigned char 
+		 -> RF24N_multicastLevel@addr(5), RF24N_write_to_pipe@out_pipe(5), RF24N_begin_d@addr(5), 
+ Auto vars:     Size  Location     Type
+  result          5   22[COMRAM] unsigned char [5]
+  out             2   30[COMRAM] PTR unsigned char 
+		 -> RF24N_pipe_address@result(5), 
+  dec             2   27[COMRAM] unsigned int 
+  i               1   32[COMRAM] unsigned char 
+  count           1   29[COMRAM] unsigned char 
+ Return value:  Size  Location     Type
+                  1    wreg      void 
+ Registers used:
+		wreg, fsr0l, fsr0h, fsr2l, fsr2h, status,2, status,0, prodl, prodh
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
+      Params:         5       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Locals:        22       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Temps:          4       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Totals:        31       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+Total ram usage:       31 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    1
+ This function calls:
+		Nothing
+ This function is called by:
+		_RF24N_begin_d
+		_RF24N_write_to_pipe
+		_RF24N_multicastLevel
+ This function uses a non-reentrant model
+
+
+ *************** function _RF24_write_register_c_d *****************
+ Defined at:
+		line 162 in file "../../../RF24_c/RF24_c.c"
+ Parameters:    Size  Location     Type
+  reg             1    wreg     unsigned char 
+  buf             2   11[COMRAM] PTR const unsigned char 
+		 -> RF24_openReadingPipe_d@address(5), RF24_openWritingPipe_d@value(5), rf.pipe0_reading_address(5), rf(22), 
+  len             1   13[COMRAM] unsigned char 
+ Auto vars:     Size  Location     Type
+  reg             1   15[COMRAM] unsigned char 
+  status          1   14[COMRAM] unsigned char 
+ Return value:  Size  Location     Type
+                  1    wreg      unsigned char 
+ Registers used:
+		wreg, fsr2l, fsr2h, status,2, status,0, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
+      Params:         3       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Locals:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Totals:         5       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+Total ram usage:        5 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    4
+ This function calls:
+		_RF24_beginTransaction
+		_RF24_endTransaction
+		_SPI_transfer
+ This function is called by:
+		_RF24_startListening
+		_RF24_openWritingPipe_d
+		_RF24_openReadingPipe_d
+		_RF24_openWritingPipe
+		_RF24_openReadingPipe
+ This function uses a non-reentrant model
+
+
+ *************** function _RF24_get_status *****************
+ Defined at:
+		line 355 in file "../../../RF24_c/RF24_c.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+                  1    wreg      unsigned char 
+ Registers used:
+		wreg, status,2, status,0, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
+      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    5
+ This function calls:
+		_RF24_spiTrans
+ This function is called by:
+		_RF24_writeFast_m
+		_RF24_txStandBy_t
+		_RF24_available_p
+		_RF24_write_m
+		_RF24_writeBlocking
+		_RF24_txStandBy
+ This function uses a non-reentrant model
+
+
+ *************** function _RF24_spiTrans *****************
+ Defined at:
+		line 327 in file "../../../RF24_c/RF24_c.c"
+ Parameters:    Size  Location     Type
+  cmd             1    wreg     unsigned char 
+ Auto vars:     Size  Location     Type
+  cmd             1   13[COMRAM] unsigned char 
+  status          1   14[COMRAM] unsigned char 
+ Return value:  Size  Location     Type
+                  1    wreg      unsigned char 
+ Registers used:
+		wreg, status,2, status,0, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
+      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Locals:         4       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Totals:         4       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+Total ram usage:        4 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    4
+ This function calls:
+		_RF24_beginTransaction
+		_RF24_endTransaction
+		_SPI_transfer
+ This function is called by:
+		_RF24_flush_rx
+		_RF24_flush_tx
+		_RF24_get_status
+		_RF24_reUseTX
  This function uses a non-reentrant model
 
 
@@ -2990,7 +3039,7 @@ Total ram usage:        1 bytes
 
  *************** function _RF24_endTransaction *****************
  Defined at:
-		line 84 in file "../../../RF24_c/RF24_cg.c"
+		line 84 in file "../../../RF24_c/RF24_c.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -3029,7 +3078,7 @@ Total ram usage:        0 bytes
 
  *************** function _RF24_beginTransaction *****************
  Defined at:
-		line 75 in file "../../../RF24_c/RF24_cg.c"
+		line 75 in file "../../../RF24_c/RF24_c.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -3068,7 +3117,7 @@ Total ram usage:        0 bytes
 
  *************** function _RF24_csn_d *****************
  Defined at:
-		line 22 in file "../../../RF24_c/RF24_cg.c"
+		line 22 in file "../../../RF24_c/RF24_c.c"
  Parameters:    Size  Location     Type
   mode            1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
@@ -3099,83 +3148,98 @@ Total ram usage:        2 bytes
  This function uses a non-reentrant model
 
 
- *************** function _RF24_write_register_c_d *****************
+ *************** function _RF24_closeReadingPipe *****************
  Defined at:
-		line 162 in file "../../../RF24_c/RF24_cg.c"
+		line 1259 in file "../../../RF24_c/RF24_c.c"
  Parameters:    Size  Location     Type
-  reg             1    wreg     unsigned char 
-  buf             2   11[COMRAM] PTR const unsigned char 
-		 -> RF24_openReadingPipe_d@address(5), RF24_openWritingPipe_d@value(5), rf.pipe0_reading_address(5), rf(22), 
-  len             1   13[COMRAM] unsigned char 
+  pipe            1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
-  reg             1   15[COMRAM] unsigned char 
-  status          1   14[COMRAM] unsigned char 
- Return value:  Size  Location     Type
-                  1    wreg      unsigned char 
- Registers used:
-		wreg, fsr2l, fsr2h, status,2, status,0, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         3       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         5       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        5 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    4
- This function calls:
-		_RF24_beginTransaction
-		_RF24_endTransaction
-		_SPI_transfer
- This function is called by:
-		_RF24_startListening
-		_RF24_openWritingPipe_d
-		_RF24_openReadingPipe_d
-		_RF24_openWritingPipe
-		_RF24_openReadingPipe
- This function uses a non-reentrant model
-
-
- *************** function _RF24N_pipe_address *****************
- Defined at:
-		line 1359 in file "../../RF24Network_cg.c"
- Parameters:    Size  Location     Type
-  node            2    2[COMRAM] unsigned int 
-  pipe            1    4[COMRAM] unsigned char 
-  address         2    5[COMRAM] PTR unsigned char 
-		 -> RF24N_multicastLevel@addr(5), RF24N_write_to_pipe@out_pipe(5), RF24N_begin_d@addr(5), 
- Auto vars:     Size  Location     Type
-  result          5   22[COMRAM] unsigned char [5]
-  out             2   30[COMRAM] PTR unsigned char 
-		 -> RF24N_pipe_address@result(5), 
-  dec             2   27[COMRAM] unsigned int 
-  i               1   32[COMRAM] unsigned char 
-  count           1   29[COMRAM] unsigned char 
+  pipe            1   20[COMRAM] unsigned char 
  Return value:  Size  Location     Type
                   1    wreg      void 
  Registers used:
-		wreg, fsr0l, fsr0h, fsr2l, fsr2h, status,2, status,0, prodl, prodh
+		wreg, status,2, status,0, tblptrl, tblptrh, tblptru, prodl, prodh, cstack
  Tracked objects:
 		On entry : 
 		On exit  : 
 		Unchanged: 
  Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         5       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:        22       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          4       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:        31       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:       31 bytes
+      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Locals:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Temps:          3       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Totals:         5       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+Total ram usage:        5 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    5
+ This function calls:
+		_RF24_read_register_d
+		_RF24_write_register_d
+ This function is called by:
+		_RF24_startListening
+ This function uses a non-reentrant model
+
+
+ *************** function _RF24N_is_valid_address *****************
+ Defined at:
+		line 1312 in file "../../RF24Network_c.c"
+ Parameters:    Size  Location     Type
+  node            2    2[COMRAM] unsigned int 
+ Auto vars:     Size  Location     Type
+  digit           1    6[COMRAM] unsigned char 
+  result          1    7[COMRAM] unsigned char 
+ Return value:  Size  Location     Type
+                  1    wreg      unsigned char 
+ Registers used:
+		wreg, status,2, status,0
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
+      Params:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Locals:         4       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Totals:         6       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+Total ram usage:        6 bytes
  Hardware stack levels used:    1
  Hardware stack levels required when called:    1
  This function calls:
 		Nothing
  This function is called by:
 		_RF24N_begin_d
-		_RF24N_write_to_pipe
-		_RF24N_multicastLevel
+		_RF24N_update
+		_RF24N_write
+ This function uses a non-reentrant model
+
+
+ *************** function _RF24_isValid *****************
+ Defined at:
+		line 1420 in file "../../../RF24_c/RF24_c.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+                  1    wreg      unsigned char 
+ Registers used:
+		wreg, status,2, status,0
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
+      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Locals:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+      Totals:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+Total ram usage:        2 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    1
+ This function calls:
+		Nothing
+ This function is called by:
+		_RF24N_begin_d
+		_RF24N_update
  This function uses a non-reentrant model
 
 
@@ -3207,16 +3271,16 @@ Total ram usage:        7 bytes
  This function calls:
 		Nothing
  This function is called by:
+		_RF24N_write_
 		_RF24_csn_d
 		_RF24_stopListening
-		_RF24N_write_
 		_RF24_startWrite
  This function uses a non-reentrant model
 
 
  *************** function _RF24_ce_d *****************
  Defined at:
-		line 67 in file "../../../RF24_c/RF24_cg.c"
+		line 67 in file "../../../RF24_c/RF24_c.c"
  Parameters:    Size  Location     Type
   level           1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
@@ -3255,7 +3319,7 @@ Total ram usage:        2 bytes
 
  *************** function _RF24_flush_tx *****************
  Defined at:
-		line 348 in file "../../../RF24_c/RF24_cg.c"
+		line 348 in file "../../../RF24_c/RF24_c.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -3290,7 +3354,7 @@ Total ram usage:        0 bytes
 
  *************** function _RF24_powerUp *****************
  Defined at:
-		line 791 in file "../../../RF24_c/RF24_cg.c"
+		line 791 in file "../../../RF24_c/RF24_c.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -3321,73 +3385,9 @@ Total ram usage:        2 bytes
  This function uses a non-reentrant model
 
 
- *************** function _RF24_isValid *****************
- Defined at:
-		line 1420 in file "../../../RF24_c/RF24_cg.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-                  1    wreg      unsigned char 
- Registers used:
-		wreg, status,2, status,0
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        2 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    1
- This function calls:
-		Nothing
- This function is called by:
-		_RF24N_begin_d
-		_RF24N_update
- This function uses a non-reentrant model
-
-
- *************** function _RF24N_is_valid_address *****************
- Defined at:
-		line 1312 in file "../../RF24Network_cg.c"
- Parameters:    Size  Location     Type
-  node            2    2[COMRAM] unsigned int 
- Auto vars:     Size  Location     Type
-  digit           1    6[COMRAM] unsigned char 
-  result          1    7[COMRAM] unsigned char 
- Return value:  Size  Location     Type
-                  1    wreg      unsigned char 
- Registers used:
-		wreg, status,2, status,0
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         4       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         6       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        6 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    1
- This function calls:
-		Nothing
- This function is called by:
-		_RF24N_begin_d
-		_RF24N_update
-		_RF24N_write
- This function uses a non-reentrant model
-
-
  *************** function _RF24N_update *****************
  Defined at:
-		line 226 in file "../../RF24Network_cg.c"
+		line 226 in file "../../RF24Network_c.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -3458,18 +3458,18 @@ Total ram usage:        6 bytes
  This function calls:
 		Nothing
  This function is called by:
+		_RF24N_update
+		_RF24N_write_
 		_RF24_begin
 		_RF24_powerUp
 		_RF24_getDynamicPayloadSize
-		_RF24N_update
-		_RF24N_write_
 		_Serial_rx
  This function uses a non-reentrant model
 
 
  *************** function _RF24N_write *****************
  Defined at:
-		line 981 in file "../../RF24Network_cg.c"
+		line 981 in file "../../RF24Network_c.c"
  Parameters:    Size  Location     Type
   to_node         2  [STACK] unsigned int 
   directTo        1  [STACK] unsigned char 
@@ -3513,7 +3513,7 @@ Total ram usage:        0 bytes
 
  *************** function _RF24_txStandBy_t *****************
  Defined at:
-		line 1018 in file "../../../RF24_c/RF24_cg.c"
+		line 1018 in file "../../../RF24_c/RF24_c.c"
  Parameters:    Size  Location     Type
   timeout         4   18[COMRAM] unsigned long 
   startTx         1   22[COMRAM] unsigned char 
@@ -3577,16 +3577,16 @@ Total ram usage:        4 bytes
 		Nothing
  This function is called by:
 		_loop
-		_RF24_txStandBy_t
 		_RF24N_write_
 		_RF24N_write
+		_RF24_txStandBy_t
 		_RF24_writeBlocking
  This function uses a non-reentrant model
 
 
  *************** function _RF24_write_register_d *****************
  Defined at:
-		line 194 in file "../../../RF24_c/RF24_cg.c"
+		line 194 in file "../../../RF24_c/RF24_c.c"
  Parameters:    Size  Location     Type
   reg             1    wreg     unsigned char 
   value           1   13[COMRAM] unsigned char 
@@ -3649,7 +3649,7 @@ Total ram usage:        3 bytes
 
  *************** function _RF24_stopListening *****************
  Defined at:
-		line 754 in file "../../../RF24_c/RF24_cg.c"
+		line 754 in file "../../../RF24_c/RF24_c.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -3677,16 +3677,16 @@ Total ram usage:        2 bytes
 		_RF24_write_register_d
 		_delayMicroseconds
  This function is called by:
-		_RF24_txStandBy_t
 		_RF24N_enqueue
 		_RF24N_write_
 		_RF24N_write_to_pipe
+		_RF24_txStandBy_t
  This function uses a non-reentrant model
 
 
  *************** function _RF24_startListening *****************
  Defined at:
-		line 723 in file "../../../RF24_c/RF24_cg.c"
+		line 723 in file "../../../RF24_c/RF24_c.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -3724,7 +3724,7 @@ Total ram usage:        1 bytes
 
  *************** function _RF24_read_register_d *****************
  Defined at:
-		line 131 in file "../../../RF24_c/RF24_cg.c"
+		line 131 in file "../../../RF24_c/RF24_c.c"
  Parameters:    Size  Location     Type
   reg             1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
@@ -3784,7 +3784,7 @@ Total ram usage:        2 bytes
 
  *************** function _RF24_setAutoAck_p *****************
  Defined at:
-		line 1387 in file "../../../RF24_c/RF24_cg.c"
+		line 1387 in file "../../../RF24_c/RF24_c.c"
  Parameters:    Size  Location     Type
   pipe            1    wreg     unsigned char 
   enable          1   16[COMRAM] unsigned char 
@@ -3871,7 +3871,7 @@ serial.c
 serial.c estimated size: 238
 
 /opt/microchip/xc8/v1.36/sources/common/memcpy.c
-		_memcpy        		CODE           	36B4	0000	65
+		_memcpy        		CODE           	3634	0000	65
 
 /opt/microchip/xc8/v1.36/sources/common/memcpy.c estimated size: 65
 
@@ -3880,12 +3880,50 @@ serial.c estimated size: 238
 
 /opt/microchip/xc8/v1.36/sources/common/Umul16.c estimated size: 39
 
+../../../RF24_c/RF24_c.c
+		_RF24_setChannel		CODE           	39A4	0000	39
+		_RF24_txStandBy_t		CODE           	2DF8	0000	189
+		_RF24_setRetries		CODE           	3A3C	0000	35
+		_RF24_available_p		CODE           	38F0	0000	51
+		_RF24_read     		CODE           	3ABE	0000	29
+		_RF24_openReadingPipe_d		CODE           	289C	0000	275
+		_RF24_openWritingPipe_d		CODE           	315C	0000	119
+		_RF24_write_payload		CODE           	2F48	0000	147
+		_RF24_spiTrans 		CODE           	3B74	0000	23
+		_RF24_init     		CODE           	3772	0000	61
+		_RF24_endTransaction		CODE           	3BD4	0000	9
+		_RF24_closeReadingPipe		CODE           	36B4	0000	65
+		_RF24_beginTransaction		CODE           	3BDC	0000	9
+		_RF24_read_payload		CODE           	2FDA	0000	135
+		_RF24_stopListening		CODE           	323C	0000	103
+		_RF24_getDynamicPayloadSize		CODE           	37AE	0000	57
+		_RF24_enableDynamicPayloads		CODE           	397C	0000	41
+		_RF24_powerUp  		CODE           	3A16	0000	39
+		_RF24_toggle_features_d		CODE           	3B5E	0000	23
+		_RF24_read_register_d		CODE           	3AA0	0000	31
+		_RF24_setDataRate		CODE           	31D2	0000	107
+		_RF24_csn_d    		CODE           	3B46	0000	25
+		_RF24_begin    		CODE           	2A90	0000	223
+		_RF24_write_register_d		CODE           	3A80	0000	33
+		_RF24_setAutoAck_p		CODE           	341C	0000	87
+		_RF24_isValid  		CODE           	3ADA	0000	29
+		_RF24_startListening		CODE           	33C4	0000	89
+		_RF24_startFastWrite		CODE           	37E6	0000	57
+		_RF24_writeFast_m		CODE           	3674	0000	65
+		_RF24_get_status		CODE           	3BCC	0000	9
+		_RF24_write_register_c_d		CODE           	388A	0000	53
+		_RF24_flush_rx 		CODE           	3BC4	0000	9
+		_RF24_flush_tx 		CODE           	3BE4	0000	9
+		_RF24_ce_d     		CODE           	3AF6	0000	29
+
+../../../RF24_c/RF24_c.c estimated size: 2304
+
 /opt/microchip/xc8/v1.36/sources/common/lldiv.c
 		___lldiv       		CODE           	3060	0000	131
 
 /opt/microchip/xc8/v1.36/sources/common/lldiv.c estimated size: 131
 
-../../RF24Network_cg.c
+../../RF24Network_c.c
 		_RF24N_pipe_address		CODE           	277E	0000	287
 		_RF24N_write_to_pipe		CODE           	2EB4	0000	149
 		_RF24N_write   		CODE           	1B20	0000	791
@@ -3906,45 +3944,7 @@ serial.c estimated size: 238
 		_RF24N_is_descendant		CODE           	3922	0000	47
 		_RF24N_setup_address		CODE           	2B6E	0000	221
 
-../../RF24Network_cg.c estimated size: 6197
-
-../../../RF24_c/RF24_cg.c
-		_RF24_setChannel		CODE           	39A4	0000	39
-		_RF24_txStandBy_t		CODE           	2DF8	0000	189
-		_RF24_setRetries		CODE           	3A3C	0000	35
-		_RF24_available_p		CODE           	38F0	0000	51
-		_RF24_read     		CODE           	3ABE	0000	29
-		_RF24_openReadingPipe_d		CODE           	289C	0000	275
-		_RF24_openWritingPipe_d		CODE           	315C	0000	119
-		_RF24_write_payload		CODE           	2F48	0000	147
-		_RF24_spiTrans 		CODE           	3B74	0000	23
-		_RF24_init     		CODE           	3772	0000	61
-		_RF24_endTransaction		CODE           	3BD4	0000	9
-		_RF24_closeReadingPipe		CODE           	3634	0000	65
-		_RF24_beginTransaction		CODE           	3BDC	0000	9
-		_RF24_read_payload		CODE           	2FDA	0000	135
-		_RF24_stopListening		CODE           	323C	0000	103
-		_RF24_getDynamicPayloadSize		CODE           	37E6	0000	57
-		_RF24_enableDynamicPayloads		CODE           	397C	0000	41
-		_RF24_powerUp  		CODE           	3A16	0000	39
-		_RF24_toggle_features_d		CODE           	3B5E	0000	23
-		_RF24_read_register_d		CODE           	3AA0	0000	31
-		_RF24_setDataRate		CODE           	31D2	0000	107
-		_RF24_csn_d    		CODE           	3B46	0000	25
-		_RF24_begin    		CODE           	2A90	0000	223
-		_RF24_write_register_d		CODE           	3A80	0000	33
-		_RF24_setAutoAck_p		CODE           	341C	0000	87
-		_RF24_isValid  		CODE           	3AF6	0000	29
-		_RF24_startListening		CODE           	33C4	0000	89
-		_RF24_startFastWrite		CODE           	37AE	0000	57
-		_RF24_writeFast_m		CODE           	3674	0000	65
-		_RF24_get_status		CODE           	3BC4	0000	9
-		_RF24_write_register_c_d		CODE           	388A	0000	53
-		_RF24_flush_rx 		CODE           	3BCC	0000	9
-		_RF24_flush_tx 		CODE           	3BE4	0000	9
-		_RF24_ce_d     		CODE           	3ADA	0000	29
-
-../../../RF24_c/RF24_cg.c estimated size: 2304
+../../RF24Network_c.c estimated size: 6197
 
 helloworld_tx.c
 		_loop          		CODE           	262E	0000	337

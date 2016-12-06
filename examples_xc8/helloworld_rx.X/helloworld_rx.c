@@ -17,8 +17,8 @@
 
 
 
-#include <RF24Network_cg.h>
-#include <RF24_cg.h>
+#include <RF24Network_c.h>
+#include <RF24_c.h>
 #include "serial.h"
 
 //RF24 radio;                // nRF24L01(+) radio attached using Getting Started board 

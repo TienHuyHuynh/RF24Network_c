@@ -3,7 +3,7 @@
 [d edition pro ]
 [d chip 18F4620 ]
 [d frameptr 4065 ]
-"676 /home/gamboa/Arduino/rf24libs/RF24_c/RF24_cg.c
+"676 /home/gamboa/Arduino/rf24libs/RF24_c/RF24_c.c
 [e E3388 . `uc
 RF24_1MBPS 0
 RF24_2MBPS 1
@@ -109,7 +109,7 @@ RF24_CRC_16 2
 [v _SPI_begin SPI_begin `(v  1 e 1 0 ]
 "250
 [v _SPI_transfer SPI_transfer `(uc  1 e 1 0 ]
-"47 /home/gamboa/Arduino/rf24libs/RF24Network_c/RF24Network_cg.c
+"47 /home/gamboa/Arduino/rf24libs/RF24Network_c/RF24Network_c.c
 [v _RF24NH_init RF24NH_init `(v  1 e 1 0 ]
 "84
 [v _RF24N_init RF24N_init `(v  1 e 1 0 ]
@@ -199,9 +199,9 @@ RF24_CRC_16 2
 [v _Serial_print Serial_print `(v  1 e 1 0 ]
 "76
 [v _Serial_println Serial_println `(v  1 e 1 0 ]
-[s S1771 RF24 22 `uc 1 ce_pin 1 0 `uc 1 csn_pin 1 1 `ui 1 spi_speed 2 2 `uc 1 p_variant 1 4 `uc 1 payload_size 1 5 `uc 1 dynamic_payloads_enabled 1 6 `[5]uc 1 pipe0_reading_address 5 7 `uc 1 addr_width 1 12 `ul 1 txDelay 4 13 `ul 1 csDelay 4 17 `uc 1 RF24_failureDetected 1 21 ]
-"20 /home/gamboa/Arduino/rf24libs/RF24_c/RF24_cg.c
-[v _rf rf `S1771  1 s 22 rf ]
+[s S2206 RF24 22 `uc 1 ce_pin 1 0 `uc 1 csn_pin 1 1 `ui 1 spi_speed 2 2 `uc 1 p_variant 1 4 `uc 1 payload_size 1 5 `uc 1 dynamic_payloads_enabled 1 6 `[5]uc 1 pipe0_reading_address 5 7 `uc 1 addr_width 1 12 `ul 1 txDelay 4 13 `ul 1 csDelay 4 17 `uc 1 RF24_failureDetected 1 21 ]
+"20 /home/gamboa/Arduino/rf24libs/RF24_c/RF24_c.c
+[v _rf rf `S2206  1 s 22 rf ]
 "749
 [v _child_pipe_enable child_pipe_enable `C[6]uc  1 s 6 child_pipe_enable ]
 "1177
@@ -211,10 +211,10 @@ RF24_CRC_16 2
 "5 /home/gamboa/Arduino/rf24libs/RF24_c/utility/XC8/spi.c
 [v _mtime mtime `ul  1 e 4 0 ]
 [s S62 . 8 `ui 1 from_node 2 0 `ui 1 to_node 2 2 `ui 1 id 2 4 `uc 1 type 1 6 `uc 1 reserved 1 7 ]
-"36 /home/gamboa/Arduino/rf24libs/RF24Network_c/RF24Network_cg.c
-[s S2082 . 12 `S62 1 header 8 0 `ui 1 message_size 2 8 `*.39uc 1 message_buffer 2 10 ]
-[s S2086 . 370 `uc 1 multicastRelay 1 0 `ul 1 txTimeout 4 1 `ui 1 routeTimeout 2 5 `[32]uc 1 frame_buffer 32 7 `*.39S2082 1 frag_ptr 2 39 `uc 1 returnSysMsgs 1 41 `uc 1 networkFlags 1 42 `ul 1 txTime 4 43 `uc 1 multicast_level 1 47 `ui 1 node_address 2 48 `uc 1 frame_size 1 50 `ui 1 max_frame_payload_size 2 51 `ui 1 parent_node 2 53 `uc 1 parent_pipe 1 55 `ui 1 node_mask 2 56 `[154]uc 1 frame_queue 154 58 `*.39uc 1 next_frame 2 212 `S2082 1 frag_queue 12 214 `[144]uc 1 frag_queue_message_buffer 144 226 ]
-[v _rn rn `S2086  1 s 370 rn ]
+"36 /home/gamboa/Arduino/rf24libs/RF24Network_c/RF24Network_c.c
+[s S1777 . 12 `S62 1 header 8 0 `ui 1 message_size 2 8 `*.39uc 1 message_buffer 2 10 ]
+[s S1781 . 370 `uc 1 multicastRelay 1 0 `ul 1 txTimeout 4 1 `ui 1 routeTimeout 2 5 `[32]uc 1 frame_buffer 32 7 `*.39S1777 1 frag_ptr 2 39 `uc 1 returnSysMsgs 1 41 `uc 1 networkFlags 1 42 `ul 1 txTime 4 43 `uc 1 multicast_level 1 47 `ui 1 node_address 2 48 `uc 1 frame_size 1 50 `ui 1 max_frame_payload_size 2 51 `ui 1 parent_node 2 53 `uc 1 parent_pipe 1 55 `ui 1 node_mask 2 56 `[154]uc 1 frame_queue 154 58 `*.39uc 1 next_frame 2 212 `S1777 1 frag_queue 12 214 `[144]uc 1 frag_queue_message_buffer 144 226 ]
+[v _rn rn `S1781  1 s 370 rn ]
 "45
 [v _next_id next_id `ui  1 s 2 next_id ]
 [s S558 . 1 `uc 1 RA0 1 0 :1:0 
@@ -904,7 +904,7 @@ RF24_CRC_16 2
 [v ___lldiv@divisor divisor `ul  1 p 4 6 ]
 "31
 } 0
-"433 /home/gamboa/Arduino/rf24libs/RF24_c/RF24_cg.c
+"433 /home/gamboa/Arduino/rf24libs/RF24_c/RF24_c.c
 [v _RF24_init RF24_init `(v  1 e 1 0 ]
 {
 [v RF24_init@_cepin _cepin `uc  1 a 1 wreg ]
@@ -935,7 +935,7 @@ RF24_CRC_16 2
 {
 "248
 } 0
-"1266 /home/gamboa/Arduino/rf24libs/RF24_c/RF24_cg.c
+"1266 /home/gamboa/Arduino/rf24libs/RF24_c/RF24_c.c
 [v _RF24_toggle_features_d RF24_toggle_features_d `(v  1 e 1 0 ]
 {
 "1272
@@ -954,7 +954,7 @@ RF24_CRC_16 2
 [v RF24_setDataRate@speed speed `E3388  1 a 1 17 ]
 "1499
 } 0
-"84 /home/gamboa/Arduino/rf24libs/RF24Network_c/RF24Network_cg.c
+"84 /home/gamboa/Arduino/rf24libs/RF24Network_c/RF24Network_c.c
 [v _RF24N_init RF24N_init `(v  1 e 1 0 ]
 {
 "100
@@ -976,7 +976,7 @@ RF24_CRC_16 2
 [v RF24N_begin_d@_channel _channel `uc  1 a 1 41 ]
 "213
 } 0
-"1580 /home/gamboa/Arduino/rf24libs/RF24_c/RF24_cg.c
+"1580 /home/gamboa/Arduino/rf24libs/RF24_c/RF24_c.c
 [v _RF24_setRetries RF24_setRetries `(v  1 e 1 0 ]
 {
 "1581
@@ -1020,7 +1020,7 @@ RF24_CRC_16 2
 {
 "1293
 } 0
-"1225 /home/gamboa/Arduino/rf24libs/RF24Network_c/RF24Network_cg.c
+"1225 /home/gamboa/Arduino/rf24libs/RF24Network_c/RF24Network_c.c
 [v _RF24N_setup_address RF24N_setup_address `(v  1 e 1 0 ]
 {
 "1228
@@ -1074,7 +1074,7 @@ RF24_CRC_16 2
 [v Serial_tx@val val `Cuc  1 a 1 2 ]
 "63
 } 0
-"791 /home/gamboa/Arduino/rf24libs/RF24Network_c/RF24Network_cg.c
+"791 /home/gamboa/Arduino/rf24libs/RF24Network_c/RF24Network_c.c
 [v _RF24N_write_m RF24N_write_m `(uc  1 e 1 0 ]
 {
 [s S62 . 8 `ui 1 from_node 2 0 `ui 1 to_node 2 2 `ui 1 id 2 4 `uc 1 type 1 6 `uc 1 reserved 1 7 ]
@@ -1128,7 +1128,7 @@ RF24_CRC_16 2
 [v ___lwmod@divisor divisor `ui  1 p 2 4 ]
 "26
 } 0
-"925 /home/gamboa/Arduino/rf24libs/RF24Network_c/RF24Network_cg.c
+"925 /home/gamboa/Arduino/rf24libs/RF24Network_c/RF24Network_c.c
 [v _RF24N__write RF24N__write `(uc  1 e 1 0 ]
 {
 "965
@@ -1159,20 +1159,29 @@ RF24_CRC_16 2
 [v digitalWrite@pin pin `uc  1 a 1 4 ]
 "114
 } 0
-"224 /home/gamboa/Arduino/rf24libs/RF24_c/RF24_cg.c
-[v _RF24_write_payload RF24_write_payload `(uc  1 e 1 0 ]
+"679 /home/gamboa/Arduino/rf24libs/RF24Network_c/RF24Network_c.c
+[v _RF24N_available RF24N_available `(uc  1 e 1 0 ]
 {
-"227
-[v RF24_write_payload@current current `*.39Cuc  1 a 2 26 ]
-"228
-[v RF24_write_payload@blank_len blank_len `uc  1 a 1 32 ]
-"226
-[v RF24_write_payload@status status `uc  1 a 1 25 ]
-"224
-[v RF24_write_payload@buf buf `*.39Cv  1 p 2 11 ]
-[v RF24_write_payload@data_len data_len `uc  1 p 1 13 ]
-[v RF24_write_payload@writeType writeType `Cuc  1 p 1 14 ]
-"268
+"687
+} 0
+"1067 /home/gamboa/Arduino/rf24libs/RF24_c/RF24_c.c
+[v _RF24_getDynamicPayloadSize RF24_getDynamicPayloadSize `(uc  1 e 1 0 ]
+{
+"1069
+[v RF24_getDynamicPayloadSize@result result `uc  1 a 1 16 ]
+"1087
+} 0
+"341
+[v _RF24_flush_rx RF24_flush_rx `(uc  1 e 1 0 ]
+{
+"344
+} 0
+"1118
+[v _RF24_read RF24_read `(v  1 e 1 0 ]
+{
+[v RF24_read@buf buf `*.39v  1 p 2 28 ]
+[v RF24_read@len len `uc  1 p 1 30 ]
+"1126
 } 0
 "272
 [v _RF24_read_payload RF24_read_payload `(uc  1 e 1 0 ]
@@ -1188,100 +1197,13 @@ RF24_CRC_16 2
 [v RF24_read_payload@data_len data_len `uc  1 p 1 13 ]
 "324
 } 0
-"327
-[v _RF24_spiTrans RF24_spiTrans `(uc  1 e 1 0 ]
-{
-[v RF24_spiTrans@cmd cmd `uc  1 a 1 wreg ]
-"329
-[v RF24_spiTrans@status status `uc  1 a 1 14 ]
-"327
-[v RF24_spiTrans@cmd cmd `uc  1 a 1 wreg ]
-"331
-[v RF24_spiTrans@cmd cmd `uc  1 a 1 13 ]
-"336
-} 0
-"355
-[v _RF24_get_status RF24_get_status `(uc  1 e 1 0 ]
-{
-"358
-} 0
-"1259
-[v _RF24_closeReadingPipe RF24_closeReadingPipe `(v  1 e 1 0 ]
-{
-[v RF24_closeReadingPipe@pipe pipe `uc  1 a 1 wreg ]
-[v RF24_closeReadingPipe@pipe pipe `uc  1 a 1 wreg ]
-"1261
-[v RF24_closeReadingPipe@pipe pipe `uc  1 a 1 20 ]
-"1262
-} 0
-"954
-[v _RF24_startFastWrite RF24_startFastWrite `(v  1 e 1 0 ]
-{
-[v RF24_startFastWrite@buf buf `*.39Cv  1 p 2 33 ]
-[v RF24_startFastWrite@len len `uc  1 p 1 35 ]
-[v RF24_startFastWrite@multicast multicast `Cuc  1 p 1 36 ]
-[v RF24_startFastWrite@startTx startTx `uc  1 p 1 37 ]
-"962
-} 0
-"909
-[v _RF24_writeFast_m RF24_writeFast_m `(uc  1 e 1 0 ]
-{
-[v RF24_writeFast_m@buf buf `*.39Cv  1 p 2 42 ]
-[v RF24_writeFast_m@len len `uc  1 p 1 44 ]
-[v RF24_writeFast_m@multicast multicast `Cuc  1 p 1 45 ]
-"941
-} 0
-"1067
-[v _RF24_getDynamicPayloadSize RF24_getDynamicPayloadSize `(uc  1 e 1 0 ]
-{
-"1069
-[v RF24_getDynamicPayloadSize@result result `uc  1 a 1 16 ]
-"1087
-} 0
-"341
-[v _RF24_flush_rx RF24_flush_rx `(uc  1 e 1 0 ]
-{
-"344
-} 0
-"1098
-[v _RF24_available_p RF24_available_p `(uc  1 e 1 0 ]
-{
-"1104
-[v RF24_available_p@status status `uc  1 a 1 19 ]
-"1098
-[v RF24_available_p@pipe_num pipe_num `*.39uc  1 p 2 15 ]
-"1114
-} 0
-"1118
-[v _RF24_read RF24_read `(v  1 e 1 0 ]
-{
-[v RF24_read@buf buf `*.39v  1 p 2 28 ]
-[v RF24_read@len len `uc  1 p 1 30 ]
-"1126
-} 0
-"1144
-[v _RF24_openWritingPipe_d RF24_openWritingPipe_d `(v  1 e 1 0 ]
-{
-"1147
-[v RF24_openWritingPipe_d@value value `[5]uc  1 a 5 26 ]
-"1146
-[v RF24_openWritingPipe_d@i i `uc  1 a 1 31 ]
-"1144
-[v RF24_openWritingPipe_d@value_ value_ `*.39Cuc  1 p 2 16 ]
-"1160
-} 0
-"679 /home/gamboa/Arduino/rf24libs/RF24Network_c/RF24Network_cg.c
-[v _RF24N_available RF24N_available `(uc  1 e 1 0 ]
-{
-"687
-} 0
-"527
+"527 /home/gamboa/Arduino/rf24libs/RF24Network_c/RF24Network_c.c
 [v _RF24N_enqueue RF24N_enqueue `(uc  1 e 1 0 ]
 {
 "614
 [v RF24N_enqueue@padding padding `uc  1 a 1 35 ]
 "652
-[v RF24N_enqueue@padding_2297 padding `uc  1 a 1 36 ]
+[v RF24N_enqueue@padding_2049 padding `uc  1 a 1 36 ]
 "530
 [v RF24N_enqueue@message_size message_size `ui  1 a 2 39 ]
 "529
@@ -1318,7 +1240,7 @@ RF24_CRC_16 2
 [v ___lwdiv@divisor divisor `ui  1 p 2 4 ]
 "31
 } 0
-"1346 /home/gamboa/Arduino/rf24libs/RF24Network_c/RF24Network_cg.c
+"1346 /home/gamboa/Arduino/rf24libs/RF24Network_c/RF24Network_c.c
 [v _RF24N_levelToAddress RF24N_levelToAddress `(ui  1 e 2 0 ]
 {
 [v RF24N_levelToAddress@level level `uc  1 a 1 wreg ]
@@ -1330,7 +1252,16 @@ RF24_CRC_16 2
 [v RF24N_levelToAddress@level level `uc  1 a 1 10 ]
 "1355
 } 0
-"1093
+"1098 /home/gamboa/Arduino/rf24libs/RF24_c/RF24_c.c
+[v _RF24_available_p RF24_available_p `(uc  1 e 1 0 ]
+{
+"1104
+[v RF24_available_p@status status `uc  1 a 1 19 ]
+"1098
+[v RF24_available_p@pipe_num pipe_num `*.39uc  1 p 2 15 ]
+"1114
+} 0
+"1093 /home/gamboa/Arduino/rf24libs/RF24Network_c/RF24Network_c.c
 [v _RF24N_logicalToPhysicalAddress RF24N_logicalToPhysicalAddress `(uc  1 e 1 0 ]
 {
 "1098
@@ -1343,9 +1274,9 @@ RF24_CRC_16 2
 [v RF24N_logicalToPhysicalAddress@multicast multicast `*.39uc  1 a 2 32 ]
 "1106
 [v RF24N_logicalToPhysicalAddress@pre_conversion_send_pipe pre_conversion_send_pipe `uc  1 a 1 38 ]
-[s S2181 . 4 `ui 1 send_node 2 0 `uc 1 send_pipe 1 2 `uc 1 multicast 1 3 ]
+[s S1930 . 4 `ui 1 send_node 2 0 `uc 1 send_pipe 1 2 `uc 1 multicast 1 3 ]
 "1093
-[v RF24N_logicalToPhysicalAddress@conversionInfo conversionInfo `*.39S2181  1 p 2 20 ]
+[v RF24N_logicalToPhysicalAddress@conversionInfo conversionInfo `*.39S1930  1 p 2 20 ]
 "1138
 } 0
 "1196
@@ -1387,49 +1318,50 @@ RF24_CRC_16 2
 [v RF24N_write_to_pipe@multicast multicast `uc  1 p 1 50 ]
 "1182
 } 0
-"250 /home/gamboa/Arduino/rf24libs/RF24_c/utility/XC8/spi.c
-[v _SPI_transfer SPI_transfer `(uc  1 e 1 0 ]
+"909 /home/gamboa/Arduino/rf24libs/RF24_c/RF24_c.c
+[v _RF24_writeFast_m RF24_writeFast_m `(uc  1 e 1 0 ]
 {
-[v SPI_transfer@data data `uc  1 a 1 wreg ]
-[v SPI_transfer@data data `uc  1 a 1 wreg ]
-"252
-[v SPI_transfer@data data `uc  1 a 1 2 ]
-"256
+[v RF24_writeFast_m@buf buf `*.39Cv  1 p 2 42 ]
+[v RF24_writeFast_m@len len `uc  1 p 1 44 ]
+[v RF24_writeFast_m@multicast multicast `Cuc  1 p 1 45 ]
+"941
 } 0
-"84 /home/gamboa/Arduino/rf24libs/RF24_c/RF24_cg.c
-[v _RF24_endTransaction RF24_endTransaction `(v  1 e 1 0 ]
+"954
+[v _RF24_startFastWrite RF24_startFastWrite `(v  1 e 1 0 ]
 {
-"89
+[v RF24_startFastWrite@buf buf `*.39Cv  1 p 2 33 ]
+[v RF24_startFastWrite@len len `uc  1 p 1 35 ]
+[v RF24_startFastWrite@multicast multicast `Cuc  1 p 1 36 ]
+[v RF24_startFastWrite@startTx startTx `uc  1 p 1 37 ]
+"962
 } 0
-"75
-[v _RF24_beginTransaction RF24_beginTransaction `(v  1 e 1 0 ]
+"224
+[v _RF24_write_payload RF24_write_payload `(uc  1 e 1 0 ]
 {
-"80
+"227
+[v RF24_write_payload@current current `*.39Cuc  1 a 2 26 ]
+"228
+[v RF24_write_payload@blank_len blank_len `uc  1 a 1 32 ]
+"226
+[v RF24_write_payload@status status `uc  1 a 1 25 ]
+"224
+[v RF24_write_payload@buf buf `*.39Cv  1 p 2 11 ]
+[v RF24_write_payload@data_len data_len `uc  1 p 1 13 ]
+[v RF24_write_payload@writeType writeType `Cuc  1 p 1 14 ]
+"268
 } 0
-"22
-[v _RF24_csn_d RF24_csn_d `(v  1 e 1 0 ]
+"1144
+[v _RF24_openWritingPipe_d RF24_openWritingPipe_d `(v  1 e 1 0 ]
 {
-[v RF24_csn_d@mode mode `uc  1 a 1 wreg ]
-[v RF24_csn_d@mode mode `uc  1 a 1 wreg ]
-"59
-[v RF24_csn_d@mode mode `uc  1 a 1 10 ]
-"63
+"1147
+[v RF24_openWritingPipe_d@value value `[5]uc  1 a 5 26 ]
+"1146
+[v RF24_openWritingPipe_d@i i `uc  1 a 1 31 ]
+"1144
+[v RF24_openWritingPipe_d@value_ value_ `*.39Cuc  1 p 2 16 ]
+"1160
 } 0
-"162
-[v _RF24_write_register_c_d RF24_write_register_c_d `(uc  1 e 1 0 ]
-{
-[v RF24_write_register_c_d@reg reg `uc  1 a 1 wreg ]
-"164
-[v RF24_write_register_c_d@status status `uc  1 a 1 14 ]
-"162
-[v RF24_write_register_c_d@reg reg `uc  1 a 1 wreg ]
-[v RF24_write_register_c_d@buf buf `*.39Cuc  1 p 2 11 ]
-[v RF24_write_register_c_d@len len `uc  1 p 1 13 ]
-"181
-[v RF24_write_register_c_d@reg reg `uc  1 a 1 15 ]
-"190
-} 0
-"1359 /home/gamboa/Arduino/rf24libs/RF24Network_c/RF24Network_cg.c
+"1359 /home/gamboa/Arduino/rf24libs/RF24Network_c/RF24Network_c.c
 [v _RF24N_pipe_address RF24N_pipe_address `(v  1 e 1 0 ]
 {
 "1363
@@ -1448,8 +1380,92 @@ RF24_CRC_16 2
 [v RF24N_pipe_address@address address `*.39uc  1 p 2 5 ]
 "1362
 [v RF24N_pipe_address@address_translation address_translation `[7]uc  1 s 7 address_translation ]
-[v RF24N_pipe_address@F3842 F3842 `[5]uc  1 s 5 F3842 ]
+[v RF24N_pipe_address@F3856 F3856 `[5]uc  1 s 5 F3856 ]
 "1404
+} 0
+"162 /home/gamboa/Arduino/rf24libs/RF24_c/RF24_c.c
+[v _RF24_write_register_c_d RF24_write_register_c_d `(uc  1 e 1 0 ]
+{
+[v RF24_write_register_c_d@reg reg `uc  1 a 1 wreg ]
+"164
+[v RF24_write_register_c_d@status status `uc  1 a 1 14 ]
+"162
+[v RF24_write_register_c_d@reg reg `uc  1 a 1 wreg ]
+[v RF24_write_register_c_d@buf buf `*.39Cuc  1 p 2 11 ]
+[v RF24_write_register_c_d@len len `uc  1 p 1 13 ]
+"181
+[v RF24_write_register_c_d@reg reg `uc  1 a 1 15 ]
+"190
+} 0
+"355
+[v _RF24_get_status RF24_get_status `(uc  1 e 1 0 ]
+{
+"358
+} 0
+"327
+[v _RF24_spiTrans RF24_spiTrans `(uc  1 e 1 0 ]
+{
+[v RF24_spiTrans@cmd cmd `uc  1 a 1 wreg ]
+"329
+[v RF24_spiTrans@status status `uc  1 a 1 14 ]
+"327
+[v RF24_spiTrans@cmd cmd `uc  1 a 1 wreg ]
+"331
+[v RF24_spiTrans@cmd cmd `uc  1 a 1 13 ]
+"336
+} 0
+"250 /home/gamboa/Arduino/rf24libs/RF24_c/utility/XC8/spi.c
+[v _SPI_transfer SPI_transfer `(uc  1 e 1 0 ]
+{
+[v SPI_transfer@data data `uc  1 a 1 wreg ]
+[v SPI_transfer@data data `uc  1 a 1 wreg ]
+"252
+[v SPI_transfer@data data `uc  1 a 1 2 ]
+"256
+} 0
+"84 /home/gamboa/Arduino/rf24libs/RF24_c/RF24_c.c
+[v _RF24_endTransaction RF24_endTransaction `(v  1 e 1 0 ]
+{
+"89
+} 0
+"75
+[v _RF24_beginTransaction RF24_beginTransaction `(v  1 e 1 0 ]
+{
+"80
+} 0
+"22
+[v _RF24_csn_d RF24_csn_d `(v  1 e 1 0 ]
+{
+[v RF24_csn_d@mode mode `uc  1 a 1 wreg ]
+[v RF24_csn_d@mode mode `uc  1 a 1 wreg ]
+"59
+[v RF24_csn_d@mode mode `uc  1 a 1 10 ]
+"63
+} 0
+"1259
+[v _RF24_closeReadingPipe RF24_closeReadingPipe `(v  1 e 1 0 ]
+{
+[v RF24_closeReadingPipe@pipe pipe `uc  1 a 1 wreg ]
+[v RF24_closeReadingPipe@pipe pipe `uc  1 a 1 wreg ]
+"1261
+[v RF24_closeReadingPipe@pipe pipe `uc  1 a 1 20 ]
+"1262
+} 0
+"1312 /home/gamboa/Arduino/rf24libs/RF24Network_c/RF24Network_c.c
+[v _RF24N_is_valid_address RF24N_is_valid_address `(uc  1 e 1 0 ]
+{
+"1318
+[v RF24N_is_valid_address@digit digit `uc  1 a 1 6 ]
+"1314
+[v RF24N_is_valid_address@result result `uc  1 a 1 7 ]
+"1312
+[v RF24N_is_valid_address@node node `ui  1 p 2 2 ]
+"1333
+} 0
+"1420 /home/gamboa/Arduino/rf24libs/RF24_c/RF24_c.c
+[v _RF24_isValid RF24_isValid `(uc  1 e 1 0 ]
+{
+"1424
 } 0
 "210 /home/gamboa/Arduino/rf24libs/RF24_c/utility/XC8/spi.c
 [v _delayMicroseconds delayMicroseconds `(v  1 e 1 0 ]
@@ -1464,7 +1480,7 @@ RF24_CRC_16 2
 [v delayMicroseconds@d d `uc  1 a 1 4 ]
 "220
 } 0
-"67 /home/gamboa/Arduino/rf24libs/RF24_c/RF24_cg.c
+"67 /home/gamboa/Arduino/rf24libs/RF24_c/RF24_c.c
 [v _RF24_ce_d RF24_ce_d `(v  1 e 1 0 ]
 {
 [v RF24_ce_d@level level `uc  1 a 1 wreg ]
@@ -1485,23 +1501,7 @@ RF24_CRC_16 2
 [v RF24_powerUp@cfg cfg `uc  1 a 1 17 ]
 "804
 } 0
-"1420
-[v _RF24_isValid RF24_isValid `(uc  1 e 1 0 ]
-{
-"1424
-} 0
-"1312 /home/gamboa/Arduino/rf24libs/RF24Network_c/RF24Network_cg.c
-[v _RF24N_is_valid_address RF24N_is_valid_address `(uc  1 e 1 0 ]
-{
-"1318
-[v RF24N_is_valid_address@digit digit `uc  1 a 1 6 ]
-"1314
-[v RF24N_is_valid_address@result result `uc  1 a 1 7 ]
-"1312
-[v RF24N_is_valid_address@node node `ui  1 p 2 2 ]
-"1333
-} 0
-"226
+"226 /home/gamboa/Arduino/rf24libs/RF24Network_c/RF24Network_c.c
 [v _RF24N_update RF24N_update `R(uc  1 e 1 0 ]
 {
 "328
@@ -1526,15 +1526,15 @@ RF24_CRC_16 2
 [v delay@val val `ui  1 p 2 2 ]
 "205
 } 0
-"981 /home/gamboa/Arduino/rf24libs/RF24Network_c/RF24Network_cg.c
+"981 /home/gamboa/Arduino/rf24libs/RF24Network_c/RF24Network_c.c
 [v _RF24N_write RF24N_write `R(uc  1 e 1 0 ]
 {
 [s S62 . 8 `ui 1 from_node 2 0 `ui 1 to_node 2 2 `ui 1 id 2 4 `uc 1 type 1 6 `uc 1 reserved 1 7 ]
 "1024
 [v RF24N_write@header header `*.39S62  1 a 2 0 ]
-[s S2181 . 4 `ui 1 send_node 2 0 `uc 1 send_pipe 1 2 `uc 1 multicast 1 3 ]
+[s S1930 . 4 `ui 1 send_node 2 0 `uc 1 send_pipe 1 2 `uc 1 multicast 1 3 ]
 "986
-[v RF24N_write@conversion conversion `S2181  1 a 4 2 ]
+[v RF24N_write@conversion conversion `S1930  1 a 4 2 ]
 "985
 [v RF24N_write@reply_time reply_time `ul  1 a 4 6 ]
 "983
@@ -1546,7 +1546,7 @@ RF24_CRC_16 2
 [v RF24N_write@directTo directTo `uc  1 p 1 -3 ]
 "1088
 } 12
-"1018 /home/gamboa/Arduino/rf24libs/RF24_c/RF24_cg.c
+"1018 /home/gamboa/Arduino/rf24libs/RF24_c/RF24_c.c
 [v _RF24_txStandBy_t RF24_txStandBy_t `(uc  1 e 1 0 ]
 {
 "1019
@@ -1561,7 +1561,7 @@ RF24_CRC_16 2
 {
 "176
 } 0
-"194 /home/gamboa/Arduino/rf24libs/RF24_c/RF24_cg.c
+"194 /home/gamboa/Arduino/rf24libs/RF24_c/RF24_c.c
 [v _RF24_write_register_d RF24_write_register_d `(uc  1 e 1 0 ]
 {
 [v RF24_write_register_d@reg reg `uc  1 a 1 wreg ]

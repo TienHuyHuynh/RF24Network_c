@@ -1,15 +1,15 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"87 ../../../RF24_c/RF24_cg.h
+"87 ../../../RF24_c/RF24_c.h
 [v _RF24_init `(v ~T0 @X0 0 ef2`uc`uc ]
-"587 ../../RF24Network_cg.h
+"587 ../../RF24Network_c.h
 [v _RF24N_init `(v ~T0 @X0 0 ef ]
 "26 serial.h
 [v _Serial_begin `(v ~T0 @X0 0 ef1`ul ]
 "29
 [v _Serial_println `(v ~T0 @X0 0 ef1`*Cuc ]
-"114 ../../../RF24_c/RF24_cg.h
+"114 ../../../RF24_c/RF24_c.h
 [v _RF24_begin `(uc ~T0 @X0 0 ef ]
-"860 ../../RF24Network_cg.h
+"860 ../../RF24Network_c.h
 [v _RF24N_begin_d `(v ~T0 @X0 0 ef2`uc`ui ]
 "625
 [v _RF24N_update `(uc ~T0 @X0 0 ef ]
@@ -19,13 +19,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 "31 helloworld_rx.c
 [s S343 `ul 1 `ul 1 ]
 [n S343 . ms counter ]
-"666 ../../RF24Network_cg.h
+"666 ../../RF24Network_c.h
 [v _RF24N_read `(ui ~T0 @X0 0 ef3`*S339`*v`ui ]
 "28 serial.h
 [v _Serial_print `(v ~T0 @X0 0 ef1`*Cuc ]
 "32
 [v _itoa_ `(*Cuc ~T0 @X0 0 ef1`ul ]
-"632 ../../RF24Network_cg.h
+"632 ../../RF24Network_c.h
 [v _RF24N_available `(uc ~T0 @X0 0 ef ]
 [; ;__size_t.h: 4: typedef unsigned size_t;
 [; ;stddef.h: 6: typedef int ptrdiff_t;
@@ -3070,149 +3070,156 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;RF24_c_config.h: 224: uint32_t csDelay;
 [; ;RF24_c_config.h: 227: uint8_t RF24_failureDetected;
 [; ;RF24_c_config.h: 230: }RF24;
-[; ;RF24Network_cg.h: 202: typedef struct
-[; ;RF24Network_cg.h: 203: {
-[; ;RF24Network_cg.h: 204: uint16_t from_node;
-[; ;RF24Network_cg.h: 205: uint16_t to_node;
-[; ;RF24Network_cg.h: 206: uint16_t id;
-[; ;RF24Network_cg.h: 213: unsigned char type;
-[; ;RF24Network_cg.h: 219: unsigned char reserved;
-[; ;RF24Network_cg.h: 265: } RF24NetworkHeader;
-[; ;RF24Network_cg.h: 267: void RF24NH_init(RF24NetworkHeader *rnh, uint16_t _to, unsigned char _type );
-[; ;RF24Network_cg.h: 268: const char* RF24NH_toString(RF24NetworkHeader *rnh);
-[; ;RF24Network_cg.h: 284: typedef struct
-[; ;RF24Network_cg.h: 285: {
-[; ;RF24Network_cg.h: 286: RF24NetworkHeader header;
-[; ;RF24Network_cg.h: 287: uint16_t message_size;
-[; ;RF24Network_cg.h: 296: uint8_t *message_buffer;
-[; ;RF24Network_cg.h: 351: } RF24NetworkFrame;
-[; ;RF24Network_cg.h: 354: typedef struct {
-[; ;RF24Network_cg.h: 355: uint16_t send_node;
-[; ;RF24Network_cg.h: 356: uint8_t send_pipe;
-[; ;RF24Network_cg.h: 357: uint8_t multicast;
-[; ;RF24Network_cg.h: 358: }logicalToPhysicalStruct;
-[; ;RF24Network_cg.h: 379: typedef struct
-[; ;RF24Network_cg.h: 380: {
-[; ;RF24Network_cg.h: 398: uint8_t multicastRelay;
-[; ;RF24Network_cg.h: 412: uint32_t txTimeout;
-[; ;RF24Network_cg.h: 421: uint16_t routeTimeout;
-[; ;RF24Network_cg.h: 435: uint8_t frame_buffer[32];
-[; ;RF24Network_cg.h: 476: RF24NetworkFrame* frag_ptr;
-[; ;RF24Network_cg.h: 496: uint8_t returnSysMsgs;
-[; ;RF24Network_cg.h: 512: uint8_t networkFlags;
-[; ;RF24Network_cg.h: 516: uint32_t txTime;
-[; ;RF24Network_cg.h: 524: uint8_t multicast_level;
-[; ;RF24Network_cg.h: 526: uint16_t node_address;
-[; ;RF24Network_cg.h: 528: uint8_t frame_size;
-[; ;RF24Network_cg.h: 529: unsigned int max_frame_payload_size;
-[; ;RF24Network_cg.h: 535: uint16_t parent_node;
-[; ;RF24Network_cg.h: 536: uint8_t parent_pipe;
-[; ;RF24Network_cg.h: 537: uint16_t node_mask;
-[; ;RF24Network_cg.h: 565: uint8_t frame_queue[144 + 10];
-[; ;RF24Network_cg.h: 568: uint8_t* next_frame;
-[; ;RF24Network_cg.h: 571: RF24NetworkFrame frag_queue;
-[; ;RF24Network_cg.h: 572: uint8_t frag_queue_message_buffer[144 + 10-10];
-[; ;RF24Network_cg.h: 577: }RF24Network;
-[; ;RF24Network_cg.h: 587: void RF24N_init(void);
-[; ;RF24Network_cg.h: 613: void RF24N_begin( uint16_t _node_address);
-[; ;RF24Network_cg.h: 625: uint8_t RF24N_update(void);
-[; ;RF24Network_cg.h: 632: uint8_t RF24N_available(void);
-[; ;RF24Network_cg.h: 644: uint16_t RF24N_peek(RF24NetworkHeader * header);
-[; ;RF24Network_cg.h: 666: uint16_t RF24N_read(RF24NetworkHeader * header, void* message, uint16_t maxlen);
-[; ;RF24Network_cg.h: 687: uint8_t RF24N_write_m( RF24NetworkHeader* header,const void* message, uint16_t len);
-[; ;RF24Network_cg.h: 710: void RF24N_init2(RF24Network * rn_, RF24 * _radio, RF24 * _radio1);
-[; ;RF24Network_cg.h: 726: void RF24N_multicastLevel( uint8_t level);
-[; ;RF24Network_cg.h: 737: void RF24N_setup_watchdog( uint8_t prescalar);
-[; ;RF24Network_cg.h: 757: void RF24N_failures( uint32_t *_fails, uint32_t *_ok);
-[; ;RF24Network_cg.h: 775: uint8_t RF24N_multicast( RF24NetworkHeader * header,const void* message, uint16_t len, uint8_t level);
-[; ;RF24Network_cg.h: 785: uint8_t RF24N_write_( RF24NetworkHeader * header,const void* message, uint16_t len, uint16_t writeDirect);
-[; ;RF24Network_cg.h: 810: uint8_t RF24N_sleepNode( unsigned int cycles, int interruptPin );
-[; ;RF24Network_cg.h: 818: uint16_t RF24N_parent(void);
-[; ;RF24Network_cg.h: 823: uint16_t RF24N_addressOfPipe( uint16_t node,uint8_t pipeNo );
-[; ;RF24Network_cg.h: 829: uint8_t RF24N_is_valid_address( uint16_t node );
-[; ;RF24Network_cg.h: 860: void RF24N_begin_d( uint8_t _channel, uint16_t _node_address );
-[; ;RF24Network_cg.h: 863: uint8_t RF24N_write( uint16_t, uint8_t directTo);
-[; ;RF24Network_cg.h: 864: uint8_t RF24N_write_to_pipe( uint16_t node, uint8_t pipe, uint8_t multicast );
-[; ;RF24Network_cg.h: 865: uint8_t RF24N_enqueue(RF24NetworkHeader *header);
-[; ;RF24Network_cg.h: 867: uint8_t RF24N_is_direct_child(uint16_t node );
-[; ;RF24Network_cg.h: 868: uint8_t RF24N_is_descendant(uint16_t node );
-[; ;RF24Network_cg.h: 870: uint16_t RF24N_direct_child_route_to(uint16_t node );
-[; ;RF24Network_cg.h: 872: void RF24N_setup_address(void);
-[; ;RF24Network_cg.h: 873: uint8_t RF24N__write(RF24NetworkHeader * header,const void* message, uint16_t len, uint16_t writeDirect);
-[; ;RF24Network_cg.h: 875: uint8_t RF24N_logicalToPhysicalAddress(logicalToPhysicalStruct *conversionInfo);
-[; ;RF24_cg.h: 38: typedef enum { RF24_PA_MIN = 0,RF24_PA_LOW, RF24_PA_HIGH, RF24_PA_MAX, RF24_PA_ERROR } rf24_pa_dbm_e ;
-[; ;RF24_cg.h: 45: typedef enum { RF24_1MBPS = 0, RF24_2MBPS, RF24_250KBPS } rf24_datarate_e;
-[; ;RF24_cg.h: 52: typedef enum { RF24_CRC_DISABLED = 0, RF24_CRC_8, RF24_CRC_16 } rf24_crclength_e;
-[; ;RF24_cg.h: 58: typedef unsigned char raddr_t;
-[; ;RF24_cg.h: 67: void RF24_beginTransaction(void);
-[; ;RF24_cg.h: 69: void RF24_endTransaction(void);
-[; ;RF24_cg.h: 87: void RF24_init( uint8_t _cepin, uint8_t _cspin);
-[; ;RF24_cg.h: 101: void RF24_init2( uint8_t _cepin, uint8_t _cspin, uint32_t spispeed );
-[; ;RF24_cg.h: 114: uint8_t RF24_begin(void);
-[; ;RF24_cg.h: 131: void RF24_startListening(void);
-[; ;RF24_cg.h: 142: void RF24_stopListening(void);
-[; ;RF24_cg.h: 153: uint8_t RF24_available(void);
-[; ;RF24_cg.h: 177: void RF24_read( void* buf, uint8_t len );
-[; ;RF24_cg.h: 202: uint8_t RF24_write( const void* buf, uint8_t len );
-[; ;RF24_cg.h: 229: void RF24_openWritingPipe(const uint8_t *address);
-[; ;RF24_cg.h: 259: void RF24_openReadingPipe(uint8_t number, const uint8_t *address);
-[; ;RF24_cg.h: 281: void RF24_printDetails(void);
-[; ;RF24_cg.h: 299: uint8_t RF24_available_p( uint8_t* pipe_num);
-[; ;RF24_cg.h: 305: uint8_t RF24_rxFifoFull(void);
-[; ;RF24_cg.h: 324: void RF24_powerDown(void);
-[; ;RF24_cg.h: 332: void RF24_powerUp(void) ;
-[; ;RF24_cg.h: 348: uint8_t RF24_write_m(const void* buf, uint8_t len, const uint8_t multicast );
-[; ;RF24_cg.h: 378: uint8_t RF24_writeFast(const void* buf, uint8_t len );
-[; ;RF24_cg.h: 391: uint8_t RF24_writeFast_m( const void* buf, uint8_t len, const uint8_t multicast );
-[; ;RF24_cg.h: 419: uint8_t RF24_writeBlocking(const void* buf, uint8_t len, uint32_t timeout );
-[; ;RF24_cg.h: 447: uint8_t RF24_txStandBy(void);
-[; ;RF24_cg.h: 465: uint8_t RF24_txStandBy_t( uint32_t timeout, uint8_t startTx);
-[; ;RF24_cg.h: 485: void RF24_writeAckPayload(uint8_t pipe, const void* buf, uint8_t len);
-[; ;RF24_cg.h: 495: uint8_t RF24_isAckPayloadAvailable(void);
-[; ;RF24_cg.h: 507: void RF24_whatHappened(uint8_t * tx_ok, uint8_t * tx_fail, uint8_t * rx_ready);
-[; ;RF24_cg.h: 533: void RF24_startFastWrite(const void* buf, uint8_t len, const uint8_t multicast, uint8_t startTx );
-[; ;RF24_cg.h: 555: void RF24_startWrite(const void* buf, uint8_t len, const uint8_t multicast );
-[; ;RF24_cg.h: 572: void RF24_reUseTX(void);
-[; ;RF24_cg.h: 580: uint8_t RF24_flush_tx(void);
-[; ;RF24_cg.h: 590: uint8_t RF24_testCarrier(void);
-[; ;RF24_cg.h: 609: uint8_t RF24_testRPD(void) ;
-[; ;RF24_cg.h: 618: uint8_t RF24_isValid(void);
-[; ;RF24_cg.h: 625: void RF24_closeReadingPipe( uint8_t pipe ) ;
-[; ;RF24_cg.h: 664: void RF24_setAddressWidth(uint8_t a_width);
-[; ;RF24_cg.h: 673: void RF24_setRetries(uint8_t delay, uint8_t count);
-[; ;RF24_cg.h: 680: void RF24_setChannel( uint8_t channel);
-[; ;RF24_cg.h: 687: uint8_t RF24_getChannel(void);
-[; ;RF24_cg.h: 701: void RF24_setPayloadSize( uint8_t size);
-[; ;RF24_cg.h: 710: uint8_t RF24_getPayloadSize(void);
-[; ;RF24_cg.h: 732: uint8_t RF24_getDynamicPayloadSize(void);
-[; ;RF24_cg.h: 743: void RF24_enableAckPayload(void);
-[; ;RF24_cg.h: 752: void RF24_enableDynamicPayloads(void);
-[; ;RF24_cg.h: 766: void RF24_enableDynamicAck(void);
-[; ;RF24_cg.h: 774: uint8_t RF24_isPVariant(void) ;
-[; ;RF24_cg.h: 784: void RF24_setAutoAck(uint8_t enable);
-[; ;RF24_cg.h: 795: void RF24_setAutoAck_p( uint8_t pipe, uint8_t enable ) ;
-[; ;RF24_cg.h: 808: void RF24_setPALevel ( uint8_t level );
-[; ;RF24_cg.h: 818: uint8_t RF24_getPALevel(void);
-[; ;RF24_cg.h: 828: uint8_t RF24_setDataRate(rf24_datarate_e speed);
-[; ;RF24_cg.h: 837: rf24_datarate_e RF24_getDataRate(void) ;
-[; ;RF24_cg.h: 844: void RF24_setCRCLength( rf24_crclength_e length);
-[; ;RF24_cg.h: 851: rf24_crclength_e RF24_getCRCLength(void);
-[; ;RF24_cg.h: 858: void RF24_disableCRC(void) ;
-[; ;RF24_cg.h: 876: void RF24_maskIRQ( uint8_t tx_ok,uint8_t tx_fail,uint8_t rx_ready);
-[; ;RF24_cg.h: 905: void RF24_openReadingPipe_d( uint8_t number,const raddr_t* address);
-[; ;RF24_cg.h: 920: void RF24_openWritingPipe_d( const raddr_t* address);
-[; ;RF24_cg.h: 940: void RF24_csn_d( uint8_t mode);
-[; ;RF24_cg.h: 948: void RF24_ce_d( uint8_t level);
-[; ;RF24_cg.h: 958: uint8_t RF24_read_register_m_d( uint8_t reg, uint8_t* buf, uint8_t len);
-[; ;RF24_cg.h: 966: uint8_t RF24_read_register_d(uint8_t reg);
-[; ;RF24_cg.h: 976: uint8_t RF24_write_register_c_d(uint8_t reg, const uint8_t* buf, uint8_t len);
-[; ;RF24_cg.h: 985: uint8_t RF24_write_register_d(uint8_t reg, uint8_t value);
-[; ;RF24_cg.h: 996: uint8_t RF24_write_payload_d(const void* buf, uint8_t len, const uint8_t writeType);
-[; ;RF24_cg.h: 1007: uint8_t RF24_read_payload_d(void* buf, uint8_t len);
-[; ;RF24_cg.h: 1014: uint8_t RF24_flush_rx_d(void);
-[; ;RF24_cg.h: 1021: uint8_t RF24_get_status_d(void);
-[; ;RF24_cg.h: 1074: void RF24_toggle_features_d(void);
-[; ;RF24_cg.h: 1080: uint8_t RF24_spiTrans_d( uint8_t cmd);
+[; ;RF24Network_c.h: 202: typedef struct
+[; ;RF24Network_c.h: 203: {
+[; ;RF24Network_c.h: 204: uint16_t from_node;
+[; ;RF24Network_c.h: 205: uint16_t to_node;
+[; ;RF24Network_c.h: 206: uint16_t id;
+[; ;RF24Network_c.h: 213: unsigned char type;
+[; ;RF24Network_c.h: 219: unsigned char reserved;
+[; ;RF24Network_c.h: 265: } RF24NetworkHeader;
+[; ;RF24Network_c.h: 267: void RF24NH_init(RF24NetworkHeader *rnh, uint16_t _to, unsigned char _type );
+[; ;RF24Network_c.h: 268: const char* RF24NH_toString(RF24NetworkHeader *rnh);
+[; ;RF24Network_c.h: 284: typedef struct
+[; ;RF24Network_c.h: 285: {
+[; ;RF24Network_c.h: 286: RF24NetworkHeader header;
+[; ;RF24Network_c.h: 287: uint16_t message_size;
+[; ;RF24Network_c.h: 296: uint8_t *message_buffer;
+[; ;RF24Network_c.h: 351: } RF24NetworkFrame;
+[; ;RF24Network_c.h: 354: typedef struct {
+[; ;RF24Network_c.h: 355: uint16_t send_node;
+[; ;RF24Network_c.h: 356: uint8_t send_pipe;
+[; ;RF24Network_c.h: 357: uint8_t multicast;
+[; ;RF24Network_c.h: 358: }logicalToPhysicalStruct;
+[; ;RF24Network_c.h: 379: typedef struct
+[; ;RF24Network_c.h: 380: {
+[; ;RF24Network_c.h: 398: uint8_t multicastRelay;
+[; ;RF24Network_c.h: 412: uint32_t txTimeout;
+[; ;RF24Network_c.h: 421: uint16_t routeTimeout;
+[; ;RF24Network_c.h: 435: uint8_t frame_buffer[32];
+[; ;RF24Network_c.h: 476: RF24NetworkFrame* frag_ptr;
+[; ;RF24Network_c.h: 496: uint8_t returnSysMsgs;
+[; ;RF24Network_c.h: 512: uint8_t networkFlags;
+[; ;RF24Network_c.h: 516: uint32_t txTime;
+[; ;RF24Network_c.h: 524: uint8_t multicast_level;
+[; ;RF24Network_c.h: 526: uint16_t node_address;
+[; ;RF24Network_c.h: 528: uint8_t frame_size;
+[; ;RF24Network_c.h: 529: unsigned int max_frame_payload_size;
+[; ;RF24Network_c.h: 535: uint16_t parent_node;
+[; ;RF24Network_c.h: 536: uint8_t parent_pipe;
+[; ;RF24Network_c.h: 537: uint16_t node_mask;
+[; ;RF24Network_c.h: 565: uint8_t frame_queue[144 + 10];
+[; ;RF24Network_c.h: 568: uint8_t* next_frame;
+[; ;RF24Network_c.h: 571: RF24NetworkFrame frag_queue;
+[; ;RF24Network_c.h: 572: uint8_t frag_queue_message_buffer[144 + 10-10];
+[; ;RF24Network_c.h: 577: }RF24Network;
+[; ;RF24Network_c.h: 587: void RF24N_init(void);
+[; ;RF24Network_c.h: 613: void RF24N_begin( uint16_t _node_address);
+[; ;RF24Network_c.h: 625: uint8_t RF24N_update(void);
+[; ;RF24Network_c.h: 632: uint8_t RF24N_available(void);
+[; ;RF24Network_c.h: 644: uint16_t RF24N_peek(RF24NetworkHeader * header);
+[; ;RF24Network_c.h: 666: uint16_t RF24N_read(RF24NetworkHeader * header, void* message, uint16_t maxlen);
+[; ;RF24Network_c.h: 687: uint8_t RF24N_write_m( RF24NetworkHeader* header,const void* message, uint16_t len);
+[; ;RF24Network_c.h: 710: void RF24N_init2(RF24Network * rn_, RF24 * _radio, RF24 * _radio1);
+[; ;RF24Network_c.h: 726: void RF24N_multicastLevel( uint8_t level);
+[; ;RF24Network_c.h: 737: void RF24N_setup_watchdog( uint8_t prescalar);
+[; ;RF24Network_c.h: 757: void RF24N_failures( uint32_t *_fails, uint32_t *_ok);
+[; ;RF24Network_c.h: 775: uint8_t RF24N_multicast( RF24NetworkHeader * header,const void* message, uint16_t len, uint8_t level);
+[; ;RF24Network_c.h: 785: uint8_t RF24N_write_( RF24NetworkHeader * header,const void* message, uint16_t len, uint16_t writeDirect);
+[; ;RF24Network_c.h: 810: uint8_t RF24N_sleepNode( unsigned int cycles, int interruptPin );
+[; ;RF24Network_c.h: 818: uint16_t RF24N_parent(void);
+[; ;RF24Network_c.h: 823: uint16_t RF24N_addressOfPipe( uint16_t node,uint8_t pipeNo );
+[; ;RF24Network_c.h: 829: uint8_t RF24N_is_valid_address( uint16_t node );
+[; ;RF24Network_c.h: 860: void RF24N_begin_d( uint8_t _channel, uint16_t _node_address );
+[; ;RF24Network_c.h: 863: uint8_t RF24N_write( uint16_t, uint8_t directTo);
+[; ;RF24Network_c.h: 864: uint8_t RF24N_write_to_pipe( uint16_t node, uint8_t pipe, uint8_t multicast );
+[; ;RF24Network_c.h: 865: uint8_t RF24N_enqueue(RF24NetworkHeader *header);
+[; ;RF24Network_c.h: 867: uint8_t RF24N_is_direct_child(uint16_t node );
+[; ;RF24Network_c.h: 868: uint8_t RF24N_is_descendant(uint16_t node );
+[; ;RF24Network_c.h: 870: uint16_t RF24N_direct_child_route_to(uint16_t node );
+[; ;RF24Network_c.h: 872: void RF24N_setup_address(void);
+[; ;RF24Network_c.h: 873: uint8_t RF24N__write(RF24NetworkHeader * header,const void* message, uint16_t len, uint16_t writeDirect);
+[; ;RF24Network_c.h: 875: uint8_t RF24N_logicalToPhysicalAddress(logicalToPhysicalStruct *conversionInfo);
+[; ;RF24Network_c.h: 883: uint8_t * RF24N_getFrame_buffer(void);
+[; ;RF24Network_c.h: 885: void RF24N_setReturnSysMsgs(void);
+[; ;RF24Network_c.h: 888: uint8_t RF24N_getNetworkFlags(void);
+[; ;RF24Network_c.h: 889: void RF24N_setNetworkFlags(uint8_t);
+[; ;RF24Network_c.h: 891: uint16_t RF24N_getRouteTimeout(void);
+[; ;RF24Network_c.h: 893: RF24NetworkFrame* RF24N_getFrag_ptr(void);
+[; ;RF24Network_c.h: 896: void RF24N_setMulticastRelay(void);
+[; ;RF24_c.h: 38: typedef enum { RF24_PA_MIN = 0,RF24_PA_LOW, RF24_PA_HIGH, RF24_PA_MAX, RF24_PA_ERROR } rf24_pa_dbm_e ;
+[; ;RF24_c.h: 45: typedef enum { RF24_1MBPS = 0, RF24_2MBPS, RF24_250KBPS } rf24_datarate_e;
+[; ;RF24_c.h: 52: typedef enum { RF24_CRC_DISABLED = 0, RF24_CRC_8, RF24_CRC_16 } rf24_crclength_e;
+[; ;RF24_c.h: 58: typedef unsigned char raddr_t;
+[; ;RF24_c.h: 67: void RF24_beginTransaction(void);
+[; ;RF24_c.h: 69: void RF24_endTransaction(void);
+[; ;RF24_c.h: 87: void RF24_init( uint8_t _cepin, uint8_t _cspin);
+[; ;RF24_c.h: 101: void RF24_init2( uint8_t _cepin, uint8_t _cspin, uint32_t spispeed );
+[; ;RF24_c.h: 114: uint8_t RF24_begin(void);
+[; ;RF24_c.h: 131: void RF24_startListening(void);
+[; ;RF24_c.h: 142: void RF24_stopListening(void);
+[; ;RF24_c.h: 153: uint8_t RF24_available(void);
+[; ;RF24_c.h: 177: void RF24_read( void* buf, uint8_t len );
+[; ;RF24_c.h: 202: uint8_t RF24_write( const void* buf, uint8_t len );
+[; ;RF24_c.h: 229: void RF24_openWritingPipe(const uint8_t *address);
+[; ;RF24_c.h: 259: void RF24_openReadingPipe(uint8_t number, const uint8_t *address);
+[; ;RF24_c.h: 281: void RF24_printDetails(void);
+[; ;RF24_c.h: 299: uint8_t RF24_available_p( uint8_t* pipe_num);
+[; ;RF24_c.h: 305: uint8_t RF24_rxFifoFull(void);
+[; ;RF24_c.h: 324: void RF24_powerDown(void);
+[; ;RF24_c.h: 332: void RF24_powerUp(void) ;
+[; ;RF24_c.h: 348: uint8_t RF24_write_m(const void* buf, uint8_t len, const uint8_t multicast );
+[; ;RF24_c.h: 378: uint8_t RF24_writeFast(const void* buf, uint8_t len );
+[; ;RF24_c.h: 391: uint8_t RF24_writeFast_m( const void* buf, uint8_t len, const uint8_t multicast );
+[; ;RF24_c.h: 419: uint8_t RF24_writeBlocking(const void* buf, uint8_t len, uint32_t timeout );
+[; ;RF24_c.h: 447: uint8_t RF24_txStandBy(void);
+[; ;RF24_c.h: 465: uint8_t RF24_txStandBy_t( uint32_t timeout, uint8_t startTx);
+[; ;RF24_c.h: 485: void RF24_writeAckPayload(uint8_t pipe, const void* buf, uint8_t len);
+[; ;RF24_c.h: 495: uint8_t RF24_isAckPayloadAvailable(void);
+[; ;RF24_c.h: 507: void RF24_whatHappened(uint8_t * tx_ok, uint8_t * tx_fail, uint8_t * rx_ready);
+[; ;RF24_c.h: 533: void RF24_startFastWrite(const void* buf, uint8_t len, const uint8_t multicast, uint8_t startTx );
+[; ;RF24_c.h: 555: void RF24_startWrite(const void* buf, uint8_t len, const uint8_t multicast );
+[; ;RF24_c.h: 572: void RF24_reUseTX(void);
+[; ;RF24_c.h: 580: uint8_t RF24_flush_tx(void);
+[; ;RF24_c.h: 590: uint8_t RF24_testCarrier(void);
+[; ;RF24_c.h: 609: uint8_t RF24_testRPD(void) ;
+[; ;RF24_c.h: 618: uint8_t RF24_isValid(void);
+[; ;RF24_c.h: 625: void RF24_closeReadingPipe( uint8_t pipe ) ;
+[; ;RF24_c.h: 664: void RF24_setAddressWidth(uint8_t a_width);
+[; ;RF24_c.h: 673: void RF24_setRetries(uint8_t delay, uint8_t count);
+[; ;RF24_c.h: 680: void RF24_setChannel( uint8_t channel);
+[; ;RF24_c.h: 687: uint8_t RF24_getChannel(void);
+[; ;RF24_c.h: 701: void RF24_setPayloadSize( uint8_t size);
+[; ;RF24_c.h: 710: uint8_t RF24_getPayloadSize(void);
+[; ;RF24_c.h: 732: uint8_t RF24_getDynamicPayloadSize(void);
+[; ;RF24_c.h: 743: void RF24_enableAckPayload(void);
+[; ;RF24_c.h: 752: void RF24_enableDynamicPayloads(void);
+[; ;RF24_c.h: 766: void RF24_enableDynamicAck(void);
+[; ;RF24_c.h: 774: uint8_t RF24_isPVariant(void) ;
+[; ;RF24_c.h: 784: void RF24_setAutoAck(uint8_t enable);
+[; ;RF24_c.h: 795: void RF24_setAutoAck_p( uint8_t pipe, uint8_t enable ) ;
+[; ;RF24_c.h: 808: void RF24_setPALevel ( uint8_t level );
+[; ;RF24_c.h: 818: uint8_t RF24_getPALevel(void);
+[; ;RF24_c.h: 828: uint8_t RF24_setDataRate(rf24_datarate_e speed);
+[; ;RF24_c.h: 837: rf24_datarate_e RF24_getDataRate(void) ;
+[; ;RF24_c.h: 844: void RF24_setCRCLength( rf24_crclength_e length);
+[; ;RF24_c.h: 851: rf24_crclength_e RF24_getCRCLength(void);
+[; ;RF24_c.h: 858: void RF24_disableCRC(void) ;
+[; ;RF24_c.h: 876: void RF24_maskIRQ( uint8_t tx_ok,uint8_t tx_fail,uint8_t rx_ready);
+[; ;RF24_c.h: 905: void RF24_openReadingPipe_d( uint8_t number,const raddr_t* address);
+[; ;RF24_c.h: 920: void RF24_openWritingPipe_d( const raddr_t* address);
+[; ;RF24_c.h: 940: void RF24_csn_d( uint8_t mode);
+[; ;RF24_c.h: 948: void RF24_ce_d( uint8_t level);
+[; ;RF24_c.h: 958: uint8_t RF24_read_register_m_d( uint8_t reg, uint8_t* buf, uint8_t len);
+[; ;RF24_c.h: 966: uint8_t RF24_read_register_d(uint8_t reg);
+[; ;RF24_c.h: 976: uint8_t RF24_write_register_c_d(uint8_t reg, const uint8_t* buf, uint8_t len);
+[; ;RF24_c.h: 985: uint8_t RF24_write_register_d(uint8_t reg, uint8_t value);
+[; ;RF24_c.h: 996: uint8_t RF24_write_payload_d(const void* buf, uint8_t len, const uint8_t writeType);
+[; ;RF24_c.h: 1007: uint8_t RF24_read_payload_d(void* buf, uint8_t len);
+[; ;RF24_c.h: 1014: uint8_t RF24_flush_rx_d(void);
+[; ;RF24_c.h: 1021: uint8_t RF24_get_status_d(void);
+[; ;RF24_c.h: 1074: void RF24_toggle_features_d(void);
+[; ;RF24_c.h: 1080: uint8_t RF24_spiTrans_d( uint8_t cmd);
 [; ;serial.h: 26: void Serial_begin(unsigned long baud);
 [; ;serial.h: 27: void Serial_tx(const unsigned char val);
 [; ;serial.h: 28: void Serial_print(const char* val);

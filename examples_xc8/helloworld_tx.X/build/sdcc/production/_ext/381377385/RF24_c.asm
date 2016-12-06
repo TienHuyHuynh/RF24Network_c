@@ -6,7 +6,7 @@
 ;--------------------------------------------------------
 
 	.ident "SDCC version 3.6.0 #9615 [pic16 port]"
-	.file	"../../../RF24_c/RF24_cg.c"
+	.file	"../../../RF24_c/RF24_c.c"
 	list	p=18f4620
 	radix	dec
 
@@ -325,13 +325,13 @@ r0x0d	res	1
 r0x0e	res	1
 r0x0f	res	1
 
-udata_RF24_cg_0	udata
+udata_RF24_c_0	udata
 _rf	res	22
 
-udata_RF24_cg_1	udata
+udata_RF24_c_1	udata
 _RF24_openWritingPipe_d_value_1_249	res	5
 
-udata_RF24_cg_2	udata
+udata_RF24_c_2	udata
 _RF24_openReadingPipe_d_address_1_254	res	5
 
 ;--------------------------------------------------------
@@ -339,9 +339,9 @@ _RF24_openReadingPipe_d_address_1_254	res	5
 ;--------------------------------------------------------
 ; I code from now on!
 ; ; Starting pCode block
-S_RF24_cg__RF24_setRetries	code
+S_RF24_c__RF24_setRetries	code
 _RF24_setRetries:
-	.line	1580; ../../../RF24_c/RF24_cg.c	void RF24_setRetries( uint8_t delay, uint8_t count)
+	.line	1580; ../../../RF24_c/RF24_c.c	void RF24_setRetries( uint8_t delay, uint8_t count)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
@@ -351,7 +351,7 @@ _RF24_setRetries:
 	MOVFF	PLUSW2, r0x00
 	MOVLW	0x03
 	MOVFF	PLUSW2, r0x01
-	.line	1582; ../../../RF24_c/RF24_cg.c	RF24_write_register_d(SETUP_RETR,(delay&0xf)<<ARD | (count&0xf)<<ARC);
+	.line	1582; ../../../RF24_c/RF24_c.c	RF24_write_register_d(SETUP_RETR,(delay&0xf)<<ARD | (count&0xf)<<ARC);
 	MOVLW	0x0f
 	ANDWF	r0x00, F
 	SWAPF	r0x00, W
@@ -377,20 +377,20 @@ _RF24_setRetries:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_disableCRC	code
+S_RF24_c__RF24_disableCRC	code
 _RF24_disableCRC:
-	.line	1573; ../../../RF24_c/RF24_cg.c	void RF24_disableCRC(void)
+	.line	1573; ../../../RF24_c/RF24_c.c	void RF24_disableCRC(void)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
-	.line	1575; ../../../RF24_c/RF24_cg.c	uint8_t disable = RF24_read_register_d(NRF_CONFIG) & ~_BV(EN_CRC) ;
+	.line	1575; ../../../RF24_c/RF24_c.c	uint8_t disable = RF24_read_register_d(NRF_CONFIG) & ~_BV(EN_CRC) ;
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
 	MOVWF	r0x00
 	MOVF	POSTINC1, F
 	BCF	r0x00, 3
-	.line	1576; ../../../RF24_c/RF24_cg.c	RF24_write_register_d( NRF_CONFIG, disable ) ;
+	.line	1576; ../../../RF24_c/RF24_c.c	RF24_write_register_d( NRF_CONFIG, disable ) ;
 	MOVF	r0x00, W
 	MOVWF	POSTDEC1
 	MOVLW	0x00
@@ -403,17 +403,17 @@ _RF24_disableCRC:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_getCRCLength	code
+S_RF24_c__RF24_getCRCLength	code
 _RF24_getCRCLength:
-	.line	1553; ../../../RF24_c/RF24_cg.c	rf24_crclength_e RF24_getCRCLength(void)
+	.line	1553; ../../../RF24_c/RF24_c.c	rf24_crclength_e RF24_getCRCLength(void)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
 	MOVFF	r0x01, POSTDEC1
 	MOVFF	r0x02, POSTDEC1
-	.line	1555; ../../../RF24_c/RF24_cg.c	rf24_crclength_e result = RF24_CRC_DISABLED;
+	.line	1555; ../../../RF24_c/RF24_c.c	rf24_crclength_e result = RF24_CRC_DISABLED;
 	CLRF	r0x00
-	.line	1557; ../../../RF24_c/RF24_cg.c	uint8_t config = RF24_read_register_d(NRF_CONFIG) & ( _BV(CRCO) | _BV(EN_CRC)) ;
+	.line	1557; ../../../RF24_c/RF24_c.c	uint8_t config = RF24_read_register_d(NRF_CONFIG) & ( _BV(CRCO) | _BV(EN_CRC)) ;
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
@@ -421,31 +421,31 @@ _RF24_getCRCLength:
 	MOVF	POSTINC1, F
 	MOVLW	0x0c
 	ANDWF	r0x01, F
-	.line	1558; ../../../RF24_c/RF24_cg.c	uint8_t AA = RF24_read_register_d(EN_AA);
+	.line	1558; ../../../RF24_c/RF24_c.c	uint8_t AA = RF24_read_register_d(EN_AA);
 	MOVLW	0x01
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
 	MOVWF	r0x02
 	MOVF	POSTINC1, F
-	.line	1560; ../../../RF24_c/RF24_cg.c	if ( config & _BV(EN_CRC ) || AA)
+	.line	1560; ../../../RF24_c/RF24_c.c	if ( config & _BV(EN_CRC ) || AA)
 	BTFSC	r0x01, 3
 	BRA	_00923_DS_
 	MOVF	r0x02, W
 	BZ	_00924_DS_
 _00923_DS_:
-	.line	1562; ../../../RF24_c/RF24_cg.c	if ( config & _BV(CRCO) )
+	.line	1562; ../../../RF24_c/RF24_c.c	if ( config & _BV(CRCO) )
 	BTFSS	r0x01, 2
 	BRA	_00921_DS_
-	.line	1563; ../../../RF24_c/RF24_cg.c	result = RF24_CRC_16;
+	.line	1563; ../../../RF24_c/RF24_c.c	result = RF24_CRC_16;
 	MOVLW	0x02
 	MOVWF	r0x00
 	BRA	_00924_DS_
 _00921_DS_:
-	.line	1565; ../../../RF24_c/RF24_cg.c	result = RF24_CRC_8;
+	.line	1565; ../../../RF24_c/RF24_c.c	result = RF24_CRC_8;
 	MOVLW	0x01
 	MOVWF	r0x00
 _00924_DS_:
-	.line	1568; ../../../RF24_c/RF24_cg.c	return result;
+	.line	1568; ../../../RF24_c/RF24_c.c	return result;
 	MOVF	r0x00, W
 	MOVFF	PREINC1, r0x02
 	MOVFF	PREINC1, r0x01
@@ -454,16 +454,16 @@ _00924_DS_:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_setCRCLength	code
+S_RF24_c__RF24_setCRCLength	code
 _RF24_setCRCLength:
-	.line	1530; ../../../RF24_c/RF24_cg.c	void RF24_setCRCLength(rf24_crclength_e length)
+	.line	1530; ../../../RF24_c/RF24_c.c	void RF24_setCRCLength(rf24_crclength_e length)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
 	MOVFF	r0x01, POSTDEC1
 	MOVLW	0x02
 	MOVFF	PLUSW2, r0x00
-	.line	1532; ../../../RF24_c/RF24_cg.c	uint8_t config = RF24_read_register_d(NRF_CONFIG) & ~( _BV(CRCO) | _BV(EN_CRC)) ;
+	.line	1532; ../../../RF24_c/RF24_c.c	uint8_t config = RF24_read_register_d(NRF_CONFIG) & ~( _BV(CRCO) | _BV(EN_CRC)) ;
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
@@ -471,23 +471,23 @@ _RF24_setCRCLength:
 	MOVF	POSTINC1, F
 	MOVLW	0xf3
 	ANDWF	r0x01, F
-	.line	1535; ../../../RF24_c/RF24_cg.c	if ( length == RF24_CRC_DISABLED )
+	.line	1535; ../../../RF24_c/RF24_c.c	if ( length == RF24_CRC_DISABLED )
 	MOVF	r0x00, W
 	BZ	_00904_DS_
-	.line	1539; ../../../RF24_c/RF24_cg.c	else if ( length == RF24_CRC_8 )
+	.line	1539; ../../../RF24_c/RF24_c.c	else if ( length == RF24_CRC_8 )
 	MOVF	r0x00, W
 	XORLW	0x01
 	BNZ	_00900_DS_
-	.line	1541; ../../../RF24_c/RF24_cg.c	config |= _BV(EN_CRC);
+	.line	1541; ../../../RF24_c/RF24_c.c	config |= _BV(EN_CRC);
 	BSF	r0x01, 3
 	BRA	_00904_DS_
 _00900_DS_:
-	.line	1545; ../../../RF24_c/RF24_cg.c	config |= _BV(EN_CRC);
+	.line	1545; ../../../RF24_c/RF24_c.c	config |= _BV(EN_CRC);
 	BSF	r0x01, 3
-	.line	1546; ../../../RF24_c/RF24_cg.c	config |= _BV( CRCO );
+	.line	1546; ../../../RF24_c/RF24_c.c	config |= _BV( CRCO );
 	BSF	r0x01, 2
 _00904_DS_:
-	.line	1548; ../../../RF24_c/RF24_cg.c	RF24_write_register_d( NRF_CONFIG, config ) ;
+	.line	1548; ../../../RF24_c/RF24_c.c	RF24_write_register_d( NRF_CONFIG, config ) ;
 	MOVF	r0x01, W
 	MOVWF	POSTDEC1
 	MOVLW	0x00
@@ -501,14 +501,14 @@ _00904_DS_:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_getDataRate	code
+S_RF24_c__RF24_getDataRate	code
 _RF24_getDataRate:
-	.line	1503; ../../../RF24_c/RF24_cg.c	rf24_datarate_e RF24_getDataRate(void )
+	.line	1503; ../../../RF24_c/RF24_c.c	rf24_datarate_e RF24_getDataRate(void )
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
 	MOVFF	r0x01, POSTDEC1
-	.line	1506; ../../../RF24_c/RF24_cg.c	uint8_t dr = RF24_read_register_d(RF_SETUP) & (_BV(RF_DR_LOW) | _BV(RF_DR_HIGH));
+	.line	1506; ../../../RF24_c/RF24_c.c	uint8_t dr = RF24_read_register_d(RF_SETUP) & (_BV(RF_DR_LOW) | _BV(RF_DR_HIGH));
 	MOVLW	0x06
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
@@ -516,28 +516,28 @@ _RF24_getDataRate:
 	MOVF	POSTINC1, F
 	MOVLW	0x28
 	ANDWF	r0x00, F
-	.line	1510; ../../../RF24_c/RF24_cg.c	if ( dr == _BV(RF_DR_LOW) )
+	.line	1510; ../../../RF24_c/RF24_c.c	if ( dr == _BV(RF_DR_LOW) )
 	MOVF	r0x00, W
 	XORLW	0x20
 	BNZ	_00880_DS_
-	.line	1513; ../../../RF24_c/RF24_cg.c	result = RF24_250KBPS ;
+	.line	1513; ../../../RF24_c/RF24_c.c	result = RF24_250KBPS ;
 	MOVLW	0x02
 	MOVWF	r0x01
 	BRA	_00881_DS_
 _00880_DS_:
-	.line	1515; ../../../RF24_c/RF24_cg.c	else if ( dr == _BV(RF_DR_HIGH) )
+	.line	1515; ../../../RF24_c/RF24_c.c	else if ( dr == _BV(RF_DR_HIGH) )
 	MOVF	r0x00, W
 	XORLW	0x08
 	BNZ	_00877_DS_
-	.line	1518; ../../../RF24_c/RF24_cg.c	result = RF24_2MBPS ;
+	.line	1518; ../../../RF24_c/RF24_c.c	result = RF24_2MBPS ;
 	MOVLW	0x01
 	MOVWF	r0x01
 	BRA	_00881_DS_
 _00877_DS_:
-	.line	1523; ../../../RF24_c/RF24_cg.c	result = RF24_1MBPS ;
+	.line	1523; ../../../RF24_c/RF24_c.c	result = RF24_1MBPS ;
 	CLRF	r0x01
 _00881_DS_:
-	.line	1525; ../../../RF24_c/RF24_cg.c	return result ;
+	.line	1525; ../../../RF24_c/RF24_c.c	return result ;
 	MOVF	r0x01, W
 	MOVFF	PREINC1, r0x01
 	MOVFF	PREINC1, r0x00
@@ -545,9 +545,9 @@ _00881_DS_:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_setDataRate	code
+S_RF24_c__RF24_setDataRate	code
 _RF24_setDataRate:
-	.line	1453; ../../../RF24_c/RF24_cg.c	uint8_t RF24_setDataRate(rf24_datarate_e speed)
+	.line	1453; ../../../RF24_c/RF24_c.c	uint8_t RF24_setDataRate(rf24_datarate_e speed)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
@@ -555,18 +555,18 @@ _RF24_setDataRate:
 	MOVFF	r0x02, POSTDEC1
 	MOVLW	0x02
 	MOVFF	PLUSW2, r0x00
-	.line	1455; ../../../RF24_c/RF24_cg.c	uint8_t result = 0;
+	.line	1455; ../../../RF24_c/RF24_c.c	uint8_t result = 0;
 	CLRF	r0x01
-	.line	1456; ../../../RF24_c/RF24_cg.c	uint8_t setup = RF24_read_register_d(RF_SETUP) ;
+	.line	1456; ../../../RF24_c/RF24_c.c	uint8_t setup = RF24_read_register_d(RF_SETUP) ;
 	MOVLW	0x06
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
 	MOVWF	r0x02
 	MOVF	POSTINC1, F
-	.line	1459; ../../../RF24_c/RF24_cg.c	setup &= ~(_BV(RF_DR_LOW) | _BV(RF_DR_HIGH)) ;
+	.line	1459; ../../../RF24_c/RF24_c.c	setup &= ~(_BV(RF_DR_LOW) | _BV(RF_DR_HIGH)) ;
 	MOVLW	0xd7
 	ANDWF	r0x02, F
-	.line	1464; ../../../RF24_c/RF24_cg.c	rf.txDelay=85;
+	.line	1464; ../../../RF24_c/RF24_c.c	rf.txDelay=85;
 	MOVLW	0x55
 	BANKSEL	(_rf + 13)
 	MOVWF	(_rf + 13), B
@@ -576,13 +576,13 @@ _RF24_setDataRate:
 	CLRF	(_rf + 15), B
 	BANKSEL	(_rf + 16)
 	CLRF	(_rf + 16), B
-	.line	1466; ../../../RF24_c/RF24_cg.c	if( speed == RF24_250KBPS )
+	.line	1466; ../../../RF24_c/RF24_c.c	if( speed == RF24_250KBPS )
 	MOVF	r0x00, W
 	XORLW	0x02
 	BNZ	_00848_DS_
-	.line	1470; ../../../RF24_c/RF24_cg.c	setup |= _BV( RF_DR_LOW ) ;
+	.line	1470; ../../../RF24_c/RF24_c.c	setup |= _BV( RF_DR_LOW ) ;
 	BSF	r0x02, 5
-	.line	1474; ../../../RF24_c/RF24_cg.c	rf.txDelay=155;
+	.line	1474; ../../../RF24_c/RF24_c.c	rf.txDelay=155;
 	MOVLW	0x9b
 	BANKSEL	(_rf + 13)
 	MOVWF	(_rf + 13), B
@@ -594,13 +594,13 @@ _RF24_setDataRate:
 	CLRF	(_rf + 16), B
 	BRA	_00849_DS_
 _00848_DS_:
-	.line	1481; ../../../RF24_c/RF24_cg.c	if ( speed == RF24_2MBPS )
+	.line	1481; ../../../RF24_c/RF24_c.c	if ( speed == RF24_2MBPS )
 	MOVF	r0x00, W
 	XORLW	0x01
 	BNZ	_00849_DS_
-	.line	1483; ../../../RF24_c/RF24_cg.c	setup |= _BV(RF_DR_HIGH);
+	.line	1483; ../../../RF24_c/RF24_c.c	setup |= _BV(RF_DR_HIGH);
 	BSF	r0x02, 3
-	.line	1487; ../../../RF24_c/RF24_cg.c	rf.txDelay=65;
+	.line	1487; ../../../RF24_c/RF24_c.c	rf.txDelay=65;
 	MOVLW	0x41
 	BANKSEL	(_rf + 13)
 	MOVWF	(_rf + 13), B
@@ -611,7 +611,7 @@ _00848_DS_:
 	BANKSEL	(_rf + 16)
 	CLRF	(_rf + 16), B
 _00849_DS_:
-	.line	1491; ../../../RF24_c/RF24_cg.c	RF24_write_register_d(RF_SETUP,setup);
+	.line	1491; ../../../RF24_c/RF24_c.c	RF24_write_register_d(RF_SETUP,setup);
 	MOVF	r0x02, W
 	MOVWF	POSTDEC1
 	MOVLW	0x06
@@ -619,7 +619,7 @@ _00849_DS_:
 	CALL	_RF24_write_register_d
 	MOVF	POSTINC1, F
 	MOVF	POSTINC1, F
-	.line	1494; ../../../RF24_c/RF24_cg.c	if ( RF24_read_register_d(RF_SETUP) == setup )
+	.line	1494; ../../../RF24_c/RF24_c.c	if ( RF24_read_register_d(RF_SETUP) == setup )
 	MOVLW	0x06
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
@@ -628,11 +628,11 @@ _00849_DS_:
 	MOVF	r0x00, W
 	XORWF	r0x02, W
 	BNZ	_00851_DS_
-	.line	1496; ../../../RF24_c/RF24_cg.c	result = 1;
+	.line	1496; ../../../RF24_c/RF24_c.c	result = 1;
 	MOVLW	0x01
 	MOVWF	r0x01
 _00851_DS_:
-	.line	1498; ../../../RF24_c/RF24_cg.c	return result;
+	.line	1498; ../../../RF24_c/RF24_c.c	return result;
 	MOVF	r0x01, W
 	MOVFF	PREINC1, r0x02
 	MOVFF	PREINC1, r0x01
@@ -641,13 +641,13 @@ _00851_DS_:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_getPALevel	code
+S_RF24_c__RF24_getPALevel	code
 _RF24_getPALevel:
-	.line	1445; ../../../RF24_c/RF24_cg.c	uint8_t RF24_getPALevel(void)
+	.line	1445; ../../../RF24_c/RF24_c.c	uint8_t RF24_getPALevel(void)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
-	.line	1448; ../../../RF24_c/RF24_cg.c	return (RF24_read_register_d(RF_SETUP) & (_BV(RF_PWR_LOW) | _BV(RF_PWR_HIGH))) >> 1 ;
+	.line	1448; ../../../RF24_c/RF24_c.c	return (RF24_read_register_d(RF_SETUP) & (_BV(RF_PWR_LOW) | _BV(RF_PWR_HIGH))) >> 1 ;
 	MOVLW	0x06
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
@@ -664,9 +664,9 @@ _RF24_getPALevel:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_setPALevel	code
+S_RF24_c__RF24_setPALevel	code
 _RF24_setPALevel:
-	.line	1428; ../../../RF24_c/RF24_cg.c	void RF24_setPALevel(uint8_t level)
+	.line	1428; ../../../RF24_c/RF24_c.c	void RF24_setPALevel(uint8_t level)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
@@ -674,7 +674,7 @@ _RF24_setPALevel:
 	MOVFF	r0x02, POSTDEC1
 	MOVLW	0x02
 	MOVFF	PLUSW2, r0x00
-	.line	1431; ../../../RF24_c/RF24_cg.c	uint8_t setup = RF24_read_register_d(RF_SETUP) & 0b11111000;
+	.line	1431; ../../../RF24_c/RF24_c.c	uint8_t setup = RF24_read_register_d(RF_SETUP) & 0b11111000;
 	MOVLW	0x06
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
@@ -682,23 +682,23 @@ _RF24_setPALevel:
 	MOVF	POSTINC1, F
 	MOVLW	0xf8
 	ANDWF	r0x01, F
-	.line	1433; ../../../RF24_c/RF24_cg.c	if(level > 3){  						// If invalid level, go to max PA
+	.line	1433; ../../../RF24_c/RF24_c.c	if(level > 3){  						// If invalid level, go to max PA
 	MOVLW	0x04
 	SUBWF	r0x00, W
 	BNC	_00827_DS_
-	.line	1434; ../../../RF24_c/RF24_cg.c	level = (RF24_PA_MAX << 1) + 1;		// +1 to support the SI24R1 chip extra bit
+	.line	1434; ../../../RF24_c/RF24_c.c	level = (RF24_PA_MAX << 1) + 1;		// +1 to support the SI24R1 chip extra bit
 	MOVLW	0x07
 	MOVWF	r0x00
 	BRA	_00828_DS_
 _00827_DS_:
-	.line	1436; ../../../RF24_c/RF24_cg.c	level = (level << 1) + 1;	 		// Else set level as requested
+	.line	1436; ../../../RF24_c/RF24_c.c	level = (level << 1) + 1;	 		// Else set level as requested
 	RLNCF	r0x00, W
 	ANDLW	0xfe
 	MOVWF	r0x02
 	INCF	r0x02, W
 	MOVWF	r0x00
 _00828_DS_:
-	.line	1440; ../../../RF24_c/RF24_cg.c	RF24_write_register_d( RF_SETUP, setup |= level ) ;	// Write it to the chip
+	.line	1440; ../../../RF24_c/RF24_c.c	RF24_write_register_d( RF_SETUP, setup |= level ) ;	// Write it to the chip
 	MOVF	r0x01, W
 	IORWF	r0x00, F
 	MOVF	r0x00, W
@@ -715,14 +715,14 @@ _00828_DS_:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_isValid	code
+S_RF24_c__RF24_isValid	code
 _RF24_isValid:
-	.line	1420; ../../../RF24_c/RF24_cg.c	uint8_t RF24_isValid(void) 
+	.line	1420; ../../../RF24_c/RF24_c.c	uint8_t RF24_isValid(void) 
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
 	BANKSEL	_rf
-	.line	1422; ../../../RF24_c/RF24_cg.c	return rf.ce_pin != 0xff && rf.csn_pin != 0xff; 
+	.line	1422; ../../../RF24_c/RF24_c.c	return rf.ce_pin != 0xff && rf.csn_pin != 0xff; 
 	MOVF	_rf, W, B
 	XORLW	0xff
 	BZ	_00812_DS_
@@ -744,13 +744,13 @@ _00814_DS_:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_testRPD	code
+S_RF24_c__RF24_testRPD	code
 _RF24_testRPD:
-	.line	1413; ../../../RF24_c/RF24_cg.c	uint8_t RF24_testRPD(void)
+	.line	1413; ../../../RF24_c/RF24_c.c	uint8_t RF24_testRPD(void)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
-	.line	1415; ../../../RF24_c/RF24_cg.c	return ( RF24_read_register_d(RPD) & 1 ) ;
+	.line	1415; ../../../RF24_c/RF24_c.c	return ( RF24_read_register_d(RPD) & 1 ) ;
 	MOVLW	0x09
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
@@ -764,13 +764,13 @@ _RF24_testRPD:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_testCarrier	code
+S_RF24_c__RF24_testCarrier	code
 _RF24_testCarrier:
-	.line	1406; ../../../RF24_c/RF24_cg.c	uint8_t RF24_testCarrier(void)
+	.line	1406; ../../../RF24_c/RF24_c.c	uint8_t RF24_testCarrier(void)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
-	.line	1408; ../../../RF24_c/RF24_cg.c	return ( RF24_read_register_d(CD) & 1 );
+	.line	1408; ../../../RF24_c/RF24_c.c	return ( RF24_read_register_d(CD) & 1 );
 	MOVLW	0x09
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
@@ -784,9 +784,9 @@ _RF24_testCarrier:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_setAutoAck_p	code
+S_RF24_c__RF24_setAutoAck_p	code
 _RF24_setAutoAck_p:
-	.line	1387; ../../../RF24_c/RF24_cg.c	void RF24_setAutoAck_p( uint8_t pipe, uint8_t enable )
+	.line	1387; ../../../RF24_c/RF24_c.c	void RF24_setAutoAck_p( uint8_t pipe, uint8_t enable )
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
@@ -796,20 +796,20 @@ _RF24_setAutoAck_p:
 	MOVFF	PLUSW2, r0x00
 	MOVLW	0x03
 	MOVFF	PLUSW2, r0x01
-	.line	1389; ../../../RF24_c/RF24_cg.c	if ( pipe <= 6 )
+	.line	1389; ../../../RF24_c/RF24_c.c	if ( pipe <= 6 )
 	MOVLW	0x07
 	SUBWF	r0x00, W
 	BC	_00782_DS_
-	.line	1391; ../../../RF24_c/RF24_cg.c	uint8_t en_aa = RF24_read_register_d( EN_AA ) ;
+	.line	1391; ../../../RF24_c/RF24_c.c	uint8_t en_aa = RF24_read_register_d( EN_AA ) ;
 	MOVLW	0x01
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
 	MOVWF	r0x02
 	MOVF	POSTINC1, F
-	.line	1392; ../../../RF24_c/RF24_cg.c	if( enable )
+	.line	1392; ../../../RF24_c/RF24_c.c	if( enable )
 	MOVF	r0x01, W
 	BZ	_00778_DS_
-	.line	1394; ../../../RF24_c/RF24_cg.c	en_aa |= _BV(pipe) ;
+	.line	1394; ../../../RF24_c/RF24_c.c	en_aa |= _BV(pipe) ;
 	MOVLW	0x01
 	MOVWF	r0x01
 	MOVF	r0x00, W
@@ -825,7 +825,7 @@ _00791_DS_:
 	IORWF	r0x02, F
 	BRA	_00779_DS_
 _00778_DS_:
-	.line	1398; ../../../RF24_c/RF24_cg.c	en_aa &= ~_BV(pipe) ;
+	.line	1398; ../../../RF24_c/RF24_c.c	en_aa &= ~_BV(pipe) ;
 	MOVLW	0x01
 	MOVWF	r0x01
 	MOVF	r0x00, W
@@ -842,7 +842,7 @@ _00794_DS_:
 	MOVF	r0x00, W
 	ANDWF	r0x02, F
 _00779_DS_:
-	.line	1400; ../../../RF24_c/RF24_cg.c	RF24_write_register_d( EN_AA, en_aa ) ;
+	.line	1400; ../../../RF24_c/RF24_c.c	RF24_write_register_d( EN_AA, en_aa ) ;
 	MOVF	r0x02, W
 	MOVWF	POSTDEC1
 	MOVLW	0x01
@@ -858,18 +858,18 @@ _00782_DS_:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_setAutoAck	code
+S_RF24_c__RF24_setAutoAck	code
 _RF24_setAutoAck:
-	.line	1377; ../../../RF24_c/RF24_cg.c	void RF24_setAutoAck( uint8_t enable)
+	.line	1377; ../../../RF24_c/RF24_c.c	void RF24_setAutoAck( uint8_t enable)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
 	MOVLW	0x02
 	MOVFF	PLUSW2, r0x00
-	.line	1379; ../../../RF24_c/RF24_cg.c	if ( enable )
+	.line	1379; ../../../RF24_c/RF24_c.c	if ( enable )
 	MOVF	r0x00, W
 	BZ	_00770_DS_
-	.line	1380; ../../../RF24_c/RF24_cg.c	RF24_write_register_d(EN_AA, 0b111111);
+	.line	1380; ../../../RF24_c/RF24_c.c	RF24_write_register_d(EN_AA, 0b111111);
 	MOVLW	0x3f
 	MOVWF	POSTDEC1
 	MOVLW	0x01
@@ -879,7 +879,7 @@ _RF24_setAutoAck:
 	MOVF	POSTINC1, F
 	BRA	_00772_DS_
 _00770_DS_:
-	.line	1382; ../../../RF24_c/RF24_cg.c	RF24_write_register_d(EN_AA, 0);
+	.line	1382; ../../../RF24_c/RF24_c.c	RF24_write_register_d(EN_AA, 0);
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	MOVLW	0x01
@@ -893,25 +893,25 @@ _00772_DS_:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_isPVariant	code
+S_RF24_c__RF24_isPVariant	code
 _RF24_isPVariant:
-	.line	1370; ../../../RF24_c/RF24_cg.c	uint8_t RF24_isPVariant(void)
+	.line	1370; ../../../RF24_c/RF24_c.c	uint8_t RF24_isPVariant(void)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	BANKSEL	(_rf + 4)
-	.line	1372; ../../../RF24_c/RF24_cg.c	return rf.p_variant ;
+	.line	1372; ../../../RF24_c/RF24_c.c	return rf.p_variant ;
 	MOVF	(_rf + 4), W, B
 	MOVFF	PREINC1, FSR2L
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_isAckPayloadAvailable	code
+S_RF24_c__RF24_isAckPayloadAvailable	code
 _RF24_isAckPayloadAvailable:
-	.line	1363; ../../../RF24_c/RF24_cg.c	uint8_t RF24_isAckPayloadAvailable(void)
+	.line	1363; ../../../RF24_c/RF24_c.c	uint8_t RF24_isAckPayloadAvailable(void)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
-	.line	1365; ../../../RF24_c/RF24_cg.c	return ! (RF24_read_register_d(FIFO_STATUS) & _BV(RX_EMPTY));
+	.line	1365; ../../../RF24_c/RF24_c.c	return ! (RF24_read_register_d(FIFO_STATUS) & _BV(RX_EMPTY));
 	MOVLW	0x17
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
@@ -932,9 +932,9 @@ _RF24_isAckPayloadAvailable:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_writeAckPayload	code
+S_RF24_c__RF24_writeAckPayload	code
 _RF24_writeAckPayload:
-	.line	1332; ../../../RF24_c/RF24_cg.c	void RF24_writeAckPayload(uint8_t pipe, const void* buf, uint8_t len)
+	.line	1332; ../../../RF24_c/RF24_c.c	void RF24_writeAckPayload(uint8_t pipe, const void* buf, uint8_t len)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
@@ -952,23 +952,23 @@ _RF24_writeAckPayload:
 	MOVFF	PLUSW2, r0x03
 	MOVLW	0x06
 	MOVFF	PLUSW2, r0x04
-	.line	1334; ../../../RF24_c/RF24_cg.c	const uint8_t* current = (const uint8_t*)(buf);
+	.line	1334; ../../../RF24_c/RF24_c.c	const uint8_t* current = (const uint8_t*)(buf);
 	MOVF	r0x03, W
 	MOVWF	r0x03
 	MOVF	r0x02, W
 	MOVWF	r0x02
 	MOVF	r0x01, W
 	MOVWF	r0x01
-	.line	1336; ../../../RF24_c/RF24_cg.c	uint8_t data_len = rf24_min(len,32);
+	.line	1336; ../../../RF24_c/RF24_c.c	uint8_t data_len = rf24_min(len,32);
 	MOVLW	0x20
 	SUBWF	r0x04, W
 	BNC	_00740_DS_
 	MOVLW	0x20
 	MOVWF	r0x04
 _00740_DS_:
-	.line	1350; ../../../RF24_c/RF24_cg.c	RF24_beginTransaction();
+	.line	1350; ../../../RF24_c/RF24_c.c	RF24_beginTransaction();
 	CALL	_RF24_beginTransaction
-	.line	1351; ../../../RF24_c/RF24_cg.c	SPI_transfer(W_ACK_PAYLOAD | ( pipe & 0b111 ) );
+	.line	1351; ../../../RF24_c/RF24_c.c	SPI_transfer(W_ACK_PAYLOAD | ( pipe & 0b111 ) );
 	MOVLW	0x07
 	ANDWF	r0x00, F
 	MOVLW	0xa8
@@ -977,7 +977,7 @@ _00740_DS_:
 	MOVWF	POSTDEC1
 	CALL	_SPI_transfer
 	MOVF	POSTINC1, F
-	.line	1353; ../../../RF24_c/RF24_cg.c	while ( data_len-- )
+	.line	1353; ../../../RF24_c/RF24_c.c	while ( data_len-- )
 	MOVFF	r0x01, r0x00
 	MOVFF	r0x02, r0x01
 	MOVFF	r0x03, r0x02
@@ -986,7 +986,7 @@ _00734_DS_:
 	DECF	r0x04, F
 	MOVF	r0x03, W
 	BZ	_00736_DS_
-	.line	1354; ../../../RF24_c/RF24_cg.c	SPI_transfer(*current++);
+	.line	1354; ../../../RF24_c/RF24_c.c	SPI_transfer(*current++);
 	MOVFF	r0x00, FSR0L
 	MOVFF	r0x01, PRODL
 	MOVF	r0x02, W
@@ -1003,7 +1003,7 @@ _00754_DS_:
 	MOVF	POSTINC1, F
 	BRA	_00734_DS_
 _00736_DS_:
-	.line	1355; ../../../RF24_c/RF24_cg.c	RF24_endTransaction();
+	.line	1355; ../../../RF24_c/RF24_c.c	RF24_endTransaction();
 	CALL	_RF24_endTransaction
 	MOVFF	PREINC1, r0x04
 	MOVFF	PREINC1, r0x03
@@ -1014,13 +1014,13 @@ _00736_DS_:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_enableDynamicAck	code
+S_RF24_c__RF24_enableDynamicAck	code
 _RF24_enableDynamicAck:
-	.line	1318; ../../../RF24_c/RF24_cg.c	void RF24_enableDynamicAck(void){
+	.line	1318; ../../../RF24_c/RF24_c.c	void RF24_enableDynamicAck(void){
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
-	.line	1323; ../../../RF24_c/RF24_cg.c	RF24_write_register_d(FEATURE,RF24_read_register_d(FEATURE) | _BV(EN_DYN_ACK) );
+	.line	1323; ../../../RF24_c/RF24_c.c	RF24_write_register_d(FEATURE,RF24_read_register_d(FEATURE) | _BV(EN_DYN_ACK) );
 	MOVLW	0x1d
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
@@ -1039,13 +1039,13 @@ _RF24_enableDynamicAck:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_enableAckPayload	code
+S_RF24_c__RF24_enableAckPayload	code
 _RF24_enableAckPayload:
-	.line	1297; ../../../RF24_c/RF24_cg.c	void RF24_enableAckPayload(void)
+	.line	1297; ../../../RF24_c/RF24_c.c	void RF24_enableAckPayload(void)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
-	.line	1304; ../../../RF24_c/RF24_cg.c	RF24_write_register_d(FEATURE,RF24_read_register_d(FEATURE) | _BV(EN_ACK_PAY) | _BV(EN_DPL) );
+	.line	1304; ../../../RF24_c/RF24_c.c	RF24_write_register_d(FEATURE,RF24_read_register_d(FEATURE) | _BV(EN_ACK_PAY) | _BV(EN_DPL) );
 	MOVLW	0x1d
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
@@ -1060,7 +1060,7 @@ _RF24_enableAckPayload:
 	CALL	_RF24_write_register_d
 	MOVF	POSTINC1, F
 	MOVF	POSTINC1, F
-	.line	1312; ../../../RF24_c/RF24_cg.c	RF24_write_register_d(DYNPD,RF24_read_register_d(DYNPD) | _BV(DPL_P1) | _BV(DPL_P0));
+	.line	1312; ../../../RF24_c/RF24_c.c	RF24_write_register_d(DYNPD,RF24_read_register_d(DYNPD) | _BV(DPL_P1) | _BV(DPL_P0));
 	MOVLW	0x1c
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
@@ -1075,7 +1075,7 @@ _RF24_enableAckPayload:
 	CALL	_RF24_write_register_d
 	MOVF	POSTINC1, F
 	MOVF	POSTINC1, F
-	.line	1313; ../../../RF24_c/RF24_cg.c	rf.dynamic_payloads_enabled = 1;
+	.line	1313; ../../../RF24_c/RF24_c.c	rf.dynamic_payloads_enabled = 1;
 	MOVLW	0x01
 	BANKSEL	(_rf + 6)
 	MOVWF	(_rf + 6), B
@@ -1084,13 +1084,13 @@ _RF24_enableAckPayload:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_enableDynamicPayloads	code
+S_RF24_c__RF24_enableDynamicPayloads	code
 _RF24_enableDynamicPayloads:
-	.line	1276; ../../../RF24_c/RF24_cg.c	void RF24_enableDynamicPayloads(void)
+	.line	1276; ../../../RF24_c/RF24_c.c	void RF24_enableDynamicPayloads(void)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
-	.line	1281; ../../../RF24_c/RF24_cg.c	RF24_write_register_d(FEATURE,RF24_read_register_d(FEATURE) | _BV(EN_DPL) );
+	.line	1281; ../../../RF24_c/RF24_c.c	RF24_write_register_d(FEATURE,RF24_read_register_d(FEATURE) | _BV(EN_DPL) );
 	MOVLW	0x1d
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
@@ -1104,7 +1104,7 @@ _RF24_enableDynamicPayloads:
 	CALL	_RF24_write_register_d
 	MOVF	POSTINC1, F
 	MOVF	POSTINC1, F
-	.line	1290; ../../../RF24_c/RF24_cg.c	RF24_write_register_d(DYNPD,RF24_read_register_d(DYNPD) | _BV(DPL_P5) | _BV(DPL_P4) | _BV(DPL_P3) | _BV(DPL_P2) | _BV(DPL_P1) | _BV(DPL_P0));
+	.line	1290; ../../../RF24_c/RF24_c.c	RF24_write_register_d(DYNPD,RF24_read_register_d(DYNPD) | _BV(DPL_P5) | _BV(DPL_P4) | _BV(DPL_P3) | _BV(DPL_P2) | _BV(DPL_P1) | _BV(DPL_P0));
 	MOVLW	0x1c
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
@@ -1119,7 +1119,7 @@ _RF24_enableDynamicPayloads:
 	CALL	_RF24_write_register_d
 	MOVF	POSTINC1, F
 	MOVF	POSTINC1, F
-	.line	1292; ../../../RF24_c/RF24_cg.c	rf.dynamic_payloads_enabled = 1;
+	.line	1292; ../../../RF24_c/RF24_c.c	rf.dynamic_payloads_enabled = 1;
 	MOVLW	0x01
 	BANKSEL	(_rf + 6)
 	MOVWF	(_rf + 6), B
@@ -1128,32 +1128,32 @@ _RF24_enableDynamicPayloads:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_toggle_features_d	code
+S_RF24_c__RF24_toggle_features_d	code
 _RF24_toggle_features_d:
-	.line	1266; ../../../RF24_c/RF24_cg.c	void RF24_toggle_features_d(void)
+	.line	1266; ../../../RF24_c/RF24_c.c	void RF24_toggle_features_d(void)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
-	.line	1268; ../../../RF24_c/RF24_cg.c	RF24_beginTransaction();
+	.line	1268; ../../../RF24_c/RF24_c.c	RF24_beginTransaction();
 	CALL	_RF24_beginTransaction
-	.line	1269; ../../../RF24_c/RF24_cg.c	SPI_transfer( ACTIVATE );
+	.line	1269; ../../../RF24_c/RF24_c.c	SPI_transfer( ACTIVATE );
 	MOVLW	0x50
 	MOVWF	POSTDEC1
 	CALL	_SPI_transfer
 	MOVF	POSTINC1, F
-	.line	1270; ../../../RF24_c/RF24_cg.c	SPI_transfer( 0x73 );
+	.line	1270; ../../../RF24_c/RF24_c.c	SPI_transfer( 0x73 );
 	MOVLW	0x73
 	MOVWF	POSTDEC1
 	CALL	_SPI_transfer
 	MOVF	POSTINC1, F
-	.line	1271; ../../../RF24_c/RF24_cg.c	RF24_endTransaction();
+	.line	1271; ../../../RF24_c/RF24_c.c	RF24_endTransaction();
 	CALL	_RF24_endTransaction
 	MOVFF	PREINC1, FSR2L
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_closeReadingPipe	code
+S_RF24_c__RF24_closeReadingPipe	code
 _RF24_closeReadingPipe:
-	.line	1259; ../../../RF24_c/RF24_cg.c	void RF24_closeReadingPipe(uint8_t pipe )
+	.line	1259; ../../../RF24_c/RF24_c.c	void RF24_closeReadingPipe(uint8_t pipe )
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
@@ -1162,7 +1162,7 @@ _RF24_closeReadingPipe:
 	MOVFF	r0x03, POSTDEC1
 	MOVLW	0x02
 	MOVFF	PLUSW2, r0x00
-	.line	1261; ../../../RF24_c/RF24_cg.c	RF24_write_register_d(EN_RXADDR,RF24_read_register_d(EN_RXADDR) & ~_BV(pgm_read_byte(&child_pipe_enable[pipe])));
+	.line	1261; ../../../RF24_c/RF24_c.c	RF24_write_register_d(EN_RXADDR,RF24_read_register_d(EN_RXADDR) & ~_BV(pgm_read_byte(&child_pipe_enable[pipe])));
 	MOVLW	0x02
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
@@ -1211,9 +1211,9 @@ _00708_DS_:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_openReadingPipe	code
+S_RF24_c__RF24_openReadingPipe	code
 _RF24_openReadingPipe:
-	.line	1231; ../../../RF24_c/RF24_cg.c	void RF24_openReadingPipe(uint8_t child, const uint8_t *address)
+	.line	1231; ../../../RF24_c/RF24_c.c	void RF24_openReadingPipe(uint8_t child, const uint8_t *address)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
@@ -1236,10 +1236,10 @@ _RF24_openReadingPipe:
 	MOVFF	PLUSW2, r0x02
 	MOVLW	0x05
 	MOVFF	PLUSW2, r0x03
-	.line	1236; ../../../RF24_c/RF24_cg.c	if (child == 0){
+	.line	1236; ../../../RF24_c/RF24_c.c	if (child == 0){
 	MOVF	r0x00, W
 	BNZ	_00681_DS_
-	.line	1237; ../../../RF24_c/RF24_cg.c	memcpy(rf.pipe0_reading_address,address,rf.addr_width);
+	.line	1237; ../../../RF24_c/RF24_c.c	memcpy(rf.pipe0_reading_address,address,rf.addr_width);
 	MOVLW	HIGH(_rf + 7)
 	MOVWF	r0x05
 	MOVLW	LOW(_rf + 7)
@@ -1274,16 +1274,16 @@ _RF24_openReadingPipe:
 	MOVLW	0x08
 	ADDWF	FSR1L, F
 _00681_DS_:
-	.line	1239; ../../../RF24_c/RF24_cg.c	if (child <= 6)
+	.line	1239; ../../../RF24_c/RF24_c.c	if (child <= 6)
 	MOVLW	0x07
 	SUBWF	r0x00, W
 	BTFSC	STATUS, 0
 	BRA	_00687_DS_
-	.line	1242; ../../../RF24_c/RF24_cg.c	if ( child < 2 ){
+	.line	1242; ../../../RF24_c/RF24_c.c	if ( child < 2 ){
 	MOVLW	0x02
 	SUBWF	r0x00, W
 	BC	_00683_DS_
-	.line	1243; ../../../RF24_c/RF24_cg.c	RF24_write_register_c_d(pgm_read_byte(&child_pipe[child]), address, rf.addr_width);
+	.line	1243; ../../../RF24_c/RF24_c.c	RF24_write_register_c_d(pgm_read_byte(&child_pipe[child]), address, rf.addr_width);
 	MOVLW	LOW(_child_pipe)
 	ADDWF	r0x00, W
 	MOVWF	r0x04
@@ -1314,7 +1314,7 @@ _00681_DS_:
 	ADDWF	FSR1L, F
 	BRA	_00684_DS_
 _00683_DS_:
-	.line	1245; ../../../RF24_c/RF24_cg.c	RF24_write_register_c_d(pgm_read_byte(&child_pipe[child]), address, 1);
+	.line	1245; ../../../RF24_c/RF24_c.c	RF24_write_register_c_d(pgm_read_byte(&child_pipe[child]), address, 1);
 	MOVLW	LOW(_child_pipe)
 	ADDWF	r0x00, W
 	MOVWF	r0x04
@@ -1343,7 +1343,7 @@ _00683_DS_:
 	MOVLW	0x05
 	ADDWF	FSR1L, F
 _00684_DS_:
-	.line	1247; ../../../RF24_c/RF24_cg.c	RF24_write_register_d(pgm_read_byte(&child_payload_size[child]),rf.payload_size);
+	.line	1247; ../../../RF24_c/RF24_c.c	RF24_write_register_d(pgm_read_byte(&child_payload_size[child]),rf.payload_size);
 	MOVLW	LOW(_child_payload_size)
 	ADDWF	r0x00, W
 	MOVWF	r0x01
@@ -1366,7 +1366,7 @@ _00684_DS_:
 	CALL	_RF24_write_register_d
 	MOVF	POSTINC1, F
 	MOVF	POSTINC1, F
-	.line	1252; ../../../RF24_c/RF24_cg.c	RF24_write_register_d(EN_RXADDR,RF24_read_register_d(EN_RXADDR) | _BV(pgm_read_byte(&child_pipe_enable[child])));
+	.line	1252; ../../../RF24_c/RF24_c.c	RF24_write_register_d(EN_RXADDR,RF24_read_register_d(EN_RXADDR) | _BV(pgm_read_byte(&child_pipe_enable[child])));
 	MOVLW	0x02
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
@@ -1422,23 +1422,23 @@ _00687_DS_:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_setAddressWidth	code
+S_RF24_c__RF24_setAddressWidth	code
 _RF24_setAddressWidth:
-	.line	1220; ../../../RF24_c/RF24_cg.c	void RF24_setAddressWidth(uint8_t a_width){
+	.line	1220; ../../../RF24_c/RF24_c.c	void RF24_setAddressWidth(uint8_t a_width){
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
 	MOVFF	r0x01, POSTDEC1
 	MOVLW	0x02
 	MOVFF	PLUSW2, r0x00
-	.line	1222; ../../../RF24_c/RF24_cg.c	if(a_width -= 2){
+	.line	1222; ../../../RF24_c/RF24_c.c	if(a_width -= 2){
 	MOVLW	0xfe
 	ADDWF	r0x00, W
 	MOVWF	r0x01
 	MOVFF	r0x01, r0x00
 	MOVF	r0x01, W
 	BZ	_00675_DS_
-	.line	1223; ../../../RF24_c/RF24_cg.c	RF24_write_register_d(SETUP_AW,a_width%4);
+	.line	1223; ../../../RF24_c/RF24_c.c	RF24_write_register_d(SETUP_AW,a_width%4);
 	MOVLW	0x03
 	ANDWF	r0x00, F
 	MOVF	r0x00, W
@@ -1448,7 +1448,7 @@ _RF24_setAddressWidth:
 	CALL	_RF24_write_register_d
 	MOVF	POSTINC1, F
 	MOVF	POSTINC1, F
-	.line	1224; ../../../RF24_c/RF24_cg.c	rf.addr_width = (a_width%4) + 2;
+	.line	1224; ../../../RF24_c/RF24_c.c	rf.addr_width = (a_width%4) + 2;
 	INCF	r0x00, F
 	INCF	r0x00, F
 	MOVF	r0x00, W
@@ -1461,9 +1461,9 @@ _00675_DS_:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_openReadingPipe_d	code
+S_RF24_c__RF24_openReadingPipe_d	code
 _RF24_openReadingPipe_d:
-	.line	1187; ../../../RF24_c/RF24_cg.c	void RF24_openReadingPipe_d(uint8_t child, const raddr_t* address_)
+	.line	1187; ../../../RF24_c/RF24_c.c	void RF24_openReadingPipe_d(uint8_t child, const raddr_t* address_)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
@@ -1484,10 +1484,10 @@ _RF24_openReadingPipe_d:
 	MOVFF	PLUSW2, r0x02
 	MOVLW	0x05
 	MOVFF	PLUSW2, r0x03
-	.line	1191; ../../../RF24_c/RF24_cg.c	for(i=0;i<5;i++)
+	.line	1191; ../../../RF24_c/RF24_c.c	for(i=0;i<5;i++)
 	CLRF	r0x04
 _00644_DS_:
-	.line	1193; ../../../RF24_c/RF24_cg.c	address[i]=address_[4-i];
+	.line	1193; ../../../RF24_c/RF24_c.c	address[i]=address_[4-i];
 	MOVLW	LOW(_RF24_openReadingPipe_d_address_1_254)
 	ADDWF	r0x04, W
 	MOVWF	r0x05
@@ -1518,15 +1518,15 @@ _00644_DS_:
 	MOVFF	r0x05, FSR0L
 	MOVFF	r0x06, FSR0H
 	MOVFF	r0x07, INDF0
-	.line	1191; ../../../RF24_c/RF24_cg.c	for(i=0;i<5;i++)
+	.line	1191; ../../../RF24_c/RF24_c.c	for(i=0;i<5;i++)
 	INCF	r0x04, F
 	MOVLW	0x05
 	SUBWF	r0x04, W
 	BNC	_00644_DS_
-	.line	1198; ../../../RF24_c/RF24_cg.c	if (child == 0){
+	.line	1198; ../../../RF24_c/RF24_c.c	if (child == 0){
 	MOVF	r0x00, W
 	BNZ	_00638_DS_
-	.line	1199; ../../../RF24_c/RF24_cg.c	memcpy(rf.pipe0_reading_address,address,rf.addr_width);
+	.line	1199; ../../../RF24_c/RF24_c.c	memcpy(rf.pipe0_reading_address,address,rf.addr_width);
 	MOVLW	HIGH(_rf + 7)
 	MOVWF	r0x02
 	MOVLW	LOW(_rf + 7)
@@ -1561,16 +1561,16 @@ _00644_DS_:
 	MOVLW	0x08
 	ADDWF	FSR1L, F
 _00638_DS_:
-	.line	1202; ../../../RF24_c/RF24_cg.c	if (child <= 6)
+	.line	1202; ../../../RF24_c/RF24_c.c	if (child <= 6)
 	MOVLW	0x07
 	SUBWF	r0x00, W
 	BTFSC	STATUS, 0
 	BRA	_00646_DS_
-	.line	1205; ../../../RF24_c/RF24_cg.c	if ( child < 2 )
+	.line	1205; ../../../RF24_c/RF24_c.c	if ( child < 2 )
 	MOVLW	0x02
 	SUBWF	r0x00, W
 	BC	_00640_DS_
-	.line	1206; ../../../RF24_c/RF24_cg.c	RF24_write_register_c_d(pgm_read_byte(&child_pipe[child]), (const uint8_t*)(address), rf.addr_width);
+	.line	1206; ../../../RF24_c/RF24_c.c	RF24_write_register_c_d(pgm_read_byte(&child_pipe[child]), (const uint8_t*)(address), rf.addr_width);
 	MOVLW	LOW(_child_pipe)
 	ADDWF	r0x00, W
 	MOVWF	r0x01
@@ -1607,7 +1607,7 @@ _00638_DS_:
 	ADDWF	FSR1L, F
 	BRA	_00641_DS_
 _00640_DS_:
-	.line	1208; ../../../RF24_c/RF24_cg.c	RF24_write_register_c_d(pgm_read_byte(&child_pipe[child]), (const uint8_t*)(address), 1);
+	.line	1208; ../../../RF24_c/RF24_c.c	RF24_write_register_c_d(pgm_read_byte(&child_pipe[child]), (const uint8_t*)(address), 1);
 	MOVLW	LOW(_child_pipe)
 	ADDWF	r0x00, W
 	MOVWF	r0x01
@@ -1642,7 +1642,7 @@ _00640_DS_:
 	MOVLW	0x05
 	ADDWF	FSR1L, F
 _00641_DS_:
-	.line	1210; ../../../RF24_c/RF24_cg.c	RF24_write_register_d(pgm_read_byte(&child_payload_size[child]),rf.payload_size);
+	.line	1210; ../../../RF24_c/RF24_c.c	RF24_write_register_d(pgm_read_byte(&child_payload_size[child]),rf.payload_size);
 	MOVLW	LOW(_child_payload_size)
 	ADDWF	r0x00, W
 	MOVWF	r0x01
@@ -1665,7 +1665,7 @@ _00641_DS_:
 	CALL	_RF24_write_register_d
 	MOVF	POSTINC1, F
 	MOVF	POSTINC1, F
-	.line	1215; ../../../RF24_c/RF24_cg.c	RF24_write_register_d(EN_RXADDR,RF24_read_register_d(EN_RXADDR) | _BV(pgm_read_byte(&child_pipe_enable[child])));
+	.line	1215; ../../../RF24_c/RF24_c.c	RF24_write_register_d(EN_RXADDR,RF24_read_register_d(EN_RXADDR) | _BV(pgm_read_byte(&child_pipe_enable[child])));
 	MOVLW	0x02
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
@@ -1719,9 +1719,9 @@ _00646_DS_:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_openWritingPipe	code
+S_RF24_c__RF24_openWritingPipe	code
 _RF24_openWritingPipe:
-	.line	1163; ../../../RF24_c/RF24_cg.c	void RF24_openWritingPipe(const uint8_t *address)
+	.line	1163; ../../../RF24_c/RF24_c.c	void RF24_openWritingPipe(const uint8_t *address)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
@@ -1734,7 +1734,7 @@ _RF24_openWritingPipe:
 	MOVLW	0x04
 	MOVFF	PLUSW2, r0x02
 	BANKSEL	(_rf + 12)
-	.line	1168; ../../../RF24_c/RF24_cg.c	RF24_write_register_c_d(RX_ADDR_P0,address, rf.addr_width);
+	.line	1168; ../../../RF24_c/RF24_c.c	RF24_write_register_c_d(RX_ADDR_P0,address, rf.addr_width);
 	MOVF	(_rf + 12), W, B
 	MOVWF	POSTDEC1
 	MOVF	r0x02, W
@@ -1749,7 +1749,7 @@ _RF24_openWritingPipe:
 	MOVLW	0x05
 	ADDWF	FSR1L, F
 	BANKSEL	(_rf + 12)
-	.line	1169; ../../../RF24_c/RF24_cg.c	RF24_write_register_c_d(TX_ADDR, address, rf.addr_width);
+	.line	1169; ../../../RF24_c/RF24_c.c	RF24_write_register_c_d(TX_ADDR, address, rf.addr_width);
 	MOVF	(_rf + 12), W, B
 	MOVWF	POSTDEC1
 	MOVF	r0x02, W
@@ -1764,7 +1764,7 @@ _RF24_openWritingPipe:
 	MOVLW	0x05
 	ADDWF	FSR1L, F
 	BANKSEL	(_rf + 5)
-	.line	1173; ../../../RF24_c/RF24_cg.c	RF24_write_register_d(RX_PW_P0,rf.payload_size);
+	.line	1173; ../../../RF24_c/RF24_c.c	RF24_write_register_d(RX_PW_P0,rf.payload_size);
 	MOVF	(_rf + 5), W, B
 	MOVWF	POSTDEC1
 	MOVLW	0x11
@@ -1779,9 +1779,9 @@ _RF24_openWritingPipe:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_openWritingPipe_d	code
+S_RF24_c__RF24_openWritingPipe_d	code
 _RF24_openWritingPipe_d:
-	.line	1144; ../../../RF24_c/RF24_cg.c	void RF24_openWritingPipe_d(const raddr_t*  value_)
+	.line	1144; ../../../RF24_c/RF24_c.c	void RF24_openWritingPipe_d(const raddr_t*  value_)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
@@ -1799,10 +1799,10 @@ _RF24_openWritingPipe_d:
 	MOVFF	PLUSW2, r0x01
 	MOVLW	0x04
 	MOVFF	PLUSW2, r0x02
-	.line	1148; ../../../RF24_c/RF24_cg.c	for(i=0;i<5;i++)
+	.line	1148; ../../../RF24_c/RF24_c.c	for(i=0;i<5;i++)
 	CLRF	r0x03
 _00615_DS_:
-	.line	1150; ../../../RF24_c/RF24_cg.c	value[i]=value_[4-i];
+	.line	1150; ../../../RF24_c/RF24_c.c	value[i]=value_[4-i];
 	MOVLW	LOW(_RF24_openWritingPipe_d_value_1_249)
 	ADDWF	r0x03, W
 	MOVWF	r0x04
@@ -1833,12 +1833,12 @@ _00615_DS_:
 	MOVFF	r0x04, FSR0L
 	MOVFF	r0x05, FSR0H
 	MOVFF	r0x06, INDF0
-	.line	1148; ../../../RF24_c/RF24_cg.c	for(i=0;i<5;i++)
+	.line	1148; ../../../RF24_c/RF24_c.c	for(i=0;i<5;i++)
 	INCF	r0x03, F
 	MOVLW	0x05
 	SUBWF	r0x03, W
 	BNC	_00615_DS_
-	.line	1153; ../../../RF24_c/RF24_cg.c	RF24_write_register_c_d(RX_ADDR_P0, ((uint8_t*)(value)), rf.addr_width);
+	.line	1153; ../../../RF24_c/RF24_c.c	RF24_write_register_c_d(RX_ADDR_P0, ((uint8_t*)(value)), rf.addr_width);
 	MOVLW	HIGH(_RF24_openWritingPipe_d_value_1_249)
 	MOVWF	r0x01
 	MOVLW	LOW(_RF24_openWritingPipe_d_value_1_249)
@@ -1859,7 +1859,7 @@ _00615_DS_:
 	CALL	_RF24_write_register_c_d
 	MOVLW	0x05
 	ADDWF	FSR1L, F
-	.line	1154; ../../../RF24_c/RF24_cg.c	RF24_write_register_c_d(TX_ADDR, ((uint8_t*)(value)), rf.addr_width);
+	.line	1154; ../../../RF24_c/RF24_c.c	RF24_write_register_c_d(TX_ADDR, ((uint8_t*)(value)), rf.addr_width);
 	MOVLW	HIGH(_RF24_openWritingPipe_d_value_1_249)
 	MOVWF	r0x01
 	MOVLW	LOW(_RF24_openWritingPipe_d_value_1_249)
@@ -1881,7 +1881,7 @@ _00615_DS_:
 	MOVLW	0x05
 	ADDWF	FSR1L, F
 	BANKSEL	(_rf + 5)
-	.line	1159; ../../../RF24_c/RF24_cg.c	RF24_write_register_d(RX_PW_P0,rf.payload_size);
+	.line	1159; ../../../RF24_c/RF24_c.c	RF24_write_register_d(RX_PW_P0,rf.payload_size);
 	MOVF	(_rf + 5), W, B
 	MOVWF	POSTDEC1
 	MOVLW	0x11
@@ -1902,9 +1902,9 @@ _00615_DS_:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_whatHappened	code
+S_RF24_c__RF24_whatHappened	code
 _RF24_whatHappened:
-	.line	1130; ../../../RF24_c/RF24_cg.c	void RF24_whatHappened( uint8_t * tx_ok,uint8_t * tx_fail,uint8_t * rx_ready)
+	.line	1130; ../../../RF24_c/RF24_c.c	void RF24_whatHappened( uint8_t * tx_ok,uint8_t * tx_fail,uint8_t * rx_ready)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
@@ -1936,7 +1936,7 @@ _RF24_whatHappened:
 	MOVFF	PLUSW2, r0x07
 	MOVLW	0x0a
 	MOVFF	PLUSW2, r0x08
-	.line	1134; ../../../RF24_c/RF24_cg.c	uint8_t status = RF24_write_register_d(NRF_STATUS,_BV(RX_DR) | _BV(TX_DS) | _BV(MAX_RT) );
+	.line	1134; ../../../RF24_c/RF24_c.c	uint8_t status = RF24_write_register_d(NRF_STATUS,_BV(RX_DR) | _BV(TX_DS) | _BV(MAX_RT) );
 	MOVLW	0x70
 	MOVWF	POSTDEC1
 	MOVLW	0x07
@@ -1945,7 +1945,7 @@ _RF24_whatHappened:
 	MOVWF	r0x09
 	MOVF	POSTINC1, F
 	MOVF	POSTINC1, F
-	.line	1137; ../../../RF24_c/RF24_cg.c	*tx_ok = status & _BV(TX_DS);
+	.line	1137; ../../../RF24_c/RF24_c.c	*tx_ok = status & _BV(TX_DS);
 	MOVLW	0x20
 	ANDWF	r0x09, W
 	MOVWF	r0x0a
@@ -1954,7 +1954,7 @@ _RF24_whatHappened:
 	MOVFF	r0x01, PRODL
 	MOVF	r0x02, W
 	CALL	__gptrput1
-	.line	1138; ../../../RF24_c/RF24_cg.c	*tx_fail = status & _BV(MAX_RT);
+	.line	1138; ../../../RF24_c/RF24_c.c	*tx_fail = status & _BV(MAX_RT);
 	MOVLW	0x10
 	ANDWF	r0x09, W
 	MOVWF	r0x00
@@ -1963,7 +1963,7 @@ _RF24_whatHappened:
 	MOVFF	r0x04, PRODL
 	MOVF	r0x05, W
 	CALL	__gptrput1
-	.line	1139; ../../../RF24_c/RF24_cg.c	*rx_ready = status & _BV(RX_DR);
+	.line	1139; ../../../RF24_c/RF24_c.c	*rx_ready = status & _BV(RX_DR);
 	MOVLW	0x40
 	ANDWF	r0x09, F
 	MOVFF	r0x09, POSTDEC1
@@ -1986,9 +1986,9 @@ _RF24_whatHappened:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_read	code
+S_RF24_c__RF24_read	code
 _RF24_read:
-	.line	1118; ../../../RF24_c/RF24_cg.c	void RF24_read(void* buf, uint8_t len ){
+	.line	1118; ../../../RF24_c/RF24_c.c	void RF24_read(void* buf, uint8_t len ){
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
@@ -2003,7 +2003,7 @@ _RF24_read:
 	MOVFF	PLUSW2, r0x02
 	MOVLW	0x05
 	MOVFF	PLUSW2, r0x03
-	.line	1121; ../../../RF24_c/RF24_cg.c	RF24_read_payload( buf, len );
+	.line	1121; ../../../RF24_c/RF24_c.c	RF24_read_payload( buf, len );
 	MOVF	r0x03, W
 	MOVWF	POSTDEC1
 	MOVF	r0x02, W
@@ -2015,7 +2015,7 @@ _RF24_read:
 	CALL	_RF24_read_payload
 	MOVLW	0x04
 	ADDWF	FSR1L, F
-	.line	1124; ../../../RF24_c/RF24_cg.c	RF24_write_register_d(NRF_STATUS,_BV(RX_DR) | _BV(MAX_RT) | _BV(TX_DS) );
+	.line	1124; ../../../RF24_c/RF24_c.c	RF24_write_register_d(NRF_STATUS,_BV(RX_DR) | _BV(MAX_RT) | _BV(TX_DS) );
 	MOVLW	0x70
 	MOVWF	POSTDEC1
 	MOVLW	0x07
@@ -2031,9 +2031,9 @@ _RF24_read:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_available_p	code
+S_RF24_c__RF24_available_p	code
 _RF24_available_p:
-	.line	1098; ../../../RF24_c/RF24_cg.c	uint8_t RF24_available_p(uint8_t* pipe_num)
+	.line	1098; ../../../RF24_c/RF24_c.c	uint8_t RF24_available_p(uint8_t* pipe_num)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
@@ -2046,7 +2046,7 @@ _RF24_available_p:
 	MOVFF	PLUSW2, r0x01
 	MOVLW	0x04
 	MOVFF	PLUSW2, r0x02
-	.line	1100; ../../../RF24_c/RF24_cg.c	if (!( RF24_read_register_d(FIFO_STATUS) & _BV(RX_EMPTY) )){
+	.line	1100; ../../../RF24_c/RF24_c.c	if (!( RF24_read_register_d(FIFO_STATUS) & _BV(RX_EMPTY) )){
 	MOVLW	0x17
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
@@ -2054,15 +2054,15 @@ _RF24_available_p:
 	MOVF	POSTINC1, F
 	BTFSC	r0x03, 0
 	BRA	_00590_DS_
-	.line	1103; ../../../RF24_c/RF24_cg.c	if ( pipe_num ){
+	.line	1103; ../../../RF24_c/RF24_c.c	if ( pipe_num ){
 	MOVF	r0x00, W
 	IORWF	r0x01, W
 	IORWF	r0x02, W
 	BZ	_00588_DS_
-	.line	1104; ../../../RF24_c/RF24_cg.c	uint8_t status = RF24_get_status();
+	.line	1104; ../../../RF24_c/RF24_c.c	uint8_t status = RF24_get_status();
 	CALL	_RF24_get_status
 	MOVWF	r0x03
-	.line	1105; ../../../RF24_c/RF24_cg.c	*pipe_num = ( status >> RX_P_NO ) & 0b111;
+	.line	1105; ../../../RF24_c/RF24_c.c	*pipe_num = ( status >> RX_P_NO ) & 0b111;
 	RRNCF	r0x03, W
 	ANDLW	0x7f
 	MOVWF	r0x03
@@ -2074,11 +2074,11 @@ _RF24_available_p:
 	MOVF	r0x02, W
 	CALL	__gptrput1
 _00588_DS_:
-	.line	1107; ../../../RF24_c/RF24_cg.c	return 1;
+	.line	1107; ../../../RF24_c/RF24_c.c	return 1;
 	MOVLW	0x01
 	BRA	_00591_DS_
 _00590_DS_:
-	.line	1111; ../../../RF24_c/RF24_cg.c	return 0;
+	.line	1111; ../../../RF24_c/RF24_c.c	return 0;
 	CLRF	WREG
 _00591_DS_:
 	MOVFF	PREINC1, r0x03
@@ -2089,13 +2089,13 @@ _00591_DS_:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_available	code
+S_RF24_c__RF24_available	code
 _RF24_available:
-	.line	1091; ../../../RF24_c/RF24_cg.c	uint8_t RF24_available(void)
+	.line	1091; ../../../RF24_c/RF24_c.c	uint8_t RF24_available(void)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
-	.line	1093; ../../../RF24_c/RF24_cg.c	return RF24_available_p(NULL);
+	.line	1093; ../../../RF24_c/RF24_c.c	return RF24_available_p(NULL);
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	MOVLW	0x00
@@ -2112,28 +2112,28 @@ _RF24_available:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_getDynamicPayloadSize	code
+S_RF24_c__RF24_getDynamicPayloadSize	code
 _RF24_getDynamicPayloadSize:
-	.line	1067; ../../../RF24_c/RF24_cg.c	uint8_t RF24_getDynamicPayloadSize(void)
+	.line	1067; ../../../RF24_c/RF24_c.c	uint8_t RF24_getDynamicPayloadSize(void)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
-	.line	1079; ../../../RF24_c/RF24_cg.c	RF24_beginTransaction();
+	.line	1079; ../../../RF24_c/RF24_c.c	RF24_beginTransaction();
 	CALL	_RF24_beginTransaction
-	.line	1080; ../../../RF24_c/RF24_cg.c	SPI_transfer( R_RX_PL_WID );
+	.line	1080; ../../../RF24_c/RF24_c.c	SPI_transfer( R_RX_PL_WID );
 	MOVLW	0x60
 	MOVWF	POSTDEC1
 	CALL	_SPI_transfer
 	MOVF	POSTINC1, F
-	.line	1081; ../../../RF24_c/RF24_cg.c	result = SPI_transfer(0xff);
+	.line	1081; ../../../RF24_c/RF24_c.c	result = SPI_transfer(0xff);
 	MOVLW	0xff
 	MOVWF	POSTDEC1
 	CALL	_SPI_transfer
 	MOVWF	r0x00
 	MOVF	POSTINC1, F
-	.line	1082; ../../../RF24_c/RF24_cg.c	RF24_endTransaction();
+	.line	1082; ../../../RF24_c/RF24_c.c	RF24_endTransaction();
 	CALL	_RF24_endTransaction
-	.line	1085; ../../../RF24_c/RF24_cg.c	if(result > 32) { RF24_flush_rx();; delay(2); return 0; }
+	.line	1085; ../../../RF24_c/RF24_c.c	if(result > 32) { RF24_flush_rx();; delay(2); return 0; }
 	MOVLW	0x21
 	SUBWF	r0x00, W
 	BNC	_00571_DS_
@@ -2148,7 +2148,7 @@ _RF24_getDynamicPayloadSize:
 	CLRF	WREG
 	BRA	_00572_DS_
 _00571_DS_:
-	.line	1086; ../../../RF24_c/RF24_cg.c	return result;
+	.line	1086; ../../../RF24_c/RF24_c.c	return result;
 	MOVF	r0x00, W
 _00572_DS_:
 	MOVFF	PREINC1, r0x00
@@ -2156,9 +2156,9 @@ _00572_DS_:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_maskIRQ	code
+S_RF24_c__RF24_maskIRQ	code
 _RF24_maskIRQ:
-	.line	1055; ../../../RF24_c/RF24_cg.c	void RF24_maskIRQ(uint8_t tx, uint8_t fail, uint8_t rx){
+	.line	1055; ../../../RF24_c/RF24_c.c	void RF24_maskIRQ(uint8_t tx, uint8_t fail, uint8_t rx){
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
@@ -2173,16 +2173,16 @@ _RF24_maskIRQ:
 	MOVFF	PLUSW2, r0x01
 	MOVLW	0x04
 	MOVFF	PLUSW2, r0x02
-	.line	1057; ../../../RF24_c/RF24_cg.c	uint8_t config = RF24_read_register_d(NRF_CONFIG);
+	.line	1057; ../../../RF24_c/RF24_c.c	uint8_t config = RF24_read_register_d(NRF_CONFIG);
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
 	MOVWF	r0x03
 	MOVF	POSTINC1, F
-	.line	1059; ../../../RF24_c/RF24_cg.c	config &= ~(1 << MASK_MAX_RT | 1 << MASK_TX_DS | 1 << MASK_RX_DR);
+	.line	1059; ../../../RF24_c/RF24_c.c	config &= ~(1 << MASK_MAX_RT | 1 << MASK_TX_DS | 1 << MASK_RX_DR);
 	MOVLW	0x8f
 	ANDWF	r0x03, F
-	.line	1061; ../../../RF24_c/RF24_cg.c	config |= fail << MASK_MAX_RT | tx << MASK_TX_DS | rx << MASK_RX_DR;
+	.line	1061; ../../../RF24_c/RF24_c.c	config |= fail << MASK_MAX_RT | tx << MASK_TX_DS | rx << MASK_RX_DR;
 	SWAPF	r0x01, W
 	ANDLW	0xf0
 	MOVWF	r0x04
@@ -2202,7 +2202,7 @@ _RF24_maskIRQ:
 	MOVWF	r0x02
 	MOVF	r0x02, W
 	IORWF	r0x03, F
-	.line	1062; ../../../RF24_c/RF24_cg.c	RF24_write_register_d(NRF_CONFIG, config);
+	.line	1062; ../../../RF24_c/RF24_c.c	RF24_write_register_d(NRF_CONFIG, config);
 	MOVF	r0x03, W
 	MOVWF	POSTDEC1
 	MOVLW	0x00
@@ -2220,9 +2220,9 @@ _RF24_maskIRQ:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_txStandBy_t	code
+S_RF24_c__RF24_txStandBy_t	code
 _RF24_txStandBy_t:
-	.line	1018; ../../../RF24_c/RF24_cg.c	uint8_t RF24_txStandBy_t(uint32_t timeout, uint8_t startTx){
+	.line	1018; ../../../RF24_c/RF24_c.c	uint8_t RF24_txStandBy_t(uint32_t timeout, uint8_t startTx){
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
@@ -2247,25 +2247,25 @@ _RF24_txStandBy_t:
 	MOVFF	PLUSW2, r0x03
 	MOVLW	0x06
 	MOVFF	PLUSW2, r0x04
-	.line	1021; ../../../RF24_c/RF24_cg.c	if(startTx){
+	.line	1021; ../../../RF24_c/RF24_c.c	if(startTx){
 	MOVF	r0x04, W
 	BZ	_00533_DS_
-	.line	1022; ../../../RF24_c/RF24_cg.c	RF24_stopListening();
+	.line	1022; ../../../RF24_c/RF24_c.c	RF24_stopListening();
 	CALL	_RF24_stopListening
-	.line	1023; ../../../RF24_c/RF24_cg.c	RF24_ce_d(HIGH);
+	.line	1023; ../../../RF24_c/RF24_c.c	RF24_ce_d(HIGH);
 	MOVLW	0x01
 	MOVWF	POSTDEC1
 	CALL	_RF24_ce_d
 	MOVF	POSTINC1, F
 _00533_DS_:
-	.line	1026; ../../../RF24_c/RF24_cg.c	start = millis();
+	.line	1026; ../../../RF24_c/RF24_c.c	start = millis();
 	CALL	_millis
 	MOVWF	r0x04
 	MOVFF	PRODL, r0x05
 	MOVFF	PRODH, r0x06
 	MOVFF	FSR0L, r0x07
 _00538_DS_:
-	.line	1028; ../../../RF24_c/RF24_cg.c	while( ! (RF24_read_register_d(FIFO_STATUS) & _BV(TX_EMPTY)) ){
+	.line	1028; ../../../RF24_c/RF24_c.c	while( ! (RF24_read_register_d(FIFO_STATUS) & _BV(TX_EMPTY)) ){
 	MOVLW	0x17
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
@@ -2273,12 +2273,12 @@ _00538_DS_:
 	MOVF	POSTINC1, F
 	BTFSC	r0x08, 4
 	BRA	_00540_DS_
-	.line	1029; ../../../RF24_c/RF24_cg.c	if( RF24_get_status() & _BV(MAX_RT)){
+	.line	1029; ../../../RF24_c/RF24_c.c	if( RF24_get_status() & _BV(MAX_RT)){
 	CALL	_RF24_get_status
 	MOVWF	r0x08
 	BTFSS	r0x08, 4
 	BRA	_00538_DS_
-	.line	1030; ../../../RF24_c/RF24_cg.c	RF24_write_register_d(NRF_STATUS,_BV(MAX_RT) );
+	.line	1030; ../../../RF24_c/RF24_c.c	RF24_write_register_d(NRF_STATUS,_BV(MAX_RT) );
 	MOVLW	0x10
 	MOVWF	POSTDEC1
 	MOVLW	0x07
@@ -2286,17 +2286,17 @@ _00538_DS_:
 	CALL	_RF24_write_register_d
 	MOVF	POSTINC1, F
 	MOVF	POSTINC1, F
-	.line	1031; ../../../RF24_c/RF24_cg.c	RF24_ce_d(LOW);										  //Set re-transmit
+	.line	1031; ../../../RF24_c/RF24_c.c	RF24_ce_d(LOW);										  //Set re-transmit
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	CALL	_RF24_ce_d
 	MOVF	POSTINC1, F
-	.line	1032; ../../../RF24_c/RF24_cg.c	RF24_ce_d(HIGH);
+	.line	1032; ../../../RF24_c/RF24_c.c	RF24_ce_d(HIGH);
 	MOVLW	0x01
 	MOVWF	POSTDEC1
 	CALL	_RF24_ce_d
 	MOVF	POSTINC1, F
-	.line	1033; ../../../RF24_c/RF24_cg.c	if(millis() - start >= timeout){
+	.line	1033; ../../../RF24_c/RF24_c.c	if(millis() - start >= timeout){
 	CALL	_millis
 	MOVWF	r0x08
 	MOVFF	PRODL, r0x09
@@ -2324,7 +2324,7 @@ _00538_DS_:
 _00560_DS_:
 	BTFSS	STATUS, 0
 	BRA	_00538_DS_
-	.line	1034; ../../../RF24_c/RF24_cg.c	RF24_ce_d(LOW); RF24_flush_tx();; return 0;
+	.line	1034; ../../../RF24_c/RF24_c.c	RF24_ce_d(LOW); RF24_flush_tx();; return 0;
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	CALL	_RF24_ce_d
@@ -2333,12 +2333,12 @@ _00560_DS_:
 	CLRF	WREG
 	BRA	_00541_DS_
 _00540_DS_:
-	.line	1048; ../../../RF24_c/RF24_cg.c	RF24_ce_d(LOW);				   //Set STANDBY-I mode
+	.line	1048; ../../../RF24_c/RF24_c.c	RF24_ce_d(LOW);				   //Set STANDBY-I mode
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	CALL	_RF24_ce_d
 	MOVF	POSTINC1, F
-	.line	1049; ../../../RF24_c/RF24_cg.c	return 1;
+	.line	1049; ../../../RF24_c/RF24_c.c	return 1;
 	MOVLW	0x01
 _00541_DS_:
 	MOVFF	PREINC1, r0x0b
@@ -2357,14 +2357,14 @@ _00541_DS_:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_txStandBy	code
+S_RF24_c__RF24_txStandBy	code
 _RF24_txStandBy:
-	.line	990; ../../../RF24_c/RF24_cg.c	uint8_t RF24_txStandBy(void){
+	.line	990; ../../../RF24_c/RF24_c.c	uint8_t RF24_txStandBy(void){
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
 _00512_DS_:
-	.line	995; ../../../RF24_c/RF24_cg.c	while( ! (RF24_read_register_d(FIFO_STATUS) & _BV(TX_EMPTY)) ){
+	.line	995; ../../../RF24_c/RF24_c.c	while( ! (RF24_read_register_d(FIFO_STATUS) & _BV(TX_EMPTY)) ){
 	MOVLW	0x17
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
@@ -2372,12 +2372,12 @@ _00512_DS_:
 	MOVF	POSTINC1, F
 	BTFSC	r0x00, 4
 	BRA	_00514_DS_
-	.line	996; ../../../RF24_c/RF24_cg.c	if( RF24_get_status() & _BV(MAX_RT)){
+	.line	996; ../../../RF24_c/RF24_c.c	if( RF24_get_status() & _BV(MAX_RT)){
 	CALL	_RF24_get_status
 	MOVWF	r0x00
 	BTFSS	r0x00, 4
 	BRA	_00512_DS_
-	.line	997; ../../../RF24_c/RF24_cg.c	RF24_write_register_d(NRF_STATUS,_BV(MAX_RT) );
+	.line	997; ../../../RF24_c/RF24_c.c	RF24_write_register_d(NRF_STATUS,_BV(MAX_RT) );
 	MOVLW	0x10
 	MOVWF	POSTDEC1
 	MOVLW	0x07
@@ -2385,23 +2385,23 @@ _00512_DS_:
 	CALL	_RF24_write_register_d
 	MOVF	POSTINC1, F
 	MOVF	POSTINC1, F
-	.line	998; ../../../RF24_c/RF24_cg.c	RF24_ce_d(LOW);
+	.line	998; ../../../RF24_c/RF24_c.c	RF24_ce_d(LOW);
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	CALL	_RF24_ce_d
 	MOVF	POSTINC1, F
-	.line	999; ../../../RF24_c/RF24_cg.c	RF24_flush_tx();;    //Non blocking, flush the data
+	.line	999; ../../../RF24_c/RF24_c.c	RF24_flush_tx();;    //Non blocking, flush the data
 	CALL	_RF24_flush_tx
-	.line	1000; ../../../RF24_c/RF24_cg.c	return 0;
+	.line	1000; ../../../RF24_c/RF24_c.c	return 0;
 	CLRF	WREG
 	BRA	_00515_DS_
 _00514_DS_:
-	.line	1012; ../../../RF24_c/RF24_cg.c	RF24_ce_d(LOW);			   //Set STANDBY-I mode
+	.line	1012; ../../../RF24_c/RF24_c.c	RF24_ce_d(LOW);			   //Set STANDBY-I mode
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	CALL	_RF24_ce_d
 	MOVF	POSTINC1, F
-	.line	1013; ../../../RF24_c/RF24_cg.c	return 1;
+	.line	1013; ../../../RF24_c/RF24_c.c	return 1;
 	MOVLW	0x01
 _00515_DS_:
 	MOVFF	PREINC1, r0x00
@@ -2409,13 +2409,13 @@ _00515_DS_:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_rxFifoFull	code
+S_RF24_c__RF24_rxFifoFull	code
 _RF24_rxFifoFull:
-	.line	985; ../../../RF24_c/RF24_cg.c	uint8_t RF24_rxFifoFull(void){
+	.line	985; ../../../RF24_c/RF24_c.c	uint8_t RF24_rxFifoFull(void){
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
-	.line	986; ../../../RF24_c/RF24_cg.c	return RF24_read_register_d(FIFO_STATUS) & _BV(RX_FULL);
+	.line	986; ../../../RF24_c/RF24_c.c	return RF24_read_register_d(FIFO_STATUS) & _BV(RX_FULL);
 	MOVLW	0x17
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
@@ -2429,9 +2429,9 @@ _RF24_rxFifoFull:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_startWrite	code
+S_RF24_c__RF24_startWrite	code
 _RF24_startWrite:
-	.line	968; ../../../RF24_c/RF24_cg.c	void RF24_startWrite(const void* buf, uint8_t len, const uint8_t multicast ){
+	.line	968; ../../../RF24_c/RF24_c.c	void RF24_startWrite(const void* buf, uint8_t len, const uint8_t multicast ){
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
@@ -2449,7 +2449,7 @@ _RF24_startWrite:
 	MOVFF	PLUSW2, r0x03
 	MOVLW	0x06
 	MOVFF	PLUSW2, r0x04
-	.line	973; ../../../RF24_c/RF24_cg.c	RF24_write_payload( buf, len,multicast? W_TX_PAYLOAD_NO_ACK : W_TX_PAYLOAD ) ;
+	.line	973; ../../../RF24_c/RF24_c.c	RF24_write_payload( buf, len,multicast? W_TX_PAYLOAD_NO_ACK : W_TX_PAYLOAD ) ;
 	MOVF	r0x04, W
 	BZ	_00499_DS_
 	MOVLW	0xb0
@@ -2472,17 +2472,17 @@ _00500_DS_:
 	CALL	_RF24_write_payload
 	MOVLW	0x05
 	ADDWF	FSR1L, F
-	.line	974; ../../../RF24_c/RF24_cg.c	RF24_ce_d(HIGH);
+	.line	974; ../../../RF24_c/RF24_c.c	RF24_ce_d(HIGH);
 	MOVLW	0x01
 	MOVWF	POSTDEC1
 	CALL	_RF24_ce_d
 	MOVF	POSTINC1, F
-	.line	976; ../../../RF24_c/RF24_cg.c	delayMicroseconds(10);
+	.line	976; ../../../RF24_c/RF24_c.c	delayMicroseconds(10);
 	MOVLW	0x0a
 	MOVWF	POSTDEC1
 	CALL	_delayMicroseconds
 	MOVF	POSTINC1, F
-	.line	978; ../../../RF24_c/RF24_cg.c	RF24_ce_d(LOW);
+	.line	978; ../../../RF24_c/RF24_c.c	RF24_ce_d(LOW);
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	CALL	_RF24_ce_d
@@ -2496,9 +2496,9 @@ _00500_DS_:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_startFastWrite	code
+S_RF24_c__RF24_startFastWrite	code
 _RF24_startFastWrite:
-	.line	954; ../../../RF24_c/RF24_cg.c	void RF24_startFastWrite(const void* buf, uint8_t len, const uint8_t multicast, uint8_t startTx){ //TMRh20
+	.line	954; ../../../RF24_c/RF24_c.c	void RF24_startFastWrite(const void* buf, uint8_t len, const uint8_t multicast, uint8_t startTx){ //TMRh20
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
@@ -2519,7 +2519,7 @@ _RF24_startFastWrite:
 	MOVFF	PLUSW2, r0x04
 	MOVLW	0x07
 	MOVFF	PLUSW2, r0x05
-	.line	957; ../../../RF24_c/RF24_cg.c	RF24_write_payload( buf, len,multicast ? W_TX_PAYLOAD_NO_ACK : W_TX_PAYLOAD ) ;
+	.line	957; ../../../RF24_c/RF24_c.c	RF24_write_payload( buf, len,multicast ? W_TX_PAYLOAD_NO_ACK : W_TX_PAYLOAD ) ;
 	MOVF	r0x04, W
 	BZ	_00491_DS_
 	MOVLW	0xb0
@@ -2542,10 +2542,10 @@ _00492_DS_:
 	CALL	_RF24_write_payload
 	MOVLW	0x05
 	ADDWF	FSR1L, F
-	.line	958; ../../../RF24_c/RF24_cg.c	if(startTx){
+	.line	958; ../../../RF24_c/RF24_c.c	if(startTx){
 	MOVF	r0x05, W
 	BZ	_00489_DS_
-	.line	959; ../../../RF24_c/RF24_cg.c	RF24_ce_d(HIGH);
+	.line	959; ../../../RF24_c/RF24_c.c	RF24_ce_d(HIGH);
 	MOVLW	0x01
 	MOVWF	POSTDEC1
 	CALL	_RF24_ce_d
@@ -2561,9 +2561,9 @@ _00489_DS_:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_writeFast	code
+S_RF24_c__RF24_writeFast	code
 _RF24_writeFast:
-	.line	943; ../../../RF24_c/RF24_cg.c	uint8_t RF24_writeFast(const void* buf, uint8_t len ){
+	.line	943; ../../../RF24_c/RF24_c.c	uint8_t RF24_writeFast(const void* buf, uint8_t len ){
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
@@ -2578,7 +2578,7 @@ _RF24_writeFast:
 	MOVFF	PLUSW2, r0x02
 	MOVLW	0x05
 	MOVFF	PLUSW2, r0x03
-	.line	944; ../../../RF24_c/RF24_cg.c	return RF24_writeFast_m(buf,len,0);
+	.line	944; ../../../RF24_c/RF24_c.c	return RF24_writeFast_m(buf,len,0);
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	MOVF	r0x03, W
@@ -2602,9 +2602,9 @@ _RF24_writeFast:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_writeFast_m	code
+S_RF24_c__RF24_writeFast_m	code
 _RF24_writeFast_m:
-	.line	909; ../../../RF24_c/RF24_cg.c	uint8_t RF24_writeFast_m( const void* buf, uint8_t len, const uint8_t multicast )
+	.line	909; ../../../RF24_c/RF24_c.c	uint8_t RF24_writeFast_m( const void* buf, uint8_t len, const uint8_t multicast )
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
@@ -2624,17 +2624,17 @@ _RF24_writeFast_m:
 	MOVLW	0x06
 	MOVFF	PLUSW2, r0x04
 _00462_DS_:
-	.line	920; ../../../RF24_c/RF24_cg.c	while( ( RF24_get_status()  & ( _BV(TX_FULL) ))) {			  //Blocking only if FIFO is full. This will loop and block until TX is successful or fail
+	.line	920; ../../../RF24_c/RF24_c.c	while( ( RF24_get_status()  & ( _BV(TX_FULL) ))) {			  //Blocking only if FIFO is full. This will loop and block until TX is successful or fail
 	CALL	_RF24_get_status
 	MOVWF	r0x05
 	BTFSS	r0x05, 0
 	BRA	_00464_DS_
-	.line	922; ../../../RF24_c/RF24_cg.c	if( RF24_get_status() & _BV(MAX_RT)){
+	.line	922; ../../../RF24_c/RF24_c.c	if( RF24_get_status() & _BV(MAX_RT)){
 	CALL	_RF24_get_status
 	MOVWF	r0x05
 	BTFSS	r0x05, 4
 	BRA	_00462_DS_
-	.line	924; ../../../RF24_c/RF24_cg.c	RF24_write_register_d(NRF_STATUS,_BV(MAX_RT) );			  //Clear max retry flag
+	.line	924; ../../../RF24_c/RF24_c.c	RF24_write_register_d(NRF_STATUS,_BV(MAX_RT) );			  //Clear max retry flag
 	MOVLW	0x10
 	MOVWF	POSTDEC1
 	MOVLW	0x07
@@ -2642,11 +2642,11 @@ _00462_DS_:
 	CALL	_RF24_write_register_d
 	MOVF	POSTINC1, F
 	MOVF	POSTINC1, F
-	.line	925; ../../../RF24_c/RF24_cg.c	return 0;										  //Return 0. The previous payload has been retransmitted
+	.line	925; ../../../RF24_c/RF24_c.c	return 0;										  //Return 0. The previous payload has been retransmitted
 	CLRF	WREG
 	BRA	_00465_DS_
 _00464_DS_:
-	.line	938; ../../../RF24_c/RF24_cg.c	RF24_startFastWrite(buf,len,multicast,1);
+	.line	938; ../../../RF24_c/RF24_c.c	RF24_startFastWrite(buf,len,multicast,1);
 	MOVLW	0x01
 	MOVWF	POSTDEC1
 	MOVF	r0x04, W
@@ -2662,7 +2662,7 @@ _00464_DS_:
 	CALL	_RF24_startFastWrite
 	MOVLW	0x06
 	ADDWF	FSR1L, F
-	.line	940; ../../../RF24_c/RF24_cg.c	return 1;
+	.line	940; ../../../RF24_c/RF24_c.c	return 1;
 	MOVLW	0x01
 _00465_DS_:
 	MOVFF	PREINC1, r0x05
@@ -2675,12 +2675,12 @@ _00465_DS_:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_reUseTX	code
+S_RF24_c__RF24_reUseTX	code
 _RF24_reUseTX:
-	.line	900; ../../../RF24_c/RF24_cg.c	void RF24_reUseTX(void){
+	.line	900; ../../../RF24_c/RF24_c.c	void RF24_reUseTX(void){
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
-	.line	901; ../../../RF24_c/RF24_cg.c	RF24_write_register_d(NRF_STATUS,_BV(MAX_RT) );			  //Clear max retry flag
+	.line	901; ../../../RF24_c/RF24_c.c	RF24_write_register_d(NRF_STATUS,_BV(MAX_RT) );			  //Clear max retry flag
 	MOVLW	0x10
 	MOVWF	POSTDEC1
 	MOVLW	0x07
@@ -2688,17 +2688,17 @@ _RF24_reUseTX:
 	CALL	_RF24_write_register_d
 	MOVF	POSTINC1, F
 	MOVF	POSTINC1, F
-	.line	902; ../../../RF24_c/RF24_cg.c	RF24_spiTrans(REUSE_TX_PL );
+	.line	902; ../../../RF24_c/RF24_c.c	RF24_spiTrans(REUSE_TX_PL );
 	MOVLW	0xe3
 	MOVWF	POSTDEC1
 	CALL	_RF24_spiTrans
 	MOVF	POSTINC1, F
-	.line	903; ../../../RF24_c/RF24_cg.c	RF24_ce_d(LOW);										  //Re-Transfer packet
+	.line	903; ../../../RF24_c/RF24_c.c	RF24_ce_d(LOW);										  //Re-Transfer packet
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	CALL	_RF24_ce_d
 	MOVF	POSTINC1, F
-	.line	904; ../../../RF24_c/RF24_cg.c	RF24_ce_d(HIGH);
+	.line	904; ../../../RF24_c/RF24_c.c	RF24_ce_d(HIGH);
 	MOVLW	0x01
 	MOVWF	POSTDEC1
 	CALL	_RF24_ce_d
@@ -2707,9 +2707,9 @@ _RF24_reUseTX:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_writeBlocking	code
+S_RF24_c__RF24_writeBlocking	code
 _RF24_writeBlocking:
-	.line	866; ../../../RF24_c/RF24_cg.c	uint8_t RF24_writeBlocking(const void* buf, uint8_t len, uint32_t timeout )
+	.line	866; ../../../RF24_c/RF24_c.c	uint8_t RF24_writeBlocking(const void* buf, uint8_t len, uint32_t timeout )
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
@@ -2744,26 +2744,26 @@ _RF24_writeBlocking:
 	MOVFF	PLUSW2, r0x06
 	MOVLW	0x09
 	MOVFF	PLUSW2, r0x07
-	.line	873; ../../../RF24_c/RF24_cg.c	uint32_t timer = millis();							  //Get the time that the payload transmission started
+	.line	873; ../../../RF24_c/RF24_c.c	uint32_t timer = millis();							  //Get the time that the payload transmission started
 	CALL	_millis
 	MOVWF	r0x08
 	MOVFF	PRODL, r0x09
 	MOVFF	PRODH, r0x0a
 	MOVFF	FSR0L, r0x0b
 _00431_DS_:
-	.line	875; ../../../RF24_c/RF24_cg.c	while( ( RF24_get_status()  & ( _BV(TX_FULL) ))) {		  //Blocking only if FIFO is full. This will loop and block until TX is successful or timeout
+	.line	875; ../../../RF24_c/RF24_c.c	while( ( RF24_get_status()  & ( _BV(TX_FULL) ))) {		  //Blocking only if FIFO is full. This will loop and block until TX is successful or timeout
 	CALL	_RF24_get_status
 	MOVWF	r0x0c
 	BTFSS	r0x0c, 0
 	BRA	_00433_DS_
-	.line	877; ../../../RF24_c/RF24_cg.c	if( RF24_get_status() & _BV(MAX_RT)){					  //If MAX Retries have been reached
+	.line	877; ../../../RF24_c/RF24_c.c	if( RF24_get_status() & _BV(MAX_RT)){					  //If MAX Retries have been reached
 	CALL	_RF24_get_status
 	MOVWF	r0x0c
 	BTFSS	r0x0c, 4
 	BRA	_00431_DS_
-	.line	878; ../../../RF24_c/RF24_cg.c	RF24_reUseTX();										  //Set re-transmit and clear the MAX_RT interrupt flag
+	.line	878; ../../../RF24_c/RF24_c.c	RF24_reUseTX();										  //Set re-transmit and clear the MAX_RT interrupt flag
 	CALL	_RF24_reUseTX
-	.line	879; ../../../RF24_c/RF24_cg.c	if(millis() - timer > timeout){ return 0; }		  //If this payload has exceeded the user-defined timeout, exit and return 0
+	.line	879; ../../../RF24_c/RF24_c.c	if(millis() - timer > timeout){ return 0; }		  //If this payload has exceeded the user-defined timeout, exit and return 0
 	CALL	_millis
 	MOVWF	r0x0c
 	MOVFF	PRODL, r0x0d
@@ -2793,7 +2793,7 @@ _00450_DS_:
 	CLRF	WREG
 	BRA	_00434_DS_
 _00433_DS_:
-	.line	893; ../../../RF24_c/RF24_cg.c	RF24_startFastWrite(buf,len,0,1);								  //Write the payload if a buffer is clear
+	.line	893; ../../../RF24_c/RF24_c.c	RF24_startFastWrite(buf,len,0,1);								  //Write the payload if a buffer is clear
 	MOVLW	0x01
 	MOVWF	POSTDEC1
 	MOVLW	0x00
@@ -2809,7 +2809,7 @@ _00433_DS_:
 	CALL	_RF24_startFastWrite
 	MOVLW	0x06
 	ADDWF	FSR1L, F
-	.line	895; ../../../RF24_c/RF24_cg.c	return 1;												  //Return 1 to indicate successful transmission
+	.line	895; ../../../RF24_c/RF24_c.c	return 1;												  //Return 1 to indicate successful transmission
 	MOVLW	0x01
 _00434_DS_:
 	MOVFF	PREINC1, r0x0f
@@ -2832,9 +2832,9 @@ _00434_DS_:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_write	code
+S_RF24_c__RF24_write	code
 _RF24_write:
-	.line	860; ../../../RF24_c/RF24_cg.c	uint8_t RF24_write(const void* buf, uint8_t len ){
+	.line	860; ../../../RF24_c/RF24_c.c	uint8_t RF24_write(const void* buf, uint8_t len ){
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
@@ -2849,7 +2849,7 @@ _RF24_write:
 	MOVFF	PLUSW2, r0x02
 	MOVLW	0x05
 	MOVFF	PLUSW2, r0x03
-	.line	861; ../../../RF24_c/RF24_cg.c	return RF24_write_m(buf,len,0);
+	.line	861; ../../../RF24_c/RF24_c.c	return RF24_write_m(buf,len,0);
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	MOVF	r0x03, W
@@ -2873,9 +2873,9 @@ _RF24_write:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_write_m	code
+S_RF24_c__RF24_write_m	code
 _RF24_write_m:
-	.line	822; ../../../RF24_c/RF24_cg.c	uint8_t RF24_write_m( const void* buf, uint8_t len, const uint8_t multicast )
+	.line	822; ../../../RF24_c/RF24_c.c	uint8_t RF24_write_m( const void* buf, uint8_t len, const uint8_t multicast )
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
@@ -2893,7 +2893,7 @@ _RF24_write_m:
 	MOVFF	PLUSW2, r0x03
 	MOVLW	0x06
 	MOVFF	PLUSW2, r0x04
-	.line	827; ../../../RF24_c/RF24_cg.c	RF24_startFastWrite(buf,len,multicast,1);
+	.line	827; ../../../RF24_c/RF24_c.c	RF24_startFastWrite(buf,len,multicast,1);
 	MOVLW	0x01
 	MOVWF	POSTDEC1
 	MOVF	r0x04, W
@@ -2910,18 +2910,18 @@ _RF24_write_m:
 	MOVLW	0x06
 	ADDWF	FSR1L, F
 _00400_DS_:
-	.line	834; ../../../RF24_c/RF24_cg.c	while( ! ( RF24_get_status()  & ( _BV(TX_DS) | _BV(MAX_RT) ))) { 
+	.line	834; ../../../RF24_c/RF24_c.c	while( ! ( RF24_get_status()  & ( _BV(TX_DS) | _BV(MAX_RT) ))) { 
 	CALL	_RF24_get_status
 	MOVWF	r0x00
 	MOVF	r0x00, W
 	ANDLW	0x30
 	BZ	_00400_DS_
-	.line	847; ../../../RF24_c/RF24_cg.c	RF24_ce_d(LOW);
+	.line	847; ../../../RF24_c/RF24_c.c	RF24_ce_d(LOW);
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	CALL	_RF24_ce_d
 	MOVF	POSTINC1, F
-	.line	849; ../../../RF24_c/RF24_cg.c	status = RF24_write_register_d(NRF_STATUS,_BV(RX_DR) | _BV(TX_DS) | _BV(MAX_RT) );
+	.line	849; ../../../RF24_c/RF24_c.c	status = RF24_write_register_d(NRF_STATUS,_BV(RX_DR) | _BV(TX_DS) | _BV(MAX_RT) );
 	MOVLW	0x70
 	MOVWF	POSTDEC1
 	MOVLW	0x07
@@ -2930,16 +2930,16 @@ _00400_DS_:
 	MOVWF	r0x00
 	MOVF	POSTINC1, F
 	MOVF	POSTINC1, F
-	.line	852; ../../../RF24_c/RF24_cg.c	if( status & _BV(MAX_RT)){
+	.line	852; ../../../RF24_c/RF24_c.c	if( status & _BV(MAX_RT)){
 	BTFSS	r0x00, 4
 	BRA	_00404_DS_
-	.line	853; ../../../RF24_c/RF24_cg.c	RF24_flush_tx(); //Only going to be 1 packet int the FIFO at a time using this method, so just flush
+	.line	853; ../../../RF24_c/RF24_c.c	RF24_flush_tx(); //Only going to be 1 packet int the FIFO at a time using this method, so just flush
 	CALL	_RF24_flush_tx
-	.line	854; ../../../RF24_c/RF24_cg.c	return 0;
+	.line	854; ../../../RF24_c/RF24_c.c	return 0;
 	CLRF	WREG
 	BRA	_00405_DS_
 _00404_DS_:
-	.line	857; ../../../RF24_c/RF24_cg.c	return 1;
+	.line	857; ../../../RF24_c/RF24_c.c	return 1;
 	MOVLW	0x01
 _00405_DS_:
 	MOVFF	PREINC1, r0x04
@@ -2951,22 +2951,22 @@ _00405_DS_:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_powerUp	code
+S_RF24_c__RF24_powerUp	code
 _RF24_powerUp:
-	.line	791; ../../../RF24_c/RF24_cg.c	void RF24_powerUp(void)
+	.line	791; ../../../RF24_c/RF24_c.c	void RF24_powerUp(void)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
-	.line	793; ../../../RF24_c/RF24_cg.c	uint8_t cfg = RF24_read_register_d(NRF_CONFIG);
+	.line	793; ../../../RF24_c/RF24_c.c	uint8_t cfg = RF24_read_register_d(NRF_CONFIG);
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
 	MOVWF	r0x00
 	MOVF	POSTINC1, F
-	.line	796; ../../../RF24_c/RF24_cg.c	if (!(cfg & _BV(PWR_UP))){
+	.line	796; ../../../RF24_c/RF24_c.c	if (!(cfg & _BV(PWR_UP))){
 	BTFSC	r0x00, 1
 	BRA	_00390_DS_
-	.line	797; ../../../RF24_c/RF24_cg.c	RF24_write_register_d(NRF_CONFIG, cfg | _BV(PWR_UP));
+	.line	797; ../../../RF24_c/RF24_c.c	RF24_write_register_d(NRF_CONFIG, cfg | _BV(PWR_UP));
 	BSF	r0x00, 1
 	MOVF	r0x00, W
 	MOVWF	POSTDEC1
@@ -2975,7 +2975,7 @@ _RF24_powerUp:
 	CALL	_RF24_write_register_d
 	MOVF	POSTINC1, F
 	MOVF	POSTINC1, F
-	.line	802; ../../../RF24_c/RF24_cg.c	delay(5);
+	.line	802; ../../../RF24_c/RF24_c.c	delay(5);
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	MOVLW	0x05
@@ -2989,18 +2989,18 @@ _00390_DS_:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_powerDown	code
+S_RF24_c__RF24_powerDown	code
 _RF24_powerDown:
-	.line	782; ../../../RF24_c/RF24_cg.c	void RF24_powerDown(void)
+	.line	782; ../../../RF24_c/RF24_c.c	void RF24_powerDown(void)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
-	.line	784; ../../../RF24_c/RF24_cg.c	RF24_ce_d(LOW); // Guarantee CE is low on powerDown
+	.line	784; ../../../RF24_c/RF24_c.c	RF24_ce_d(LOW); // Guarantee CE is low on powerDown
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	CALL	_RF24_ce_d
 	MOVF	POSTINC1, F
-	.line	785; ../../../RF24_c/RF24_cg.c	RF24_write_register_d(NRF_CONFIG,RF24_read_register_d(NRF_CONFIG) & ~_BV(PWR_UP));
+	.line	785; ../../../RF24_c/RF24_c.c	RF24_write_register_d(NRF_CONFIG,RF24_read_register_d(NRF_CONFIG) & ~_BV(PWR_UP));
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
@@ -3019,28 +3019,28 @@ _RF24_powerDown:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_stopListening	code
+S_RF24_c__RF24_stopListening	code
 _RF24_stopListening:
-	.line	754; ../../../RF24_c/RF24_cg.c	void RF24_stopListening(void)
+	.line	754; ../../../RF24_c/RF24_c.c	void RF24_stopListening(void)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
 	MOVFF	r0x01, POSTDEC1
 	MOVFF	r0x02, POSTDEC1
-	.line	756; ../../../RF24_c/RF24_cg.c	RF24_ce_d(LOW);
+	.line	756; ../../../RF24_c/RF24_c.c	RF24_ce_d(LOW);
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	CALL	_RF24_ce_d
 	MOVF	POSTINC1, F
 	BANKSEL	(_rf + 13)
-	.line	758; ../../../RF24_c/RF24_cg.c	delayMicroseconds(rf.txDelay);
+	.line	758; ../../../RF24_c/RF24_c.c	delayMicroseconds(rf.txDelay);
 	MOVF	(_rf + 13), W, B
 	MOVWF	r0x00
 	MOVF	r0x00, W
 	MOVWF	POSTDEC1
 	CALL	_delayMicroseconds
 	MOVF	POSTINC1, F
-	.line	760; ../../../RF24_c/RF24_cg.c	if(RF24_read_register_d(FEATURE) & _BV(EN_ACK_PAY)){
+	.line	760; ../../../RF24_c/RF24_c.c	if(RF24_read_register_d(FEATURE) & _BV(EN_ACK_PAY)){
 	MOVLW	0x1d
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
@@ -3049,17 +3049,17 @@ _RF24_stopListening:
 	BTFSS	r0x00, 1
 	BRA	_00369_DS_
 	BANKSEL	(_rf + 13)
-	.line	761; ../../../RF24_c/RF24_cg.c	delayMicroseconds(rf.txDelay); //200
+	.line	761; ../../../RF24_c/RF24_c.c	delayMicroseconds(rf.txDelay); //200
 	MOVF	(_rf + 13), W, B
 	MOVWF	r0x00
 	MOVF	r0x00, W
 	MOVWF	POSTDEC1
 	CALL	_delayMicroseconds
 	MOVF	POSTINC1, F
-	.line	762; ../../../RF24_c/RF24_cg.c	RF24_flush_tx();
+	.line	762; ../../../RF24_c/RF24_c.c	RF24_flush_tx();
 	CALL	_RF24_flush_tx
 _00369_DS_:
-	.line	765; ../../../RF24_c/RF24_cg.c	RF24_write_register_d(NRF_CONFIG, ( RF24_read_register_d(NRF_CONFIG) ) & ~_BV(PRIM_RX) );
+	.line	765; ../../../RF24_c/RF24_c.c	RF24_write_register_d(NRF_CONFIG, ( RF24_read_register_d(NRF_CONFIG) ) & ~_BV(PRIM_RX) );
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
@@ -3073,7 +3073,7 @@ _00369_DS_:
 	CALL	_RF24_write_register_d
 	MOVF	POSTINC1, F
 	MOVF	POSTINC1, F
-	.line	774; ../../../RF24_c/RF24_cg.c	RF24_write_register_d(EN_RXADDR,RF24_read_register_d(EN_RXADDR) | _BV(pgm_read_byte(&child_pipe_enable[0]))); // Enable RX on pipe0
+	.line	774; ../../../RF24_c/RF24_c.c	RF24_write_register_d(EN_RXADDR,RF24_read_register_d(EN_RXADDR) | _BV(pgm_read_byte(&child_pipe_enable[0]))); // Enable RX on pipe0
 	MOVLW	0x02
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
@@ -3114,17 +3114,17 @@ _00377_DS_:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_startListening	code
+S_RF24_c__RF24_startListening	code
 _RF24_startListening:
-	.line	723; ../../../RF24_c/RF24_cg.c	void RF24_startListening(void)
+	.line	723; ../../../RF24_c/RF24_c.c	void RF24_startListening(void)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
 	MOVFF	r0x01, POSTDEC1
 	MOVFF	r0x02, POSTDEC1
-	.line	726; ../../../RF24_c/RF24_cg.c	RF24_powerUp();
+	.line	726; ../../../RF24_c/RF24_c.c	RF24_powerUp();
 	CALL	_RF24_powerUp
-	.line	728; ../../../RF24_c/RF24_cg.c	RF24_write_register_d(NRF_CONFIG, RF24_read_register_d(NRF_CONFIG) | _BV(PRIM_RX));
+	.line	728; ../../../RF24_c/RF24_c.c	RF24_write_register_d(NRF_CONFIG, RF24_read_register_d(NRF_CONFIG) | _BV(PRIM_RX));
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
@@ -3138,7 +3138,7 @@ _RF24_startListening:
 	CALL	_RF24_write_register_d
 	MOVF	POSTINC1, F
 	MOVF	POSTINC1, F
-	.line	729; ../../../RF24_c/RF24_cg.c	RF24_write_register_d(NRF_STATUS, _BV(RX_DR) | _BV(TX_DS) | _BV(MAX_RT) );
+	.line	729; ../../../RF24_c/RF24_c.c	RF24_write_register_d(NRF_STATUS, _BV(RX_DR) | _BV(TX_DS) | _BV(MAX_RT) );
 	MOVLW	0x70
 	MOVWF	POSTDEC1
 	MOVLW	0x07
@@ -3146,16 +3146,16 @@ _RF24_startListening:
 	CALL	_RF24_write_register_d
 	MOVF	POSTINC1, F
 	MOVF	POSTINC1, F
-	.line	730; ../../../RF24_c/RF24_cg.c	RF24_ce_d(HIGH);
+	.line	730; ../../../RF24_c/RF24_c.c	RF24_ce_d(HIGH);
 	MOVLW	0x01
 	MOVWF	POSTDEC1
 	CALL	_RF24_ce_d
 	MOVF	POSTINC1, F
 	BANKSEL	(_rf + 7)
-	.line	732; ../../../RF24_c/RF24_cg.c	if (rf.pipe0_reading_address[0] > 0){
+	.line	732; ../../../RF24_c/RF24_c.c	if (rf.pipe0_reading_address[0] > 0){
 	MOVF	(_rf + 7), W, B
 	BZ	_00350_DS_
-	.line	733; ../../../RF24_c/RF24_cg.c	RF24_write_register_c_d(RX_ADDR_P0, rf.pipe0_reading_address, rf.addr_width);	
+	.line	733; ../../../RF24_c/RF24_c.c	RF24_write_register_c_d(RX_ADDR_P0, rf.pipe0_reading_address, rf.addr_width);	
 	MOVLW	HIGH(_rf + 7)
 	MOVWF	r0x01
 	MOVLW	LOW(_rf + 7)
@@ -3178,13 +3178,13 @@ _RF24_startListening:
 	ADDWF	FSR1L, F
 	BRA	_00351_DS_
 _00350_DS_:
-	.line	735; ../../../RF24_c/RF24_cg.c	RF24_closeReadingPipe(0);
+	.line	735; ../../../RF24_c/RF24_c.c	RF24_closeReadingPipe(0);
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	CALL	_RF24_closeReadingPipe
 	MOVF	POSTINC1, F
 _00351_DS_:
-	.line	740; ../../../RF24_c/RF24_cg.c	if(RF24_read_register_d(FEATURE) & _BV(EN_ACK_PAY)){
+	.line	740; ../../../RF24_c/RF24_c.c	if(RF24_read_register_d(FEATURE) & _BV(EN_ACK_PAY)){
 	MOVLW	0x1d
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
@@ -3192,7 +3192,7 @@ _00351_DS_:
 	MOVF	POSTINC1, F
 	BTFSS	r0x00, 1
 	BRA	_00354_DS_
-	.line	741; ../../../RF24_c/RF24_cg.c	RF24_flush_tx();
+	.line	741; ../../../RF24_c/RF24_c.c	RF24_flush_tx();
 	CALL	_RF24_flush_tx
 _00354_DS_:
 	MOVFF	PREINC1, r0x02
@@ -3202,15 +3202,15 @@ _00354_DS_:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_begin	code
+S_RF24_c__RF24_begin	code
 _RF24_begin:
-	.line	598; ../../../RF24_c/RF24_cg.c	uint8_t RF24_begin(void )
+	.line	598; ../../../RF24_c/RF24_c.c	uint8_t RF24_begin(void )
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
 	MOVFF	r0x01, POSTDEC1
 	BANKSEL	_rf
-	.line	640; ../../../RF24_c/RF24_cg.c	if (rf.ce_pin != rf.csn_pin) pinMode(rf.ce_pin,OUTPUT);  
+	.line	640; ../../../RF24_c/RF24_c.c	if (rf.ce_pin != rf.csn_pin) pinMode(rf.ce_pin,OUTPUT);  
 	MOVF	_rf, W, B
 	BANKSEL	(_rf + 1)
 	XORWF	(_rf + 1), W, B
@@ -3224,13 +3224,13 @@ _RF24_begin:
 	MOVF	POSTINC1, F
 	MOVF	POSTINC1, F
 _00316_DS_:
-	.line	643; ../../../RF24_c/RF24_cg.c	if (rf.ce_pin != rf.csn_pin)
+	.line	643; ../../../RF24_c/RF24_c.c	if (rf.ce_pin != rf.csn_pin)
 	MOVFF	(_rf + 1), r0x00
 	BANKSEL	_rf
 	MOVF	_rf, W, B
 	XORWF	r0x00, W
 	BZ	_00318_DS_
-	.line	645; ../../../RF24_c/RF24_cg.c	pinMode(rf.csn_pin,OUTPUT);
+	.line	645; ../../../RF24_c/RF24_c.c	pinMode(rf.csn_pin,OUTPUT);
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	MOVF	r0x00, W
@@ -3239,19 +3239,19 @@ _00316_DS_:
 	MOVF	POSTINC1, F
 	MOVF	POSTINC1, F
 _00318_DS_:
-	.line	647; ../../../RF24_c/RF24_cg.c	SPI_begin();
+	.line	647; ../../../RF24_c/RF24_c.c	SPI_begin();
 	CALL	_SPI_begin
-	.line	648; ../../../RF24_c/RF24_cg.c	RF24_ce_d(LOW);
+	.line	648; ../../../RF24_c/RF24_c.c	RF24_ce_d(LOW);
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	CALL	_RF24_ce_d
 	MOVF	POSTINC1, F
-	.line	649; ../../../RF24_c/RF24_cg.c	RF24_csn_d(HIGH);
+	.line	649; ../../../RF24_c/RF24_c.c	RF24_csn_d(HIGH);
 	MOVLW	0x01
 	MOVWF	POSTDEC1
 	CALL	_RF24_csn_d
 	MOVF	POSTINC1, F
-	.line	661; ../../../RF24_c/RF24_cg.c	delay( 5 ) ;
+	.line	661; ../../../RF24_c/RF24_c.c	delay( 5 ) ;
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	MOVLW	0x05
@@ -3259,7 +3259,7 @@ _00318_DS_:
 	CALL	_delay
 	MOVF	POSTINC1, F
 	MOVF	POSTINC1, F
-	.line	664; ../../../RF24_c/RF24_cg.c	RF24_write_register_d( NRF_CONFIG, 0b00001100 ) ;
+	.line	664; ../../../RF24_c/RF24_c.c	RF24_write_register_d( NRF_CONFIG, 0b00001100 ) ;
 	MOVLW	0x0c
 	MOVWF	POSTDEC1
 	MOVLW	0x00
@@ -3267,7 +3267,7 @@ _00318_DS_:
 	CALL	_RF24_write_register_d
 	MOVF	POSTINC1, F
 	MOVF	POSTINC1, F
-	.line	669; ../../../RF24_c/RF24_cg.c	RF24_setRetries(5,15);
+	.line	669; ../../../RF24_c/RF24_c.c	RF24_setRetries(5,15);
 	MOVLW	0x0f
 	MOVWF	POSTDEC1
 	MOVLW	0x05
@@ -3275,7 +3275,7 @@ _00318_DS_:
 	CALL	_RF24_setRetries
 	MOVF	POSTINC1, F
 	MOVF	POSTINC1, F
-	.line	676; ../../../RF24_c/RF24_cg.c	if( RF24_setDataRate( RF24_250KBPS ) )
+	.line	676; ../../../RF24_c/RF24_c.c	if( RF24_setDataRate( RF24_250KBPS ) )
 	MOVLW	0x02
 	MOVWF	POSTDEC1
 	CALL	_RF24_setDataRate
@@ -3283,25 +3283,25 @@ _00318_DS_:
 	MOVF	POSTINC1, F
 	MOVF	r0x00, W
 	BZ	_00320_DS_
-	.line	678; ../../../RF24_c/RF24_cg.c	rf.p_variant = 1 ;
+	.line	678; ../../../RF24_c/RF24_c.c	rf.p_variant = 1 ;
 	MOVLW	0x01
 	BANKSEL	(_rf + 4)
 	MOVWF	(_rf + 4), B
 _00320_DS_:
-	.line	680; ../../../RF24_c/RF24_cg.c	setup = RF24_read_register_d(RF_SETUP);
+	.line	680; ../../../RF24_c/RF24_c.c	setup = RF24_read_register_d(RF_SETUP);
 	MOVLW	0x06
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
 	MOVWF	r0x00
 	MOVF	POSTINC1, F
-	.line	688; ../../../RF24_c/RF24_cg.c	RF24_setDataRate( RF24_1MBPS ) ;
+	.line	688; ../../../RF24_c/RF24_c.c	RF24_setDataRate( RF24_1MBPS ) ;
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	CALL	_RF24_setDataRate
 	MOVF	POSTINC1, F
-	.line	694; ../../../RF24_c/RF24_cg.c	RF24_toggle_features_d();
+	.line	694; ../../../RF24_c/RF24_c.c	RF24_toggle_features_d();
 	CALL	_RF24_toggle_features_d
-	.line	695; ../../../RF24_c/RF24_cg.c	RF24_write_register_d(FEATURE,0 );
+	.line	695; ../../../RF24_c/RF24_c.c	RF24_write_register_d(FEATURE,0 );
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	MOVLW	0x1d
@@ -3309,7 +3309,7 @@ _00320_DS_:
 	CALL	_RF24_write_register_d
 	MOVF	POSTINC1, F
 	MOVF	POSTINC1, F
-	.line	696; ../../../RF24_c/RF24_cg.c	RF24_write_register_d(DYNPD,0);
+	.line	696; ../../../RF24_c/RF24_c.c	RF24_write_register_d(DYNPD,0);
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	MOVLW	0x1c
@@ -3317,7 +3317,7 @@ _00320_DS_:
 	CALL	_RF24_write_register_d
 	MOVF	POSTINC1, F
 	MOVF	POSTINC1, F
-	.line	700; ../../../RF24_c/RF24_cg.c	RF24_write_register_d(NRF_STATUS,_BV(RX_DR) | _BV(TX_DS) | _BV(MAX_RT) );
+	.line	700; ../../../RF24_c/RF24_c.c	RF24_write_register_d(NRF_STATUS,_BV(RX_DR) | _BV(TX_DS) | _BV(MAX_RT) );
 	MOVLW	0x70
 	MOVWF	POSTDEC1
 	MOVLW	0x07
@@ -3325,18 +3325,18 @@ _00320_DS_:
 	CALL	_RF24_write_register_d
 	MOVF	POSTINC1, F
 	MOVF	POSTINC1, F
-	.line	705; ../../../RF24_c/RF24_cg.c	RF24_setChannel(76);
+	.line	705; ../../../RF24_c/RF24_c.c	RF24_setChannel(76);
 	MOVLW	0x4c
 	MOVWF	POSTDEC1
 	CALL	_RF24_setChannel
 	MOVF	POSTINC1, F
-	.line	708; ../../../RF24_c/RF24_cg.c	RF24_flush_rx();
+	.line	708; ../../../RF24_c/RF24_c.c	RF24_flush_rx();
 	CALL	_RF24_flush_rx
-	.line	709; ../../../RF24_c/RF24_cg.c	RF24_flush_tx();
+	.line	709; ../../../RF24_c/RF24_c.c	RF24_flush_tx();
 	CALL	_RF24_flush_tx
-	.line	711; ../../../RF24_c/RF24_cg.c	RF24_powerUp(); //Power up by default when begin() is called
+	.line	711; ../../../RF24_c/RF24_c.c	RF24_powerUp(); //Power up by default when begin() is called
 	CALL	_RF24_powerUp
-	.line	715; ../../../RF24_c/RF24_cg.c	RF24_write_register_d(NRF_CONFIG, ( RF24_read_register_d(NRF_CONFIG) ) & ~_BV(PRIM_RX) );
+	.line	715; ../../../RF24_c/RF24_c.c	RF24_write_register_d(NRF_CONFIG, ( RF24_read_register_d(NRF_CONFIG) ) & ~_BV(PRIM_RX) );
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
@@ -3350,7 +3350,7 @@ _00320_DS_:
 	CALL	_RF24_write_register_d
 	MOVF	POSTINC1, F
 	MOVF	POSTINC1, F
-	.line	718; ../../../RF24_c/RF24_cg.c	return ( setup != 0 && setup != 0xff );
+	.line	718; ../../../RF24_c/RF24_c.c	return ( setup != 0 && setup != 0xff );
 	MOVF	r0x00, W
 	BZ	_00323_DS_
 	MOVF	r0x00, W
@@ -3370,27 +3370,27 @@ _00325_DS_:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_getPayloadSize	code
+S_RF24_c__RF24_getPayloadSize	code
 _RF24_getPayloadSize:
-	.line	484; ../../../RF24_c/RF24_cg.c	uint8_t RF24_getPayloadSize(void)
+	.line	484; ../../../RF24_c/RF24_c.c	uint8_t RF24_getPayloadSize(void)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	BANKSEL	(_rf + 5)
-	.line	486; ../../../RF24_c/RF24_cg.c	return rf.payload_size;
+	.line	486; ../../../RF24_c/RF24_c.c	return rf.payload_size;
 	MOVF	(_rf + 5), W, B
 	MOVFF	PREINC1, FSR2L
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_setPayloadSize	code
+S_RF24_c__RF24_setPayloadSize	code
 _RF24_setPayloadSize:
-	.line	477; ../../../RF24_c/RF24_cg.c	void RF24_setPayloadSize(uint8_t size)
+	.line	477; ../../../RF24_c/RF24_c.c	void RF24_setPayloadSize(uint8_t size)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
 	MOVLW	0x02
 	MOVFF	PLUSW2, r0x00
-	.line	479; ../../../RF24_c/RF24_cg.c	rf.payload_size = rf24_min(size,32);
+	.line	479; ../../../RF24_c/RF24_c.c	rf.payload_size = rf24_min(size,32);
 	MOVLW	0x20
 	SUBWF	r0x00, W
 	BNC	_00301_DS_
@@ -3405,13 +3405,13 @@ _00301_DS_:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_getChannel	code
+S_RF24_c__RF24_getChannel	code
 _RF24_getChannel:
-	.line	470; ../../../RF24_c/RF24_cg.c	uint8_t RF24_getChannel(void)
+	.line	470; ../../../RF24_c/RF24_c.c	uint8_t RF24_getChannel(void)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
-	.line	473; ../../../RF24_c/RF24_cg.c	return RF24_read_register_d(RF_CH);
+	.line	473; ../../../RF24_c/RF24_c.c	return RF24_read_register_d(RF_CH);
 	MOVLW	0x05
 	MOVWF	POSTDEC1
 	CALL	_RF24_read_register_d
@@ -3423,15 +3423,15 @@ _RF24_getChannel:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_setChannel	code
+S_RF24_c__RF24_setChannel	code
 _RF24_setChannel:
-	.line	464; ../../../RF24_c/RF24_cg.c	void RF24_setChannel( uint8_t channel)
+	.line	464; ../../../RF24_c/RF24_c.c	void RF24_setChannel( uint8_t channel)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
 	MOVLW	0x02
 	MOVFF	PLUSW2, r0x00
-	.line	467; ../../../RF24_c/RF24_cg.c	RF24_write_register_d(RF_CH,rf24_min(channel,max_channel));
+	.line	467; ../../../RF24_c/RF24_c.c	RF24_write_register_d(RF_CH,rf24_min(channel,max_channel));
 	MOVLW	0x7d
 	SUBWF	r0x00, W
 	BNC	_00284_DS_
@@ -3450,9 +3450,9 @@ _00284_DS_:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_init	code
+S_RF24_c__RF24_init	code
 _RF24_init:
-	.line	433; ../../../RF24_c/RF24_cg.c	void RF24_init( uint8_t _cepin, uint8_t _cspin)
+	.line	433; ../../../RF24_c/RF24_c.c	void RF24_init( uint8_t _cepin, uint8_t _cspin)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
@@ -3461,29 +3461,29 @@ _RF24_init:
 	MOVFF	PLUSW2, r0x00
 	MOVLW	0x03
 	MOVFF	PLUSW2, r0x01
-	.line	435; ../../../RF24_c/RF24_cg.c	rf.ce_pin=_cepin;
+	.line	435; ../../../RF24_c/RF24_c.c	rf.ce_pin=_cepin;
 	MOVF	r0x00, W
 	BANKSEL	_rf
 	MOVWF	_rf, B
-	.line	436; ../../../RF24_c/RF24_cg.c	rf.csn_pin=_cspin;
+	.line	436; ../../../RF24_c/RF24_c.c	rf.csn_pin=_cspin;
 	MOVF	r0x01, W
 	BANKSEL	(_rf + 1)
 	MOVWF	(_rf + 1), B
 	BANKSEL	(_rf + 4)
-	.line	437; ../../../RF24_c/RF24_cg.c	rf.p_variant=0;
+	.line	437; ../../../RF24_c/RF24_c.c	rf.p_variant=0;
 	CLRF	(_rf + 4), B
-	.line	438; ../../../RF24_c/RF24_cg.c	rf.payload_size=32;
+	.line	438; ../../../RF24_c/RF24_c.c	rf.payload_size=32;
 	MOVLW	0x20
 	BANKSEL	(_rf + 5)
 	MOVWF	(_rf + 5), B
 	BANKSEL	(_rf + 6)
-	.line	439; ../../../RF24_c/RF24_cg.c	rf.dynamic_payloads_enabled=0;
+	.line	439; ../../../RF24_c/RF24_c.c	rf.dynamic_payloads_enabled=0;
 	CLRF	(_rf + 6), B
-	.line	440; ../../../RF24_c/RF24_cg.c	rf.addr_width=ADDR_WIDTH;
+	.line	440; ../../../RF24_c/RF24_c.c	rf.addr_width=ADDR_WIDTH;
 	MOVLW	0x05
 	BANKSEL	(_rf + 12)
 	MOVWF	(_rf + 12), B
-	.line	441; ../../../RF24_c/RF24_cg.c	rf.csDelay=5;
+	.line	441; ../../../RF24_c/RF24_c.c	rf.csDelay=5;
 	MOVLW	0x05
 	BANKSEL	(_rf + 17)
 	MOVWF	(_rf + 17), B
@@ -3494,7 +3494,7 @@ _RF24_init:
 	BANKSEL	(_rf + 20)
 	CLRF	(_rf + 20), B
 	BANKSEL	(_rf + 7)
-	.line	442; ../../../RF24_c/RF24_cg.c	rf.pipe0_reading_address[0]=0;
+	.line	442; ../../../RF24_c/RF24_c.c	rf.pipe0_reading_address[0]=0;
 	CLRF	(_rf + 7), B
 	MOVFF	PREINC1, r0x01
 	MOVFF	PREINC1, r0x00
@@ -3502,13 +3502,13 @@ _RF24_init:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_get_status	code
+S_RF24_c__RF24_get_status	code
 _RF24_get_status:
-	.line	355; ../../../RF24_c/RF24_cg.c	uint8_t RF24_get_status(void )
+	.line	355; ../../../RF24_c/RF24_c.c	uint8_t RF24_get_status(void )
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
-	.line	357; ../../../RF24_c/RF24_cg.c	return RF24_spiTrans( NOP_);
+	.line	357; ../../../RF24_c/RF24_c.c	return RF24_spiTrans( NOP_);
 	MOVLW	0xff
 	MOVWF	POSTDEC1
 	CALL	_RF24_spiTrans
@@ -3520,13 +3520,13 @@ _RF24_get_status:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_flush_tx	code
+S_RF24_c__RF24_flush_tx	code
 _RF24_flush_tx:
-	.line	348; ../../../RF24_c/RF24_cg.c	uint8_t RF24_flush_tx(void )
+	.line	348; ../../../RF24_c/RF24_c.c	uint8_t RF24_flush_tx(void )
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
-	.line	350; ../../../RF24_c/RF24_cg.c	return RF24_spiTrans( FLUSH_TX );
+	.line	350; ../../../RF24_c/RF24_c.c	return RF24_spiTrans( FLUSH_TX );
 	MOVLW	0xe1
 	MOVWF	POSTDEC1
 	CALL	_RF24_spiTrans
@@ -3538,13 +3538,13 @@ _RF24_flush_tx:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_flush_rx	code
+S_RF24_c__RF24_flush_rx	code
 _RF24_flush_rx:
-	.line	341; ../../../RF24_c/RF24_cg.c	uint8_t RF24_flush_rx(void)
+	.line	341; ../../../RF24_c/RF24_c.c	uint8_t RF24_flush_rx(void)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
-	.line	343; ../../../RF24_c/RF24_cg.c	return RF24_spiTrans( FLUSH_RX );
+	.line	343; ../../../RF24_c/RF24_c.c	return RF24_spiTrans( FLUSH_RX );
 	MOVLW	0xe2
 	MOVWF	POSTDEC1
 	CALL	_RF24_spiTrans
@@ -3556,34 +3556,34 @@ _RF24_flush_rx:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_spiTrans	code
+S_RF24_c__RF24_spiTrans	code
 _RF24_spiTrans:
-	.line	327; ../../../RF24_c/RF24_cg.c	uint8_t RF24_spiTrans(uint8_t cmd){
+	.line	327; ../../../RF24_c/RF24_c.c	uint8_t RF24_spiTrans(uint8_t cmd){
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
 	MOVLW	0x02
 	MOVFF	PLUSW2, r0x00
-	.line	331; ../../../RF24_c/RF24_cg.c	RF24_beginTransaction();
+	.line	331; ../../../RF24_c/RF24_c.c	RF24_beginTransaction();
 	CALL	_RF24_beginTransaction
-	.line	332; ../../../RF24_c/RF24_cg.c	status = SPI_transfer( cmd );
+	.line	332; ../../../RF24_c/RF24_c.c	status = SPI_transfer( cmd );
 	MOVF	r0x00, W
 	MOVWF	POSTDEC1
 	CALL	_SPI_transfer
 	MOVWF	r0x00
 	MOVF	POSTINC1, F
-	.line	333; ../../../RF24_c/RF24_cg.c	RF24_endTransaction();
+	.line	333; ../../../RF24_c/RF24_c.c	RF24_endTransaction();
 	CALL	_RF24_endTransaction
-	.line	335; ../../../RF24_c/RF24_cg.c	return status;
+	.line	335; ../../../RF24_c/RF24_c.c	return status;
 	MOVF	r0x00, W
 	MOVFF	PREINC1, r0x00
 	MOVFF	PREINC1, FSR2L
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_read_payload	code
+S_RF24_c__RF24_read_payload	code
 _RF24_read_payload:
-	.line	272; ../../../RF24_c/RF24_cg.c	uint8_t RF24_read_payload(void* buf, uint8_t data_len)
+	.line	272; ../../../RF24_c/RF24_c.c	uint8_t RF24_read_payload(void* buf, uint8_t data_len)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
@@ -3601,14 +3601,14 @@ _RF24_read_payload:
 	MOVFF	PLUSW2, r0x02
 	MOVLW	0x05
 	MOVFF	PLUSW2, r0x03
-	.line	275; ../../../RF24_c/RF24_cg.c	uint8_t* current = (uint8_t*)(buf);
+	.line	275; ../../../RF24_c/RF24_c.c	uint8_t* current = (uint8_t*)(buf);
 	MOVF	r0x02, W
 	MOVWF	r0x02
 	MOVF	r0x01, W
 	MOVWF	r0x01
 	MOVF	r0x00, W
 	MOVWF	r0x00
-	.line	278; ../../../RF24_c/RF24_cg.c	if(data_len > rf.payload_size) data_len = rf.payload_size;
+	.line	278; ../../../RF24_c/RF24_c.c	if(data_len > rf.payload_size) data_len = rf.payload_size;
 	MOVFF	(_rf + 5), r0x04
 	MOVF	r0x03, W
 	SUBWF	r0x04, W
@@ -3616,7 +3616,7 @@ _RF24_read_payload:
 	MOVFF	r0x04, r0x03
 _00219_DS_:
 	BANKSEL	(_rf + 6)
-	.line	279; ../../../RF24_c/RF24_cg.c	blank_len = rf.dynamic_payloads_enabled ? 0 : rf.payload_size - data_len;
+	.line	279; ../../../RF24_c/RF24_c.c	blank_len = rf.dynamic_payloads_enabled ? 0 : rf.payload_size - data_len;
 	MOVF	(_rf + 6), W, B
 	BZ	_00228_DS_
 	CLRF	r0x05
@@ -3627,21 +3627,21 @@ _00228_DS_:
 	MOVWF	r0x05
 _00229_DS_:
 	MOVFF	r0x05, r0x04
-	.line	311; ../../../RF24_c/RF24_cg.c	RF24_beginTransaction();
+	.line	311; ../../../RF24_c/RF24_c.c	RF24_beginTransaction();
 	CALL	_RF24_beginTransaction
-	.line	312; ../../../RF24_c/RF24_cg.c	status = SPI_transfer( R_RX_PAYLOAD );
+	.line	312; ../../../RF24_c/RF24_c.c	status = SPI_transfer( R_RX_PAYLOAD );
 	MOVLW	0x61
 	MOVWF	POSTDEC1
 	CALL	_SPI_transfer
 	MOVWF	r0x05
 	MOVF	POSTINC1, F
 _00220_DS_:
-	.line	313; ../../../RF24_c/RF24_cg.c	while ( data_len-- ) {
+	.line	313; ../../../RF24_c/RF24_c.c	while ( data_len-- ) {
 	MOVFF	r0x03, r0x06
 	DECF	r0x03, F
 	MOVF	r0x06, W
 	BZ	_00235_DS_
-	.line	314; ../../../RF24_c/RF24_cg.c	*current++ = SPI_transfer(0xFF);
+	.line	314; ../../../RF24_c/RF24_c.c	*current++ = SPI_transfer(0xFF);
 	MOVLW	0xff
 	MOVWF	POSTDEC1
 	CALL	_SPI_transfer
@@ -3659,23 +3659,23 @@ _00220_DS_:
 _00251_DS_:
 	BRA	_00220_DS_
 _00235_DS_:
-	.line	316; ../../../RF24_c/RF24_cg.c	while ( blank_len-- ) {
+	.line	316; ../../../RF24_c/RF24_c.c	while ( blank_len-- ) {
 	MOVFF	r0x04, r0x00
 _00223_DS_:
 	MOVFF	r0x00, r0x01
 	DECF	r0x00, F
 	MOVF	r0x01, W
 	BZ	_00225_DS_
-	.line	317; ../../../RF24_c/RF24_cg.c	SPI_transfer(0xff);
+	.line	317; ../../../RF24_c/RF24_c.c	SPI_transfer(0xff);
 	MOVLW	0xff
 	MOVWF	POSTDEC1
 	CALL	_SPI_transfer
 	MOVF	POSTINC1, F
 	BRA	_00223_DS_
 _00225_DS_:
-	.line	319; ../../../RF24_c/RF24_cg.c	RF24_endTransaction();
+	.line	319; ../../../RF24_c/RF24_c.c	RF24_endTransaction();
 	CALL	_RF24_endTransaction
-	.line	323; ../../../RF24_c/RF24_cg.c	return status;
+	.line	323; ../../../RF24_c/RF24_c.c	return status;
 	MOVF	r0x05, W
 	MOVFF	PREINC1, r0x06
 	MOVFF	PREINC1, r0x05
@@ -3688,9 +3688,9 @@ _00225_DS_:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_write_payload	code
+S_RF24_c__RF24_write_payload	code
 _RF24_write_payload:
-	.line	224; ../../../RF24_c/RF24_cg.c	uint8_t RF24_write_payload(const void* buf, uint8_t data_len, const uint8_t writeType)
+	.line	224; ../../../RF24_c/RF24_c.c	uint8_t RF24_write_payload(const void* buf, uint8_t data_len, const uint8_t writeType)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
@@ -3710,14 +3710,14 @@ _RF24_write_payload:
 	MOVFF	PLUSW2, r0x03
 	MOVLW	0x06
 	MOVFF	PLUSW2, r0x04
-	.line	227; ../../../RF24_c/RF24_cg.c	const uint8_t* current = (const uint8_t*)(buf);
+	.line	227; ../../../RF24_c/RF24_c.c	const uint8_t* current = (const uint8_t*)(buf);
 	MOVF	r0x02, W
 	MOVWF	r0x02
 	MOVF	r0x01, W
 	MOVWF	r0x01
 	MOVF	r0x00, W
 	MOVWF	r0x00
-	.line	230; ../../../RF24_c/RF24_cg.c	data_len = rf24_min(data_len, rf.payload_size);
+	.line	230; ../../../RF24_c/RF24_c.c	data_len = rf24_min(data_len, rf.payload_size);
 	MOVFF	(_rf + 5), r0x05
 	MOVF	r0x05, W
 	SUBWF	r0x03, W
@@ -3729,7 +3729,7 @@ _00188_DS_:
 _00189_DS_:
 	MOVFF	r0x06, r0x03
 	BANKSEL	(_rf + 6)
-	.line	231; ../../../RF24_c/RF24_cg.c	blank_len = rf.dynamic_payloads_enabled ? 0 : rf.payload_size - data_len;
+	.line	231; ../../../RF24_c/RF24_c.c	blank_len = rf.dynamic_payloads_enabled ? 0 : rf.payload_size - data_len;
 	MOVF	(_rf + 6), W, B
 	BZ	_00190_DS_
 	CLRF	r0x06
@@ -3740,21 +3740,21 @@ _00190_DS_:
 	MOVWF	r0x06
 _00191_DS_:
 	MOVFF	r0x06, r0x05
-	.line	255; ../../../RF24_c/RF24_cg.c	RF24_beginTransaction();
+	.line	255; ../../../RF24_c/RF24_c.c	RF24_beginTransaction();
 	CALL	_RF24_beginTransaction
-	.line	256; ../../../RF24_c/RF24_cg.c	status = SPI_transfer( writeType );
+	.line	256; ../../../RF24_c/RF24_c.c	status = SPI_transfer( writeType );
 	MOVF	r0x04, W
 	MOVWF	POSTDEC1
 	CALL	_SPI_transfer
 	MOVWF	r0x04
 	MOVF	POSTINC1, F
 _00180_DS_:
-	.line	257; ../../../RF24_c/RF24_cg.c	while ( data_len-- ) {
+	.line	257; ../../../RF24_c/RF24_c.c	while ( data_len-- ) {
 	MOVFF	r0x03, r0x06
 	DECF	r0x03, F
 	MOVF	r0x06, W
 	BZ	_00197_DS_
-	.line	258; ../../../RF24_c/RF24_cg.c	SPI_transfer(*current++);
+	.line	258; ../../../RF24_c/RF24_c.c	SPI_transfer(*current++);
 	MOVFF	r0x00, FSR0L
 	MOVFF	r0x01, PRODL
 	MOVF	r0x02, W
@@ -3771,23 +3771,23 @@ _00213_DS_:
 	MOVF	POSTINC1, F
 	BRA	_00180_DS_
 _00197_DS_:
-	.line	260; ../../../RF24_c/RF24_cg.c	while ( blank_len-- ) {
+	.line	260; ../../../RF24_c/RF24_c.c	while ( blank_len-- ) {
 	MOVFF	r0x05, r0x00
 _00183_DS_:
 	MOVFF	r0x00, r0x01
 	DECF	r0x00, F
 	MOVF	r0x01, W
 	BZ	_00185_DS_
-	.line	261; ../../../RF24_c/RF24_cg.c	SPI_transfer(0);
+	.line	261; ../../../RF24_c/RF24_c.c	SPI_transfer(0);
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	CALL	_SPI_transfer
 	MOVF	POSTINC1, F
 	BRA	_00183_DS_
 _00185_DS_:
-	.line	263; ../../../RF24_c/RF24_cg.c	RF24_endTransaction();
+	.line	263; ../../../RF24_c/RF24_c.c	RF24_endTransaction();
 	CALL	_RF24_endTransaction
-	.line	267; ../../../RF24_c/RF24_cg.c	return status;
+	.line	267; ../../../RF24_c/RF24_c.c	return status;
 	MOVF	r0x04, W
 	MOVFF	PREINC1, r0x06
 	MOVFF	PREINC1, r0x05
@@ -3800,9 +3800,9 @@ _00185_DS_:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_write_register_d	code
+S_RF24_c__RF24_write_register_d	code
 _RF24_write_register_d:
-	.line	194; ../../../RF24_c/RF24_cg.c	uint8_t RF24_write_register_d(uint8_t reg, uint8_t value)
+	.line	194; ../../../RF24_c/RF24_c.c	uint8_t RF24_write_register_d(uint8_t reg, uint8_t value)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
@@ -3811,9 +3811,9 @@ _RF24_write_register_d:
 	MOVFF	PLUSW2, r0x00
 	MOVLW	0x03
 	MOVFF	PLUSW2, r0x01
-	.line	212; ../../../RF24_c/RF24_cg.c	RF24_beginTransaction();
+	.line	212; ../../../RF24_c/RF24_c.c	RF24_beginTransaction();
 	CALL	_RF24_beginTransaction
-	.line	213; ../../../RF24_c/RF24_cg.c	status = SPI_transfer( W_REGISTER | ( REGISTER_MASK & reg ) );
+	.line	213; ../../../RF24_c/RF24_c.c	status = SPI_transfer( W_REGISTER | ( REGISTER_MASK & reg ) );
 	MOVLW	0x1f
 	ANDWF	r0x00, F
 	BSF	r0x00, 5
@@ -3822,14 +3822,14 @@ _RF24_write_register_d:
 	CALL	_SPI_transfer
 	MOVWF	r0x00
 	MOVF	POSTINC1, F
-	.line	214; ../../../RF24_c/RF24_cg.c	SPI_transfer(value);
+	.line	214; ../../../RF24_c/RF24_c.c	SPI_transfer(value);
 	MOVF	r0x01, W
 	MOVWF	POSTDEC1
 	CALL	_SPI_transfer
 	MOVF	POSTINC1, F
-	.line	215; ../../../RF24_c/RF24_cg.c	RF24_endTransaction();
+	.line	215; ../../../RF24_c/RF24_c.c	RF24_endTransaction();
 	CALL	_RF24_endTransaction
-	.line	219; ../../../RF24_c/RF24_cg.c	return status;
+	.line	219; ../../../RF24_c/RF24_c.c	return status;
 	MOVF	r0x00, W
 	MOVFF	PREINC1, r0x01
 	MOVFF	PREINC1, r0x00
@@ -3837,9 +3837,9 @@ _RF24_write_register_d:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_write_register_c_d	code
+S_RF24_c__RF24_write_register_c_d	code
 _RF24_write_register_c_d:
-	.line	162; ../../../RF24_c/RF24_cg.c	uint8_t RF24_write_register_c_d(uint8_t reg, const uint8_t* buf, uint8_t len)
+	.line	162; ../../../RF24_c/RF24_c.c	uint8_t RF24_write_register_c_d(uint8_t reg, const uint8_t* buf, uint8_t len)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
@@ -3858,9 +3858,9 @@ _RF24_write_register_c_d:
 	MOVFF	PLUSW2, r0x03
 	MOVLW	0x06
 	MOVFF	PLUSW2, r0x04
-	.line	181; ../../../RF24_c/RF24_cg.c	RF24_beginTransaction();
+	.line	181; ../../../RF24_c/RF24_c.c	RF24_beginTransaction();
 	CALL	_RF24_beginTransaction
-	.line	182; ../../../RF24_c/RF24_cg.c	status = SPI_transfer( W_REGISTER | ( REGISTER_MASK & reg ) );
+	.line	182; ../../../RF24_c/RF24_c.c	status = SPI_transfer( W_REGISTER | ( REGISTER_MASK & reg ) );
 	MOVLW	0x1f
 	ANDWF	r0x00, F
 	BSF	r0x00, 5
@@ -3870,12 +3870,12 @@ _RF24_write_register_c_d:
 	MOVWF	r0x00
 	MOVF	POSTINC1, F
 _00156_DS_:
-	.line	183; ../../../RF24_c/RF24_cg.c	while ( len-- )
+	.line	183; ../../../RF24_c/RF24_c.c	while ( len-- )
 	MOVFF	r0x04, r0x05
 	DECF	r0x04, F
 	MOVF	r0x05, W
 	BZ	_00158_DS_
-	.line	184; ../../../RF24_c/RF24_cg.c	SPI_transfer(*buf++);
+	.line	184; ../../../RF24_c/RF24_c.c	SPI_transfer(*buf++);
 	MOVFF	r0x01, FSR0L
 	MOVFF	r0x02, PRODL
 	MOVF	r0x03, W
@@ -3892,9 +3892,9 @@ _00170_DS_:
 	MOVF	POSTINC1, F
 	BRA	_00156_DS_
 _00158_DS_:
-	.line	185; ../../../RF24_c/RF24_cg.c	RF24_endTransaction();
+	.line	185; ../../../RF24_c/RF24_c.c	RF24_endTransaction();
 	CALL	_RF24_endTransaction
-	.line	189; ../../../RF24_c/RF24_cg.c	return status;
+	.line	189; ../../../RF24_c/RF24_c.c	return status;
 	MOVF	r0x00, W
 	MOVFF	PREINC1, r0x05
 	MOVFF	PREINC1, r0x04
@@ -3906,41 +3906,41 @@ _00158_DS_:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_read_register_d	code
+S_RF24_c__RF24_read_register_d	code
 _RF24_read_register_d:
-	.line	131; ../../../RF24_c/RF24_cg.c	uint8_t RF24_read_register_d(uint8_t reg)
+	.line	131; ../../../RF24_c/RF24_c.c	uint8_t RF24_read_register_d(uint8_t reg)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
 	MOVLW	0x02
 	MOVFF	PLUSW2, r0x00
-	.line	150; ../../../RF24_c/RF24_cg.c	RF24_beginTransaction();
+	.line	150; ../../../RF24_c/RF24_c.c	RF24_beginTransaction();
 	CALL	_RF24_beginTransaction
-	.line	151; ../../../RF24_c/RF24_cg.c	SPI_transfer( R_REGISTER | ( REGISTER_MASK & reg ) );
+	.line	151; ../../../RF24_c/RF24_c.c	SPI_transfer( R_REGISTER | ( REGISTER_MASK & reg ) );
 	MOVLW	0x1f
 	ANDWF	r0x00, F
 	MOVF	r0x00, W
 	MOVWF	POSTDEC1
 	CALL	_SPI_transfer
 	MOVF	POSTINC1, F
-	.line	152; ../../../RF24_c/RF24_cg.c	result = SPI_transfer(0xff);
+	.line	152; ../../../RF24_c/RF24_c.c	result = SPI_transfer(0xff);
 	MOVLW	0xff
 	MOVWF	POSTDEC1
 	CALL	_SPI_transfer
 	MOVWF	r0x00
 	MOVF	POSTINC1, F
-	.line	153; ../../../RF24_c/RF24_cg.c	RF24_endTransaction();
+	.line	153; ../../../RF24_c/RF24_c.c	RF24_endTransaction();
 	CALL	_RF24_endTransaction
-	.line	157; ../../../RF24_c/RF24_cg.c	return result;
+	.line	157; ../../../RF24_c/RF24_c.c	return result;
 	MOVF	r0x00, W
 	MOVFF	PREINC1, r0x00
 	MOVFF	PREINC1, FSR2L
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_read_register_m_d	code
+S_RF24_c__RF24_read_register_m_d	code
 _RF24_read_register_m_d:
-	.line	93; ../../../RF24_c/RF24_cg.c	uint8_t RF24_read_register_m_d(uint8_t reg, uint8_t* buf, uint8_t len)
+	.line	93; ../../../RF24_c/RF24_c.c	uint8_t RF24_read_register_m_d(uint8_t reg, uint8_t* buf, uint8_t len)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
@@ -3959,9 +3959,9 @@ _RF24_read_register_m_d:
 	MOVFF	PLUSW2, r0x03
 	MOVLW	0x06
 	MOVFF	PLUSW2, r0x04
-	.line	117; ../../../RF24_c/RF24_cg.c	RF24_beginTransaction();
+	.line	117; ../../../RF24_c/RF24_c.c	RF24_beginTransaction();
 	CALL	_RF24_beginTransaction
-	.line	118; ../../../RF24_c/RF24_cg.c	status = SPI_transfer( R_REGISTER | ( REGISTER_MASK & reg ) );
+	.line	118; ../../../RF24_c/RF24_c.c	status = SPI_transfer( R_REGISTER | ( REGISTER_MASK & reg ) );
 	MOVLW	0x1f
 	ANDWF	r0x00, F
 	MOVF	r0x00, W
@@ -3970,12 +3970,12 @@ _RF24_read_register_m_d:
 	MOVWF	r0x00
 	MOVF	POSTINC1, F
 _00133_DS_:
-	.line	119; ../../../RF24_c/RF24_cg.c	while ( len-- ){
+	.line	119; ../../../RF24_c/RF24_c.c	while ( len-- ){
 	MOVFF	r0x04, r0x05
 	DECF	r0x04, F
 	MOVF	r0x05, W
 	BZ	_00135_DS_
-	.line	120; ../../../RF24_c/RF24_cg.c	*buf++ = SPI_transfer(0xff);
+	.line	120; ../../../RF24_c/RF24_c.c	*buf++ = SPI_transfer(0xff);
 	MOVLW	0xff
 	MOVWF	POSTDEC1
 	CALL	_SPI_transfer
@@ -3993,9 +3993,9 @@ _00133_DS_:
 _00146_DS_:
 	BRA	_00133_DS_
 _00135_DS_:
-	.line	122; ../../../RF24_c/RF24_cg.c	RF24_endTransaction();
+	.line	122; ../../../RF24_c/RF24_c.c	RF24_endTransaction();
 	CALL	_RF24_endTransaction
-	.line	126; ../../../RF24_c/RF24_cg.c	return status;
+	.line	126; ../../../RF24_c/RF24_c.c	return status;
 	MOVF	r0x00, W
 	MOVFF	PREINC1, r0x05
 	MOVFF	PREINC1, r0x04
@@ -4007,12 +4007,12 @@ _00135_DS_:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_endTransaction	code
+S_RF24_c__RF24_endTransaction	code
 _RF24_endTransaction:
-	.line	84; ../../../RF24_c/RF24_cg.c	void RF24_endTransaction(void) {
+	.line	84; ../../../RF24_c/RF24_c.c	void RF24_endTransaction(void) {
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
-	.line	85; ../../../RF24_c/RF24_cg.c	RF24_csn_d(HIGH);
+	.line	85; ../../../RF24_c/RF24_c.c	RF24_csn_d(HIGH);
 	MOVLW	0x01
 	MOVWF	POSTDEC1
 	CALL	_RF24_csn_d
@@ -4021,12 +4021,12 @@ _RF24_endTransaction:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_beginTransaction	code
+S_RF24_c__RF24_beginTransaction	code
 _RF24_beginTransaction:
-	.line	75; ../../../RF24_c/RF24_cg.c	void RF24_beginTransaction(void ) {
+	.line	75; ../../../RF24_c/RF24_c.c	void RF24_beginTransaction(void ) {
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
-	.line	79; ../../../RF24_c/RF24_cg.c	RF24_csn_d(LOW);
+	.line	79; ../../../RF24_c/RF24_c.c	RF24_csn_d(LOW);
 	MOVLW	0x00
 	MOVWF	POSTDEC1
 	CALL	_RF24_csn_d
@@ -4035,16 +4035,16 @@ _RF24_beginTransaction:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_ce_d	code
+S_RF24_c__RF24_ce_d	code
 _RF24_ce_d:
-	.line	67; ../../../RF24_c/RF24_cg.c	void RF24_ce_d(uint8_t level)
+	.line	67; ../../../RF24_c/RF24_c.c	void RF24_ce_d(uint8_t level)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
 	MOVLW	0x02
 	MOVFF	PLUSW2, r0x00
 	BANKSEL	_rf
-	.line	70; ../../../RF24_c/RF24_cg.c	if (rf.ce_pin != rf.csn_pin) digitalWrite(rf.ce_pin,level);
+	.line	70; ../../../RF24_c/RF24_c.c	if (rf.ce_pin != rf.csn_pin) digitalWrite(rf.ce_pin,level);
 	MOVF	_rf, W, B
 	BANKSEL	(_rf + 1)
 	XORWF	(_rf + 1), W, B
@@ -4063,15 +4063,15 @@ _00112_DS_:
 	RETURN	
 
 ; ; Starting pCode block
-S_RF24_cg__RF24_csn_d	code
+S_RF24_c__RF24_csn_d	code
 _RF24_csn_d:
-	.line	22; ../../../RF24_c/RF24_cg.c	void RF24_csn_d( uint8_t mode)
+	.line	22; ../../../RF24_c/RF24_c.c	void RF24_csn_d( uint8_t mode)
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
 	MOVFF	r0x00, POSTDEC1
 	MOVLW	0x02
 	MOVFF	PLUSW2, r0x00
-	.line	59; ../../../RF24_c/RF24_cg.c	digitalWrite(rf.csn_pin,mode);
+	.line	59; ../../../RF24_c/RF24_c.c	digitalWrite(rf.csn_pin,mode);
 	MOVF	r0x00, W
 	MOVWF	POSTDEC1
 	BANKSEL	(_rf + 1)
@@ -4081,7 +4081,7 @@ _RF24_csn_d:
 	MOVF	POSTINC1, F
 	MOVF	POSTINC1, F
 	BANKSEL	(_rf + 17)
-	.line	60; ../../../RF24_c/RF24_cg.c	delayMicroseconds(rf.csDelay);
+	.line	60; ../../../RF24_c/RF24_c.c	delayMicroseconds(rf.csDelay);
 	MOVF	(_rf + 17), W, B
 	MOVWF	r0x00
 	MOVF	r0x00, W

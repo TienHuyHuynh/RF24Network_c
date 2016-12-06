@@ -31,9 +31,9 @@
 //RF24 radio(RPI_V2_GPIO_P1_15, BCM2835_SPI_CS0, BCM2835_SPI_SPEED_4MHZ); 
 
 // Setup for GPIO 22 CE and CE1 CSN with SPI Speed @ 8Mhz
-RF24 radio;
+//RF24 radio;
 
-RF24Network network;
+//RF24Network network;
 
 // Address of our node in Octal format
 const uint16_t this_node = 00;
@@ -56,25 +56,25 @@ int main(int argc, char** argv)
 {
 	// Refer to RF24.h or nRF24L01 DS for settings
 
-	RF24_init2(&radio,RPI_V2_GPIO_P1_15, BCM2835_SPI_CS0, BCM2835_SPI_SPEED_8MHZ);  
+	RF24_init2(RPI_V2_GPIO_P1_15, BCM2835_SPI_CS0, BCM2835_SPI_SPEED_8MHZ);  
 
-	RF24N_init(&network,&radio);
+	RF24N_init();
 
-	RF24_begin(&radio);
+	RF24_begin();
 	
 	delay(5);
-	RF24N_begin_d(&network,/*channel*/ 90, /*node address*/ this_node);
-	RF24_printDetails(&radio);
+	RF24N_begin_d(/*channel*/ 90, /*node address*/ this_node);
+	RF24_printDetails();
 	
 	while(1)
 	{
 
-		  RF24N_update(&network);
-  		  while ( RF24N_available(&network) ) {     // Is there anything ready for us?
+		  RF24N_update();
+  		  while ( RF24N_available() ) {     // Is there anything ready for us?
     			
 		 	RF24NetworkHeader header;        // If so, grab it and print it out
    			 payload_t payload;
-  			 RF24N_read(&network,&header,&payload,sizeof(payload));
+  			 RF24N_read(&header,&payload,sizeof(payload));
 			
 			printf("Received payload # %lu at %lu \n",payload.counter,payload.ms);
                   }		  

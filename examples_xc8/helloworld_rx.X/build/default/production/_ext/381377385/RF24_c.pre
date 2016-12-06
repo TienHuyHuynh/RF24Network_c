@@ -1,5 +1,5 @@
 
-# 1 "../../../RF24_c/RF24_cg.c"
+# 1 "../../../RF24_c/RF24_c.c"
 
 # 26 "/opt/microchip/xc8/v1.36/include/htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -4058,7 +4058,7 @@ uint8_t RF24_failureDetected;
 
 }RF24;
 
-# 38 "../../../RF24_c/RF24_cg.h"
+# 38 "../../../RF24_c/RF24_c.h"
 typedef enum { RF24_PA_MIN = 0,RF24_PA_LOW, RF24_PA_HIGH, RF24_PA_MAX, RF24_PA_ERROR } rf24_pa_dbm_e ;
 
 # 45
@@ -4276,7 +4276,7 @@ void RF24_toggle_features_d(void);
 # 1080
 uint8_t RF24_spiTrans_d( uint8_t cmd);
 
-# 20 "../../../RF24_c/RF24_cg.c"
+# 20 "../../../RF24_c/RF24_c.c"
 static RF24 rf;
 
 void RF24_csn_d( uint8_t mode)

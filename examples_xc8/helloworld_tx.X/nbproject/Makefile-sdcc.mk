@@ -51,17 +51,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=helloworld_tx.c pic_main.c serial.c ../../../RF24_c/utility/XC8/spi.c ../../../RF24_c/RF24_cg.c ../../RF24Network_cg.c
+SOURCEFILES_QUOTED_IF_SPACED=helloworld_tx.c pic_main.c serial.c ../../../RF24_c/utility/XC8/spi.c ../../RF24Network_c.c ../../../RF24_c/RF24_c.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/helloworld_tx.o ${OBJECTDIR}/pic_main.o ${OBJECTDIR}/serial.o ${OBJECTDIR}/_ext/2031907356/spi.o ${OBJECTDIR}/_ext/381377385/RF24_cg.o ${OBJECTDIR}/_ext/43898991/RF24Network_cg.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/helloworld_tx.o.d ${OBJECTDIR}/pic_main.o.d ${OBJECTDIR}/serial.o.d ${OBJECTDIR}/_ext/2031907356/spi.o.d ${OBJECTDIR}/_ext/381377385/RF24_cg.o.d ${OBJECTDIR}/_ext/43898991/RF24Network_cg.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/helloworld_tx.o ${OBJECTDIR}/pic_main.o ${OBJECTDIR}/serial.o ${OBJECTDIR}/_ext/2031907356/spi.o ${OBJECTDIR}/_ext/43898991/RF24Network_c.o ${OBJECTDIR}/_ext/381377385/RF24_c.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/helloworld_tx.o.d ${OBJECTDIR}/pic_main.o.d ${OBJECTDIR}/serial.o.d ${OBJECTDIR}/_ext/2031907356/spi.o.d ${OBJECTDIR}/_ext/43898991/RF24Network_c.o.d ${OBJECTDIR}/_ext/381377385/RF24_c.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/helloworld_tx.o ${OBJECTDIR}/pic_main.o ${OBJECTDIR}/serial.o ${OBJECTDIR}/_ext/2031907356/spi.o ${OBJECTDIR}/_ext/381377385/RF24_cg.o ${OBJECTDIR}/_ext/43898991/RF24Network_cg.o
+OBJECTFILES=${OBJECTDIR}/helloworld_tx.o ${OBJECTDIR}/pic_main.o ${OBJECTDIR}/serial.o ${OBJECTDIR}/_ext/2031907356/spi.o ${OBJECTDIR}/_ext/43898991/RF24Network_c.o ${OBJECTDIR}/_ext/381377385/RF24_c.o
 
 # Source Files
-SOURCEFILES=helloworld_tx.c pic_main.c serial.c ../../../RF24_c/utility/XC8/spi.c ../../../RF24_c/RF24_cg.c ../../RF24Network_cg.c
+SOURCEFILES=helloworld_tx.c pic_main.c serial.c ../../../RF24_c/utility/XC8/spi.c ../../RF24Network_c.c ../../../RF24_c/RF24_c.c
 
 
 CFLAGS=
@@ -106,15 +106,15 @@ ${OBJECTDIR}/_ext/2031907356/spi.o: ../../../RF24_c/utility/XC8/spi.c  nbproject
 	${RM} ${OBJECTDIR}/_ext/2031907356/spi.o 
 	${MP_CC} --use-non-free -I"../../" -I"../../../RF24_c" -I"../../../RF24_c/utility/XC8"  -Wl,-s,18f4620_g.lkr  --debug -c -mpic16 -p18f4620 ../../../RF24_c/utility/XC8/spi.c  -o${OBJECTDIR}/_ext/2031907356/spi.o
 	
-${OBJECTDIR}/_ext/381377385/RF24_cg.o: ../../../RF24_c/RF24_cg.c  nbproject/Makefile-${CND_CONF}.mk
-	${MKDIR} ${OBJECTDIR}/_ext/381377385 
-	${RM} ${OBJECTDIR}/_ext/381377385/RF24_cg.o 
-	${MP_CC} --use-non-free -I"../../" -I"../../../RF24_c" -I"../../../RF24_c/utility/XC8"  -Wl,-s,18f4620_g.lkr  --debug -c -mpic16 -p18f4620 ../../../RF24_c/RF24_cg.c  -o${OBJECTDIR}/_ext/381377385/RF24_cg.o
-	
-${OBJECTDIR}/_ext/43898991/RF24Network_cg.o: ../../RF24Network_cg.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/43898991/RF24Network_c.o: ../../RF24Network_c.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/43898991 
-	${RM} ${OBJECTDIR}/_ext/43898991/RF24Network_cg.o 
-	${MP_CC} --use-non-free -I"../../" -I"../../../RF24_c" -I"../../../RF24_c/utility/XC8"  -Wl,-s,18f4620_g.lkr  --debug -c -mpic16 -p18f4620 ../../RF24Network_cg.c  -o${OBJECTDIR}/_ext/43898991/RF24Network_cg.o
+	${RM} ${OBJECTDIR}/_ext/43898991/RF24Network_c.o 
+	${MP_CC} --use-non-free -I"../../" -I"../../../RF24_c" -I"../../../RF24_c/utility/XC8"  -Wl,-s,18f4620_g.lkr  --debug -c -mpic16 -p18f4620 ../../RF24Network_c.c  -o${OBJECTDIR}/_ext/43898991/RF24Network_c.o
+	
+${OBJECTDIR}/_ext/381377385/RF24_c.o: ../../../RF24_c/RF24_c.c  nbproject/Makefile-${CND_CONF}.mk
+	${MKDIR} ${OBJECTDIR}/_ext/381377385 
+	${RM} ${OBJECTDIR}/_ext/381377385/RF24_c.o 
+	${MP_CC} --use-non-free -I"../../" -I"../../../RF24_c" -I"../../../RF24_c/utility/XC8"  -Wl,-s,18f4620_g.lkr  --debug -c -mpic16 -p18f4620 ../../../RF24_c/RF24_c.c  -o${OBJECTDIR}/_ext/381377385/RF24_c.o
 	
 else
 ${OBJECTDIR}/helloworld_tx.o: helloworld_tx.c  nbproject/Makefile-${CND_CONF}.mk
@@ -137,15 +137,15 @@ ${OBJECTDIR}/_ext/2031907356/spi.o: ../../../RF24_c/utility/XC8/spi.c  nbproject
 	${RM} ${OBJECTDIR}/_ext/2031907356/spi.o 
 	${MP_CC} --use-non-free -I"../../" -I"../../../RF24_c" -I"../../../RF24_c/utility/XC8"  -Wl,-s,18f4620_g.lkr  --debug -c -mpic16 -p18f4620 ../../../RF24_c/utility/XC8/spi.c  -o${OBJECTDIR}/_ext/2031907356/spi.o
 	
-${OBJECTDIR}/_ext/381377385/RF24_cg.o: ../../../RF24_c/RF24_cg.c  nbproject/Makefile-${CND_CONF}.mk
-	${MKDIR} ${OBJECTDIR}/_ext/381377385 
-	${RM} ${OBJECTDIR}/_ext/381377385/RF24_cg.o 
-	${MP_CC} --use-non-free -I"../../" -I"../../../RF24_c" -I"../../../RF24_c/utility/XC8"  -Wl,-s,18f4620_g.lkr  --debug -c -mpic16 -p18f4620 ../../../RF24_c/RF24_cg.c  -o${OBJECTDIR}/_ext/381377385/RF24_cg.o
-	
-${OBJECTDIR}/_ext/43898991/RF24Network_cg.o: ../../RF24Network_cg.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/43898991/RF24Network_c.o: ../../RF24Network_c.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR}/_ext/43898991 
-	${RM} ${OBJECTDIR}/_ext/43898991/RF24Network_cg.o 
-	${MP_CC} --use-non-free -I"../../" -I"../../../RF24_c" -I"../../../RF24_c/utility/XC8"  -Wl,-s,18f4620_g.lkr  --debug -c -mpic16 -p18f4620 ../../RF24Network_cg.c  -o${OBJECTDIR}/_ext/43898991/RF24Network_cg.o
+	${RM} ${OBJECTDIR}/_ext/43898991/RF24Network_c.o 
+	${MP_CC} --use-non-free -I"../../" -I"../../../RF24_c" -I"../../../RF24_c/utility/XC8"  -Wl,-s,18f4620_g.lkr  --debug -c -mpic16 -p18f4620 ../../RF24Network_c.c  -o${OBJECTDIR}/_ext/43898991/RF24Network_c.o
+	
+${OBJECTDIR}/_ext/381377385/RF24_c.o: ../../../RF24_c/RF24_c.c  nbproject/Makefile-${CND_CONF}.mk
+	${MKDIR} ${OBJECTDIR}/_ext/381377385 
+	${RM} ${OBJECTDIR}/_ext/381377385/RF24_c.o 
+	${MP_CC} --use-non-free -I"../../" -I"../../../RF24_c" -I"../../../RF24_c/utility/XC8"  -Wl,-s,18f4620_g.lkr  --debug -c -mpic16 -p18f4620 ../../../RF24_c/RF24_c.c  -o${OBJECTDIR}/_ext/381377385/RF24_c.o
 	
 endif
 

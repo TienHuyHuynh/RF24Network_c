@@ -4151,7 +4151,7 @@ uint8_t RF24_failureDetected;
 
 }RF24;
 
-# 202 "../../RF24Network_cg.h"
+# 202 "../../RF24Network_c.h"
 typedef struct
 {
 uint16_t from_node;
@@ -4315,7 +4315,23 @@ uint8_t RF24N__write(RF24NetworkHeader * header,const void* message, uint16_t le
 
 uint8_t RF24N_logicalToPhysicalAddress(logicalToPhysicalStruct *conversionInfo);
 
-# 38 "../../../RF24_c/RF24_cg.h"
+# 883
+uint8_t * RF24N_getFrame_buffer(void);
+
+void RF24N_setReturnSysMsgs(void);
+
+
+uint8_t RF24N_getNetworkFlags(void);
+void RF24N_setNetworkFlags(uint8_t);
+
+uint16_t RF24N_getRouteTimeout(void);
+
+RF24NetworkFrame* RF24N_getFrag_ptr(void);
+
+
+void RF24N_setMulticastRelay(void);
+
+# 38 "../../../RF24_c/RF24_c.h"
 typedef enum { RF24_PA_MIN = 0,RF24_PA_LOW, RF24_PA_HIGH, RF24_PA_MAX, RF24_PA_ERROR } rf24_pa_dbm_e ;
 
 # 45

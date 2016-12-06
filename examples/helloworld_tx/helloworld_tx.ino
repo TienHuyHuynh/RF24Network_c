@@ -15,8 +15,8 @@
  * Every 2 seconds, send a payload to the receiver node.
  */
 
-#include <RF24Network_cg.h>
-#include <RF24_cg.h>
+#include <RF24Network_c.h>
+#include <RF24_c.h>
 
 
 const uint16_t this_node = 01;        // Address of our node in Octal format
@@ -38,7 +38,7 @@ void setup(void)
   RF24_init(7,8);
   RF24N_init();
   
-  Serial.begin(57600);
+  Serial.begin(115200);
   Serial.println("RF24Network/examples/helloworld_tx/");
  
   RF24_begin();

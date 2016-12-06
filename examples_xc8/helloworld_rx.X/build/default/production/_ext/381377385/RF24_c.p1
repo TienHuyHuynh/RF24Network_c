@@ -14,12 +14,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _SPI_begin `(v ~T0 @X0 0 ef ]
 "80 ../../../RF24_c/utility/XC8/xc8_config.h
 [v _delay `(v ~T0 @X0 0 ef1`ui ]
-"673 ../../../RF24_c/RF24_cg.h
+"673 ../../../RF24_c/RF24_c.h
 [v _RF24_setRetries `(v ~T0 @X0 0 ef2`uc`uc ]
-"676 ../../../RF24_c/RF24_cg.c
+"676 ../../../RF24_c/RF24_c.c
 [c E3388 0 1 2 .. ]
 [n E3388 . RF24_1MBPS RF24_2MBPS RF24_250KBPS  ]
-"828 ../../../RF24_c/RF24_cg.h
+"828 ../../../RF24_c/RF24_c.h
 [v _RF24_setDataRate `(uc ~T0 @X0 0 ef1`E3388 ]
 "1074
 [v _RF24_toggle_features_d `(v ~T0 @X0 0 ef ]
@@ -31,13 +31,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_startFastWrite `(v ~T0 @X0 0 ef4`*Cv`uc`Cuc`uc ]
 "78 ../../../RF24_c/utility/XC8/xc8_config.h
 [v _millis `(l ~T0 @X0 0 ef ]
-"572 ../../../RF24_c/RF24_cg.h
+"572 ../../../RF24_c/RF24_c.h
 [v _RF24_reUseTX `(v ~T0 @X0 0 ef ]
 "299
 [v _RF24_available_p `(uc ~T0 @X0 0 ef1`*uc ]
 "14 /opt/microchip/xc8/v1.36/include/string.h
 [v _memcpy `(*v ~T0 @X0 0 ef3`*v`*Cv`ui ]
-"1434 ../../../RF24_c/RF24_cg.c
+"1434 ../../../RF24_c/RF24_c.c
 [c E3381 0 1 2 3 4 .. ]
 [n E3381 . RF24_PA_MIN RF24_PA_LOW RF24_PA_HIGH RF24_PA_MAX RF24_PA_ERROR  ]
 "1531
@@ -3057,100 +3057,100 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;RF24_c_config.h: 224: uint32_t csDelay;
 [; ;RF24_c_config.h: 227: uint8_t RF24_failureDetected;
 [; ;RF24_c_config.h: 230: }RF24;
-[; ;RF24_cg.h: 38: typedef enum { RF24_PA_MIN = 0,RF24_PA_LOW, RF24_PA_HIGH, RF24_PA_MAX, RF24_PA_ERROR } rf24_pa_dbm_e ;
-[; ;RF24_cg.h: 45: typedef enum { RF24_1MBPS = 0, RF24_2MBPS, RF24_250KBPS } rf24_datarate_e;
-[; ;RF24_cg.h: 52: typedef enum { RF24_CRC_DISABLED = 0, RF24_CRC_8, RF24_CRC_16 } rf24_crclength_e;
-[; ;RF24_cg.h: 58: typedef unsigned char raddr_t;
-[; ;RF24_cg.h: 67: void RF24_beginTransaction(void);
-[; ;RF24_cg.h: 69: void RF24_endTransaction(void);
-[; ;RF24_cg.h: 87: void RF24_init( uint8_t _cepin, uint8_t _cspin);
-[; ;RF24_cg.h: 101: void RF24_init2( uint8_t _cepin, uint8_t _cspin, uint32_t spispeed );
-[; ;RF24_cg.h: 114: uint8_t RF24_begin(void);
-[; ;RF24_cg.h: 131: void RF24_startListening(void);
-[; ;RF24_cg.h: 142: void RF24_stopListening(void);
-[; ;RF24_cg.h: 153: uint8_t RF24_available(void);
-[; ;RF24_cg.h: 177: void RF24_read( void* buf, uint8_t len );
-[; ;RF24_cg.h: 202: uint8_t RF24_write( const void* buf, uint8_t len );
-[; ;RF24_cg.h: 229: void RF24_openWritingPipe(const uint8_t *address);
-[; ;RF24_cg.h: 259: void RF24_openReadingPipe(uint8_t number, const uint8_t *address);
-[; ;RF24_cg.h: 281: void RF24_printDetails(void);
-[; ;RF24_cg.h: 299: uint8_t RF24_available_p( uint8_t* pipe_num);
-[; ;RF24_cg.h: 305: uint8_t RF24_rxFifoFull(void);
-[; ;RF24_cg.h: 324: void RF24_powerDown(void);
-[; ;RF24_cg.h: 332: void RF24_powerUp(void) ;
-[; ;RF24_cg.h: 348: uint8_t RF24_write_m(const void* buf, uint8_t len, const uint8_t multicast );
-[; ;RF24_cg.h: 378: uint8_t RF24_writeFast(const void* buf, uint8_t len );
-[; ;RF24_cg.h: 391: uint8_t RF24_writeFast_m( const void* buf, uint8_t len, const uint8_t multicast );
-[; ;RF24_cg.h: 419: uint8_t RF24_writeBlocking(const void* buf, uint8_t len, uint32_t timeout );
-[; ;RF24_cg.h: 447: uint8_t RF24_txStandBy(void);
-[; ;RF24_cg.h: 465: uint8_t RF24_txStandBy_t( uint32_t timeout, uint8_t startTx);
-[; ;RF24_cg.h: 485: void RF24_writeAckPayload(uint8_t pipe, const void* buf, uint8_t len);
-[; ;RF24_cg.h: 495: uint8_t RF24_isAckPayloadAvailable(void);
-[; ;RF24_cg.h: 507: void RF24_whatHappened(uint8_t * tx_ok, uint8_t * tx_fail, uint8_t * rx_ready);
-[; ;RF24_cg.h: 533: void RF24_startFastWrite(const void* buf, uint8_t len, const uint8_t multicast, uint8_t startTx );
-[; ;RF24_cg.h: 555: void RF24_startWrite(const void* buf, uint8_t len, const uint8_t multicast );
-[; ;RF24_cg.h: 572: void RF24_reUseTX(void);
-[; ;RF24_cg.h: 580: uint8_t RF24_flush_tx(void);
-[; ;RF24_cg.h: 590: uint8_t RF24_testCarrier(void);
-[; ;RF24_cg.h: 609: uint8_t RF24_testRPD(void) ;
-[; ;RF24_cg.h: 618: uint8_t RF24_isValid(void);
-[; ;RF24_cg.h: 625: void RF24_closeReadingPipe( uint8_t pipe ) ;
-[; ;RF24_cg.h: 664: void RF24_setAddressWidth(uint8_t a_width);
-[; ;RF24_cg.h: 673: void RF24_setRetries(uint8_t delay, uint8_t count);
-[; ;RF24_cg.h: 680: void RF24_setChannel( uint8_t channel);
-[; ;RF24_cg.h: 687: uint8_t RF24_getChannel(void);
-[; ;RF24_cg.h: 701: void RF24_setPayloadSize( uint8_t size);
-[; ;RF24_cg.h: 710: uint8_t RF24_getPayloadSize(void);
-[; ;RF24_cg.h: 732: uint8_t RF24_getDynamicPayloadSize(void);
-[; ;RF24_cg.h: 743: void RF24_enableAckPayload(void);
-[; ;RF24_cg.h: 752: void RF24_enableDynamicPayloads(void);
-[; ;RF24_cg.h: 766: void RF24_enableDynamicAck(void);
-[; ;RF24_cg.h: 774: uint8_t RF24_isPVariant(void) ;
-[; ;RF24_cg.h: 784: void RF24_setAutoAck(uint8_t enable);
-[; ;RF24_cg.h: 795: void RF24_setAutoAck_p( uint8_t pipe, uint8_t enable ) ;
-[; ;RF24_cg.h: 808: void RF24_setPALevel ( uint8_t level );
-[; ;RF24_cg.h: 818: uint8_t RF24_getPALevel(void);
-[; ;RF24_cg.h: 828: uint8_t RF24_setDataRate(rf24_datarate_e speed);
-[; ;RF24_cg.h: 837: rf24_datarate_e RF24_getDataRate(void) ;
-[; ;RF24_cg.h: 844: void RF24_setCRCLength( rf24_crclength_e length);
-[; ;RF24_cg.h: 851: rf24_crclength_e RF24_getCRCLength(void);
-[; ;RF24_cg.h: 858: void RF24_disableCRC(void) ;
-[; ;RF24_cg.h: 876: void RF24_maskIRQ( uint8_t tx_ok,uint8_t tx_fail,uint8_t rx_ready);
-[; ;RF24_cg.h: 905: void RF24_openReadingPipe_d( uint8_t number,const raddr_t* address);
-[; ;RF24_cg.h: 920: void RF24_openWritingPipe_d( const raddr_t* address);
-[; ;RF24_cg.h: 940: void RF24_csn_d( uint8_t mode);
-[; ;RF24_cg.h: 948: void RF24_ce_d( uint8_t level);
-[; ;RF24_cg.h: 958: uint8_t RF24_read_register_m_d( uint8_t reg, uint8_t* buf, uint8_t len);
-[; ;RF24_cg.h: 966: uint8_t RF24_read_register_d(uint8_t reg);
-[; ;RF24_cg.h: 976: uint8_t RF24_write_register_c_d(uint8_t reg, const uint8_t* buf, uint8_t len);
-[; ;RF24_cg.h: 985: uint8_t RF24_write_register_d(uint8_t reg, uint8_t value);
-[; ;RF24_cg.h: 996: uint8_t RF24_write_payload_d(const void* buf, uint8_t len, const uint8_t writeType);
-[; ;RF24_cg.h: 1007: uint8_t RF24_read_payload_d(void* buf, uint8_t len);
-[; ;RF24_cg.h: 1014: uint8_t RF24_flush_rx_d(void);
-[; ;RF24_cg.h: 1021: uint8_t RF24_get_status_d(void);
-[; ;RF24_cg.h: 1074: void RF24_toggle_features_d(void);
-[; ;RF24_cg.h: 1080: uint8_t RF24_spiTrans_d( uint8_t cmd);
-"20 ../../../RF24_c/RF24_cg.c
+[; ;RF24_c.h: 38: typedef enum { RF24_PA_MIN = 0,RF24_PA_LOW, RF24_PA_HIGH, RF24_PA_MAX, RF24_PA_ERROR } rf24_pa_dbm_e ;
+[; ;RF24_c.h: 45: typedef enum { RF24_1MBPS = 0, RF24_2MBPS, RF24_250KBPS } rf24_datarate_e;
+[; ;RF24_c.h: 52: typedef enum { RF24_CRC_DISABLED = 0, RF24_CRC_8, RF24_CRC_16 } rf24_crclength_e;
+[; ;RF24_c.h: 58: typedef unsigned char raddr_t;
+[; ;RF24_c.h: 67: void RF24_beginTransaction(void);
+[; ;RF24_c.h: 69: void RF24_endTransaction(void);
+[; ;RF24_c.h: 87: void RF24_init( uint8_t _cepin, uint8_t _cspin);
+[; ;RF24_c.h: 101: void RF24_init2( uint8_t _cepin, uint8_t _cspin, uint32_t spispeed );
+[; ;RF24_c.h: 114: uint8_t RF24_begin(void);
+[; ;RF24_c.h: 131: void RF24_startListening(void);
+[; ;RF24_c.h: 142: void RF24_stopListening(void);
+[; ;RF24_c.h: 153: uint8_t RF24_available(void);
+[; ;RF24_c.h: 177: void RF24_read( void* buf, uint8_t len );
+[; ;RF24_c.h: 202: uint8_t RF24_write( const void* buf, uint8_t len );
+[; ;RF24_c.h: 229: void RF24_openWritingPipe(const uint8_t *address);
+[; ;RF24_c.h: 259: void RF24_openReadingPipe(uint8_t number, const uint8_t *address);
+[; ;RF24_c.h: 281: void RF24_printDetails(void);
+[; ;RF24_c.h: 299: uint8_t RF24_available_p( uint8_t* pipe_num);
+[; ;RF24_c.h: 305: uint8_t RF24_rxFifoFull(void);
+[; ;RF24_c.h: 324: void RF24_powerDown(void);
+[; ;RF24_c.h: 332: void RF24_powerUp(void) ;
+[; ;RF24_c.h: 348: uint8_t RF24_write_m(const void* buf, uint8_t len, const uint8_t multicast );
+[; ;RF24_c.h: 378: uint8_t RF24_writeFast(const void* buf, uint8_t len );
+[; ;RF24_c.h: 391: uint8_t RF24_writeFast_m( const void* buf, uint8_t len, const uint8_t multicast );
+[; ;RF24_c.h: 419: uint8_t RF24_writeBlocking(const void* buf, uint8_t len, uint32_t timeout );
+[; ;RF24_c.h: 447: uint8_t RF24_txStandBy(void);
+[; ;RF24_c.h: 465: uint8_t RF24_txStandBy_t( uint32_t timeout, uint8_t startTx);
+[; ;RF24_c.h: 485: void RF24_writeAckPayload(uint8_t pipe, const void* buf, uint8_t len);
+[; ;RF24_c.h: 495: uint8_t RF24_isAckPayloadAvailable(void);
+[; ;RF24_c.h: 507: void RF24_whatHappened(uint8_t * tx_ok, uint8_t * tx_fail, uint8_t * rx_ready);
+[; ;RF24_c.h: 533: void RF24_startFastWrite(const void* buf, uint8_t len, const uint8_t multicast, uint8_t startTx );
+[; ;RF24_c.h: 555: void RF24_startWrite(const void* buf, uint8_t len, const uint8_t multicast );
+[; ;RF24_c.h: 572: void RF24_reUseTX(void);
+[; ;RF24_c.h: 580: uint8_t RF24_flush_tx(void);
+[; ;RF24_c.h: 590: uint8_t RF24_testCarrier(void);
+[; ;RF24_c.h: 609: uint8_t RF24_testRPD(void) ;
+[; ;RF24_c.h: 618: uint8_t RF24_isValid(void);
+[; ;RF24_c.h: 625: void RF24_closeReadingPipe( uint8_t pipe ) ;
+[; ;RF24_c.h: 664: void RF24_setAddressWidth(uint8_t a_width);
+[; ;RF24_c.h: 673: void RF24_setRetries(uint8_t delay, uint8_t count);
+[; ;RF24_c.h: 680: void RF24_setChannel( uint8_t channel);
+[; ;RF24_c.h: 687: uint8_t RF24_getChannel(void);
+[; ;RF24_c.h: 701: void RF24_setPayloadSize( uint8_t size);
+[; ;RF24_c.h: 710: uint8_t RF24_getPayloadSize(void);
+[; ;RF24_c.h: 732: uint8_t RF24_getDynamicPayloadSize(void);
+[; ;RF24_c.h: 743: void RF24_enableAckPayload(void);
+[; ;RF24_c.h: 752: void RF24_enableDynamicPayloads(void);
+[; ;RF24_c.h: 766: void RF24_enableDynamicAck(void);
+[; ;RF24_c.h: 774: uint8_t RF24_isPVariant(void) ;
+[; ;RF24_c.h: 784: void RF24_setAutoAck(uint8_t enable);
+[; ;RF24_c.h: 795: void RF24_setAutoAck_p( uint8_t pipe, uint8_t enable ) ;
+[; ;RF24_c.h: 808: void RF24_setPALevel ( uint8_t level );
+[; ;RF24_c.h: 818: uint8_t RF24_getPALevel(void);
+[; ;RF24_c.h: 828: uint8_t RF24_setDataRate(rf24_datarate_e speed);
+[; ;RF24_c.h: 837: rf24_datarate_e RF24_getDataRate(void) ;
+[; ;RF24_c.h: 844: void RF24_setCRCLength( rf24_crclength_e length);
+[; ;RF24_c.h: 851: rf24_crclength_e RF24_getCRCLength(void);
+[; ;RF24_c.h: 858: void RF24_disableCRC(void) ;
+[; ;RF24_c.h: 876: void RF24_maskIRQ( uint8_t tx_ok,uint8_t tx_fail,uint8_t rx_ready);
+[; ;RF24_c.h: 905: void RF24_openReadingPipe_d( uint8_t number,const raddr_t* address);
+[; ;RF24_c.h: 920: void RF24_openWritingPipe_d( const raddr_t* address);
+[; ;RF24_c.h: 940: void RF24_csn_d( uint8_t mode);
+[; ;RF24_c.h: 948: void RF24_ce_d( uint8_t level);
+[; ;RF24_c.h: 958: uint8_t RF24_read_register_m_d( uint8_t reg, uint8_t* buf, uint8_t len);
+[; ;RF24_c.h: 966: uint8_t RF24_read_register_d(uint8_t reg);
+[; ;RF24_c.h: 976: uint8_t RF24_write_register_c_d(uint8_t reg, const uint8_t* buf, uint8_t len);
+[; ;RF24_c.h: 985: uint8_t RF24_write_register_d(uint8_t reg, uint8_t value);
+[; ;RF24_c.h: 996: uint8_t RF24_write_payload_d(const void* buf, uint8_t len, const uint8_t writeType);
+[; ;RF24_c.h: 1007: uint8_t RF24_read_payload_d(void* buf, uint8_t len);
+[; ;RF24_c.h: 1014: uint8_t RF24_flush_rx_d(void);
+[; ;RF24_c.h: 1021: uint8_t RF24_get_status_d(void);
+[; ;RF24_c.h: 1074: void RF24_toggle_features_d(void);
+[; ;RF24_c.h: 1080: uint8_t RF24_spiTrans_d( uint8_t cmd);
+"20 ../../../RF24_c/RF24_c.c
 [v _rf `S338 ~T0 @X0 1 s ]
-[; ;RF24_cg.c: 20: static RF24 rf;
+[; ;RF24_c.c: 20: static RF24 rf;
 "22
 [v _RF24_csn_d `(v ~T0 @X0 1 ef1`uc ]
 "23
 {
-[; ;RF24_cg.c: 22: void RF24_csn_d( uint8_t mode)
-[; ;RF24_cg.c: 23: {
+[; ;RF24_c.c: 22: void RF24_csn_d( uint8_t mode)
+[; ;RF24_c.c: 23: {
 [e :U _RF24_csn_d ]
 "22
 [v _mode `uc ~T0 @X0 1 r1 ]
 "23
 [f ]
-[; ;RF24_cg.c: 59: digitalWrite(rf.csn_pin,mode);
+[; ;RF24_c.c: 59: digitalWrite(rf.csn_pin,mode);
 "59
 [e ( _digitalWrite (2 , . _rf 1 _mode ]
-[; ;RF24_cg.c: 60: delayMicroseconds(rf.csDelay);
+[; ;RF24_c.c: 60: delayMicroseconds(rf.csDelay);
 "60
 [e ( _delayMicroseconds (1 -> . _rf 9 `uc ]
-[; ;RF24_cg.c: 63: }
+[; ;RF24_c.c: 63: }
 "63
 [e :UE 339 ]
 }
@@ -3158,45 +3158,45 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_ce_d `(v ~T0 @X0 1 ef1`uc ]
 "68
 {
-[; ;RF24_cg.c: 67: void RF24_ce_d(uint8_t level)
-[; ;RF24_cg.c: 68: {
+[; ;RF24_c.c: 67: void RF24_ce_d(uint8_t level)
+[; ;RF24_c.c: 68: {
 [e :U _RF24_ce_d ]
 "67
 [v _level `uc ~T0 @X0 1 r1 ]
 "68
 [f ]
-[; ;RF24_cg.c: 70: if (rf.ce_pin != rf.csn_pin) digitalWrite(rf.ce_pin,level);
+[; ;RF24_c.c: 70: if (rf.ce_pin != rf.csn_pin) digitalWrite(rf.ce_pin,level);
 "70
 [e $ ! != -> . _rf 0 `i -> . _rf 1 `i 341  ]
 [e ( _digitalWrite (2 , . _rf 0 _level ]
 [e :U 341 ]
-[; ;RF24_cg.c: 71: }
+[; ;RF24_c.c: 71: }
 "71
 [e :UE 340 ]
 }
 "75
 [v _RF24_beginTransaction `(v ~T0 @X0 1 ef ]
 {
-[; ;RF24_cg.c: 75: void RF24_beginTransaction(void ) {
+[; ;RF24_c.c: 75: void RF24_beginTransaction(void ) {
 [e :U _RF24_beginTransaction ]
 [f ]
-[; ;RF24_cg.c: 79: RF24_csn_d(0);
+[; ;RF24_c.c: 79: RF24_csn_d(0);
 "79
 [e ( _RF24_csn_d (1 -> -> 0 `i `uc ]
-[; ;RF24_cg.c: 80: }
+[; ;RF24_c.c: 80: }
 "80
 [e :UE 342 ]
 }
 "84
 [v _RF24_endTransaction `(v ~T0 @X0 1 ef ]
 {
-[; ;RF24_cg.c: 84: void RF24_endTransaction(void) {
+[; ;RF24_c.c: 84: void RF24_endTransaction(void) {
 [e :U _RF24_endTransaction ]
 [f ]
-[; ;RF24_cg.c: 85: RF24_csn_d(1);
+[; ;RF24_c.c: 85: RF24_csn_d(1);
 "85
 [e ( _RF24_csn_d (1 -> -> 1 `i `uc ]
-[; ;RF24_cg.c: 89: }
+[; ;RF24_c.c: 89: }
 "89
 [e :UE 343 ]
 }
@@ -3204,8 +3204,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_read_register_m_d `(uc ~T0 @X0 1 ef3`uc`*uc`uc ]
 "94
 {
-[; ;RF24_cg.c: 93: uint8_t RF24_read_register_m_d(uint8_t reg, uint8_t* buf, uint8_t len)
-[; ;RF24_cg.c: 94: {
+[; ;RF24_c.c: 93: uint8_t RF24_read_register_m_d(uint8_t reg, uint8_t* buf, uint8_t len)
+[; ;RF24_c.c: 94: {
 [e :U _RF24_read_register_m_d ]
 "93
 [v _reg `uc ~T0 @X0 1 r1 ]
@@ -3215,19 +3215,19 @@ Version 3.2 HI-TECH Software Intermediate Code
 [f ]
 "95
 [v _status `uc ~T0 @X0 1 a ]
-[; ;RF24_cg.c: 95: uint8_t status;
-[; ;RF24_cg.c: 117: RF24_beginTransaction();
+[; ;RF24_c.c: 95: uint8_t status;
+[; ;RF24_c.c: 117: RF24_beginTransaction();
 "117
 [e ( _RF24_beginTransaction ..  ]
-[; ;RF24_cg.c: 118: status = SPI_transfer( 0x00 | ( 0x1F & reg ) );
+[; ;RF24_c.c: 118: status = SPI_transfer( 0x00 | ( 0x1F & reg ) );
 "118
 [e = _status ( _SPI_transfer (1 -> | -> 0 `i & -> 31 `i -> _reg `i `uc ]
-[; ;RF24_cg.c: 119: while ( len-- ){
+[; ;RF24_c.c: 119: while ( len-- ){
 "119
 [e $U 345  ]
 [e :U 346 ]
 {
-[; ;RF24_cg.c: 120: *buf++ = SPI_transfer(0xff);
+[; ;RF24_c.c: 120: *buf++ = SPI_transfer(0xff);
 "120
 [e = *U ++ _buf * -> -> 1 `i `x -> -> # *U _buf `i `x ( _SPI_transfer (1 -> -> 255 `i `uc ]
 "121
@@ -3236,15 +3236,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 "119
 [e $ != -> -- _len -> -> 1 `i `uc `i -> -> -> 0 `i `uc `i 346  ]
 [e :U 347 ]
-[; ;RF24_cg.c: 121: }
-[; ;RF24_cg.c: 122: RF24_endTransaction();
+[; ;RF24_c.c: 121: }
+[; ;RF24_c.c: 122: RF24_endTransaction();
 "122
 [e ( _RF24_endTransaction ..  ]
-[; ;RF24_cg.c: 126: return status;
+[; ;RF24_c.c: 126: return status;
 "126
 [e ) _status ]
 [e $UE 344  ]
-[; ;RF24_cg.c: 127: }
+[; ;RF24_c.c: 127: }
 "127
 [e :UE 344 ]
 }
@@ -3252,8 +3252,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_read_register_d `(uc ~T0 @X0 1 ef1`uc ]
 "132
 {
-[; ;RF24_cg.c: 131: uint8_t RF24_read_register_d(uint8_t reg)
-[; ;RF24_cg.c: 132: {
+[; ;RF24_c.c: 131: uint8_t RF24_read_register_d(uint8_t reg)
+[; ;RF24_c.c: 132: {
 [e :U _RF24_read_register_d ]
 "131
 [v _reg `uc ~T0 @X0 1 r1 ]
@@ -3261,24 +3261,24 @@ Version 3.2 HI-TECH Software Intermediate Code
 [f ]
 "133
 [v _result `uc ~T0 @X0 1 a ]
-[; ;RF24_cg.c: 133: uint8_t result;
-[; ;RF24_cg.c: 150: RF24_beginTransaction();
+[; ;RF24_c.c: 133: uint8_t result;
+[; ;RF24_c.c: 150: RF24_beginTransaction();
 "150
 [e ( _RF24_beginTransaction ..  ]
-[; ;RF24_cg.c: 151: SPI_transfer( 0x00 | ( 0x1F & reg ) );
+[; ;RF24_c.c: 151: SPI_transfer( 0x00 | ( 0x1F & reg ) );
 "151
 [e ( _SPI_transfer (1 -> | -> 0 `i & -> 31 `i -> _reg `i `uc ]
-[; ;RF24_cg.c: 152: result = SPI_transfer(0xff);
+[; ;RF24_c.c: 152: result = SPI_transfer(0xff);
 "152
 [e = _result ( _SPI_transfer (1 -> -> 255 `i `uc ]
-[; ;RF24_cg.c: 153: RF24_endTransaction();
+[; ;RF24_c.c: 153: RF24_endTransaction();
 "153
 [e ( _RF24_endTransaction ..  ]
-[; ;RF24_cg.c: 157: return result;
+[; ;RF24_c.c: 157: return result;
 "157
 [e ) _result ]
 [e $UE 348  ]
-[; ;RF24_cg.c: 158: }
+[; ;RF24_c.c: 158: }
 "158
 [e :UE 348 ]
 }
@@ -3286,8 +3286,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_write_register_c_d `(uc ~T0 @X0 1 ef3`uc`*Cuc`uc ]
 "163
 {
-[; ;RF24_cg.c: 162: uint8_t RF24_write_register_c_d(uint8_t reg, const uint8_t* buf, uint8_t len)
-[; ;RF24_cg.c: 163: {
+[; ;RF24_c.c: 162: uint8_t RF24_write_register_c_d(uint8_t reg, const uint8_t* buf, uint8_t len)
+[; ;RF24_c.c: 163: {
 [e :U _RF24_write_register_c_d ]
 "162
 [v _reg `uc ~T0 @X0 1 r1 ]
@@ -3297,32 +3297,32 @@ Version 3.2 HI-TECH Software Intermediate Code
 [f ]
 "164
 [v _status `uc ~T0 @X0 1 a ]
-[; ;RF24_cg.c: 164: uint8_t status;
-[; ;RF24_cg.c: 181: RF24_beginTransaction();
+[; ;RF24_c.c: 164: uint8_t status;
+[; ;RF24_c.c: 181: RF24_beginTransaction();
 "181
 [e ( _RF24_beginTransaction ..  ]
-[; ;RF24_cg.c: 182: status = SPI_transfer( 0x20 | ( 0x1F & reg ) );
+[; ;RF24_c.c: 182: status = SPI_transfer( 0x20 | ( 0x1F & reg ) );
 "182
 [e = _status ( _SPI_transfer (1 -> | -> 32 `i & -> 31 `i -> _reg `i `uc ]
-[; ;RF24_cg.c: 183: while ( len-- )
+[; ;RF24_c.c: 183: while ( len-- )
 "183
 [e $U 350  ]
 [e :U 351 ]
-[; ;RF24_cg.c: 184: SPI_transfer(*buf++);
+[; ;RF24_c.c: 184: SPI_transfer(*buf++);
 "184
 [e ( _SPI_transfer (1 *U ++ _buf * -> -> 1 `i `x -> -> # *U _buf `i `x ]
 [e :U 350 ]
 "183
 [e $ != -> -- _len -> -> 1 `i `uc `i -> -> -> 0 `i `uc `i 351  ]
 [e :U 352 ]
-[; ;RF24_cg.c: 185: RF24_endTransaction();
+[; ;RF24_c.c: 185: RF24_endTransaction();
 "185
 [e ( _RF24_endTransaction ..  ]
-[; ;RF24_cg.c: 189: return status;
+[; ;RF24_c.c: 189: return status;
 "189
 [e ) _status ]
 [e $UE 349  ]
-[; ;RF24_cg.c: 190: }
+[; ;RF24_c.c: 190: }
 "190
 [e :UE 349 ]
 }
@@ -3330,8 +3330,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_write_register_d `(uc ~T0 @X0 1 ef2`uc`uc ]
 "195
 {
-[; ;RF24_cg.c: 194: uint8_t RF24_write_register_d(uint8_t reg, uint8_t value)
-[; ;RF24_cg.c: 195: {
+[; ;RF24_c.c: 194: uint8_t RF24_write_register_d(uint8_t reg, uint8_t value)
+[; ;RF24_c.c: 195: {
 [e :U _RF24_write_register_d ]
 "194
 [v _reg `uc ~T0 @X0 1 r1 ]
@@ -3340,25 +3340,25 @@ Version 3.2 HI-TECH Software Intermediate Code
 [f ]
 "196
 [v _status `uc ~T0 @X0 1 a ]
-[; ;RF24_cg.c: 196: uint8_t status;
-[; ;RF24_cg.c: 198: ;
-[; ;RF24_cg.c: 212: RF24_beginTransaction();
+[; ;RF24_c.c: 196: uint8_t status;
+[; ;RF24_c.c: 198: ;
+[; ;RF24_c.c: 212: RF24_beginTransaction();
 "212
 [e ( _RF24_beginTransaction ..  ]
-[; ;RF24_cg.c: 213: status = SPI_transfer( 0x20 | ( 0x1F & reg ) );
+[; ;RF24_c.c: 213: status = SPI_transfer( 0x20 | ( 0x1F & reg ) );
 "213
 [e = _status ( _SPI_transfer (1 -> | -> 32 `i & -> 31 `i -> _reg `i `uc ]
-[; ;RF24_cg.c: 214: SPI_transfer(value);
+[; ;RF24_c.c: 214: SPI_transfer(value);
 "214
 [e ( _SPI_transfer (1 _value ]
-[; ;RF24_cg.c: 215: RF24_endTransaction();
+[; ;RF24_c.c: 215: RF24_endTransaction();
 "215
 [e ( _RF24_endTransaction ..  ]
-[; ;RF24_cg.c: 219: return status;
+[; ;RF24_c.c: 219: return status;
 "219
 [e ) _status ]
 [e $UE 353  ]
-[; ;RF24_cg.c: 220: }
+[; ;RF24_c.c: 220: }
 "220
 [e :UE 353 ]
 }
@@ -3366,8 +3366,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_write_payload `(uc ~T0 @X0 1 ef3`*Cv`uc`Cuc ]
 "225
 {
-[; ;RF24_cg.c: 224: uint8_t RF24_write_payload(const void* buf, uint8_t data_len, const uint8_t writeType)
-[; ;RF24_cg.c: 225: {
+[; ;RF24_c.c: 224: uint8_t RF24_write_payload(const void* buf, uint8_t data_len, const uint8_t writeType)
+[; ;RF24_c.c: 225: {
 [e :U _RF24_write_payload ]
 "224
 [v _buf `*Cv ~T0 @X0 1 r1 ]
@@ -3379,31 +3379,31 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _status `uc ~T0 @X0 1 a ]
 "227
 [v _current `*Cuc ~T0 @X0 1 a ]
-[; ;RF24_cg.c: 226: uint8_t status;
-[; ;RF24_cg.c: 227: const uint8_t* current = (const uint8_t*)(buf);
+[; ;RF24_c.c: 226: uint8_t status;
+[; ;RF24_c.c: 227: const uint8_t* current = (const uint8_t*)(buf);
 [e = _current -> _buf `*Cuc ]
 "228
 [v _blank_len `uc ~T0 @X0 1 a ]
-[; ;RF24_cg.c: 228: uint8_t blank_len;
-[; ;RF24_cg.c: 230: data_len = (data_len<rf.payload_size?data_len:rf.payload_size);
+[; ;RF24_c.c: 228: uint8_t blank_len;
+[; ;RF24_c.c: 230: data_len = (data_len<rf.payload_size?data_len:rf.payload_size);
 "230
 [e = _data_len -> ? < -> _data_len `i -> . _rf 4 `i : -> _data_len `i -> . _rf 4 `i `uc ]
-[; ;RF24_cg.c: 231: blank_len = rf.dynamic_payloads_enabled ? 0 : rf.payload_size - data_len;
+[; ;RF24_c.c: 231: blank_len = rf.dynamic_payloads_enabled ? 0 : rf.payload_size - data_len;
 "231
 [e = _blank_len -> ? != -> . _rf 5 `i -> -> -> 0 `i `uc `i : -> 0 `i - -> . _rf 4 `i -> _data_len `i `uc ]
-[; ;RF24_cg.c: 234: ;
-[; ;RF24_cg.c: 255: RF24_beginTransaction();
+[; ;RF24_c.c: 234: ;
+[; ;RF24_c.c: 255: RF24_beginTransaction();
 "255
 [e ( _RF24_beginTransaction ..  ]
-[; ;RF24_cg.c: 256: status = SPI_transfer( writeType );
+[; ;RF24_c.c: 256: status = SPI_transfer( writeType );
 "256
 [e = _status ( _SPI_transfer (1 _writeType ]
-[; ;RF24_cg.c: 257: while ( data_len-- ) {
+[; ;RF24_c.c: 257: while ( data_len-- ) {
 "257
 [e $U 355  ]
 [e :U 356 ]
 {
-[; ;RF24_cg.c: 258: SPI_transfer(*current++);
+[; ;RF24_c.c: 258: SPI_transfer(*current++);
 "258
 [e ( _SPI_transfer (1 *U ++ _current * -> -> 1 `i `x -> -> # *U _current `i `x ]
 "259
@@ -3412,13 +3412,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 "257
 [e $ != -> -- _data_len -> -> 1 `i `uc `i -> -> -> 0 `i `uc `i 356  ]
 [e :U 357 ]
-[; ;RF24_cg.c: 259: }
-[; ;RF24_cg.c: 260: while ( blank_len-- ) {
+[; ;RF24_c.c: 259: }
+[; ;RF24_c.c: 260: while ( blank_len-- ) {
 "260
 [e $U 358  ]
 [e :U 359 ]
 {
-[; ;RF24_cg.c: 261: SPI_transfer(0);
+[; ;RF24_c.c: 261: SPI_transfer(0);
 "261
 [e ( _SPI_transfer (1 -> -> 0 `i `uc ]
 "262
@@ -3427,15 +3427,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 "260
 [e $ != -> -- _blank_len -> -> 1 `i `uc `i -> -> -> 0 `i `uc `i 359  ]
 [e :U 360 ]
-[; ;RF24_cg.c: 262: }
-[; ;RF24_cg.c: 263: RF24_endTransaction();
+[; ;RF24_c.c: 262: }
+[; ;RF24_c.c: 263: RF24_endTransaction();
 "263
 [e ( _RF24_endTransaction ..  ]
-[; ;RF24_cg.c: 267: return status;
+[; ;RF24_c.c: 267: return status;
 "267
 [e ) _status ]
 [e $UE 354  ]
-[; ;RF24_cg.c: 268: }
+[; ;RF24_c.c: 268: }
 "268
 [e :UE 354 ]
 }
@@ -3443,8 +3443,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_read_payload `(uc ~T0 @X0 1 ef2`*v`uc ]
 "273
 {
-[; ;RF24_cg.c: 272: uint8_t RF24_read_payload(void* buf, uint8_t data_len)
-[; ;RF24_cg.c: 273: {
+[; ;RF24_c.c: 272: uint8_t RF24_read_payload(void* buf, uint8_t data_len)
+[; ;RF24_c.c: 273: {
 [e :U _RF24_read_payload ]
 "272
 [v _buf `*v ~T0 @X0 1 r1 ]
@@ -3455,33 +3455,33 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _status `uc ~T0 @X0 1 a ]
 "275
 [v _current `*uc ~T0 @X0 1 a ]
-[; ;RF24_cg.c: 274: uint8_t status;
-[; ;RF24_cg.c: 275: uint8_t* current = (uint8_t*)(buf);
+[; ;RF24_c.c: 274: uint8_t status;
+[; ;RF24_c.c: 275: uint8_t* current = (uint8_t*)(buf);
 [e = _current -> _buf `*uc ]
 "276
 [v _blank_len `uc ~T0 @X0 1 a ]
-[; ;RF24_cg.c: 276: uint8_t blank_len;
-[; ;RF24_cg.c: 278: if(data_len > rf.payload_size) data_len = rf.payload_size;
+[; ;RF24_c.c: 276: uint8_t blank_len;
+[; ;RF24_c.c: 278: if(data_len > rf.payload_size) data_len = rf.payload_size;
 "278
 [e $ ! > -> _data_len `i -> . _rf 4 `i 362  ]
 [e = _data_len . _rf 4 ]
 [e :U 362 ]
-[; ;RF24_cg.c: 279: blank_len = rf.dynamic_payloads_enabled ? 0 : rf.payload_size - data_len;
+[; ;RF24_c.c: 279: blank_len = rf.dynamic_payloads_enabled ? 0 : rf.payload_size - data_len;
 "279
 [e = _blank_len -> ? != -> . _rf 5 `i -> -> -> 0 `i `uc `i : -> 0 `i - -> . _rf 4 `i -> _data_len `i `uc ]
-[; ;RF24_cg.c: 283: ;
-[; ;RF24_cg.c: 311: RF24_beginTransaction();
+[; ;RF24_c.c: 283: ;
+[; ;RF24_c.c: 311: RF24_beginTransaction();
 "311
 [e ( _RF24_beginTransaction ..  ]
-[; ;RF24_cg.c: 312: status = SPI_transfer( 0x61 );
+[; ;RF24_c.c: 312: status = SPI_transfer( 0x61 );
 "312
 [e = _status ( _SPI_transfer (1 -> -> 97 `i `uc ]
-[; ;RF24_cg.c: 313: while ( data_len-- ) {
+[; ;RF24_c.c: 313: while ( data_len-- ) {
 "313
 [e $U 363  ]
 [e :U 364 ]
 {
-[; ;RF24_cg.c: 314: *current++ = SPI_transfer(0xFF);
+[; ;RF24_c.c: 314: *current++ = SPI_transfer(0xFF);
 "314
 [e = *U ++ _current * -> -> 1 `i `x -> -> # *U _current `i `x ( _SPI_transfer (1 -> -> 255 `i `uc ]
 "315
@@ -3490,13 +3490,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 "313
 [e $ != -> -- _data_len -> -> 1 `i `uc `i -> -> -> 0 `i `uc `i 364  ]
 [e :U 365 ]
-[; ;RF24_cg.c: 315: }
-[; ;RF24_cg.c: 316: while ( blank_len-- ) {
+[; ;RF24_c.c: 315: }
+[; ;RF24_c.c: 316: while ( blank_len-- ) {
 "316
 [e $U 366  ]
 [e :U 367 ]
 {
-[; ;RF24_cg.c: 317: SPI_transfer(0xff);
+[; ;RF24_c.c: 317: SPI_transfer(0xff);
 "317
 [e ( _SPI_transfer (1 -> -> 255 `i `uc ]
 "318
@@ -3505,42 +3505,42 @@ Version 3.2 HI-TECH Software Intermediate Code
 "316
 [e $ != -> -- _blank_len -> -> 1 `i `uc `i -> -> -> 0 `i `uc `i 367  ]
 [e :U 368 ]
-[; ;RF24_cg.c: 318: }
-[; ;RF24_cg.c: 319: RF24_endTransaction();
+[; ;RF24_c.c: 318: }
+[; ;RF24_c.c: 319: RF24_endTransaction();
 "319
 [e ( _RF24_endTransaction ..  ]
-[; ;RF24_cg.c: 323: return status;
+[; ;RF24_c.c: 323: return status;
 "323
 [e ) _status ]
 [e $UE 361  ]
-[; ;RF24_cg.c: 324: }
+[; ;RF24_c.c: 324: }
 "324
 [e :UE 361 ]
 }
 "327
 [v _RF24_spiTrans `(uc ~T0 @X0 1 ef1`uc ]
 {
-[; ;RF24_cg.c: 327: uint8_t RF24_spiTrans(uint8_t cmd){
+[; ;RF24_c.c: 327: uint8_t RF24_spiTrans(uint8_t cmd){
 [e :U _RF24_spiTrans ]
 [v _cmd `uc ~T0 @X0 1 r1 ]
 [f ]
 "329
 [v _status `uc ~T0 @X0 1 a ]
-[; ;RF24_cg.c: 329: uint8_t status;
-[; ;RF24_cg.c: 331: RF24_beginTransaction();
+[; ;RF24_c.c: 329: uint8_t status;
+[; ;RF24_c.c: 331: RF24_beginTransaction();
 "331
 [e ( _RF24_beginTransaction ..  ]
-[; ;RF24_cg.c: 332: status = SPI_transfer( cmd );
+[; ;RF24_c.c: 332: status = SPI_transfer( cmd );
 "332
 [e = _status ( _SPI_transfer (1 _cmd ]
-[; ;RF24_cg.c: 333: RF24_endTransaction();
+[; ;RF24_c.c: 333: RF24_endTransaction();
 "333
 [e ( _RF24_endTransaction ..  ]
-[; ;RF24_cg.c: 335: return status;
+[; ;RF24_c.c: 335: return status;
 "335
 [e ) _status ]
 [e $UE 369  ]
-[; ;RF24_cg.c: 336: }
+[; ;RF24_c.c: 336: }
 "336
 [e :UE 369 ]
 }
@@ -3548,15 +3548,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_flush_rx `(uc ~T0 @X0 1 ef ]
 "342
 {
-[; ;RF24_cg.c: 341: uint8_t RF24_flush_rx(void)
-[; ;RF24_cg.c: 342: {
+[; ;RF24_c.c: 341: uint8_t RF24_flush_rx(void)
+[; ;RF24_c.c: 342: {
 [e :U _RF24_flush_rx ]
 [f ]
-[; ;RF24_cg.c: 343: return RF24_spiTrans( 0xE2 );
+[; ;RF24_c.c: 343: return RF24_spiTrans( 0xE2 );
 "343
 [e ) ( _RF24_spiTrans (1 -> -> 226 `i `uc ]
 [e $UE 370  ]
-[; ;RF24_cg.c: 344: }
+[; ;RF24_c.c: 344: }
 "344
 [e :UE 370 ]
 }
@@ -3564,15 +3564,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_flush_tx `(uc ~T0 @X0 1 ef ]
 "349
 {
-[; ;RF24_cg.c: 348: uint8_t RF24_flush_tx(void )
-[; ;RF24_cg.c: 349: {
+[; ;RF24_c.c: 348: uint8_t RF24_flush_tx(void )
+[; ;RF24_c.c: 349: {
 [e :U _RF24_flush_tx ]
 [f ]
-[; ;RF24_cg.c: 350: return RF24_spiTrans( 0xE1 );
+[; ;RF24_c.c: 350: return RF24_spiTrans( 0xE1 );
 "350
 [e ) ( _RF24_spiTrans (1 -> -> 225 `i `uc ]
 [e $UE 371  ]
-[; ;RF24_cg.c: 351: }
+[; ;RF24_c.c: 351: }
 "351
 [e :UE 371 ]
 }
@@ -3580,15 +3580,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_get_status `(uc ~T0 @X0 1 ef ]
 "356
 {
-[; ;RF24_cg.c: 355: uint8_t RF24_get_status(void )
-[; ;RF24_cg.c: 356: {
+[; ;RF24_c.c: 355: uint8_t RF24_get_status(void )
+[; ;RF24_c.c: 356: {
 [e :U _RF24_get_status ]
 [f ]
-[; ;RF24_cg.c: 357: return RF24_spiTrans( 0xFF);
+[; ;RF24_c.c: 357: return RF24_spiTrans( 0xFF);
 "357
 [e ) ( _RF24_spiTrans (1 -> -> 255 `i `uc ]
 [e $UE 372  ]
-[; ;RF24_cg.c: 358: }
+[; ;RF24_c.c: 358: }
 "358
 [e :UE 372 ]
 }
@@ -3596,39 +3596,39 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_init `(v ~T0 @X0 1 ef2`uc`uc ]
 "434
 {
-[; ;RF24_cg.c: 433: void RF24_init( uint8_t _cepin, uint8_t _cspin)
-[; ;RF24_cg.c: 434: {
+[; ;RF24_c.c: 433: void RF24_init( uint8_t _cepin, uint8_t _cspin)
+[; ;RF24_c.c: 434: {
 [e :U _RF24_init ]
 "433
 [v __cepin `uc ~T0 @X0 1 r1 ]
 [v __cspin `uc ~T0 @X0 1 r2 ]
 "434
 [f ]
-[; ;RF24_cg.c: 435: rf.ce_pin=_cepin;
+[; ;RF24_c.c: 435: rf.ce_pin=_cepin;
 "435
 [e = . _rf 0 __cepin ]
-[; ;RF24_cg.c: 436: rf.csn_pin=_cspin;
+[; ;RF24_c.c: 436: rf.csn_pin=_cspin;
 "436
 [e = . _rf 1 __cspin ]
-[; ;RF24_cg.c: 437: rf.p_variant=0;
+[; ;RF24_c.c: 437: rf.p_variant=0;
 "437
 [e = . _rf 3 -> -> 0 `i `uc ]
-[; ;RF24_cg.c: 438: rf.payload_size=32;
+[; ;RF24_c.c: 438: rf.payload_size=32;
 "438
 [e = . _rf 4 -> -> 32 `i `uc ]
-[; ;RF24_cg.c: 439: rf.dynamic_payloads_enabled=0;
+[; ;RF24_c.c: 439: rf.dynamic_payloads_enabled=0;
 "439
 [e = . _rf 5 -> -> 0 `i `uc ]
-[; ;RF24_cg.c: 440: rf.addr_width=5;
+[; ;RF24_c.c: 440: rf.addr_width=5;
 "440
 [e = . _rf 7 -> -> 5 `i `uc ]
-[; ;RF24_cg.c: 441: rf.csDelay=5;
+[; ;RF24_c.c: 441: rf.csDelay=5;
 "441
 [e = . _rf 9 -> -> -> 5 `i `l `ul ]
-[; ;RF24_cg.c: 442: rf.pipe0_reading_address[0]=0;
+[; ;RF24_c.c: 442: rf.pipe0_reading_address[0]=0;
 "442
 [e = *U + &U . _rf 6 * -> -> -> 0 `i `ui `ux -> -> # *U &U . _rf 6 `ui `ux -> -> 0 `i `uc ]
-[; ;RF24_cg.c: 443: }
+[; ;RF24_c.c: 443: }
 "443
 [e :UE 373 ]
 }
@@ -3636,8 +3636,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_setChannel `(v ~T0 @X0 1 ef1`uc ]
 "465
 {
-[; ;RF24_cg.c: 464: void RF24_setChannel( uint8_t channel)
-[; ;RF24_cg.c: 465: {
+[; ;RF24_c.c: 464: void RF24_setChannel( uint8_t channel)
+[; ;RF24_c.c: 465: {
 [e :U _RF24_setChannel ]
 "464
 [v _channel `uc ~T0 @X0 1 r1 ]
@@ -3645,12 +3645,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [f ]
 "466
 [v _max_channel `Cuc ~T0 @X0 1 a ]
-[; ;RF24_cg.c: 466: const uint8_t max_channel = 125;
+[; ;RF24_c.c: 466: const uint8_t max_channel = 125;
 [e = _max_channel -> -> 125 `i `uc ]
-[; ;RF24_cg.c: 467: RF24_write_register_d(0x05,(channel<max_channel?channel:max_channel));
+[; ;RF24_c.c: 467: RF24_write_register_d(0x05,(channel<max_channel?channel:max_channel));
 "467
 [e ( _RF24_write_register_d (2 , -> -> 5 `i `uc -> ? < -> _channel `i -> _max_channel `i : -> _channel `i -> _max_channel `i `uc ]
-[; ;RF24_cg.c: 468: }
+[; ;RF24_c.c: 468: }
 "468
 [e :UE 374 ]
 }
@@ -3658,15 +3658,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_getChannel `(uc ~T0 @X0 1 ef ]
 "471
 {
-[; ;RF24_cg.c: 470: uint8_t RF24_getChannel(void)
-[; ;RF24_cg.c: 471: {
+[; ;RF24_c.c: 470: uint8_t RF24_getChannel(void)
+[; ;RF24_c.c: 471: {
 [e :U _RF24_getChannel ]
 [f ]
-[; ;RF24_cg.c: 473: return RF24_read_register_d(0x05);
+[; ;RF24_c.c: 473: return RF24_read_register_d(0x05);
 "473
 [e ) ( _RF24_read_register_d (1 -> -> 5 `i `uc ]
 [e $UE 375  ]
-[; ;RF24_cg.c: 474: }
+[; ;RF24_c.c: 474: }
 "474
 [e :UE 375 ]
 }
@@ -3674,17 +3674,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_setPayloadSize `(v ~T0 @X0 1 ef1`uc ]
 "478
 {
-[; ;RF24_cg.c: 477: void RF24_setPayloadSize(uint8_t size)
-[; ;RF24_cg.c: 478: {
+[; ;RF24_c.c: 477: void RF24_setPayloadSize(uint8_t size)
+[; ;RF24_c.c: 478: {
 [e :U _RF24_setPayloadSize ]
 "477
 [v _size `uc ~T0 @X0 1 r1 ]
 "478
 [f ]
-[; ;RF24_cg.c: 479: rf.payload_size = (size<32?size:32);
+[; ;RF24_c.c: 479: rf.payload_size = (size<32?size:32);
 "479
 [e = . _rf 4 -> ? < -> _size `i -> 32 `i : -> _size `i -> 32 `i `uc ]
-[; ;RF24_cg.c: 480: }
+[; ;RF24_c.c: 480: }
 "480
 [e :UE 376 ]
 }
@@ -3692,15 +3692,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_getPayloadSize `(uc ~T0 @X0 1 ef ]
 "485
 {
-[; ;RF24_cg.c: 484: uint8_t RF24_getPayloadSize(void)
-[; ;RF24_cg.c: 485: {
+[; ;RF24_c.c: 484: uint8_t RF24_getPayloadSize(void)
+[; ;RF24_c.c: 485: {
 [e :U _RF24_getPayloadSize ]
 [f ]
-[; ;RF24_cg.c: 486: return rf.payload_size;
+[; ;RF24_c.c: 486: return rf.payload_size;
 "486
 [e ) . _rf 4 ]
 [e $UE 377  ]
-[; ;RF24_cg.c: 487: }
+[; ;RF24_c.c: 487: }
 "487
 [e :UE 377 ]
 }
@@ -3708,95 +3708,95 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_begin `(uc ~T0 @X0 1 ef ]
 "599
 {
-[; ;RF24_cg.c: 598: uint8_t RF24_begin(void )
-[; ;RF24_cg.c: 599: {
+[; ;RF24_c.c: 598: uint8_t RF24_begin(void )
+[; ;RF24_c.c: 599: {
 [e :U _RF24_begin ]
 [f ]
 "601
 [v _setup `uc ~T0 @X0 1 a ]
-[; ;RF24_cg.c: 601: uint8_t setup=0;
+[; ;RF24_c.c: 601: uint8_t setup=0;
 [e = _setup -> -> 0 `i `uc ]
-[; ;RF24_cg.c: 640: if (rf.ce_pin != rf.csn_pin) pinMode(rf.ce_pin,0);
+[; ;RF24_c.c: 640: if (rf.ce_pin != rf.csn_pin) pinMode(rf.ce_pin,0);
 "640
 [e $ ! != -> . _rf 0 `i -> . _rf 1 `i 379  ]
 [e ( _pinMode (2 , . _rf 0 -> -> 0 `i `uc ]
 [e :U 379 ]
-[; ;RF24_cg.c: 643: if (rf.ce_pin != rf.csn_pin)
+[; ;RF24_c.c: 643: if (rf.ce_pin != rf.csn_pin)
 "643
 [e $ ! != -> . _rf 0 `i -> . _rf 1 `i 380  ]
-[; ;RF24_cg.c: 645: pinMode(rf.csn_pin,0);
+[; ;RF24_c.c: 645: pinMode(rf.csn_pin,0);
 "645
 [e ( _pinMode (2 , . _rf 1 -> -> 0 `i `uc ]
 [e :U 380 ]
-[; ;RF24_cg.c: 647: SPI_begin();
+[; ;RF24_c.c: 647: SPI_begin();
 "647
 [e ( _SPI_begin ..  ]
-[; ;RF24_cg.c: 648: RF24_ce_d(0);
+[; ;RF24_c.c: 648: RF24_ce_d(0);
 "648
 [e ( _RF24_ce_d (1 -> -> 0 `i `uc ]
-[; ;RF24_cg.c: 649: RF24_csn_d(1);
+[; ;RF24_c.c: 649: RF24_csn_d(1);
 "649
 [e ( _RF24_csn_d (1 -> -> 1 `i `uc ]
-[; ;RF24_cg.c: 661: delay( 5 ) ;
+[; ;RF24_c.c: 661: delay( 5 ) ;
 "661
 [e ( _delay (1 -> -> 5 `i `ui ]
-[; ;RF24_cg.c: 664: RF24_write_register_d( 0x00, 0b00001100 ) ;
+[; ;RF24_c.c: 664: RF24_write_register_d( 0x00, 0b00001100 ) ;
 "664
 [e ( _RF24_write_register_d (2 , -> -> 0 `i `uc -> -> 12 `i `uc ]
-[; ;RF24_cg.c: 669: RF24_setRetries(5,15);
+[; ;RF24_c.c: 669: RF24_setRetries(5,15);
 "669
 [e ( _RF24_setRetries (2 , -> -> 5 `i `uc -> -> 15 `i `uc ]
-[; ;RF24_cg.c: 676: if( RF24_setDataRate( RF24_250KBPS ) )
+[; ;RF24_c.c: 676: if( RF24_setDataRate( RF24_250KBPS ) )
 "676
 [e $ ! != -> ( _RF24_setDataRate (1 . `E3388 2 `i -> -> -> 0 `i `uc `i 381  ]
-[; ;RF24_cg.c: 677: {
+[; ;RF24_c.c: 677: {
 "677
 {
-[; ;RF24_cg.c: 678: rf.p_variant = 1 ;
+[; ;RF24_c.c: 678: rf.p_variant = 1 ;
 "678
 [e = . _rf 3 -> -> 1 `i `uc ]
 "679
 }
 [e :U 381 ]
-[; ;RF24_cg.c: 679: }
-[; ;RF24_cg.c: 680: setup = RF24_read_register_d(0x06);
+[; ;RF24_c.c: 679: }
+[; ;RF24_c.c: 680: setup = RF24_read_register_d(0x06);
 "680
 [e = _setup ( _RF24_read_register_d (1 -> -> 6 `i `uc ]
-[; ;RF24_cg.c: 688: RF24_setDataRate( RF24_1MBPS ) ;
+[; ;RF24_c.c: 688: RF24_setDataRate( RF24_1MBPS ) ;
 "688
 [e ( _RF24_setDataRate (1 . `E3388 0 ]
-[; ;RF24_cg.c: 694: RF24_toggle_features_d();
+[; ;RF24_c.c: 694: RF24_toggle_features_d();
 "694
 [e ( _RF24_toggle_features_d ..  ]
-[; ;RF24_cg.c: 695: RF24_write_register_d(0x1D,0 );
+[; ;RF24_c.c: 695: RF24_write_register_d(0x1D,0 );
 "695
 [e ( _RF24_write_register_d (2 , -> -> 29 `i `uc -> -> 0 `i `uc ]
-[; ;RF24_cg.c: 696: RF24_write_register_d(0x1C,0);
+[; ;RF24_c.c: 696: RF24_write_register_d(0x1C,0);
 "696
 [e ( _RF24_write_register_d (2 , -> -> 28 `i `uc -> -> 0 `i `uc ]
-[; ;RF24_cg.c: 700: RF24_write_register_d(0x07,(1<<(6)) | (1<<(5)) | (1<<(4)) );
+[; ;RF24_c.c: 700: RF24_write_register_d(0x07,(1<<(6)) | (1<<(5)) | (1<<(4)) );
 "700
 [e ( _RF24_write_register_d (2 , -> -> 7 `i `uc -> | | << -> 1 `i -> 6 `i << -> 1 `i -> 5 `i << -> 1 `i -> 4 `i `uc ]
-[; ;RF24_cg.c: 705: RF24_setChannel(76);
+[; ;RF24_c.c: 705: RF24_setChannel(76);
 "705
 [e ( _RF24_setChannel (1 -> -> 76 `i `uc ]
-[; ;RF24_cg.c: 708: RF24_flush_rx();
+[; ;RF24_c.c: 708: RF24_flush_rx();
 "708
 [e ( _RF24_flush_rx ..  ]
-[; ;RF24_cg.c: 709: RF24_flush_tx();
+[; ;RF24_c.c: 709: RF24_flush_tx();
 "709
 [e ( _RF24_flush_tx ..  ]
-[; ;RF24_cg.c: 711: RF24_powerUp();
+[; ;RF24_c.c: 711: RF24_powerUp();
 "711
 [e ( _RF24_powerUp ..  ]
-[; ;RF24_cg.c: 715: RF24_write_register_d(0x00, ( RF24_read_register_d(0x00) ) & ~(1<<(0)) );
+[; ;RF24_c.c: 715: RF24_write_register_d(0x00, ( RF24_read_register_d(0x00) ) & ~(1<<(0)) );
 "715
 [e ( _RF24_write_register_d (2 , -> -> 0 `i `uc -> & -> ( _RF24_read_register_d (1 -> -> 0 `i `uc `i ~ << -> 1 `i -> 0 `i `uc ]
-[; ;RF24_cg.c: 718: return ( setup != 0 && setup != 0xff );
+[; ;RF24_c.c: 718: return ( setup != 0 && setup != 0xff );
 "718
 [e ) -> -> && != -> _setup `i -> 0 `i != -> _setup `i -> 255 `i `i `uc ]
 [e $UE 378  ]
-[; ;RF24_cg.c: 719: }
+[; ;RF24_c.c: 719: }
 "719
 [e :UE 378 ]
 }
@@ -3804,54 +3804,54 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_startListening `(v ~T0 @X0 1 ef ]
 "724
 {
-[; ;RF24_cg.c: 723: void RF24_startListening(void)
-[; ;RF24_cg.c: 724: {
+[; ;RF24_c.c: 723: void RF24_startListening(void)
+[; ;RF24_c.c: 724: {
 [e :U _RF24_startListening ]
 [f ]
-[; ;RF24_cg.c: 726: RF24_powerUp();
+[; ;RF24_c.c: 726: RF24_powerUp();
 "726
 [e ( _RF24_powerUp ..  ]
-[; ;RF24_cg.c: 728: RF24_write_register_d(0x00, RF24_read_register_d(0x00) | (1<<(0)));
+[; ;RF24_c.c: 728: RF24_write_register_d(0x00, RF24_read_register_d(0x00) | (1<<(0)));
 "728
 [e ( _RF24_write_register_d (2 , -> -> 0 `i `uc -> | -> ( _RF24_read_register_d (1 -> -> 0 `i `uc `i << -> 1 `i -> 0 `i `uc ]
-[; ;RF24_cg.c: 729: RF24_write_register_d(0x07, (1<<(6)) | (1<<(5)) | (1<<(4)) );
+[; ;RF24_c.c: 729: RF24_write_register_d(0x07, (1<<(6)) | (1<<(5)) | (1<<(4)) );
 "729
 [e ( _RF24_write_register_d (2 , -> -> 7 `i `uc -> | | << -> 1 `i -> 6 `i << -> 1 `i -> 5 `i << -> 1 `i -> 4 `i `uc ]
-[; ;RF24_cg.c: 730: RF24_ce_d(1);
+[; ;RF24_c.c: 730: RF24_ce_d(1);
 "730
 [e ( _RF24_ce_d (1 -> -> 1 `i `uc ]
-[; ;RF24_cg.c: 732: if (rf.pipe0_reading_address[0] > 0){
+[; ;RF24_c.c: 732: if (rf.pipe0_reading_address[0] > 0){
 "732
 [e $ ! > -> *U + &U . _rf 6 * -> -> -> 0 `i `ui `ux -> -> # *U &U . _rf 6 `ui `ux `i -> 0 `i 383  ]
 {
-[; ;RF24_cg.c: 733: RF24_write_register_c_d(0x0A, rf.pipe0_reading_address, rf.addr_width);
+[; ;RF24_c.c: 733: RF24_write_register_c_d(0x0A, rf.pipe0_reading_address, rf.addr_width);
 "733
 [e ( _RF24_write_register_c_d (3 , , -> -> 10 `i `uc -> &U . _rf 6 `*Cuc . _rf 7 ]
 "734
 }
-[; ;RF24_cg.c: 734: }else{
+[; ;RF24_c.c: 734: }else{
 [e $U 384  ]
 [e :U 383 ]
 {
-[; ;RF24_cg.c: 735: RF24_closeReadingPipe(0);
+[; ;RF24_c.c: 735: RF24_closeReadingPipe(0);
 "735
 [e ( _RF24_closeReadingPipe (1 -> -> 0 `i `uc ]
 "736
 }
 [e :U 384 ]
-[; ;RF24_cg.c: 736: }
-[; ;RF24_cg.c: 740: if(RF24_read_register_d(0x1D) & (1<<(1))){
+[; ;RF24_c.c: 736: }
+[; ;RF24_c.c: 740: if(RF24_read_register_d(0x1D) & (1<<(1))){
 "740
 [e $ ! != & -> ( _RF24_read_register_d (1 -> -> 29 `i `uc `i << -> 1 `i -> 1 `i -> 0 `i 385  ]
 {
-[; ;RF24_cg.c: 741: RF24_flush_tx();
+[; ;RF24_c.c: 741: RF24_flush_tx();
 "741
 [e ( _RF24_flush_tx ..  ]
 "742
 }
 [e :U 385 ]
-[; ;RF24_cg.c: 742: }
-[; ;RF24_cg.c: 746: }
+[; ;RF24_c.c: 742: }
+[; ;RF24_c.c: 746: }
 "746
 [e :UE 382 ]
 }
@@ -3869,45 +3869,45 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 5 `i `uc
 ..
 ]
-[; ;RF24_cg.c: 749: static const uint8_t child_pipe_enable[]  =
-[; ;RF24_cg.c: 750: {
-[; ;RF24_cg.c: 751: 0, 1, 2, 3, 4, 5
-[; ;RF24_cg.c: 752: };
+[; ;RF24_c.c: 749: static const uint8_t child_pipe_enable[]  =
+[; ;RF24_c.c: 750: {
+[; ;RF24_c.c: 751: 0, 1, 2, 3, 4, 5
+[; ;RF24_c.c: 752: };
 "754
 [v _RF24_stopListening `(v ~T0 @X0 1 ef ]
 "755
 {
-[; ;RF24_cg.c: 754: void RF24_stopListening(void)
-[; ;RF24_cg.c: 755: {
+[; ;RF24_c.c: 754: void RF24_stopListening(void)
+[; ;RF24_c.c: 755: {
 [e :U _RF24_stopListening ]
 [f ]
-[; ;RF24_cg.c: 756: RF24_ce_d(0);
+[; ;RF24_c.c: 756: RF24_ce_d(0);
 "756
 [e ( _RF24_ce_d (1 -> -> 0 `i `uc ]
-[; ;RF24_cg.c: 758: delayMicroseconds(rf.txDelay);
+[; ;RF24_c.c: 758: delayMicroseconds(rf.txDelay);
 "758
 [e ( _delayMicroseconds (1 -> . _rf 8 `uc ]
-[; ;RF24_cg.c: 760: if(RF24_read_register_d(0x1D) & (1<<(1))){
+[; ;RF24_c.c: 760: if(RF24_read_register_d(0x1D) & (1<<(1))){
 "760
 [e $ ! != & -> ( _RF24_read_register_d (1 -> -> 29 `i `uc `i << -> 1 `i -> 1 `i -> 0 `i 387  ]
 {
-[; ;RF24_cg.c: 761: delayMicroseconds(rf.txDelay);
+[; ;RF24_c.c: 761: delayMicroseconds(rf.txDelay);
 "761
 [e ( _delayMicroseconds (1 -> . _rf 8 `uc ]
-[; ;RF24_cg.c: 762: RF24_flush_tx();
+[; ;RF24_c.c: 762: RF24_flush_tx();
 "762
 [e ( _RF24_flush_tx ..  ]
 "763
 }
 [e :U 387 ]
-[; ;RF24_cg.c: 763: }
-[; ;RF24_cg.c: 765: RF24_write_register_d(0x00, ( RF24_read_register_d(0x00) ) & ~(1<<(0)) );
+[; ;RF24_c.c: 763: }
+[; ;RF24_c.c: 765: RF24_write_register_d(0x00, ( RF24_read_register_d(0x00) ) & ~(1<<(0)) );
 "765
 [e ( _RF24_write_register_d (2 , -> -> 0 `i `uc -> & -> ( _RF24_read_register_d (1 -> -> 0 `i `uc `i ~ << -> 1 `i -> 0 `i `uc ]
-[; ;RF24_cg.c: 774: RF24_write_register_d(0x02,RF24_read_register_d(0x02) | (1<<((*(&child_pipe_enable[0])))));
+[; ;RF24_c.c: 774: RF24_write_register_d(0x02,RF24_read_register_d(0x02) | (1<<((*(&child_pipe_enable[0])))));
 "774
 [e ( _RF24_write_register_d (2 , -> -> 2 `i `uc -> | -> ( _RF24_read_register_d (1 -> -> 2 `i `uc `i << -> 1 `i *U &U *U + &U _child_pipe_enable * -> -> -> 0 `i `ui `ux -> -> # *U &U _child_pipe_enable `ui `ux `uc ]
-[; ;RF24_cg.c: 778: }
+[; ;RF24_c.c: 778: }
 "778
 [e :UE 386 ]
 }
@@ -3915,17 +3915,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_powerDown `(v ~T0 @X0 1 ef ]
 "783
 {
-[; ;RF24_cg.c: 782: void RF24_powerDown(void)
-[; ;RF24_cg.c: 783: {
+[; ;RF24_c.c: 782: void RF24_powerDown(void)
+[; ;RF24_c.c: 783: {
 [e :U _RF24_powerDown ]
 [f ]
-[; ;RF24_cg.c: 784: RF24_ce_d(0);
+[; ;RF24_c.c: 784: RF24_ce_d(0);
 "784
 [e ( _RF24_ce_d (1 -> -> 0 `i `uc ]
-[; ;RF24_cg.c: 785: RF24_write_register_d(0x00,RF24_read_register_d(0x00) & ~(1<<(1)));
+[; ;RF24_c.c: 785: RF24_write_register_d(0x00,RF24_read_register_d(0x00) & ~(1<<(1)));
 "785
 [e ( _RF24_write_register_d (2 , -> -> 0 `i `uc -> & -> ( _RF24_read_register_d (1 -> -> 0 `i `uc `i ~ << -> 1 `i -> 1 `i `uc ]
-[; ;RF24_cg.c: 786: }
+[; ;RF24_c.c: 786: }
 "786
 [e :UE 388 ]
 }
@@ -3933,29 +3933,29 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_powerUp `(v ~T0 @X0 1 ef ]
 "792
 {
-[; ;RF24_cg.c: 791: void RF24_powerUp(void)
-[; ;RF24_cg.c: 792: {
+[; ;RF24_c.c: 791: void RF24_powerUp(void)
+[; ;RF24_c.c: 792: {
 [e :U _RF24_powerUp ]
 [f ]
 "793
 [v _cfg `uc ~T0 @X0 1 a ]
-[; ;RF24_cg.c: 793: uint8_t cfg = RF24_read_register_d(0x00);
+[; ;RF24_c.c: 793: uint8_t cfg = RF24_read_register_d(0x00);
 [e = _cfg ( _RF24_read_register_d (1 -> -> 0 `i `uc ]
-[; ;RF24_cg.c: 796: if (!(cfg & (1<<(1)))){
+[; ;RF24_c.c: 796: if (!(cfg & (1<<(1)))){
 "796
 [e $ ! ! != & -> _cfg `i << -> 1 `i -> 1 `i -> 0 `i 390  ]
 {
-[; ;RF24_cg.c: 797: RF24_write_register_d(0x00, cfg | (1<<(1)));
+[; ;RF24_c.c: 797: RF24_write_register_d(0x00, cfg | (1<<(1)));
 "797
 [e ( _RF24_write_register_d (2 , -> -> 0 `i `uc -> | -> _cfg `i << -> 1 `i -> 1 `i `uc ]
-[; ;RF24_cg.c: 802: delay(5);
+[; ;RF24_c.c: 802: delay(5);
 "802
 [e ( _delay (1 -> -> 5 `i `ui ]
 "803
 }
 [e :U 390 ]
-[; ;RF24_cg.c: 803: }
-[; ;RF24_cg.c: 804: }
+[; ;RF24_c.c: 803: }
+[; ;RF24_c.c: 804: }
 "804
 [e :UE 389 ]
 }
@@ -3963,8 +3963,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_write_m `(uc ~T0 @X0 1 ef3`*Cv`uc`Cuc ]
 "823
 {
-[; ;RF24_cg.c: 822: uint8_t RF24_write_m( const void* buf, uint8_t len, const uint8_t multicast )
-[; ;RF24_cg.c: 823: {
+[; ;RF24_c.c: 822: uint8_t RF24_write_m( const void* buf, uint8_t len, const uint8_t multicast )
+[; ;RF24_c.c: 823: {
 [e :U _RF24_write_m ]
 "822
 [v _buf `*Cv ~T0 @X0 1 r1 ]
@@ -3974,11 +3974,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [f ]
 "824
 [v _status `uc ~T0 @X0 1 a ]
-[; ;RF24_cg.c: 824: uint8_t status;
-[; ;RF24_cg.c: 827: RF24_startFastWrite(buf,len,multicast,1);
+[; ;RF24_c.c: 824: uint8_t status;
+[; ;RF24_c.c: 827: RF24_startFastWrite(buf,len,multicast,1);
 "827
 [e ( _RF24_startFastWrite (4 , , , _buf _len _multicast -> -> 1 `i `uc ]
-[; ;RF24_cg.c: 834: while( ! ( RF24_get_status() & ( (1<<(5)) | (1<<(4)) ))) {
+[; ;RF24_c.c: 834: while( ! ( RF24_get_status() & ( (1<<(5)) | (1<<(4)) ))) {
 "834
 [e $U 392  ]
 [e :U 393 ]
@@ -3989,49 +3989,49 @@ Version 3.2 HI-TECH Software Intermediate Code
 "834
 [e $ ! != & -> ( _RF24_get_status ..  `i | << -> 1 `i -> 5 `i << -> 1 `i -> 4 `i -> 0 `i 393  ]
 [e :U 394 ]
-[; ;RF24_cg.c: 845: }
-[; ;RF24_cg.c: 847: RF24_ce_d(0);
+[; ;RF24_c.c: 845: }
+[; ;RF24_c.c: 847: RF24_ce_d(0);
 "847
 [e ( _RF24_ce_d (1 -> -> 0 `i `uc ]
-[; ;RF24_cg.c: 849: status = RF24_write_register_d(0x07,(1<<(6)) | (1<<(5)) | (1<<(4)) );
+[; ;RF24_c.c: 849: status = RF24_write_register_d(0x07,(1<<(6)) | (1<<(5)) | (1<<(4)) );
 "849
 [e = _status ( _RF24_write_register_d (2 , -> -> 7 `i `uc -> | | << -> 1 `i -> 6 `i << -> 1 `i -> 5 `i << -> 1 `i -> 4 `i `uc ]
-[; ;RF24_cg.c: 852: if( status & (1<<(4))){
+[; ;RF24_c.c: 852: if( status & (1<<(4))){
 "852
 [e $ ! != & -> _status `i << -> 1 `i -> 4 `i -> 0 `i 395  ]
 {
-[; ;RF24_cg.c: 853: RF24_flush_tx();
+[; ;RF24_c.c: 853: RF24_flush_tx();
 "853
 [e ( _RF24_flush_tx ..  ]
-[; ;RF24_cg.c: 854: return 0;
+[; ;RF24_c.c: 854: return 0;
 "854
 [e ) -> -> 0 `i `uc ]
 [e $UE 391  ]
 "855
 }
 [e :U 395 ]
-[; ;RF24_cg.c: 855: }
-[; ;RF24_cg.c: 857: return 1;
+[; ;RF24_c.c: 855: }
+[; ;RF24_c.c: 857: return 1;
 "857
 [e ) -> -> 1 `i `uc ]
 [e $UE 391  ]
-[; ;RF24_cg.c: 858: }
+[; ;RF24_c.c: 858: }
 "858
 [e :UE 391 ]
 }
 "860
 [v _RF24_write `(uc ~T0 @X0 1 ef2`*Cv`uc ]
 {
-[; ;RF24_cg.c: 860: uint8_t RF24_write(const void* buf, uint8_t len ){
+[; ;RF24_c.c: 860: uint8_t RF24_write(const void* buf, uint8_t len ){
 [e :U _RF24_write ]
 [v _buf `*Cv ~T0 @X0 1 r1 ]
 [v _len `uc ~T0 @X0 1 r2 ]
 [f ]
-[; ;RF24_cg.c: 861: return RF24_write_m(buf,len,0);
+[; ;RF24_c.c: 861: return RF24_write_m(buf,len,0);
 "861
 [e ) ( _RF24_write_m (3 , , _buf _len -> -> 0 `i `uc ]
 [e $UE 396  ]
-[; ;RF24_cg.c: 862: }
+[; ;RF24_c.c: 862: }
 "862
 [e :UE 396 ]
 }
@@ -4039,8 +4039,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_writeBlocking `(uc ~T0 @X0 1 ef3`*Cv`uc`ul ]
 "867
 {
-[; ;RF24_cg.c: 866: uint8_t RF24_writeBlocking(const void* buf, uint8_t len, uint32_t timeout )
-[; ;RF24_cg.c: 867: {
+[; ;RF24_c.c: 866: uint8_t RF24_writeBlocking(const void* buf, uint8_t len, uint32_t timeout )
+[; ;RF24_c.c: 867: {
 [e :U _RF24_writeBlocking ]
 "866
 [v _buf `*Cv ~T0 @X0 1 r1 ]
@@ -4050,21 +4050,21 @@ Version 3.2 HI-TECH Software Intermediate Code
 [f ]
 "873
 [v _timer `ul ~T0 @X0 1 a ]
-[; ;RF24_cg.c: 873: uint32_t timer = millis();
+[; ;RF24_c.c: 873: uint32_t timer = millis();
 [e = _timer -> ( _millis ..  `ul ]
-[; ;RF24_cg.c: 875: while( ( RF24_get_status() & ( (1<<(0)) ))) {
+[; ;RF24_c.c: 875: while( ( RF24_get_status() & ( (1<<(0)) ))) {
 "875
 [e $U 398  ]
 [e :U 399 ]
 {
-[; ;RF24_cg.c: 877: if( RF24_get_status() & (1<<(4))){
+[; ;RF24_c.c: 877: if( RF24_get_status() & (1<<(4))){
 "877
 [e $ ! != & -> ( _RF24_get_status ..  `i << -> 1 `i -> 4 `i -> 0 `i 401  ]
 {
-[; ;RF24_cg.c: 878: RF24_reUseTX();
+[; ;RF24_c.c: 878: RF24_reUseTX();
 "878
 [e ( _RF24_reUseTX ..  ]
-[; ;RF24_cg.c: 879: if(millis() - timer > timeout){ return 0; }
+[; ;RF24_c.c: 879: if(millis() - timer > timeout){ return 0; }
 "879
 [e $ ! > - -> ( _millis ..  `ul _timer _timeout 402  ]
 {
@@ -4081,38 +4081,38 @@ Version 3.2 HI-TECH Software Intermediate Code
 "875
 [e $ != & -> ( _RF24_get_status ..  `i << -> 1 `i -> 0 `i -> 0 `i 399  ]
 [e :U 400 ]
-[; ;RF24_cg.c: 880: }
-[; ;RF24_cg.c: 890: }
-[; ;RF24_cg.c: 893: RF24_startFastWrite(buf,len,0,1);
+[; ;RF24_c.c: 880: }
+[; ;RF24_c.c: 890: }
+[; ;RF24_c.c: 893: RF24_startFastWrite(buf,len,0,1);
 "893
 [e ( _RF24_startFastWrite (4 , , , _buf _len -> -> 0 `i `uc -> -> 1 `i `uc ]
-[; ;RF24_cg.c: 895: return 1;
+[; ;RF24_c.c: 895: return 1;
 "895
 [e ) -> -> 1 `i `uc ]
 [e $UE 397  ]
-[; ;RF24_cg.c: 896: }
+[; ;RF24_c.c: 896: }
 "896
 [e :UE 397 ]
 }
 "900
 [v _RF24_reUseTX `(v ~T0 @X0 1 ef ]
 {
-[; ;RF24_cg.c: 900: void RF24_reUseTX(void){
+[; ;RF24_c.c: 900: void RF24_reUseTX(void){
 [e :U _RF24_reUseTX ]
 [f ]
-[; ;RF24_cg.c: 901: RF24_write_register_d(0x07,(1<<(4)) );
+[; ;RF24_c.c: 901: RF24_write_register_d(0x07,(1<<(4)) );
 "901
 [e ( _RF24_write_register_d (2 , -> -> 7 `i `uc -> << -> 1 `i -> 4 `i `uc ]
-[; ;RF24_cg.c: 902: RF24_spiTrans(0xE3 );
+[; ;RF24_c.c: 902: RF24_spiTrans(0xE3 );
 "902
 [e ( _RF24_spiTrans (1 -> -> 227 `i `uc ]
-[; ;RF24_cg.c: 903: RF24_ce_d(0);
+[; ;RF24_c.c: 903: RF24_ce_d(0);
 "903
 [e ( _RF24_ce_d (1 -> -> 0 `i `uc ]
-[; ;RF24_cg.c: 904: RF24_ce_d(1);
+[; ;RF24_c.c: 904: RF24_ce_d(1);
 "904
 [e ( _RF24_ce_d (1 -> -> 1 `i `uc ]
-[; ;RF24_cg.c: 905: }
+[; ;RF24_c.c: 905: }
 "905
 [e :UE 403 ]
 }
@@ -4120,8 +4120,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_writeFast_m `(uc ~T0 @X0 1 ef3`*Cv`uc`Cuc ]
 "910
 {
-[; ;RF24_cg.c: 909: uint8_t RF24_writeFast_m( const void* buf, uint8_t len, const uint8_t multicast )
-[; ;RF24_cg.c: 910: {
+[; ;RF24_c.c: 909: uint8_t RF24_writeFast_m( const void* buf, uint8_t len, const uint8_t multicast )
+[; ;RF24_c.c: 910: {
 [e :U _RF24_writeFast_m ]
 "909
 [v _buf `*Cv ~T0 @X0 1 r1 ]
@@ -4129,19 +4129,19 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _multicast `Cuc ~T0 @X0 1 r3 ]
 "910
 [f ]
-[; ;RF24_cg.c: 920: while( ( RF24_get_status() & ( (1<<(0)) ))) {
+[; ;RF24_c.c: 920: while( ( RF24_get_status() & ( (1<<(0)) ))) {
 "920
 [e $U 405  ]
 [e :U 406 ]
 {
-[; ;RF24_cg.c: 922: if( RF24_get_status() & (1<<(4))){
+[; ;RF24_c.c: 922: if( RF24_get_status() & (1<<(4))){
 "922
 [e $ ! != & -> ( _RF24_get_status ..  `i << -> 1 `i -> 4 `i -> 0 `i 408  ]
 {
-[; ;RF24_cg.c: 924: RF24_write_register_d(0x07,(1<<(4)) );
+[; ;RF24_c.c: 924: RF24_write_register_d(0x07,(1<<(4)) );
 "924
 [e ( _RF24_write_register_d (2 , -> -> 7 `i `uc -> << -> 1 `i -> 4 `i `uc ]
-[; ;RF24_cg.c: 925: return 0;
+[; ;RF24_c.c: 925: return 0;
 "925
 [e ) -> -> 0 `i `uc ]
 [e $UE 404  ]
@@ -4154,127 +4154,127 @@ Version 3.2 HI-TECH Software Intermediate Code
 "920
 [e $ != & -> ( _RF24_get_status ..  `i << -> 1 `i -> 0 `i -> 0 `i 406  ]
 [e :U 407 ]
-[; ;RF24_cg.c: 927: }
-[; ;RF24_cg.c: 936: }
-[; ;RF24_cg.c: 938: RF24_startFastWrite(buf,len,multicast,1);
+[; ;RF24_c.c: 927: }
+[; ;RF24_c.c: 936: }
+[; ;RF24_c.c: 938: RF24_startFastWrite(buf,len,multicast,1);
 "938
 [e ( _RF24_startFastWrite (4 , , , _buf _len _multicast -> -> 1 `i `uc ]
-[; ;RF24_cg.c: 940: return 1;
+[; ;RF24_c.c: 940: return 1;
 "940
 [e ) -> -> 1 `i `uc ]
 [e $UE 404  ]
-[; ;RF24_cg.c: 941: }
+[; ;RF24_c.c: 941: }
 "941
 [e :UE 404 ]
 }
 "943
 [v _RF24_writeFast `(uc ~T0 @X0 1 ef2`*Cv`uc ]
 {
-[; ;RF24_cg.c: 943: uint8_t RF24_writeFast(const void* buf, uint8_t len ){
+[; ;RF24_c.c: 943: uint8_t RF24_writeFast(const void* buf, uint8_t len ){
 [e :U _RF24_writeFast ]
 [v _buf `*Cv ~T0 @X0 1 r1 ]
 [v _len `uc ~T0 @X0 1 r2 ]
 [f ]
-[; ;RF24_cg.c: 944: return RF24_writeFast_m(buf,len,0);
+[; ;RF24_c.c: 944: return RF24_writeFast_m(buf,len,0);
 "944
 [e ) ( _RF24_writeFast_m (3 , , _buf _len -> -> 0 `i `uc ]
 [e $UE 409  ]
-[; ;RF24_cg.c: 945: }
+[; ;RF24_c.c: 945: }
 "945
 [e :UE 409 ]
 }
 "954
 [v _RF24_startFastWrite `(v ~T0 @X0 1 ef4`*Cv`uc`Cuc`uc ]
 {
-[; ;RF24_cg.c: 954: void RF24_startFastWrite(const void* buf, uint8_t len, const uint8_t multicast, uint8_t startTx){
+[; ;RF24_c.c: 954: void RF24_startFastWrite(const void* buf, uint8_t len, const uint8_t multicast, uint8_t startTx){
 [e :U _RF24_startFastWrite ]
 [v _buf `*Cv ~T0 @X0 1 r1 ]
 [v _len `uc ~T0 @X0 1 r2 ]
 [v _multicast `Cuc ~T0 @X0 1 r3 ]
 [v _startTx `uc ~T0 @X0 1 r4 ]
 [f ]
-[; ;RF24_cg.c: 957: RF24_write_payload( buf, len,multicast ? 0xB0 : 0xA0 ) ;
+[; ;RF24_c.c: 957: RF24_write_payload( buf, len,multicast ? 0xB0 : 0xA0 ) ;
 "957
 [e ( _RF24_write_payload (3 , , _buf _len -> ? != -> _multicast `i -> -> -> 0 `i `Cuc `i : -> 176 `i -> 160 `i `uc ]
-[; ;RF24_cg.c: 958: if(startTx){
+[; ;RF24_c.c: 958: if(startTx){
 "958
 [e $ ! != -> _startTx `i -> -> -> 0 `i `uc `i 411  ]
 {
-[; ;RF24_cg.c: 959: RF24_ce_d(1);
+[; ;RF24_c.c: 959: RF24_ce_d(1);
 "959
 [e ( _RF24_ce_d (1 -> -> 1 `i `uc ]
 "960
 }
 [e :U 411 ]
-[; ;RF24_cg.c: 960: }
-[; ;RF24_cg.c: 962: }
+[; ;RF24_c.c: 960: }
+[; ;RF24_c.c: 962: }
 "962
 [e :UE 410 ]
 }
 "968
 [v _RF24_startWrite `(v ~T0 @X0 1 ef3`*Cv`uc`Cuc ]
 {
-[; ;RF24_cg.c: 968: void RF24_startWrite(const void* buf, uint8_t len, const uint8_t multicast ){
+[; ;RF24_c.c: 968: void RF24_startWrite(const void* buf, uint8_t len, const uint8_t multicast ){
 [e :U _RF24_startWrite ]
 [v _buf `*Cv ~T0 @X0 1 r1 ]
 [v _len `uc ~T0 @X0 1 r2 ]
 [v _multicast `Cuc ~T0 @X0 1 r3 ]
 [f ]
-[; ;RF24_cg.c: 973: RF24_write_payload( buf, len,multicast? 0xB0 : 0xA0 ) ;
+[; ;RF24_c.c: 973: RF24_write_payload( buf, len,multicast? 0xB0 : 0xA0 ) ;
 "973
 [e ( _RF24_write_payload (3 , , _buf _len -> ? != -> _multicast `i -> -> -> 0 `i `Cuc `i : -> 176 `i -> 160 `i `uc ]
-[; ;RF24_cg.c: 974: RF24_ce_d(1);
+[; ;RF24_c.c: 974: RF24_ce_d(1);
 "974
 [e ( _RF24_ce_d (1 -> -> 1 `i `uc ]
-[; ;RF24_cg.c: 976: delayMicroseconds(10);
+[; ;RF24_c.c: 976: delayMicroseconds(10);
 "976
 [e ( _delayMicroseconds (1 -> -> 10 `i `uc ]
-[; ;RF24_cg.c: 978: RF24_ce_d(0);
+[; ;RF24_c.c: 978: RF24_ce_d(0);
 "978
 [e ( _RF24_ce_d (1 -> -> 0 `i `uc ]
-[; ;RF24_cg.c: 981: }
+[; ;RF24_c.c: 981: }
 "981
 [e :UE 412 ]
 }
 "985
 [v _RF24_rxFifoFull `(uc ~T0 @X0 1 ef ]
 {
-[; ;RF24_cg.c: 985: uint8_t RF24_rxFifoFull(void){
+[; ;RF24_c.c: 985: uint8_t RF24_rxFifoFull(void){
 [e :U _RF24_rxFifoFull ]
 [f ]
-[; ;RF24_cg.c: 986: return RF24_read_register_d(0x17) & (1<<(1));
+[; ;RF24_c.c: 986: return RF24_read_register_d(0x17) & (1<<(1));
 "986
 [e ) -> & -> ( _RF24_read_register_d (1 -> -> 23 `i `uc `i << -> 1 `i -> 1 `i `uc ]
 [e $UE 413  ]
-[; ;RF24_cg.c: 987: }
+[; ;RF24_c.c: 987: }
 "987
 [e :UE 413 ]
 }
 "990
 [v _RF24_txStandBy `(uc ~T0 @X0 1 ef ]
 {
-[; ;RF24_cg.c: 990: uint8_t RF24_txStandBy(void){
+[; ;RF24_c.c: 990: uint8_t RF24_txStandBy(void){
 [e :U _RF24_txStandBy ]
 [f ]
-[; ;RF24_cg.c: 995: while( ! (RF24_read_register_d(0x17) & (1<<(4))) ){
+[; ;RF24_c.c: 995: while( ! (RF24_read_register_d(0x17) & (1<<(4))) ){
 "995
 [e $U 415  ]
 [e :U 416 ]
 {
-[; ;RF24_cg.c: 996: if( RF24_get_status() & (1<<(4))){
+[; ;RF24_c.c: 996: if( RF24_get_status() & (1<<(4))){
 "996
 [e $ ! != & -> ( _RF24_get_status ..  `i << -> 1 `i -> 4 `i -> 0 `i 418  ]
 {
-[; ;RF24_cg.c: 997: RF24_write_register_d(0x07,(1<<(4)) );
+[; ;RF24_c.c: 997: RF24_write_register_d(0x07,(1<<(4)) );
 "997
 [e ( _RF24_write_register_d (2 , -> -> 7 `i `uc -> << -> 1 `i -> 4 `i `uc ]
-[; ;RF24_cg.c: 998: RF24_ce_d(0);
+[; ;RF24_c.c: 998: RF24_ce_d(0);
 "998
 [e ( _RF24_ce_d (1 -> -> 0 `i `uc ]
-[; ;RF24_cg.c: 999: RF24_flush_tx();;
+[; ;RF24_c.c: 999: RF24_flush_tx();;
 "999
 [e ( _RF24_flush_tx ..  ]
-[; ;RF24_cg.c: 1000: return 0;
+[; ;RF24_c.c: 1000: return 0;
 "1000
 [e ) -> -> 0 `i `uc ]
 [e $UE 414  ]
@@ -4287,70 +4287,70 @@ Version 3.2 HI-TECH Software Intermediate Code
 "995
 [e $ ! != & -> ( _RF24_read_register_d (1 -> -> 23 `i `uc `i << -> 1 `i -> 4 `i -> 0 `i 416  ]
 [e :U 417 ]
-[; ;RF24_cg.c: 1001: }
-[; ;RF24_cg.c: 1010: }
-[; ;RF24_cg.c: 1012: RF24_ce_d(0);
+[; ;RF24_c.c: 1001: }
+[; ;RF24_c.c: 1010: }
+[; ;RF24_c.c: 1012: RF24_ce_d(0);
 "1012
 [e ( _RF24_ce_d (1 -> -> 0 `i `uc ]
-[; ;RF24_cg.c: 1013: return 1;
+[; ;RF24_c.c: 1013: return 1;
 "1013
 [e ) -> -> 1 `i `uc ]
 [e $UE 414  ]
-[; ;RF24_cg.c: 1014: }
+[; ;RF24_c.c: 1014: }
 "1014
 [e :UE 414 ]
 }
 "1018
 [v _RF24_txStandBy_t `(uc ~T0 @X0 1 ef2`ul`uc ]
 {
-[; ;RF24_cg.c: 1018: uint8_t RF24_txStandBy_t(uint32_t timeout, uint8_t startTx){
+[; ;RF24_c.c: 1018: uint8_t RF24_txStandBy_t(uint32_t timeout, uint8_t startTx){
 [e :U _RF24_txStandBy_t ]
 [v _timeout `ul ~T0 @X0 1 r1 ]
 [v _startTx `uc ~T0 @X0 1 r2 ]
 [f ]
 "1019
 [v _start `ul ~T0 @X0 1 a ]
-[; ;RF24_cg.c: 1019: uint32_t start;
-[; ;RF24_cg.c: 1021: if(startTx){
+[; ;RF24_c.c: 1019: uint32_t start;
+[; ;RF24_c.c: 1021: if(startTx){
 "1021
 [e $ ! != -> _startTx `i -> -> -> 0 `i `uc `i 420  ]
 {
-[; ;RF24_cg.c: 1022: RF24_stopListening();
+[; ;RF24_c.c: 1022: RF24_stopListening();
 "1022
 [e ( _RF24_stopListening ..  ]
-[; ;RF24_cg.c: 1023: RF24_ce_d(1);
+[; ;RF24_c.c: 1023: RF24_ce_d(1);
 "1023
 [e ( _RF24_ce_d (1 -> -> 1 `i `uc ]
 "1024
 }
 [e :U 420 ]
-[; ;RF24_cg.c: 1024: }
-[; ;RF24_cg.c: 1026: start = millis();
+[; ;RF24_c.c: 1024: }
+[; ;RF24_c.c: 1026: start = millis();
 "1026
 [e = _start -> ( _millis ..  `ul ]
-[; ;RF24_cg.c: 1028: while( ! (RF24_read_register_d(0x17) & (1<<(4))) ){
+[; ;RF24_c.c: 1028: while( ! (RF24_read_register_d(0x17) & (1<<(4))) ){
 "1028
 [e $U 421  ]
 [e :U 422 ]
 {
-[; ;RF24_cg.c: 1029: if( RF24_get_status() & (1<<(4))){
+[; ;RF24_c.c: 1029: if( RF24_get_status() & (1<<(4))){
 "1029
 [e $ ! != & -> ( _RF24_get_status ..  `i << -> 1 `i -> 4 `i -> 0 `i 424  ]
 {
-[; ;RF24_cg.c: 1030: RF24_write_register_d(0x07,(1<<(4)) );
+[; ;RF24_c.c: 1030: RF24_write_register_d(0x07,(1<<(4)) );
 "1030
 [e ( _RF24_write_register_d (2 , -> -> 7 `i `uc -> << -> 1 `i -> 4 `i `uc ]
-[; ;RF24_cg.c: 1031: RF24_ce_d(0);
+[; ;RF24_c.c: 1031: RF24_ce_d(0);
 "1031
 [e ( _RF24_ce_d (1 -> -> 0 `i `uc ]
-[; ;RF24_cg.c: 1032: RF24_ce_d(1);
+[; ;RF24_c.c: 1032: RF24_ce_d(1);
 "1032
 [e ( _RF24_ce_d (1 -> -> 1 `i `uc ]
-[; ;RF24_cg.c: 1033: if(millis() - start >= timeout){
+[; ;RF24_c.c: 1033: if(millis() - start >= timeout){
 "1033
 [e $ ! >= - -> ( _millis ..  `ul _start _timeout 425  ]
 {
-[; ;RF24_cg.c: 1034: RF24_ce_d(0); RF24_flush_tx();; return 0;
+[; ;RF24_c.c: 1034: RF24_ce_d(0); RF24_flush_tx();; return 0;
 "1034
 [e ( _RF24_ce_d (1 -> -> 0 `i `uc ]
 [e ( _RF24_flush_tx ..  ]
@@ -4368,24 +4368,24 @@ Version 3.2 HI-TECH Software Intermediate Code
 "1028
 [e $ ! != & -> ( _RF24_read_register_d (1 -> -> 23 `i `uc `i << -> 1 `i -> 4 `i -> 0 `i 422  ]
 [e :U 423 ]
-[; ;RF24_cg.c: 1035: }
-[; ;RF24_cg.c: 1036: }
-[; ;RF24_cg.c: 1045: }
-[; ;RF24_cg.c: 1048: RF24_ce_d(0);
+[; ;RF24_c.c: 1035: }
+[; ;RF24_c.c: 1036: }
+[; ;RF24_c.c: 1045: }
+[; ;RF24_c.c: 1048: RF24_ce_d(0);
 "1048
 [e ( _RF24_ce_d (1 -> -> 0 `i `uc ]
-[; ;RF24_cg.c: 1049: return 1;
+[; ;RF24_c.c: 1049: return 1;
 "1049
 [e ) -> -> 1 `i `uc ]
 [e $UE 419  ]
-[; ;RF24_cg.c: 1051: }
+[; ;RF24_c.c: 1051: }
 "1051
 [e :UE 419 ]
 }
 "1055
 [v _RF24_maskIRQ `(v ~T0 @X0 1 ef3`uc`uc`uc ]
 {
-[; ;RF24_cg.c: 1055: void RF24_maskIRQ(uint8_t tx, uint8_t fail, uint8_t rx){
+[; ;RF24_c.c: 1055: void RF24_maskIRQ(uint8_t tx, uint8_t fail, uint8_t rx){
 [e :U _RF24_maskIRQ ]
 [v _tx `uc ~T0 @X0 1 r1 ]
 [v _fail `uc ~T0 @X0 1 r2 ]
@@ -4393,18 +4393,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [f ]
 "1057
 [v _config `uc ~T0 @X0 1 a ]
-[; ;RF24_cg.c: 1057: uint8_t config = RF24_read_register_d(0x00);
+[; ;RF24_c.c: 1057: uint8_t config = RF24_read_register_d(0x00);
 [e = _config ( _RF24_read_register_d (1 -> -> 0 `i `uc ]
-[; ;RF24_cg.c: 1059: config &= ~(1 << 4 | 1 << 5 | 1 << 6);
+[; ;RF24_c.c: 1059: config &= ~(1 << 4 | 1 << 5 | 1 << 6);
 "1059
 [e =& _config -> ~ | | << -> 1 `i -> 4 `i << -> 1 `i -> 5 `i << -> 1 `i -> 6 `i `uc ]
-[; ;RF24_cg.c: 1061: config |= fail << 4 | tx << 5 | rx << 6;
+[; ;RF24_c.c: 1061: config |= fail << 4 | tx << 5 | rx << 6;
 "1061
 [e =| _config -> | | << -> _fail `i -> 4 `i << -> _tx `i -> 5 `i << -> _rx `i -> 6 `i `uc ]
-[; ;RF24_cg.c: 1062: RF24_write_register_d(0x00, config);
+[; ;RF24_c.c: 1062: RF24_write_register_d(0x00, config);
 "1062
 [e ( _RF24_write_register_d (2 , -> -> 0 `i `uc _config ]
-[; ;RF24_cg.c: 1063: }
+[; ;RF24_c.c: 1063: }
 "1063
 [e :UE 426 ]
 }
@@ -4412,27 +4412,27 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_getDynamicPayloadSize `(uc ~T0 @X0 1 ef ]
 "1068
 {
-[; ;RF24_cg.c: 1067: uint8_t RF24_getDynamicPayloadSize(void)
-[; ;RF24_cg.c: 1068: {
+[; ;RF24_c.c: 1067: uint8_t RF24_getDynamicPayloadSize(void)
+[; ;RF24_c.c: 1068: {
 [e :U _RF24_getDynamicPayloadSize ]
 [f ]
 "1069
 [v _result `uc ~T0 @X0 1 a ]
-[; ;RF24_cg.c: 1069: uint8_t result = 0;
+[; ;RF24_c.c: 1069: uint8_t result = 0;
 [e = _result -> -> 0 `i `uc ]
-[; ;RF24_cg.c: 1079: RF24_beginTransaction();
+[; ;RF24_c.c: 1079: RF24_beginTransaction();
 "1079
 [e ( _RF24_beginTransaction ..  ]
-[; ;RF24_cg.c: 1080: SPI_transfer( 0x60 );
+[; ;RF24_c.c: 1080: SPI_transfer( 0x60 );
 "1080
 [e ( _SPI_transfer (1 -> -> 96 `i `uc ]
-[; ;RF24_cg.c: 1081: result = SPI_transfer(0xff);
+[; ;RF24_c.c: 1081: result = SPI_transfer(0xff);
 "1081
 [e = _result ( _SPI_transfer (1 -> -> 255 `i `uc ]
-[; ;RF24_cg.c: 1082: RF24_endTransaction();
+[; ;RF24_c.c: 1082: RF24_endTransaction();
 "1082
 [e ( _RF24_endTransaction ..  ]
-[; ;RF24_cg.c: 1085: if(result > 32) { RF24_flush_rx();; delay(2); return 0; }
+[; ;RF24_c.c: 1085: if(result > 32) { RF24_flush_rx();; delay(2); return 0; }
 "1085
 [e $ ! > -> _result `i -> 32 `i 428  ]
 {
@@ -4442,11 +4442,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $UE 427  ]
 }
 [e :U 428 ]
-[; ;RF24_cg.c: 1086: return result;
+[; ;RF24_c.c: 1086: return result;
 "1086
 [e ) _result ]
 [e $UE 427  ]
-[; ;RF24_cg.c: 1087: }
+[; ;RF24_c.c: 1087: }
 "1087
 [e :UE 427 ]
 }
@@ -4454,15 +4454,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_available `(uc ~T0 @X0 1 ef ]
 "1092
 {
-[; ;RF24_cg.c: 1091: uint8_t RF24_available(void)
-[; ;RF24_cg.c: 1092: {
+[; ;RF24_c.c: 1091: uint8_t RF24_available(void)
+[; ;RF24_c.c: 1092: {
 [e :U _RF24_available ]
 [f ]
-[; ;RF24_cg.c: 1093: return RF24_available_p((0));
+[; ;RF24_c.c: 1093: return RF24_available_p((0));
 "1093
 [e ) ( _RF24_available_p (1 -> -> 0 `i `*uc ]
 [e $UE 429  ]
-[; ;RF24_cg.c: 1094: }
+[; ;RF24_c.c: 1094: }
 "1094
 [e :UE 429 ]
 }
@@ -4470,63 +4470,63 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_available_p `(uc ~T0 @X0 1 ef1`*uc ]
 "1099
 {
-[; ;RF24_cg.c: 1098: uint8_t RF24_available_p(uint8_t* pipe_num)
-[; ;RF24_cg.c: 1099: {
+[; ;RF24_c.c: 1098: uint8_t RF24_available_p(uint8_t* pipe_num)
+[; ;RF24_c.c: 1099: {
 [e :U _RF24_available_p ]
 "1098
 [v _pipe_num `*uc ~T0 @X0 1 r1 ]
 "1099
 [f ]
-[; ;RF24_cg.c: 1100: if (!( RF24_read_register_d(0x17) & (1<<(0)) )){
+[; ;RF24_c.c: 1100: if (!( RF24_read_register_d(0x17) & (1<<(0)) )){
 "1100
 [e $ ! ! != & -> ( _RF24_read_register_d (1 -> -> 23 `i `uc `i << -> 1 `i -> 0 `i -> 0 `i 431  ]
 {
-[; ;RF24_cg.c: 1103: if ( pipe_num ){
+[; ;RF24_c.c: 1103: if ( pipe_num ){
 "1103
 [e $ ! != _pipe_num -> -> 0 `i `*uc 432  ]
 {
 "1104
 [v _status `uc ~T0 @X0 1 a ]
-[; ;RF24_cg.c: 1104: uint8_t status = RF24_get_status();
+[; ;RF24_c.c: 1104: uint8_t status = RF24_get_status();
 [e = _status ( _RF24_get_status ..  ]
-[; ;RF24_cg.c: 1105: *pipe_num = ( status >> 1 ) & 0b111;
+[; ;RF24_c.c: 1105: *pipe_num = ( status >> 1 ) & 0b111;
 "1105
 [e = *U _pipe_num -> & >> -> _status `i -> 1 `i -> 7 `i `uc ]
 "1106
 }
 [e :U 432 ]
-[; ;RF24_cg.c: 1106: }
-[; ;RF24_cg.c: 1107: return 1;
+[; ;RF24_c.c: 1106: }
+[; ;RF24_c.c: 1107: return 1;
 "1107
 [e ) -> -> 1 `i `uc ]
 [e $UE 430  ]
 "1108
 }
 [e :U 431 ]
-[; ;RF24_cg.c: 1108: }
-[; ;RF24_cg.c: 1111: return 0;
+[; ;RF24_c.c: 1108: }
+[; ;RF24_c.c: 1111: return 0;
 "1111
 [e ) -> -> 0 `i `uc ]
 [e $UE 430  ]
-[; ;RF24_cg.c: 1114: }
+[; ;RF24_c.c: 1114: }
 "1114
 [e :UE 430 ]
 }
 "1118
 [v _RF24_read `(v ~T0 @X0 1 ef2`*v`uc ]
 {
-[; ;RF24_cg.c: 1118: void RF24_read(void* buf, uint8_t len ){
+[; ;RF24_c.c: 1118: void RF24_read(void* buf, uint8_t len ){
 [e :U _RF24_read ]
 [v _buf `*v ~T0 @X0 1 r1 ]
 [v _len `uc ~T0 @X0 1 r2 ]
 [f ]
-[; ;RF24_cg.c: 1121: RF24_read_payload( buf, len );
+[; ;RF24_c.c: 1121: RF24_read_payload( buf, len );
 "1121
 [e ( _RF24_read_payload (2 , _buf _len ]
-[; ;RF24_cg.c: 1124: RF24_write_register_d(0x07,(1<<(6)) | (1<<(4)) | (1<<(5)) );
+[; ;RF24_c.c: 1124: RF24_write_register_d(0x07,(1<<(6)) | (1<<(4)) | (1<<(5)) );
 "1124
 [e ( _RF24_write_register_d (2 , -> -> 7 `i `uc -> | | << -> 1 `i -> 6 `i << -> 1 `i -> 4 `i << -> 1 `i -> 5 `i `uc ]
-[; ;RF24_cg.c: 1126: }
+[; ;RF24_c.c: 1126: }
 "1126
 [e :UE 433 ]
 }
@@ -4534,8 +4534,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_whatHappened `(v ~T0 @X0 1 ef3`*uc`*uc`*uc ]
 "1131
 {
-[; ;RF24_cg.c: 1130: void RF24_whatHappened( uint8_t * tx_ok,uint8_t * tx_fail,uint8_t * rx_ready)
-[; ;RF24_cg.c: 1131: {
+[; ;RF24_c.c: 1130: void RF24_whatHappened( uint8_t * tx_ok,uint8_t * tx_fail,uint8_t * rx_ready)
+[; ;RF24_c.c: 1131: {
 [e :U _RF24_whatHappened ]
 "1130
 [v _tx_ok `*uc ~T0 @X0 1 r1 ]
@@ -4545,18 +4545,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [f ]
 "1134
 [v _status `uc ~T0 @X0 1 a ]
-[; ;RF24_cg.c: 1134: uint8_t status = RF24_write_register_d(0x07,(1<<(6)) | (1<<(5)) | (1<<(4)) );
+[; ;RF24_c.c: 1134: uint8_t status = RF24_write_register_d(0x07,(1<<(6)) | (1<<(5)) | (1<<(4)) );
 [e = _status ( _RF24_write_register_d (2 , -> -> 7 `i `uc -> | | << -> 1 `i -> 6 `i << -> 1 `i -> 5 `i << -> 1 `i -> 4 `i `uc ]
-[; ;RF24_cg.c: 1137: *tx_ok = status & (1<<(5));
+[; ;RF24_c.c: 1137: *tx_ok = status & (1<<(5));
 "1137
 [e = *U _tx_ok -> & -> _status `i << -> 1 `i -> 5 `i `uc ]
-[; ;RF24_cg.c: 1138: *tx_fail = status & (1<<(4));
+[; ;RF24_c.c: 1138: *tx_fail = status & (1<<(4));
 "1138
 [e = *U _tx_fail -> & -> _status `i << -> 1 `i -> 4 `i `uc ]
-[; ;RF24_cg.c: 1139: *rx_ready = status & (1<<(6));
+[; ;RF24_c.c: 1139: *rx_ready = status & (1<<(6));
 "1139
 [e = *U _rx_ready -> & -> _status `i << -> 1 `i -> 6 `i `uc ]
-[; ;RF24_cg.c: 1140: }
+[; ;RF24_c.c: 1140: }
 "1140
 [e :UE 434 ]
 }
@@ -4564,8 +4564,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_openWritingPipe_d `(v ~T0 @X0 1 ef1`*Cuc ]
 "1145
 {
-[; ;RF24_cg.c: 1144: void RF24_openWritingPipe_d(const raddr_t* value_)
-[; ;RF24_cg.c: 1145: {
+[; ;RF24_c.c: 1144: void RF24_openWritingPipe_d(const raddr_t* value_)
+[; ;RF24_c.c: 1145: {
 [e :U _RF24_openWritingPipe_d ]
 "1144
 [v _value_ `*Cuc ~T0 @X0 1 r1 ]
@@ -4575,9 +4575,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _i `uc ~T0 @X0 1 a ]
 "1147
 [v _value `uc ~T0 @X0 -> 5 `i a ]
-[; ;RF24_cg.c: 1146: uint8_t i;
-[; ;RF24_cg.c: 1147: raddr_t value[5];
-[; ;RF24_cg.c: 1148: for(i=0;i<5;i++)
+[; ;RF24_c.c: 1146: uint8_t i;
+[; ;RF24_c.c: 1147: raddr_t value[5];
+[; ;RF24_c.c: 1148: for(i=0;i<5;i++)
 "1148
 {
 [e = _i -> -> 0 `i `uc ]
@@ -4585,9 +4585,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 437  ]
 "1149
 [e :U 436 ]
-[; ;RF24_cg.c: 1149: {
+[; ;RF24_c.c: 1149: {
 {
-[; ;RF24_cg.c: 1150: value[i]=value_[4-i];
+[; ;RF24_c.c: 1150: value[i]=value_[4-i];
 "1150
 [e = *U + &U _value * -> _i `ux -> -> # *U &U _value `ui `ux *U + _value_ * -> - -> 4 `i -> _i `i `x -> -> # *U _value_ `i `x ]
 "1151
@@ -4598,17 +4598,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 437 ]
 "1151
 }
-[; ;RF24_cg.c: 1151: }
-[; ;RF24_cg.c: 1153: RF24_write_register_c_d(0x0A, ((uint8_t*)(value)), rf.addr_width);
+[; ;RF24_c.c: 1151: }
+[; ;RF24_c.c: 1153: RF24_write_register_c_d(0x0A, ((uint8_t*)(value)), rf.addr_width);
 "1153
 [e ( _RF24_write_register_c_d (3 , , -> -> 10 `i `uc -> &U _value `*Cuc . _rf 7 ]
-[; ;RF24_cg.c: 1154: RF24_write_register_c_d(0x10, ((uint8_t*)(value)), rf.addr_width);
+[; ;RF24_c.c: 1154: RF24_write_register_c_d(0x10, ((uint8_t*)(value)), rf.addr_width);
 "1154
 [e ( _RF24_write_register_c_d (3 , , -> -> 16 `i `uc -> &U _value `*Cuc . _rf 7 ]
-[; ;RF24_cg.c: 1159: RF24_write_register_d(0x11,rf.payload_size);
+[; ;RF24_c.c: 1159: RF24_write_register_d(0x11,rf.payload_size);
 "1159
 [e ( _RF24_write_register_d (2 , -> -> 17 `i `uc . _rf 4 ]
-[; ;RF24_cg.c: 1160: }
+[; ;RF24_c.c: 1160: }
 "1160
 [e :UE 435 ]
 }
@@ -4616,23 +4616,23 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_openWritingPipe `(v ~T0 @X0 1 ef1`*Cuc ]
 "1164
 {
-[; ;RF24_cg.c: 1163: void RF24_openWritingPipe(const uint8_t *address)
-[; ;RF24_cg.c: 1164: {
+[; ;RF24_c.c: 1163: void RF24_openWritingPipe(const uint8_t *address)
+[; ;RF24_c.c: 1164: {
 [e :U _RF24_openWritingPipe ]
 "1163
 [v _address `*Cuc ~T0 @X0 1 r1 ]
 "1164
 [f ]
-[; ;RF24_cg.c: 1168: RF24_write_register_c_d(0x0A,address, rf.addr_width);
+[; ;RF24_c.c: 1168: RF24_write_register_c_d(0x0A,address, rf.addr_width);
 "1168
 [e ( _RF24_write_register_c_d (3 , , -> -> 10 `i `uc _address . _rf 7 ]
-[; ;RF24_cg.c: 1169: RF24_write_register_c_d(0x10, address, rf.addr_width);
+[; ;RF24_c.c: 1169: RF24_write_register_c_d(0x10, address, rf.addr_width);
 "1169
 [e ( _RF24_write_register_c_d (3 , , -> -> 16 `i `uc _address . _rf 7 ]
-[; ;RF24_cg.c: 1173: RF24_write_register_d(0x11,rf.payload_size);
+[; ;RF24_c.c: 1173: RF24_write_register_d(0x11,rf.payload_size);
 "1173
 [e ( _RF24_write_register_d (2 , -> -> 17 `i `uc . _rf 4 ]
-[; ;RF24_cg.c: 1174: }
+[; ;RF24_c.c: 1174: }
 "1174
 [e :UE 439 ]
 }
@@ -4650,10 +4650,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 15 `i `uc
 ..
 ]
-[; ;RF24_cg.c: 1177: static const uint8_t child_pipe[]  =
-[; ;RF24_cg.c: 1178: {
-[; ;RF24_cg.c: 1179: 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F
-[; ;RF24_cg.c: 1180: };
+[; ;RF24_c.c: 1177: static const uint8_t child_pipe[]  =
+[; ;RF24_c.c: 1178: {
+[; ;RF24_c.c: 1179: 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F
+[; ;RF24_c.c: 1180: };
 "1181
 [v _child_payload_size `Cuc ~T0 @X0 -> 0 `x s ]
 [i _child_payload_size
@@ -4668,16 +4668,16 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 22 `i `uc
 ..
 ]
-[; ;RF24_cg.c: 1181: static const uint8_t child_payload_size[]  =
-[; ;RF24_cg.c: 1182: {
-[; ;RF24_cg.c: 1183: 0x11, 0x12, 0x13, 0x14, 0x15, 0x16
-[; ;RF24_cg.c: 1184: };
+[; ;RF24_c.c: 1181: static const uint8_t child_payload_size[]  =
+[; ;RF24_c.c: 1182: {
+[; ;RF24_c.c: 1183: 0x11, 0x12, 0x13, 0x14, 0x15, 0x16
+[; ;RF24_c.c: 1184: };
 "1187
 [v _RF24_openReadingPipe_d `(v ~T0 @X0 1 ef2`uc`*Cuc ]
 "1188
 {
-[; ;RF24_cg.c: 1187: void RF24_openReadingPipe_d(uint8_t child, const raddr_t* address_)
-[; ;RF24_cg.c: 1188: {
+[; ;RF24_c.c: 1187: void RF24_openReadingPipe_d(uint8_t child, const raddr_t* address_)
+[; ;RF24_c.c: 1188: {
 [e :U _RF24_openReadingPipe_d ]
 "1187
 [v _child `uc ~T0 @X0 1 r1 ]
@@ -4688,9 +4688,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _i `uc ~T0 @X0 1 a ]
 "1190
 [v _address `uc ~T0 @X0 -> 5 `i a ]
-[; ;RF24_cg.c: 1189: uint8_t i;
-[; ;RF24_cg.c: 1190: raddr_t address[5];
-[; ;RF24_cg.c: 1191: for(i=0;i<5;i++)
+[; ;RF24_c.c: 1189: uint8_t i;
+[; ;RF24_c.c: 1190: raddr_t address[5];
+[; ;RF24_c.c: 1191: for(i=0;i<5;i++)
 "1191
 {
 [e = _i -> -> 0 `i `uc ]
@@ -4698,9 +4698,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 442  ]
 "1192
 [e :U 441 ]
-[; ;RF24_cg.c: 1192: {
+[; ;RF24_c.c: 1192: {
 {
-[; ;RF24_cg.c: 1193: address[i]=address_[4-i];
+[; ;RF24_c.c: 1193: address[i]=address_[4-i];
 "1193
 [e = *U + &U _address * -> _i `ux -> -> # *U &U _address `ui `ux *U + _address_ * -> - -> 4 `i -> _i `i `x -> -> # *U _address_ `i `x ]
 "1194
@@ -4711,74 +4711,74 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 442 ]
 "1194
 }
-[; ;RF24_cg.c: 1194: }
-[; ;RF24_cg.c: 1198: if (child == 0){
+[; ;RF24_c.c: 1194: }
+[; ;RF24_c.c: 1198: if (child == 0){
 "1198
 [e $ ! == -> _child `i -> 0 `i 444  ]
 {
-[; ;RF24_cg.c: 1199: memcpy(rf.pipe0_reading_address,address,rf.addr_width);
+[; ;RF24_c.c: 1199: memcpy(rf.pipe0_reading_address,address,rf.addr_width);
 "1199
 [e ( _memcpy (3 , , -> &U . _rf 6 `*v -> &U _address `*Cv -> . _rf 7 `ui ]
 "1200
 }
 [e :U 444 ]
-[; ;RF24_cg.c: 1200: }
-[; ;RF24_cg.c: 1202: if (child <= 6)
+[; ;RF24_c.c: 1200: }
+[; ;RF24_c.c: 1202: if (child <= 6)
 "1202
 [e $ ! <= -> _child `i -> 6 `i 445  ]
-[; ;RF24_cg.c: 1203: {
+[; ;RF24_c.c: 1203: {
 "1203
 {
-[; ;RF24_cg.c: 1205: if ( child < 2 )
+[; ;RF24_c.c: 1205: if ( child < 2 )
 "1205
 [e $ ! < -> _child `i -> 2 `i 446  ]
-[; ;RF24_cg.c: 1206: RF24_write_register_c_d((*(&child_pipe[child])), (const uint8_t*)(address), rf.addr_width);
+[; ;RF24_c.c: 1206: RF24_write_register_c_d((*(&child_pipe[child])), (const uint8_t*)(address), rf.addr_width);
 "1206
 [e ( _RF24_write_register_c_d (3 , , *U &U *U + &U _child_pipe * -> _child `ux -> -> # *U &U _child_pipe `ui `ux -> &U _address `*Cuc . _rf 7 ]
 [e $U 447  ]
 "1207
 [e :U 446 ]
-[; ;RF24_cg.c: 1207: else
-[; ;RF24_cg.c: 1208: RF24_write_register_c_d((*(&child_pipe[child])), (const uint8_t*)(address), 1);
+[; ;RF24_c.c: 1207: else
+[; ;RF24_c.c: 1208: RF24_write_register_c_d((*(&child_pipe[child])), (const uint8_t*)(address), 1);
 "1208
 [e ( _RF24_write_register_c_d (3 , , *U &U *U + &U _child_pipe * -> _child `ux -> -> # *U &U _child_pipe `ui `ux -> &U _address `*Cuc -> -> 1 `i `uc ]
 [e :U 447 ]
-[; ;RF24_cg.c: 1210: RF24_write_register_d((*(&child_payload_size[child])),rf.payload_size);
+[; ;RF24_c.c: 1210: RF24_write_register_d((*(&child_payload_size[child])),rf.payload_size);
 "1210
 [e ( _RF24_write_register_d (2 , *U &U *U + &U _child_payload_size * -> _child `ux -> -> # *U &U _child_payload_size `ui `ux . _rf 4 ]
-[; ;RF24_cg.c: 1215: RF24_write_register_d(0x02,RF24_read_register_d(0x02) | (1<<((*(&child_pipe_enable[child])))));
+[; ;RF24_c.c: 1215: RF24_write_register_d(0x02,RF24_read_register_d(0x02) | (1<<((*(&child_pipe_enable[child])))));
 "1215
 [e ( _RF24_write_register_d (2 , -> -> 2 `i `uc -> | -> ( _RF24_read_register_d (1 -> -> 2 `i `uc `i << -> 1 `i *U &U *U + &U _child_pipe_enable * -> _child `ux -> -> # *U &U _child_pipe_enable `ui `ux `uc ]
 "1216
 }
 [e :U 445 ]
-[; ;RF24_cg.c: 1216: }
-[; ;RF24_cg.c: 1217: }
+[; ;RF24_c.c: 1216: }
+[; ;RF24_c.c: 1217: }
 "1217
 [e :UE 440 ]
 }
 "1220
 [v _RF24_setAddressWidth `(v ~T0 @X0 1 ef1`uc ]
 {
-[; ;RF24_cg.c: 1220: void RF24_setAddressWidth(uint8_t a_width){
+[; ;RF24_c.c: 1220: void RF24_setAddressWidth(uint8_t a_width){
 [e :U _RF24_setAddressWidth ]
 [v _a_width `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;RF24_cg.c: 1222: if(a_width -= 2){
+[; ;RF24_c.c: 1222: if(a_width -= 2){
 "1222
 [e $ ! != -> =- _a_width -> -> 2 `i `uc `i -> -> -> 0 `i `uc `i 449  ]
 {
-[; ;RF24_cg.c: 1223: RF24_write_register_d(0x03,a_width%4);
+[; ;RF24_c.c: 1223: RF24_write_register_d(0x03,a_width%4);
 "1223
 [e ( _RF24_write_register_d (2 , -> -> 3 `i `uc -> % -> _a_width `i -> 4 `i `uc ]
-[; ;RF24_cg.c: 1224: rf.addr_width = (a_width%4) + 2;
+[; ;RF24_c.c: 1224: rf.addr_width = (a_width%4) + 2;
 "1224
 [e = . _rf 7 -> + % -> _a_width `i -> 4 `i -> 2 `i `uc ]
 "1225
 }
 [e :U 449 ]
-[; ;RF24_cg.c: 1225: }
-[; ;RF24_cg.c: 1227: }
+[; ;RF24_c.c: 1225: }
+[; ;RF24_c.c: 1227: }
 "1227
 [e :UE 448 ]
 }
@@ -4786,62 +4786,62 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_openReadingPipe `(v ~T0 @X0 1 ef2`uc`*Cuc ]
 "1232
 {
-[; ;RF24_cg.c: 1231: void RF24_openReadingPipe(uint8_t child, const uint8_t *address)
-[; ;RF24_cg.c: 1232: {
+[; ;RF24_c.c: 1231: void RF24_openReadingPipe(uint8_t child, const uint8_t *address)
+[; ;RF24_c.c: 1232: {
 [e :U _RF24_openReadingPipe ]
 "1231
 [v _child `uc ~T0 @X0 1 r1 ]
 [v _address `*Cuc ~T0 @X0 1 r2 ]
 "1232
 [f ]
-[; ;RF24_cg.c: 1236: if (child == 0){
+[; ;RF24_c.c: 1236: if (child == 0){
 "1236
 [e $ ! == -> _child `i -> 0 `i 451  ]
 {
-[; ;RF24_cg.c: 1237: memcpy(rf.pipe0_reading_address,address,rf.addr_width);
+[; ;RF24_c.c: 1237: memcpy(rf.pipe0_reading_address,address,rf.addr_width);
 "1237
 [e ( _memcpy (3 , , -> &U . _rf 6 `*v -> _address `*Cv -> . _rf 7 `ui ]
 "1238
 }
 [e :U 451 ]
-[; ;RF24_cg.c: 1238: }
-[; ;RF24_cg.c: 1239: if (child <= 6)
+[; ;RF24_c.c: 1238: }
+[; ;RF24_c.c: 1239: if (child <= 6)
 "1239
 [e $ ! <= -> _child `i -> 6 `i 452  ]
-[; ;RF24_cg.c: 1240: {
+[; ;RF24_c.c: 1240: {
 "1240
 {
-[; ;RF24_cg.c: 1242: if ( child < 2 ){
+[; ;RF24_c.c: 1242: if ( child < 2 ){
 "1242
 [e $ ! < -> _child `i -> 2 `i 453  ]
 {
-[; ;RF24_cg.c: 1243: RF24_write_register_c_d((*(&child_pipe[child])), address, rf.addr_width);
+[; ;RF24_c.c: 1243: RF24_write_register_c_d((*(&child_pipe[child])), address, rf.addr_width);
 "1243
 [e ( _RF24_write_register_c_d (3 , , *U &U *U + &U _child_pipe * -> _child `ux -> -> # *U &U _child_pipe `ui `ux _address . _rf 7 ]
 "1244
 }
-[; ;RF24_cg.c: 1244: }else{
+[; ;RF24_c.c: 1244: }else{
 [e $U 454  ]
 [e :U 453 ]
 {
-[; ;RF24_cg.c: 1245: RF24_write_register_c_d((*(&child_pipe[child])), address, 1);
+[; ;RF24_c.c: 1245: RF24_write_register_c_d((*(&child_pipe[child])), address, 1);
 "1245
 [e ( _RF24_write_register_c_d (3 , , *U &U *U + &U _child_pipe * -> _child `ux -> -> # *U &U _child_pipe `ui `ux _address -> -> 1 `i `uc ]
 "1246
 }
 [e :U 454 ]
-[; ;RF24_cg.c: 1246: }
-[; ;RF24_cg.c: 1247: RF24_write_register_d((*(&child_payload_size[child])),rf.payload_size);
+[; ;RF24_c.c: 1246: }
+[; ;RF24_c.c: 1247: RF24_write_register_d((*(&child_payload_size[child])),rf.payload_size);
 "1247
 [e ( _RF24_write_register_d (2 , *U &U *U + &U _child_payload_size * -> _child `ux -> -> # *U &U _child_payload_size `ui `ux . _rf 4 ]
-[; ;RF24_cg.c: 1252: RF24_write_register_d(0x02,RF24_read_register_d(0x02) | (1<<((*(&child_pipe_enable[child])))));
+[; ;RF24_c.c: 1252: RF24_write_register_d(0x02,RF24_read_register_d(0x02) | (1<<((*(&child_pipe_enable[child])))));
 "1252
 [e ( _RF24_write_register_d (2 , -> -> 2 `i `uc -> | -> ( _RF24_read_register_d (1 -> -> 2 `i `uc `i << -> 1 `i *U &U *U + &U _child_pipe_enable * -> _child `ux -> -> # *U &U _child_pipe_enable `ui `ux `uc ]
 "1254
 }
 [e :U 452 ]
-[; ;RF24_cg.c: 1254: }
-[; ;RF24_cg.c: 1255: }
+[; ;RF24_c.c: 1254: }
+[; ;RF24_c.c: 1255: }
 "1255
 [e :UE 450 ]
 }
@@ -4849,17 +4849,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_closeReadingPipe `(v ~T0 @X0 1 ef1`uc ]
 "1260
 {
-[; ;RF24_cg.c: 1259: void RF24_closeReadingPipe(uint8_t pipe )
-[; ;RF24_cg.c: 1260: {
+[; ;RF24_c.c: 1259: void RF24_closeReadingPipe(uint8_t pipe )
+[; ;RF24_c.c: 1260: {
 [e :U _RF24_closeReadingPipe ]
 "1259
 [v _pipe `uc ~T0 @X0 1 r1 ]
 "1260
 [f ]
-[; ;RF24_cg.c: 1261: RF24_write_register_d(0x02,RF24_read_register_d(0x02) & ~(1<<((*(&child_pipe_enable[pipe])))));
+[; ;RF24_c.c: 1261: RF24_write_register_d(0x02,RF24_read_register_d(0x02) & ~(1<<((*(&child_pipe_enable[pipe])))));
 "1261
 [e ( _RF24_write_register_d (2 , -> -> 2 `i `uc -> & -> ( _RF24_read_register_d (1 -> -> 2 `i `uc `i ~ << -> 1 `i *U &U *U + &U _child_pipe_enable * -> _pipe `ux -> -> # *U &U _child_pipe_enable `ui `ux `uc ]
-[; ;RF24_cg.c: 1262: }
+[; ;RF24_c.c: 1262: }
 "1262
 [e :UE 455 ]
 }
@@ -4867,23 +4867,23 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_toggle_features_d `(v ~T0 @X0 1 ef ]
 "1267
 {
-[; ;RF24_cg.c: 1266: void RF24_toggle_features_d(void)
-[; ;RF24_cg.c: 1267: {
+[; ;RF24_c.c: 1266: void RF24_toggle_features_d(void)
+[; ;RF24_c.c: 1267: {
 [e :U _RF24_toggle_features_d ]
 [f ]
-[; ;RF24_cg.c: 1268: RF24_beginTransaction();
+[; ;RF24_c.c: 1268: RF24_beginTransaction();
 "1268
 [e ( _RF24_beginTransaction ..  ]
-[; ;RF24_cg.c: 1269: SPI_transfer( 0x50 );
+[; ;RF24_c.c: 1269: SPI_transfer( 0x50 );
 "1269
 [e ( _SPI_transfer (1 -> -> 80 `i `uc ]
-[; ;RF24_cg.c: 1270: SPI_transfer( 0x73 );
+[; ;RF24_c.c: 1270: SPI_transfer( 0x73 );
 "1270
 [e ( _SPI_transfer (1 -> -> 115 `i `uc ]
-[; ;RF24_cg.c: 1271: RF24_endTransaction();
+[; ;RF24_c.c: 1271: RF24_endTransaction();
 "1271
 [e ( _RF24_endTransaction ..  ]
-[; ;RF24_cg.c: 1272: }
+[; ;RF24_c.c: 1272: }
 "1272
 [e :UE 456 ]
 }
@@ -4891,21 +4891,21 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_enableDynamicPayloads `(v ~T0 @X0 1 ef ]
 "1277
 {
-[; ;RF24_cg.c: 1276: void RF24_enableDynamicPayloads(void)
-[; ;RF24_cg.c: 1277: {
+[; ;RF24_c.c: 1276: void RF24_enableDynamicPayloads(void)
+[; ;RF24_c.c: 1277: {
 [e :U _RF24_enableDynamicPayloads ]
 [f ]
-[; ;RF24_cg.c: 1281: RF24_write_register_d(0x1D,RF24_read_register_d(0x1D) | (1<<(2)) );
+[; ;RF24_c.c: 1281: RF24_write_register_d(0x1D,RF24_read_register_d(0x1D) | (1<<(2)) );
 "1281
 [e ( _RF24_write_register_d (2 , -> -> 29 `i `uc -> | -> ( _RF24_read_register_d (1 -> -> 29 `i `uc `i << -> 1 `i -> 2 `i `uc ]
-[; ;RF24_cg.c: 1284: ;
-[; ;RF24_cg.c: 1290: RF24_write_register_d(0x1C,RF24_read_register_d(0x1C) | (1<<(5)) | (1<<(4)) | (1<<(3)) | (1<<(2)) | (1<<(1)) | (1<<(0)));
+[; ;RF24_c.c: 1284: ;
+[; ;RF24_c.c: 1290: RF24_write_register_d(0x1C,RF24_read_register_d(0x1C) | (1<<(5)) | (1<<(4)) | (1<<(3)) | (1<<(2)) | (1<<(1)) | (1<<(0)));
 "1290
 [e ( _RF24_write_register_d (2 , -> -> 28 `i `uc -> | | | | | | -> ( _RF24_read_register_d (1 -> -> 28 `i `uc `i << -> 1 `i -> 5 `i << -> 1 `i -> 4 `i << -> 1 `i -> 3 `i << -> 1 `i -> 2 `i << -> 1 `i -> 1 `i << -> 1 `i -> 0 `i `uc ]
-[; ;RF24_cg.c: 1292: rf.dynamic_payloads_enabled = 1;
+[; ;RF24_c.c: 1292: rf.dynamic_payloads_enabled = 1;
 "1292
 [e = . _rf 5 -> -> 1 `i `uc ]
-[; ;RF24_cg.c: 1293: }
+[; ;RF24_c.c: 1293: }
 "1293
 [e :UE 457 ]
 }
@@ -4913,35 +4913,35 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_enableAckPayload `(v ~T0 @X0 1 ef ]
 "1298
 {
-[; ;RF24_cg.c: 1297: void RF24_enableAckPayload(void)
-[; ;RF24_cg.c: 1298: {
+[; ;RF24_c.c: 1297: void RF24_enableAckPayload(void)
+[; ;RF24_c.c: 1298: {
 [e :U _RF24_enableAckPayload ]
 [f ]
-[; ;RF24_cg.c: 1304: RF24_write_register_d(0x1D,RF24_read_register_d(0x1D) | (1<<(1)) | (1<<(2)) );
+[; ;RF24_c.c: 1304: RF24_write_register_d(0x1D,RF24_read_register_d(0x1D) | (1<<(1)) | (1<<(2)) );
 "1304
 [e ( _RF24_write_register_d (2 , -> -> 29 `i `uc -> | | -> ( _RF24_read_register_d (1 -> -> 29 `i `uc `i << -> 1 `i -> 1 `i << -> 1 `i -> 2 `i `uc ]
-[; ;RF24_cg.c: 1306: ;
-[; ;RF24_cg.c: 1312: RF24_write_register_d(0x1C,RF24_read_register_d(0x1C) | (1<<(1)) | (1<<(0)));
+[; ;RF24_c.c: 1306: ;
+[; ;RF24_c.c: 1312: RF24_write_register_d(0x1C,RF24_read_register_d(0x1C) | (1<<(1)) | (1<<(0)));
 "1312
 [e ( _RF24_write_register_d (2 , -> -> 28 `i `uc -> | | -> ( _RF24_read_register_d (1 -> -> 28 `i `uc `i << -> 1 `i -> 1 `i << -> 1 `i -> 0 `i `uc ]
-[; ;RF24_cg.c: 1313: rf.dynamic_payloads_enabled = 1;
+[; ;RF24_c.c: 1313: rf.dynamic_payloads_enabled = 1;
 "1313
 [e = . _rf 5 -> -> 1 `i `uc ]
-[; ;RF24_cg.c: 1314: }
+[; ;RF24_c.c: 1314: }
 "1314
 [e :UE 458 ]
 }
 "1318
 [v _RF24_enableDynamicAck `(v ~T0 @X0 1 ef ]
 {
-[; ;RF24_cg.c: 1318: void RF24_enableDynamicAck(void){
+[; ;RF24_c.c: 1318: void RF24_enableDynamicAck(void){
 [e :U _RF24_enableDynamicAck ]
 [f ]
-[; ;RF24_cg.c: 1323: RF24_write_register_d(0x1D,RF24_read_register_d(0x1D) | (1<<(0)) );
+[; ;RF24_c.c: 1323: RF24_write_register_d(0x1D,RF24_read_register_d(0x1D) | (1<<(0)) );
 "1323
 [e ( _RF24_write_register_d (2 , -> -> 29 `i `uc -> | -> ( _RF24_read_register_d (1 -> -> 29 `i `uc `i << -> 1 `i -> 0 `i `uc ]
-[; ;RF24_cg.c: 1325: ;
-[; ;RF24_cg.c: 1328: }
+[; ;RF24_c.c: 1325: ;
+[; ;RF24_c.c: 1328: }
 "1328
 [e :UE 459 ]
 }
@@ -4949,8 +4949,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_writeAckPayload `(v ~T0 @X0 1 ef3`uc`*Cv`uc ]
 "1333
 {
-[; ;RF24_cg.c: 1332: void RF24_writeAckPayload(uint8_t pipe, const void* buf, uint8_t len)
-[; ;RF24_cg.c: 1333: {
+[; ;RF24_c.c: 1332: void RF24_writeAckPayload(uint8_t pipe, const void* buf, uint8_t len)
+[; ;RF24_c.c: 1333: {
 [e :U _RF24_writeAckPayload ]
 "1332
 [v _pipe `uc ~T0 @X0 1 r1 ]
@@ -4960,33 +4960,33 @@ Version 3.2 HI-TECH Software Intermediate Code
 [f ]
 "1334
 [v _current `*Cuc ~T0 @X0 1 a ]
-[; ;RF24_cg.c: 1334: const uint8_t* current = (const uint8_t*)(buf);
+[; ;RF24_c.c: 1334: const uint8_t* current = (const uint8_t*)(buf);
 [e = _current -> _buf `*Cuc ]
 "1336
 [v _data_len `uc ~T0 @X0 1 a ]
-[; ;RF24_cg.c: 1336: uint8_t data_len = (len<32?len:32);
+[; ;RF24_c.c: 1336: uint8_t data_len = (len<32?len:32);
 [e = _data_len -> ? < -> _len `i -> 32 `i : -> _len `i -> 32 `i `uc ]
-[; ;RF24_cg.c: 1350: RF24_beginTransaction();
+[; ;RF24_c.c: 1350: RF24_beginTransaction();
 "1350
 [e ( _RF24_beginTransaction ..  ]
-[; ;RF24_cg.c: 1351: SPI_transfer(0xA8 | ( pipe & 0b111 ) );
+[; ;RF24_c.c: 1351: SPI_transfer(0xA8 | ( pipe & 0b111 ) );
 "1351
 [e ( _SPI_transfer (1 -> | -> 168 `i & -> _pipe `i -> 7 `i `uc ]
-[; ;RF24_cg.c: 1353: while ( data_len-- )
+[; ;RF24_c.c: 1353: while ( data_len-- )
 "1353
 [e $U 461  ]
 [e :U 462 ]
-[; ;RF24_cg.c: 1354: SPI_transfer(*current++);
+[; ;RF24_c.c: 1354: SPI_transfer(*current++);
 "1354
 [e ( _SPI_transfer (1 *U ++ _current * -> -> 1 `i `x -> -> # *U _current `i `x ]
 [e :U 461 ]
 "1353
 [e $ != -> -- _data_len -> -> 1 `i `uc `i -> -> -> 0 `i `uc `i 462  ]
 [e :U 463 ]
-[; ;RF24_cg.c: 1355: RF24_endTransaction();
+[; ;RF24_c.c: 1355: RF24_endTransaction();
 "1355
 [e ( _RF24_endTransaction ..  ]
-[; ;RF24_cg.c: 1359: }
+[; ;RF24_c.c: 1359: }
 "1359
 [e :UE 460 ]
 }
@@ -4994,15 +4994,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_isAckPayloadAvailable `(uc ~T0 @X0 1 ef ]
 "1364
 {
-[; ;RF24_cg.c: 1363: uint8_t RF24_isAckPayloadAvailable(void)
-[; ;RF24_cg.c: 1364: {
+[; ;RF24_c.c: 1363: uint8_t RF24_isAckPayloadAvailable(void)
+[; ;RF24_c.c: 1364: {
 [e :U _RF24_isAckPayloadAvailable ]
 [f ]
-[; ;RF24_cg.c: 1365: return ! (RF24_read_register_d(0x17) & (1<<(0)));
+[; ;RF24_c.c: 1365: return ! (RF24_read_register_d(0x17) & (1<<(0)));
 "1365
 [e ) -> -> ! != & -> ( _RF24_read_register_d (1 -> -> 23 `i `uc `i << -> 1 `i -> 0 `i -> 0 `i `i `uc ]
 [e $UE 464  ]
-[; ;RF24_cg.c: 1366: }
+[; ;RF24_c.c: 1366: }
 "1366
 [e :UE 464 ]
 }
@@ -5010,15 +5010,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_isPVariant `(uc ~T0 @X0 1 ef ]
 "1371
 {
-[; ;RF24_cg.c: 1370: uint8_t RF24_isPVariant(void)
-[; ;RF24_cg.c: 1371: {
+[; ;RF24_c.c: 1370: uint8_t RF24_isPVariant(void)
+[; ;RF24_c.c: 1371: {
 [e :U _RF24_isPVariant ]
 [f ]
-[; ;RF24_cg.c: 1372: return rf.p_variant ;
+[; ;RF24_c.c: 1372: return rf.p_variant ;
 "1372
 [e ) . _rf 3 ]
 [e $UE 465  ]
-[; ;RF24_cg.c: 1373: }
+[; ;RF24_c.c: 1373: }
 "1373
 [e :UE 465 ]
 }
@@ -5026,28 +5026,28 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_setAutoAck `(v ~T0 @X0 1 ef1`uc ]
 "1378
 {
-[; ;RF24_cg.c: 1377: void RF24_setAutoAck( uint8_t enable)
-[; ;RF24_cg.c: 1378: {
+[; ;RF24_c.c: 1377: void RF24_setAutoAck( uint8_t enable)
+[; ;RF24_c.c: 1378: {
 [e :U _RF24_setAutoAck ]
 "1377
 [v _enable `uc ~T0 @X0 1 r1 ]
 "1378
 [f ]
-[; ;RF24_cg.c: 1379: if ( enable )
+[; ;RF24_c.c: 1379: if ( enable )
 "1379
 [e $ ! != -> _enable `i -> -> -> 0 `i `uc `i 467  ]
-[; ;RF24_cg.c: 1380: RF24_write_register_d(0x01, 0b111111);
+[; ;RF24_c.c: 1380: RF24_write_register_d(0x01, 0b111111);
 "1380
 [e ( _RF24_write_register_d (2 , -> -> 1 `i `uc -> -> 63 `i `uc ]
 [e $U 468  ]
 "1381
 [e :U 467 ]
-[; ;RF24_cg.c: 1381: else
-[; ;RF24_cg.c: 1382: RF24_write_register_d(0x01, 0);
+[; ;RF24_c.c: 1381: else
+[; ;RF24_c.c: 1382: RF24_write_register_d(0x01, 0);
 "1382
 [e ( _RF24_write_register_d (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
 [e :U 468 ]
-[; ;RF24_cg.c: 1383: }
+[; ;RF24_c.c: 1383: }
 "1383
 [e :UE 466 ]
 }
@@ -5055,58 +5055,58 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_setAutoAck_p `(v ~T0 @X0 1 ef2`uc`uc ]
 "1388
 {
-[; ;RF24_cg.c: 1387: void RF24_setAutoAck_p( uint8_t pipe, uint8_t enable )
-[; ;RF24_cg.c: 1388: {
+[; ;RF24_c.c: 1387: void RF24_setAutoAck_p( uint8_t pipe, uint8_t enable )
+[; ;RF24_c.c: 1388: {
 [e :U _RF24_setAutoAck_p ]
 "1387
 [v _pipe `uc ~T0 @X0 1 r1 ]
 [v _enable `uc ~T0 @X0 1 r2 ]
 "1388
 [f ]
-[; ;RF24_cg.c: 1389: if ( pipe <= 6 )
+[; ;RF24_c.c: 1389: if ( pipe <= 6 )
 "1389
 [e $ ! <= -> _pipe `i -> 6 `i 470  ]
-[; ;RF24_cg.c: 1390: {
+[; ;RF24_c.c: 1390: {
 "1390
 {
 "1391
 [v _en_aa `uc ~T0 @X0 1 a ]
-[; ;RF24_cg.c: 1391: uint8_t en_aa = RF24_read_register_d( 0x01 ) ;
+[; ;RF24_c.c: 1391: uint8_t en_aa = RF24_read_register_d( 0x01 ) ;
 [e = _en_aa ( _RF24_read_register_d (1 -> -> 1 `i `uc ]
-[; ;RF24_cg.c: 1392: if( enable )
+[; ;RF24_c.c: 1392: if( enable )
 "1392
 [e $ ! != -> _enable `i -> -> -> 0 `i `uc `i 471  ]
-[; ;RF24_cg.c: 1393: {
+[; ;RF24_c.c: 1393: {
 "1393
 {
-[; ;RF24_cg.c: 1394: en_aa |= (1<<(pipe)) ;
+[; ;RF24_c.c: 1394: en_aa |= (1<<(pipe)) ;
 "1394
 [e =| _en_aa -> << -> 1 `i _pipe `uc ]
 "1395
 }
-[; ;RF24_cg.c: 1395: }
+[; ;RF24_c.c: 1395: }
 [e $U 472  ]
 "1396
 [e :U 471 ]
-[; ;RF24_cg.c: 1396: else
-[; ;RF24_cg.c: 1397: {
+[; ;RF24_c.c: 1396: else
+[; ;RF24_c.c: 1397: {
 "1397
 {
-[; ;RF24_cg.c: 1398: en_aa &= ~(1<<(pipe)) ;
+[; ;RF24_c.c: 1398: en_aa &= ~(1<<(pipe)) ;
 "1398
 [e =& _en_aa -> ~ << -> 1 `i _pipe `uc ]
 "1399
 }
 [e :U 472 ]
-[; ;RF24_cg.c: 1399: }
-[; ;RF24_cg.c: 1400: RF24_write_register_d( 0x01, en_aa ) ;
+[; ;RF24_c.c: 1399: }
+[; ;RF24_c.c: 1400: RF24_write_register_d( 0x01, en_aa ) ;
 "1400
 [e ( _RF24_write_register_d (2 , -> -> 1 `i `uc _en_aa ]
 "1401
 }
 [e :U 470 ]
-[; ;RF24_cg.c: 1401: }
-[; ;RF24_cg.c: 1402: }
+[; ;RF24_c.c: 1401: }
+[; ;RF24_c.c: 1402: }
 "1402
 [e :UE 469 ]
 }
@@ -5114,15 +5114,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_testCarrier `(uc ~T0 @X0 1 ef ]
 "1407
 {
-[; ;RF24_cg.c: 1406: uint8_t RF24_testCarrier(void)
-[; ;RF24_cg.c: 1407: {
+[; ;RF24_c.c: 1406: uint8_t RF24_testCarrier(void)
+[; ;RF24_c.c: 1407: {
 [e :U _RF24_testCarrier ]
 [f ]
-[; ;RF24_cg.c: 1408: return ( RF24_read_register_d(0x09) & 1 );
+[; ;RF24_c.c: 1408: return ( RF24_read_register_d(0x09) & 1 );
 "1408
 [e ) -> & -> ( _RF24_read_register_d (1 -> -> 9 `i `uc `i -> 1 `i `uc ]
 [e $UE 473  ]
-[; ;RF24_cg.c: 1409: }
+[; ;RF24_c.c: 1409: }
 "1409
 [e :UE 473 ]
 }
@@ -5130,15 +5130,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_testRPD `(uc ~T0 @X0 1 ef ]
 "1414
 {
-[; ;RF24_cg.c: 1413: uint8_t RF24_testRPD(void)
-[; ;RF24_cg.c: 1414: {
+[; ;RF24_c.c: 1413: uint8_t RF24_testRPD(void)
+[; ;RF24_c.c: 1414: {
 [e :U _RF24_testRPD ]
 [f ]
-[; ;RF24_cg.c: 1415: return ( RF24_read_register_d(0x09) & 1 ) ;
+[; ;RF24_c.c: 1415: return ( RF24_read_register_d(0x09) & 1 ) ;
 "1415
 [e ) -> & -> ( _RF24_read_register_d (1 -> -> 9 `i `uc `i -> 1 `i `uc ]
 [e $UE 474  ]
-[; ;RF24_cg.c: 1416: }
+[; ;RF24_c.c: 1416: }
 "1416
 [e :UE 474 ]
 }
@@ -5146,15 +5146,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_isValid `(uc ~T0 @X0 1 ef ]
 "1421
 {
-[; ;RF24_cg.c: 1420: uint8_t RF24_isValid(void)
-[; ;RF24_cg.c: 1421: {
+[; ;RF24_c.c: 1420: uint8_t RF24_isValid(void)
+[; ;RF24_c.c: 1421: {
 [e :U _RF24_isValid ]
 [f ]
-[; ;RF24_cg.c: 1422: return rf.ce_pin != 0xff && rf.csn_pin != 0xff;
+[; ;RF24_c.c: 1422: return rf.ce_pin != 0xff && rf.csn_pin != 0xff;
 "1422
 [e ) -> -> && != -> . _rf 0 `i -> 255 `i != -> . _rf 1 `i -> 255 `i `i `uc ]
 [e $UE 475  ]
-[; ;RF24_cg.c: 1424: }
+[; ;RF24_c.c: 1424: }
 "1424
 [e :UE 475 ]
 }
@@ -5162,8 +5162,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_setPALevel `(v ~T0 @X0 1 ef1`uc ]
 "1429
 {
-[; ;RF24_cg.c: 1428: void RF24_setPALevel(uint8_t level)
-[; ;RF24_cg.c: 1429: {
+[; ;RF24_c.c: 1428: void RF24_setPALevel(uint8_t level)
+[; ;RF24_c.c: 1429: {
 [e :U _RF24_setPALevel ]
 "1428
 [v _level `uc ~T0 @X0 1 r1 ]
@@ -5171,32 +5171,32 @@ Version 3.2 HI-TECH Software Intermediate Code
 [f ]
 "1431
 [v _setup `uc ~T0 @X0 1 a ]
-[; ;RF24_cg.c: 1431: uint8_t setup = RF24_read_register_d(0x06) & 0b11111000;
+[; ;RF24_c.c: 1431: uint8_t setup = RF24_read_register_d(0x06) & 0b11111000;
 [e = _setup -> & -> ( _RF24_read_register_d (1 -> -> 6 `i `uc `i -> 248 `i `uc ]
-[; ;RF24_cg.c: 1433: if(level > 3){
+[; ;RF24_c.c: 1433: if(level > 3){
 "1433
 [e $ ! > -> _level `i -> 3 `i 477  ]
 {
-[; ;RF24_cg.c: 1434: level = (RF24_PA_MAX << 1) + 1;
+[; ;RF24_c.c: 1434: level = (RF24_PA_MAX << 1) + 1;
 "1434
 [e = _level -> + << -> . `E3381 3 `i -> 1 `i -> 1 `i `uc ]
 "1435
 }
-[; ;RF24_cg.c: 1435: }else{
+[; ;RF24_c.c: 1435: }else{
 [e $U 478  ]
 [e :U 477 ]
 {
-[; ;RF24_cg.c: 1436: level = (level << 1) + 1;
+[; ;RF24_c.c: 1436: level = (level << 1) + 1;
 "1436
 [e = _level -> + << -> _level `i -> 1 `i -> 1 `i `uc ]
 "1437
 }
 [e :U 478 ]
-[; ;RF24_cg.c: 1437: }
-[; ;RF24_cg.c: 1440: RF24_write_register_d( 0x06, setup |= level ) ;
+[; ;RF24_c.c: 1437: }
+[; ;RF24_c.c: 1440: RF24_write_register_d( 0x06, setup |= level ) ;
 "1440
 [e ( _RF24_write_register_d (2 , -> -> 6 `i `uc =| _setup _level ]
-[; ;RF24_cg.c: 1441: }
+[; ;RF24_c.c: 1441: }
 "1441
 [e :UE 476 ]
 }
@@ -5204,15 +5204,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_getPALevel `(uc ~T0 @X0 1 ef ]
 "1446
 {
-[; ;RF24_cg.c: 1445: uint8_t RF24_getPALevel(void)
-[; ;RF24_cg.c: 1446: {
+[; ;RF24_c.c: 1445: uint8_t RF24_getPALevel(void)
+[; ;RF24_c.c: 1446: {
 [e :U _RF24_getPALevel ]
 [f ]
-[; ;RF24_cg.c: 1448: return (RF24_read_register_d(0x06) & ((1<<(1)) | (1<<(2)))) >> 1 ;
+[; ;RF24_c.c: 1448: return (RF24_read_register_d(0x06) & ((1<<(1)) | (1<<(2)))) >> 1 ;
 "1448
 [e ) -> >> & -> ( _RF24_read_register_d (1 -> -> 6 `i `uc `i | << -> 1 `i -> 1 `i << -> 1 `i -> 2 `i -> 1 `i `uc ]
 [e $UE 479  ]
-[; ;RF24_cg.c: 1449: }
+[; ;RF24_c.c: 1449: }
 "1449
 [e :UE 479 ]
 }
@@ -5220,8 +5220,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_setDataRate `(uc ~T0 @X0 1 ef1`E3388 ]
 "1454
 {
-[; ;RF24_cg.c: 1453: uint8_t RF24_setDataRate(rf24_datarate_e speed)
-[; ;RF24_cg.c: 1454: {
+[; ;RF24_c.c: 1453: uint8_t RF24_setDataRate(rf24_datarate_e speed)
+[; ;RF24_c.c: 1454: {
 [e :U _RF24_setDataRate ]
 "1453
 [v _speed `E3388 ~T0 @X0 1 r1 ]
@@ -5229,50 +5229,50 @@ Version 3.2 HI-TECH Software Intermediate Code
 [f ]
 "1455
 [v _result `uc ~T0 @X0 1 a ]
-[; ;RF24_cg.c: 1455: uint8_t result = 0;
+[; ;RF24_c.c: 1455: uint8_t result = 0;
 [e = _result -> -> 0 `i `uc ]
 "1456
 [v _setup `uc ~T0 @X0 1 a ]
-[; ;RF24_cg.c: 1456: uint8_t setup = RF24_read_register_d(0x06) ;
+[; ;RF24_c.c: 1456: uint8_t setup = RF24_read_register_d(0x06) ;
 [e = _setup ( _RF24_read_register_d (1 -> -> 6 `i `uc ]
-[; ;RF24_cg.c: 1459: setup &= ~((1<<(5)) | (1<<(3))) ;
+[; ;RF24_c.c: 1459: setup &= ~((1<<(5)) | (1<<(3))) ;
 "1459
 [e =& _setup -> ~ | << -> 1 `i -> 5 `i << -> 1 `i -> 3 `i `uc ]
-[; ;RF24_cg.c: 1464: rf.txDelay=85;
+[; ;RF24_c.c: 1464: rf.txDelay=85;
 "1464
 [e = . _rf 8 -> -> -> 85 `i `l `ul ]
-[; ;RF24_cg.c: 1466: if( speed == RF24_250KBPS )
+[; ;RF24_c.c: 1466: if( speed == RF24_250KBPS )
 "1466
 [e $ ! == -> _speed `i -> . `E3388 2 `i 481  ]
-[; ;RF24_cg.c: 1467: {
+[; ;RF24_c.c: 1467: {
 "1467
 {
-[; ;RF24_cg.c: 1470: setup |= (1<<(5)) ;
+[; ;RF24_c.c: 1470: setup |= (1<<(5)) ;
 "1470
 [e =| _setup -> << -> 1 `i -> 5 `i `uc ]
-[; ;RF24_cg.c: 1474: rf.txDelay=155;
+[; ;RF24_c.c: 1474: rf.txDelay=155;
 "1474
 [e = . _rf 8 -> -> -> 155 `i `l `ul ]
 "1476
 }
-[; ;RF24_cg.c: 1476: }
+[; ;RF24_c.c: 1476: }
 [e $U 482  ]
 "1477
 [e :U 481 ]
-[; ;RF24_cg.c: 1477: else
-[; ;RF24_cg.c: 1478: {
+[; ;RF24_c.c: 1477: else
+[; ;RF24_c.c: 1478: {
 "1478
 {
-[; ;RF24_cg.c: 1481: if ( speed == RF24_2MBPS )
+[; ;RF24_c.c: 1481: if ( speed == RF24_2MBPS )
 "1481
 [e $ ! == -> _speed `i -> . `E3388 1 `i 483  ]
-[; ;RF24_cg.c: 1482: {
+[; ;RF24_c.c: 1482: {
 "1482
 {
-[; ;RF24_cg.c: 1483: setup |= (1<<(3));
+[; ;RF24_c.c: 1483: setup |= (1<<(3));
 "1483
 [e =| _setup -> << -> 1 `i -> 3 `i `uc ]
-[; ;RF24_cg.c: 1487: rf.txDelay=65;
+[; ;RF24_c.c: 1487: rf.txDelay=65;
 "1487
 [e = . _rf 8 -> -> -> 65 `i `l `ul ]
 "1489
@@ -5281,29 +5281,29 @@ Version 3.2 HI-TECH Software Intermediate Code
 "1490
 }
 [e :U 482 ]
-[; ;RF24_cg.c: 1489: }
-[; ;RF24_cg.c: 1490: }
-[; ;RF24_cg.c: 1491: RF24_write_register_d(0x06,setup);
+[; ;RF24_c.c: 1489: }
+[; ;RF24_c.c: 1490: }
+[; ;RF24_c.c: 1491: RF24_write_register_d(0x06,setup);
 "1491
 [e ( _RF24_write_register_d (2 , -> -> 6 `i `uc _setup ]
-[; ;RF24_cg.c: 1494: if ( RF24_read_register_d(0x06) == setup )
+[; ;RF24_c.c: 1494: if ( RF24_read_register_d(0x06) == setup )
 "1494
 [e $ ! == -> ( _RF24_read_register_d (1 -> -> 6 `i `uc `i -> _setup `i 484  ]
-[; ;RF24_cg.c: 1495: {
+[; ;RF24_c.c: 1495: {
 "1495
 {
-[; ;RF24_cg.c: 1496: result = 1;
+[; ;RF24_c.c: 1496: result = 1;
 "1496
 [e = _result -> -> 1 `i `uc ]
 "1497
 }
 [e :U 484 ]
-[; ;RF24_cg.c: 1497: }
-[; ;RF24_cg.c: 1498: return result;
+[; ;RF24_c.c: 1497: }
+[; ;RF24_c.c: 1498: return result;
 "1498
 [e ) _result ]
 [e $UE 480  ]
-[; ;RF24_cg.c: 1499: }
+[; ;RF24_c.c: 1499: }
 "1499
 [e :UE 480 ]
 }
@@ -5311,63 +5311,63 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_getDataRate `(E3388 ~T0 @X0 1 ef ]
 "1504
 {
-[; ;RF24_cg.c: 1503: rf24_datarate_e RF24_getDataRate(void )
-[; ;RF24_cg.c: 1504: {
+[; ;RF24_c.c: 1503: rf24_datarate_e RF24_getDataRate(void )
+[; ;RF24_c.c: 1504: {
 [e :U _RF24_getDataRate ]
 [f ]
 "1505
 [v _result `E3388 ~T0 @X0 1 a ]
 "1506
 [v _dr `uc ~T0 @X0 1 a ]
-[; ;RF24_cg.c: 1505: rf24_datarate_e result ;
-[; ;RF24_cg.c: 1506: uint8_t dr = RF24_read_register_d(0x06) & ((1<<(5)) | (1<<(3)));
+[; ;RF24_c.c: 1505: rf24_datarate_e result ;
+[; ;RF24_c.c: 1506: uint8_t dr = RF24_read_register_d(0x06) & ((1<<(5)) | (1<<(3)));
 [e = _dr -> & -> ( _RF24_read_register_d (1 -> -> 6 `i `uc `i | << -> 1 `i -> 5 `i << -> 1 `i -> 3 `i `uc ]
-[; ;RF24_cg.c: 1510: if ( dr == (1<<(5)) )
+[; ;RF24_c.c: 1510: if ( dr == (1<<(5)) )
 "1510
 [e $ ! == -> _dr `i << -> 1 `i -> 5 `i 486  ]
-[; ;RF24_cg.c: 1511: {
+[; ;RF24_c.c: 1511: {
 "1511
 {
-[; ;RF24_cg.c: 1513: result = RF24_250KBPS ;
+[; ;RF24_c.c: 1513: result = RF24_250KBPS ;
 "1513
 [e = _result . `E3388 2 ]
 "1514
 }
-[; ;RF24_cg.c: 1514: }
+[; ;RF24_c.c: 1514: }
 [e $U 487  ]
 "1515
 [e :U 486 ]
-[; ;RF24_cg.c: 1515: else if ( dr == (1<<(3)) )
+[; ;RF24_c.c: 1515: else if ( dr == (1<<(3)) )
 [e $ ! == -> _dr `i << -> 1 `i -> 3 `i 488  ]
-[; ;RF24_cg.c: 1516: {
+[; ;RF24_c.c: 1516: {
 "1516
 {
-[; ;RF24_cg.c: 1518: result = RF24_2MBPS ;
+[; ;RF24_c.c: 1518: result = RF24_2MBPS ;
 "1518
 [e = _result . `E3388 1 ]
 "1519
 }
-[; ;RF24_cg.c: 1519: }
+[; ;RF24_c.c: 1519: }
 [e $U 489  ]
 "1520
 [e :U 488 ]
-[; ;RF24_cg.c: 1520: else
-[; ;RF24_cg.c: 1521: {
+[; ;RF24_c.c: 1520: else
+[; ;RF24_c.c: 1521: {
 "1521
 {
-[; ;RF24_cg.c: 1523: result = RF24_1MBPS ;
+[; ;RF24_c.c: 1523: result = RF24_1MBPS ;
 "1523
 [e = _result . `E3388 0 ]
 "1524
 }
 [e :U 489 ]
 [e :U 487 ]
-[; ;RF24_cg.c: 1524: }
-[; ;RF24_cg.c: 1525: return result ;
+[; ;RF24_c.c: 1524: }
+[; ;RF24_c.c: 1525: return result ;
 "1525
 [e ) _result ]
 [e $UE 485  ]
-[; ;RF24_cg.c: 1526: }
+[; ;RF24_c.c: 1526: }
 "1526
 [e :UE 485 ]
 }
@@ -5375,8 +5375,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_setCRCLength `(v ~T0 @X0 1 ef1`E3393 ]
 "1531
 {
-[; ;RF24_cg.c: 1530: void RF24_setCRCLength(rf24_crclength_e length)
-[; ;RF24_cg.c: 1531: {
+[; ;RF24_c.c: 1530: void RF24_setCRCLength(rf24_crclength_e length)
+[; ;RF24_c.c: 1531: {
 [e :U _RF24_setCRCLength ]
 "1530
 [v _length `E3393 ~T0 @X0 1 r1 ]
@@ -5384,53 +5384,53 @@ Version 3.2 HI-TECH Software Intermediate Code
 [f ]
 "1532
 [v _config `uc ~T0 @X0 1 a ]
-[; ;RF24_cg.c: 1532: uint8_t config = RF24_read_register_d(0x00) & ~( (1<<(2)) | (1<<(3))) ;
+[; ;RF24_c.c: 1532: uint8_t config = RF24_read_register_d(0x00) & ~( (1<<(2)) | (1<<(3))) ;
 [e = _config -> & -> ( _RF24_read_register_d (1 -> -> 0 `i `uc `i ~ | << -> 1 `i -> 2 `i << -> 1 `i -> 3 `i `uc ]
-[; ;RF24_cg.c: 1535: if ( length == RF24_CRC_DISABLED )
+[; ;RF24_c.c: 1535: if ( length == RF24_CRC_DISABLED )
 "1535
 [e $ ! == -> _length `i -> . `E3393 0 `i 491  ]
-[; ;RF24_cg.c: 1536: {
+[; ;RF24_c.c: 1536: {
 "1536
 {
 "1538
 }
-[; ;RF24_cg.c: 1538: }
+[; ;RF24_c.c: 1538: }
 [e $U 492  ]
 "1539
 [e :U 491 ]
-[; ;RF24_cg.c: 1539: else if ( length == RF24_CRC_8 )
+[; ;RF24_c.c: 1539: else if ( length == RF24_CRC_8 )
 [e $ ! == -> _length `i -> . `E3393 1 `i 493  ]
-[; ;RF24_cg.c: 1540: {
+[; ;RF24_c.c: 1540: {
 "1540
 {
-[; ;RF24_cg.c: 1541: config |= (1<<(3));
+[; ;RF24_c.c: 1541: config |= (1<<(3));
 "1541
 [e =| _config -> << -> 1 `i -> 3 `i `uc ]
 "1542
 }
-[; ;RF24_cg.c: 1542: }
+[; ;RF24_c.c: 1542: }
 [e $U 494  ]
 "1543
 [e :U 493 ]
-[; ;RF24_cg.c: 1543: else
-[; ;RF24_cg.c: 1544: {
+[; ;RF24_c.c: 1543: else
+[; ;RF24_c.c: 1544: {
 "1544
 {
-[; ;RF24_cg.c: 1545: config |= (1<<(3));
+[; ;RF24_c.c: 1545: config |= (1<<(3));
 "1545
 [e =| _config -> << -> 1 `i -> 3 `i `uc ]
-[; ;RF24_cg.c: 1546: config |= (1<<(2));
+[; ;RF24_c.c: 1546: config |= (1<<(2));
 "1546
 [e =| _config -> << -> 1 `i -> 2 `i `uc ]
 "1547
 }
 [e :U 494 ]
 [e :U 492 ]
-[; ;RF24_cg.c: 1547: }
-[; ;RF24_cg.c: 1548: RF24_write_register_d( 0x00, config ) ;
+[; ;RF24_c.c: 1547: }
+[; ;RF24_c.c: 1548: RF24_write_register_d( 0x00, config ) ;
 "1548
 [e ( _RF24_write_register_d (2 , -> -> 0 `i `uc _config ]
-[; ;RF24_cg.c: 1549: }
+[; ;RF24_c.c: 1549: }
 "1549
 [e :UE 490 ]
 }
@@ -5438,51 +5438,51 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_getCRCLength `(E3393 ~T0 @X0 1 ef ]
 "1554
 {
-[; ;RF24_cg.c: 1553: rf24_crclength_e RF24_getCRCLength(void)
-[; ;RF24_cg.c: 1554: {
+[; ;RF24_c.c: 1553: rf24_crclength_e RF24_getCRCLength(void)
+[; ;RF24_c.c: 1554: {
 [e :U _RF24_getCRCLength ]
 [f ]
 "1555
 [v _result `E3393 ~T0 @X0 1 a ]
-[; ;RF24_cg.c: 1555: rf24_crclength_e result = RF24_CRC_DISABLED;
+[; ;RF24_c.c: 1555: rf24_crclength_e result = RF24_CRC_DISABLED;
 [e = _result . `E3393 0 ]
 "1557
 [v _config `uc ~T0 @X0 1 a ]
-[; ;RF24_cg.c: 1557: uint8_t config = RF24_read_register_d(0x00) & ( (1<<(2)) | (1<<(3))) ;
+[; ;RF24_c.c: 1557: uint8_t config = RF24_read_register_d(0x00) & ( (1<<(2)) | (1<<(3))) ;
 [e = _config -> & -> ( _RF24_read_register_d (1 -> -> 0 `i `uc `i | << -> 1 `i -> 2 `i << -> 1 `i -> 3 `i `uc ]
 "1558
 [v _AA `uc ~T0 @X0 1 a ]
-[; ;RF24_cg.c: 1558: uint8_t AA = RF24_read_register_d(0x01);
+[; ;RF24_c.c: 1558: uint8_t AA = RF24_read_register_d(0x01);
 [e = _AA ( _RF24_read_register_d (1 -> -> 1 `i `uc ]
-[; ;RF24_cg.c: 1560: if ( config & (1<<(3)) || AA)
+[; ;RF24_c.c: 1560: if ( config & (1<<(3)) || AA)
 "1560
 [e $ ! || != & -> _config `i << -> 1 `i -> 3 `i -> 0 `i != -> _AA `i -> -> -> 0 `i `uc `i 496  ]
-[; ;RF24_cg.c: 1561: {
+[; ;RF24_c.c: 1561: {
 "1561
 {
-[; ;RF24_cg.c: 1562: if ( config & (1<<(2)) )
+[; ;RF24_c.c: 1562: if ( config & (1<<(2)) )
 "1562
 [e $ ! != & -> _config `i << -> 1 `i -> 2 `i -> 0 `i 497  ]
-[; ;RF24_cg.c: 1563: result = RF24_CRC_16;
+[; ;RF24_c.c: 1563: result = RF24_CRC_16;
 "1563
 [e = _result . `E3393 2 ]
 [e $U 498  ]
 "1564
 [e :U 497 ]
-[; ;RF24_cg.c: 1564: else
-[; ;RF24_cg.c: 1565: result = RF24_CRC_8;
+[; ;RF24_c.c: 1564: else
+[; ;RF24_c.c: 1565: result = RF24_CRC_8;
 "1565
 [e = _result . `E3393 1 ]
 [e :U 498 ]
 "1566
 }
 [e :U 496 ]
-[; ;RF24_cg.c: 1566: }
-[; ;RF24_cg.c: 1568: return result;
+[; ;RF24_c.c: 1566: }
+[; ;RF24_c.c: 1568: return result;
 "1568
 [e ) _result ]
 [e $UE 495  ]
-[; ;RF24_cg.c: 1569: }
+[; ;RF24_c.c: 1569: }
 "1569
 [e :UE 495 ]
 }
@@ -5490,18 +5490,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_disableCRC `(v ~T0 @X0 1 ef ]
 "1574
 {
-[; ;RF24_cg.c: 1573: void RF24_disableCRC(void)
-[; ;RF24_cg.c: 1574: {
+[; ;RF24_c.c: 1573: void RF24_disableCRC(void)
+[; ;RF24_c.c: 1574: {
 [e :U _RF24_disableCRC ]
 [f ]
 "1575
 [v _disable `uc ~T0 @X0 1 a ]
-[; ;RF24_cg.c: 1575: uint8_t disable = RF24_read_register_d(0x00) & ~(1<<(3)) ;
+[; ;RF24_c.c: 1575: uint8_t disable = RF24_read_register_d(0x00) & ~(1<<(3)) ;
 [e = _disable -> & -> ( _RF24_read_register_d (1 -> -> 0 `i `uc `i ~ << -> 1 `i -> 3 `i `uc ]
-[; ;RF24_cg.c: 1576: RF24_write_register_d( 0x00, disable ) ;
+[; ;RF24_c.c: 1576: RF24_write_register_d( 0x00, disable ) ;
 "1576
 [e ( _RF24_write_register_d (2 , -> -> 0 `i `uc _disable ]
-[; ;RF24_cg.c: 1577: }
+[; ;RF24_c.c: 1577: }
 "1577
 [e :UE 499 ]
 }
@@ -5509,18 +5509,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RF24_setRetries `(v ~T0 @X0 1 ef2`uc`uc ]
 "1581
 {
-[; ;RF24_cg.c: 1580: void RF24_setRetries( uint8_t delay, uint8_t count)
-[; ;RF24_cg.c: 1581: {
+[; ;RF24_c.c: 1580: void RF24_setRetries( uint8_t delay, uint8_t count)
+[; ;RF24_c.c: 1581: {
 [e :U _RF24_setRetries ]
 [v _delay `uc ~T0 @X0 1 r1 ]
 "1580
 [v _count `uc ~T0 @X0 1 r2 ]
 "1581
 [f ]
-[; ;RF24_cg.c: 1582: RF24_write_register_d(0x04,(delay&0xf)<<4 | (count&0xf)<<0);
+[; ;RF24_c.c: 1582: RF24_write_register_d(0x04,(delay&0xf)<<4 | (count&0xf)<<0);
 "1582
 [e ( _RF24_write_register_d (2 , -> -> 4 `i `uc -> | << & -> _delay `i -> 15 `i -> 4 `i << & -> _count `i -> 15 `i -> 0 `i `uc ]
-[; ;RF24_cg.c: 1583: }
+[; ;RF24_c.c: 1583: }
 "1583
 [e :UE 500 ]
 }
