@@ -706,9 +706,7 @@ typedef struct
    * @param _radio The underlying radio driver instance
    * @param _radio1 The second underlying radio driver instance
    */
-   
-void  RF24N_init2(RF24Network * rn_,  RF24 * _radio, RF24 * _radio1); 
-  
+//void  RF24N_init2(RF24Network * rn_,  RF24 * _radio, RF24 * _radio1); 
 	/**
 	* By default, multicast addresses are divided into levels. 
 	*

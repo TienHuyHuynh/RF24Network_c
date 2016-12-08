@@ -39,10 +39,10 @@ typedef struct  {                  // Structure of our payload
 
 void setup(void)
 {
-  RF24_init(36,35);
+  RF24_init();//pins are defined in xc8_config.h
   RF24N_init();
   
-  Serial_begin(57600);
+  Serial_begin(115200);
   Serial_println("RF24Network/examples/helloworld_tx/");
  
   RF24_begin();

@@ -351,7 +351,7 @@ uint8_t RF24N_update()
 				RF24N_write(header->to_node,1);	//Send it on, indicate it is a routed payload
 			}
 		#else
-		write(header->to_node,1);	//Send it on, indicate it is a routed payload
+		RF24N_write(header->to_node,1);	//Send it on, indicate it is a routed payload
 		#endif
 	  }
 	  
@@ -631,27 +631,23 @@ IF_SERIAL_DEBUG_FRAGMENTATION_L2(for(int i=0; i< frag_queue.message_size;i++){ S
 	}//If more or last fragments
 
   }else //else is not a fragment
- #endif // End fragmentation enabled
-
   // Copy the current frame into the frame queue
-
-#if !defined( DISABLE_FRAGMENTATION )
-
 	if(header->type == EXTERNAL_DATA_TYPE){
 		memcpy(&rn.frag_queue,rn.frame_buffer,8);
 		rn.frag_queue.message_buffer = rn.frame_buffer+sizeof(RF24NetworkHeader);
 		rn.frag_queue.message_size = message_size;
 		return 2;
 	}
-#endif		
+#endif // End fragmentation enabled
+
 #if defined (DISABLE_USER_PAYLOADS)
 	return 0;
  }
 #else
   if(message_size + (rn.next_frame-rn.frame_queue) <= MAIN_BUFFER_SIZE){
 	uint8_t padding;
-      memcpy(rn.next_frame,rn.frame_buffer,8);
-    memcpy(rn.next_frame+8,&message_size,2);
+        memcpy(rn.next_frame,rn.frame_buffer,8);
+        memcpy(rn.next_frame+8,&message_size,2);
 	memcpy(rn.next_frame+10,rn.frame_buffer+8,message_size);
     
 	//IF_SERIAL_DEBUG_FRAGMENTATION( for(int i=0; i<message_size;i++){ Serial.print(next_frame[i],HEX); Serial.print(" : "); } Serial.println(""); );
@@ -805,8 +801,8 @@ uint8_t RF24N_write_( RF24NetworkHeader* header,const void* message, uint16_t le
     
 
 #if defined (DISABLE_FRAGMENTATION)
-    frame_size = rf24_min(len+sizeof(RF24NetworkHeader),MAX_FRAME_SIZE);
-	return RF24__write(&network, header,message,rf24_min(len,max_frame_payload_size),writeDirect);
+    rn.frame_size = rf24_min(len+sizeof(RF24NetworkHeader),MAX_FRAME_SIZE);
+	return RF24N__write(header,message,rf24_min(len,rn.max_frame_payload_size),writeDirect);
 #else  
     
   if(len <= rn.max_frame_payload_size){

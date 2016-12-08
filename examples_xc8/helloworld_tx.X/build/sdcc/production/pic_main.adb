@@ -1,1 +1,0 @@
-M:pic_main
