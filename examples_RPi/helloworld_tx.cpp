@@ -10,7 +10,7 @@
  */
 
 //#include <cstdlib>
-#include <RF24_c/RF24_c.h>
+#include <RF24/RF24.h>
 #include <RF24Network_c/RF24Network_c.h>
 #include <iostream>
 #include <ctime>

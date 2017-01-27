@@ -4,47 +4,40 @@
  This program is free software; you can redistribute it and/or
  modify it under the terms of the GNU General Public License
  version 2 as published by the Free Software Foundation.
+ 
+ 2014 - TMRh20: New sketch included with updated library
  */
 
 /**
- * Example: Network topology, and pinging across a tree/mesh network
+ * Example: Network topology, and pinging across a tree/mesh network with sleeping nodes
  *
  * Using this sketch, each node will send a ping to every other node in the network every few seconds. 
  * The RF24Network library will route the message across the mesh to the correct node.
  *
- * This sketch is greatly complicated by the fact that at startup time, each
- * node (including the base) has no clue what nodes are alive.  So,
- * each node builds an array of nodes it has heard about.  The base
- * periodically sends out its whole known list of nodes to everyone.
+ * This sketch demonstrates the new functionality of nodes sleeping in STANDBY-I mode. In receive mode,
+ * the radio will draw about 13.5 mA. In STANDBY-I mode, the radio draws .000022mA, and is able to awake
+ * when payloads are received.
  *
- * To see the underlying frames being relayed, compile RF24Network with
- * #define SERIAL_DEBUG.
+ * How it Works:
+ * The enhanced sleep mode utilizes the ACK payload functionality, as radios that are in Primary Transmitter
+ * mode (PTX) are able to receive ACK payloads while in STANDBY-I mode. 
+ * 1. The radio is configured to use Dynamic Payloads and ACK payloads with Auto-Ack enabled 
+ * 2. The radio enters PTX mode and attaches an interrupt handler to the radio interrupt input pin (pin 2)
+ * 3. The radio uses the Watchdog Timer to awake at set 1 second intervals in this example
+ * 4. Every interval, it sends out a 'sleep' payload and goes back to sleep. Incoming payloads will then be treated as ACK payloads, while the radio remains in STANDBY-I mode.
+ * 5. If an interrupt is triggered, the radio wakes up
+ * 6. When a message is sent to the sleeping node, the interrupt triggers a wake up, the MCU
+ * grabs the payload, and switches back to receive mode in case more data is on its way.
  *
- * Update: The logical node address of each node is set below, and are grouped in twos for demonstration.
- * Number 0 is the master node. Numbers 1-2 represent the 2nd layer in the tree (02,05).
- * Number 3 (012) is the first child of number 1 (02). Number 4 (015) is the first child of number 2.
- * Below that are children 5 (022) and 6 (025), and so on as shown below 
- * The tree below represents the possible network topology with the addresses defined lower down
- *
- *     Addresses/Topology                            Node Numbers  (To simplify address assignment in this demonstration)
- *             00                  - Master Node         ( 0 )
- *           02  05                - 1st Level children ( 1,2 )
- *    32 22 12    15 25 35 45    - 2nd Level children (7,5,3-4,6,8)
- *
- * eg:
- * For node 4 (Address 015) to contact node 1 (address 02), it will send through node 2 (address 05) which relays the payload
- * through the master (00), which sends it through to node 1 (02). This seems complicated, however, node 4 (015) can be a very
- * long way away from node 1 (02), with node 2 (05) bridging the gap between it and the master node.
- *
- * To use the sketch, upload it to two or more units and set the NODE_ADDRESS below. If configuring only a few
- * units, set the addresses to 0,1,3,5... to configure all nodes as children to each other. If using many nodes,
- * it is easiest just to increment the NODE_ADDRESS by 1 as the sketch is uploaded to each device.
+ * The node (Arduino) power use can be reduced further by disabling unnessessary systems via the Power Reduction Register(s) (PRR).
  */
 
 #include <avr/pgmspace.h>
 #include <RF24Network_c.h>
-#include <RF24_c.h>
+#include <RF24.h>
 #include "printf.h"
+#include <avr/sleep.h>
+#include <avr/power.h>
 
 /***********************************************************************
 ************* Set the Node Address *************************************
@@ -52,7 +45,7 @@
 
 // These are the Octal addresses that will be assigned
 const uint16_t node_address_set[10] = { 00, 02, 05, 012, 015, 022, 025, 032, 035, 045 };
- 
+
 // 0 = Master
 // 1-2 (02,05)   = Children of Master(00)
 // 3,5 (012,022) = Children of (02)
@@ -60,69 +53,99 @@ const uint16_t node_address_set[10] = { 00, 02, 05, 012, 015, 022, 025, 032, 035
 // 7   (032)     = Child of (02)
 // 8,9 (035,045) = Children of (05)
 
-uint8_t NODE_ADDRESS = 0;  // Use numbers 0 through to select an address from the array
+uint8_t NODE_ADDRESS = 1; // Use numbers 0 through 9 to select an address from the array
 
 /***********************************************************************/
 /***********************************************************************/
 
 
-RF24 radio;                              // CE & CS pins to use (Using 7,8 on Uno,Nano)
-RF24Network network; 
+//RF24 radio;                                    // CE & CS pins to use (Using 7,8 on Uno,Nano)
+//RF24Network network; 
 
-uint16_t this_node;                           // Our node address
+uint16_t this_node;                                  // Our node address
 
-const unsigned long interval = 1000; // ms       // Delay manager to send pings regularly.
+const unsigned long interval = 1000; // ms           // Delay manager to send pings regularly. Because of sleepNode(), this is largely irrelevant.
 unsigned long last_time_sent;
 
-
-const short max_active_nodes = 10;            // Array of nodes we are aware of
+const short max_active_nodes = 10;                    // Array of nodes we are aware of
 uint16_t active_nodes[max_active_nodes];
 short num_active_nodes = 0;
 short next_ping_node_index = 0;
 
 
-bool send_T(uint16_t to);                      // Prototypes for functions to send & handle messages
+bool send_T(uint16_t to);                              // Prototypes for functions to send & handle messages
 bool send_N(uint16_t to);
 void handle_T(RF24NetworkHeader& header);
 void handle_N(RF24NetworkHeader& header);
 void add_node(uint16_t node);
 
 
+//This is for sleep mode. It is not really required, as users could just use the number 0 through 10
+typedef enum { wdt_16ms = 0, wdt_32ms, wdt_64ms, wdt_128ms, wdt_250ms, wdt_500ms, wdt_1s, wdt_2s, wdt_4s, wdt_8s } wdt_prescalar_e;
+
+unsigned long awakeTime = 500;                          // How long in ms the radio will stay awake after leaving sleep mode
+unsigned long sleepTimer = 0;                           // Used to keep track of how long the system has been awake
+
 void setup(){
-  RF24_init(&radio,7,8);
-  RF24N_init(&network,&radio);
-  
+  RF24_init(7,8);
+  RF24N_init();
   Serial.begin(115200);
   printf_begin();
   printf_P(PSTR("\n\rRF24Network/examples/meshping/\n\r"));
 
   this_node = node_address_set[NODE_ADDRESS];            // Which node are we?
   
-  RF24_begin(&radio);
-  RF24_setPALevel(&radio,RF24_PA_HIGH);
-  RF24N_begin_d(&network,/*channel*/ 100, /*node address*/ this_node );
+  RF24_begin();
+  RF24_setPALevel(RF24_PA_HIGH);
+  RF24N_begin_d(/*channel*/ 100, /*node address*/ this_node );
 
+/******************************** This is the configuration for sleep mode ***********************/
+  RF24N_setup_watchdog(wdt_1s);                       //The watchdog timer will wake the MCU and radio every second to send a sleep payload, then go back to sleep
 }
 
 void loop(){
     
-  RF24N_update(&network);                                      // Pump the network regularly
+  RF24N_update();                                      // Pump the network regularly
 
-   while ( RF24N_available(&network) )  {                      // Is there anything ready for us?
+   while ( RF24N_available() )  {                      // Is there anything ready for us?
      
     RF24NetworkHeader header;                            // If so, take a look at it
-    RF24N_peek(&network,&header);
+    RF24N_peek(&header);
 
     
       switch (header.type){                              // Dispatch the message to the correct handler.
         case 'T': handle_T(header); break;
         case 'N': handle_N(header); break;
+        
+   /************* SLEEP MODE *********/
+  // Note: A 'sleep' header has been defined, and should only need to be ignored if a node is routing traffic to itself
+  // The header is defined as:  RF24NetworkHeader sleepHeader(/*to node*/ 00, /*type*/ 'S' /*Sleep*/);    
+         case 'S': /*This is a sleep payload, do nothing*/ break;
+        
         default:  printf_P(PSTR("*** WARNING *** Unknown message type %c\n\r"),header.type);
-                  RF24N_read(&network,&header,0,0);
+                  RF24N_read(&header,0,0);
                   break;
       };
     }
+    
+/***************************** CALLING THE NEW SLEEP FUNCTION ************************/    
 
+  if(millis() - sleepTimer > awakeTime&& NODE_ADDRESS){  // Want to make sure the Arduino stays awake for a little while when data comes in. Do NOT sleep if master node.
+     Serial.println("Sleep");
+     sleepTimer = millis();                           // Reset the timer value
+     delay(100);                                      // Give the Serial print some time to finish up
+     RF24_stopListening();                           // Switch to PTX mode. Payloads will be seen as ACK payloads, and the radio will wake up
+     RF24N_sleepNode(8,0);                          // Sleep the node for 8 cycles of 1second intervals
+     Serial.println("Awake"); 
+  }
+  
+   //Examples:
+   // network.sleepNode( cycles, interrupt-pin );
+   // network.sleepNode(0,0);         // The WDT is configured in this example to sleep in cycles of 1 second. This will sleep 1 second, or until a payload is received 
+   // network.sleepNode(1,255);       // Sleep this node for 1 second. Do not wake up until then, even if a payload is received ( no interrupt ) Payloads will be lost.
+    
+                                /****  end sleep section ***/  
+  
   
   unsigned long now = millis();                         // Send a ping to the next node every 'interval' ms
   if ( now - last_time_sent >= interval ){
@@ -156,12 +179,6 @@ void loop(){
         last_time_sent -= 100;                            // Try sending at a different time next time
     }
   }
-
-
-//  delay(50);                          // Delay to allow completion of any serial printing
-//  if(!network.available()){
-//      network.sleepNode(2,0);         // Sleep this node for 2 seconds or a payload is received (interrupt 0 triggered), whichever comes first
-//  }
 }
 
 /**
@@ -176,7 +193,7 @@ bool send_T(uint16_t to)
   unsigned long message = millis();
   printf_P(PSTR("---------------------------------\n\r"));
   printf_P(PSTR("%lu: APP Sending %lu to 0%o...\n\r"),millis(),message,to);
-  return RF24N_write_m(&network,&header,&message,sizeof(unsigned long));
+  return RF24N_write_m(&header,&message,sizeof(unsigned long));
 }
 
 /**
@@ -189,7 +206,7 @@ bool send_N(uint16_t to)
   
   printf_P(PSTR("---------------------------------\n\r"));
   printf_P(PSTR("%lu: APP Sending active nodes to 0%o...\n\r"),millis(),to);
-  return RF24N_write_m(&network,&header,active_nodes,sizeof(active_nodes));
+  return RF24N_write_m(&header,active_nodes,sizeof(active_nodes));
 }
 
 /**
@@ -199,7 +216,7 @@ bool send_N(uint16_t to)
 void handle_T(RF24NetworkHeader& header){
 
   unsigned long message;                                                                      // The 'T' message is just a ulong, containing the time
-  RF24N_read(&network, &header,&message,sizeof(unsigned long));
+  RF24N_read(&header,&message,sizeof(unsigned long));
   printf_P(PSTR("%lu: APP Received %lu from 0%o\n\r"),millis(),message,header.from_node);
 
 
@@ -214,7 +231,7 @@ void handle_N(RF24NetworkHeader& header)
 {
   static uint16_t incoming_nodes[max_active_nodes];
 
-  RF24N_read(&network,&header,&incoming_nodes,sizeof(incoming_nodes));
+  RF24N_read(&header,&incoming_nodes,sizeof(incoming_nodes));
   printf_P(PSTR("%lu: APP Received nodes from 0%o\n\r"),millis(),header.from_node);
 
   int i = 0;
@@ -238,5 +255,3 @@ void add_node(uint16_t node){
       printf_P(PSTR("%lu: APP Added 0%o to list of active nodes.\n\r"),millis(),node);
   }
 }
-
-

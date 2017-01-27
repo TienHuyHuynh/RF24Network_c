@@ -18,8 +18,8 @@
       <itemPath>pic_main.c</itemPath>
       <itemPath>serial.c</itemPath>
       <itemPath>../../../RF24_c/utility/XC8/spi.c</itemPath>
-      <itemPath>../../../RF24_c/RF24_c.c</itemPath>
       <itemPath>../../RF24Network_c.c</itemPath>
+      <itemPath>../../../RF24_c/RF24.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

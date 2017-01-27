@@ -16,7 +16,7 @@
  */
 
 #include <RF24Network_c.h>
-#include <RF24_c.h>
+#include <RF24.h>
 
 
 const uint16_t this_node = 01;        // Address of our node in Octal format

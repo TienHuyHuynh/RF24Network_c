@@ -75,9 +75,9 @@
 
 
 #if (defined (__linux) || defined (linux)) && !defined (__ARDUINO_X86__)
-    #include <RF24_c/RF24_c_config.h>
+    #include <RF24/RF24_config.h>
 #else
-    #include <RF24_c_config.h>
+    #include <RF24_config.h>
 #endif
 
 

@@ -18,10 +18,10 @@
   #include <sys/time.h>
   #include <time.h>
   #include <unistd.h>
-  #include <RF24_c/RF24_c.h>
+  #include <RF24/RF24.h>
   #include "RF24Network_c.h"
 #else  
-  #include "RF24_c.h"
+  #include "RF24.h"
   #include "RF24Network_c.h"
 #endif
 
