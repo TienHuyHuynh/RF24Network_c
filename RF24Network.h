@@ -25,7 +25,7 @@ extern "C" {
 
 #include <stddef.h>
 #include <stdint.h>
-#include "RF24Network_c_config.h"
+#include "RF24Network_config.h"
 
 #if (defined (__linux) || defined (linux)) && !defined (__ARDUINO_X86__)
   #include <stdint.h>
@@ -262,10 +262,10 @@ typedef struct
    * @return String representation of this object
    */
   //const char* toString(void) const;
-} RF24NetworkHeader;
+} RF24NetworkHeader_;
 
-  void RF24NH_init(RF24NetworkHeader *rnh, uint16_t _to, unsigned char _type );
-  const char* RF24NH_toString(RF24NetworkHeader *rnh);
+  void RF24NH_init(RF24NetworkHeader_ *rnh, uint16_t _to, unsigned char _type );
+  const char* RF24NH_toString(RF24NetworkHeader_ *rnh);
 
 
 /**
@@ -283,7 +283,7 @@ typedef struct
 //RF24NetworkFrame
 typedef struct
 {
-  RF24NetworkHeader header; /**< Header which is sent with each message */
+  RF24NetworkHeader_ header; /**< Header which is sent with each message */
   uint16_t message_size; /**< The size in bytes of the payload length */
   
   /**
@@ -348,7 +348,7 @@ typedef struct
    */
   //const char* toString(void) const;
 
-} RF24NetworkFrame;
+} RF24NetworkFrame_;
 
  
  typedef struct {
@@ -361,11 +361,11 @@ typedef struct
 //queue emulation on c
 #if defined (RF24_LINUX)
   #define MAX_QUEUE 1024
-  void qpush(RF24NetworkFrame * fc,uint16_t * cont, RF24NetworkFrame frame);
-  RF24NetworkFrame qpop(RF24NetworkFrame * fc,uint16_t * cont);
-  RF24NetworkFrame qfront(RF24NetworkFrame * fc,uint16_t * cont);
-  uint16_t qempty(RF24NetworkFrame * fc,uint16_t * cont);
-  uint16_t qsize(RF24NetworkFrame * fc,uint16_t * cont);
+  void qpush(RF24NetworkFrame_ * fc,uint16_t * cont, RF24NetworkFrame_ frame);
+  RF24NetworkFrame_ qpop(RF24NetworkFrame_ * fc,uint16_t * cont);
+  RF24NetworkFrame_ qfront(RF24NetworkFrame_ * fc,uint16_t * cont);
+  uint16_t qempty(RF24NetworkFrame_ * fc,uint16_t * cont);
+  uint16_t qsize(RF24NetworkFrame_ * fc,uint16_t * cont);
 #endif
 
  /**
@@ -450,7 +450,7 @@ typedef struct
    * @endcode
    */
   #if defined (RF24_LINUX)
-    RF24NetworkFrame external_queue[MAX_QUEUE];
+    RF24NetworkFrame_ external_queue[MAX_QUEUE];
     uint16_t external_queue_c;
   #endif
   
@@ -473,7 +473,7 @@ typedef struct
  * @endcode  
   * Linux devices (defined as RF24_LINUX) currently cache all payload types, and do not utilize frag_ptr. 
   */
-  RF24NetworkFrame* frag_ptr;
+  RF24NetworkFrame_* frag_ptr;
   #endif
 
   /**
@@ -544,10 +544,10 @@ typedef struct
 //public:
 
 #if defined (RF24_LINUX) 
-    RF24NetworkFrame  frame_queue[MAX_QUEUE];
+    RF24NetworkFrame_  frame_queue[MAX_QUEUE];
     uint16_t frame_queue_c;
 
-    RF24NetworkFrame frameFragmentsCache[256];
+    RF24NetworkFrame_ frameFragmentsCache[256];
 
   #else
     #if  defined(__AVR_ATtiny25__) || defined(__AVR_ATtiny45__) || defined(__AVR_ATtiny85__) || defined(__AVR_ATtiny24__) || defined(__AVR_ATtiny44__) || defined(__AVR_ATtiny84__)
@@ -568,13 +568,13 @@ typedef struct
 	uint8_t* next_frame; /**< Pointer into the @p frame_queue where we should place the next received frame */
 	
 	#if !defined ( DISABLE_FRAGMENTATION )
-      RF24NetworkFrame frag_queue;
+      RF24NetworkFrame_ frag_queue;
       uint8_t frag_queue_message_buffer[MAX_PAYLOAD_SIZE]; //frame size + 1 
     #endif
   
   #endif    
 
-}RF24Network;
+}RF24Network_;
 
  /**
    * Construct the network
@@ -641,7 +641,7 @@ typedef struct
    *
    * @param[out] header The header (envelope) of the next message
    */
-  uint16_t RF24N_peek(RF24NetworkHeader * header);
+  uint16_t RF24N_peek(RF24NetworkHeader_ * header);
 
   /**
    * Read a message
@@ -663,7 +663,7 @@ typedef struct
    * @param maxlen The largest message size which can be held in @p message
    * @return The total number of bytes copied into @p message
    */
-  uint16_t RF24N_read(RF24NetworkHeader * header, void* message, uint16_t maxlen);
+  uint16_t RF24N_read(RF24NetworkHeader_ * header, void* message, uint16_t maxlen);
 
   /**
    * Send a message
@@ -684,7 +684,7 @@ typedef struct
    * @param len The size of the message
    * @return Whether the message was successfully received
    */
-  uint8_t RF24N_write_m( RF24NetworkHeader* header,const void* message, uint16_t len);
+  uint8_t RF24N_write_m( RF24NetworkHeader_* header,const void* message, uint16_t len);
 
   /**@}*/
   /**
@@ -770,7 +770,7 @@ typedef struct
    * @return Whether the message was successfully sent
    */
    
-   uint8_t RF24N_multicast( RF24NetworkHeader * header,const void* message, uint16_t len, uint8_t level);
+   uint8_t RF24N_multicast( RF24NetworkHeader_ * header,const void* message, uint16_t len, uint8_t level);
    
 	
    #endif
@@ -780,7 +780,7 @@ typedef struct
    * The same as write, but a physical address is specified as the last option.
    * The payload will be written to the physical address, and routed as necessary by the recipient
    */
-   uint8_t RF24N_write_( RF24NetworkHeader * header,const void* message, uint16_t len, uint16_t writeDirect);
+   uint8_t RF24N_write_( RF24NetworkHeader_ * header,const void* message, uint16_t len, uint16_t writeDirect);
 
    /**
    * Sleep this node - For AVR devices only
@@ -860,7 +860,7 @@ typedef struct
 
  uint8_t RF24N_write( uint16_t, uint8_t directTo);
   uint8_t RF24N_write_to_pipe( uint16_t node, uint8_t pipe, uint8_t multicast );
-  uint8_t RF24N_enqueue(RF24NetworkHeader *header);
+  uint8_t RF24N_enqueue(RF24NetworkHeader_ *header);
 
   uint8_t RF24N_is_direct_child(uint16_t node );
   uint8_t RF24N_is_descendant(uint16_t node );
@@ -868,13 +868,13 @@ typedef struct
   uint16_t RF24N_direct_child_route_to(uint16_t node );
   //uint8_t RF24N_pipe_to_descendant(RF24Network * rn,  uint16_t node );
   void RF24N_setup_address(void);
-  uint8_t RF24N__write(RF24NetworkHeader * header,const void* message, uint16_t len, uint16_t writeDirect);
+  uint8_t RF24N__write(RF24NetworkHeader_ * header,const void* message, uint16_t len, uint16_t writeDirect);
     
   uint8_t RF24N_logicalToPhysicalAddress(logicalToPhysicalStruct *conversionInfo);
   
 
 #if defined (RF24_LINUX) 
-    uint8_t RF24N_appendFragmentToFrame(RF24NetworkFrame frame);
+    uint8_t RF24N_appendFragmentToFrame(RF24NetworkFrame_ frame);
 #endif
   
  
@@ -888,7 +888,7 @@ typedef struct
 
    uint16_t RF24N_getRouteTimeout(void);
   
-   RF24NetworkFrame* RF24N_getFrag_ptr(void);
+   RF24NetworkFrame_* RF24N_getFrag_ptr(void);
 
 
    void    RF24N_setMulticastRelay(void); 
@@ -896,7 +896,7 @@ typedef struct
    uint8_t  RF24N_getMulticastRelay(void); 
 
   #if defined (RF24_LINUX)
-   RF24NetworkFrame * RF24N_getExternalQueue(void);  
+   RF24NetworkFrame_ * RF24N_getExternalQueue(void);  
    uint16_t * RF24N_getExternalQueue_c(void);  
   #endif
 
@@ -1352,6 +1352,10 @@ typedef struct
 
 #ifdef __cplusplus
  }
+#endif
+
+#ifdef __cplusplus
+#include"cpp_wrapper.h" 
 #endif
 
 #endif // __RF24NETWORK_H__

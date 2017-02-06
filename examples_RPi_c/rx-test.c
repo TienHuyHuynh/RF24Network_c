@@ -3,8 +3,6 @@
 
 #include <RF24/RF24.h>
 #include <RF24Network/RF24Network.h>
-#include <iostream>
-#include <ctime>
 #include <stdio.h>
 /*#include <rrd.h>*/
 #include <time.h>
@@ -23,9 +21,10 @@
 //RF24 radio(RPI_V2_GPIO_P1_15, BCM2835_SPI_CS0, BCM2835_SPI_SPEED_4MHZ); 
 
 // Setup for GPIO 22 CE and CE1 CSN with SPI Speed @ 8Mhz
-RF24 radio(RPI_V2_GPIO_P1_15, BCM2835_SPI_CS0, BCM2835_SPI_SPEED_8MHZ);  
+//RF24 radio;
 
-RF24Network network(radio);
+
+//RF24Network network;
 
 // Address of our node
 const uint16_t this_node = 00;
@@ -59,29 +58,34 @@ int main(int argc, char** argv)
 
 	char temperatureFile[] = "temperature.txt";
 
-	radio.begin();
+	
+	RF24_init2(RPI_V2_GPIO_P1_15, BCM2835_SPI_CS0, BCM2835_SPI_SPEED_8MHZ);  
+
+	RF24N_init();
+
+	RF24_begin();
 	//radio.setDataRate(RF24_250KBPS);
-	radio.setRetries(7,7);
+	RF24_setRetries(7,7);
 	
 	delay(5);
-	network.begin(/*channel*/ 100, /*node address*/ this_node);
-	radio.printDetails();
+	RF24N_begin_d(/*channel*/ 100, /*node address*/ this_node);
+	RF24_printDetails();
 	
 	while(1)
 	{
 		  //FILE * pFile;
 	          //pFile = fopen ("/root/temp-exterior.txt","a");
-		  network.update();
-		  while ( network.available() )
+		  RF24N_update();
+		  while ( RF24N_available() )
 		  {
 		    // If so, grab it and print it out
-		    RF24NetworkHeader header;
-		    network.peek(header);
+		    RF24NetworkHeader_ header;
+		    RF24N_peek(&header);
 
 		   
 		   if(header.type == 'T'){
 			float message;
-			network.read(header,&message,sizeof(float));
+			RF24N_read(&header,&message,sizeof(float));
 			printf("RCVD: %.3f \n\r",message);
 			FILE *myFile;
 			myFile = fopen(temperatureFile, "a+"); //Append, new EOF

@@ -1,0 +1,102 @@
+1795060612: NET Pipe 5 on node 01 has address cccccc3ce3
+1795060628: NET Pipe 4 on node 01 has address cccccc3c3e
+1795060644: NET Pipe 3 on node 01 has address cccccc3cce
+1795060660: NET Pipe 2 on node 01 has address cccccc3c33
+1795060676: NET Pipe 1 on node 01 has address cccccc3c3c
+1795060695: NET Pipe 0 on node 01 has address cccccc3ccc
+================ SPI Configuration ================
+CSN Pin  	 = CE0 (PI Hardware Driven)
+CE Pin  	 = Custom GPIO22
+Clock Speed	 = 8 Mhz
+================ NRF Configuration ================
+STATUS		 = 0x0e RX_DR=0 TX_DS=0 MAX_RT=0 RX_P_NO=7 TX_FULL=0
+RX_ADDR_P0-1	 = 0xcccccc3ccc 0xcccccc3c3c
+RX_ADDR_P2-5	 = 0x33 0xce 0x3e 0xe3
+TX_ADDR		 = 0xcccccccc3c
+RX_PW_P0-6	 = 0x20 0x20 0x20 0x20 0x20 0x20
+EN_AA		 = 0x3e
+EN_RXADDR	 = 0x3f
+RF_CH		 = 0x5a
+RF_SETUP	 = 0x07
+CONFIG		 = 0x0f
+DYNPD/FEATURE	 = 0x3f 0x04
+Data Rate	 = 1MBPS
+Model		 = nRF24L01+
+CRC Length	 = 16 bits
+PA Power	 = PA_MAX
+Sending ..
+1795060859: NET Sending id 1 from 01 to 00 type 0
+1795060859: FRG frame size 16
+1795060859: FRG frame 01 00 00 00 01 00 00 00 7B 74 FFFFFFFE 6A 00 00 00 00 
+1795060859: MAC Sending to 00 via 00 on pipe 1
+1795060859: NET Pipe 1 on node 00 has address cccccccc3c
+ok.
+Sending ..
+1795062859: NET Sending id 2 from 01 to 00 type 0
+1795062859: FRG frame size 16
+1795062859: FRG frame 01 00 00 00 02 00 00 00 4B 7C FFFFFFFE 6A 01 00 00 00 
+1795062859: MAC Sending to 00 via 00 on pipe 1
+1795062859: NET Pipe 1 on node 00 has address cccccccc3c
+ok.
+Sending ..
+1795064859: NET Sending id 3 from 01 to 00 type 0
+1795064859: FRG frame size 16
+1795064859: FRG frame 01 00 00 00 03 00 00 00 1B FFFFFF84 FFFFFFFE 6A 02 00 00 00 
+1795064859: MAC Sending to 00 via 00 on pipe 1
+1795064859: NET Pipe 1 on node 00 has address cccccccc3c
+ok.
+Sending ..
+1795066861: NET Sending id 4 from 01 to 00 type 0
+1795066861: FRG frame size 16
+1795066861: FRG frame 01 00 00 00 04 00 00 00 FFFFFFED FFFFFF8B FFFFFFFE 6A 03 00 00 00 
+1795066861: MAC Sending to 00 via 00 on pipe 1
+1795066861: NET Pipe 1 on node 00 has address cccccccc3c
+ok.
+Sending ..
+1795068863: NET Sending id 5 from 01 to 00 type 0
+1795068863: FRG frame size 16
+1795068863: FRG frame 01 00 00 00 05 00 00 00 FFFFFFBF FFFFFF93 FFFFFFFE 6A 04 00 00 00 
+1795068863: MAC Sending to 00 via 00 on pipe 1
+1795068863: NET Pipe 1 on node 00 has address cccccccc3c
+ok.
+Sending ..
+1795070865: NET Sending id 6 from 01 to 00 type 0
+1795070865: FRG frame size 16
+1795070865: FRG frame 01 00 00 00 06 00 00 00 FFFFFF90 FFFFFF9B FFFFFFFE 6A 05 00 00 00 
+1795070865: MAC Sending to 00 via 00 on pipe 1
+1795070865: NET Pipe 1 on node 00 has address cccccccc3c
+ok.
+Sending ..
+1795072865: NET Sending id 7 from 01 to 00 type 0
+1795072865: FRG frame size 16
+1795072865: FRG frame 01 00 00 00 07 00 00 00 61 FFFFFFA3 FFFFFFFE 6A 06 00 00 00 
+1795072865: MAC Sending to 00 via 00 on pipe 1
+1795072865: NET Pipe 1 on node 00 has address cccccccc3c
+ok.
+Sending ..
+1795074865: NET Sending id 8 from 01 to 00 type 0
+1795074865: FRG frame size 16
+1795074865: FRG frame 01 00 00 00 08 00 00 00 30 FFFFFFAB FFFFFFFE 6A 07 00 00 00 
+1795074865: MAC Sending to 00 via 00 on pipe 1
+1795074865: NET Pipe 1 on node 00 has address cccccccc3c
+ok.
+Sending ..
+1795076864: NET Sending id 9 from 01 to 00 type 0
+1795076864: FRG frame size 16
+1795076864: FRG frame 01 00 00 00 09 00 00 00 00 FFFFFFB3 FFFFFFFE 6A 08 00 00 00 
+1795076864: MAC Sending to 00 via 00 on pipe 1
+1795076864: NET Pipe 1 on node 00 has address cccccccc3c
+ok.
+Sending ..
+1795078866: NET Sending id 10 from 01 to 00 type 0
+1795078866: FRG frame size 16
+1795078866: FRG frame 01 00 00 00 0A 00 00 00 FFFFFFD1 FFFFFFBA FFFFFFFE 6A 09 00 00 00 
+1795078866: MAC Sending to 00 via 00 on pipe 1
+1795078866: NET Pipe 1 on node 00 has address cccccccc3c
+ok.
+Sending ..
+1795080867: NET Sending id 11 from 01 to 00 type 0
+1795080867: FRG frame size 16
+1795080867: FRG frame 01 00 00 00 0B 00 00 00 FFFFFFA3 FFFFFFC2 FFFFFFFE 6A 0A 00 00 00 
+1795080867: MAC Sending to 00 via 00 on pipe 1
+1795080867: NET Pipe 1 on node 00 has addres

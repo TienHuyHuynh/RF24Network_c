@@ -17,11 +17,11 @@ PREFIX=/usr/local
 # where to put the lib
 LIBDIR=$(PREFIX)/lib
 # lib name 
-LIB_RFN=librf24network_c
+LIB_RFN=librf24network
 # shared library name
 LIBNAME_RFN=$(LIB_RFN).so.1.0
 
-HEADER_DIR=${PREFIX}/include/RF24Network_c
+HEADER_DIR=${PREFIX}/include/RF24Network
 
 ARCH=armv6zk
 ifeq "$(shell uname -m)" "armv7l"
@@ -43,14 +43,14 @@ endif
 
 # make all
 # reinstall the library after each recompilation
-all: librf24network_c
+all: librf24network
 
 # Make the library
-librf24network_c: RF24Network_c.o
+librf24network: RF24Network.o
 	gcc -shared -Wl,-soname,$@.so.1 ${CCFLAGS} -o ${LIBNAME_RFN} $^ -lrf24-bcm
 
 # Library parts
-RF24Network_c.o: RF24Network_c.c 
+RF24Network.o: RF24Network.c 
 	gcc -Wall -fPIC ${CCFLAGS} -c $^
 
 # clear build files

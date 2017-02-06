@@ -19,7 +19,7 @@ extern "C" {
 #include <string.h>
 // Framework headers
 // Library headers
-#include <RF24Network_c_config.h>
+#include <RF24Network_config.h>
 // Project headers
 
 //class RF24Network;
@@ -31,7 +31,7 @@ extern "C" {
 //class Sync
 typedef struct
 {
-  RF24Network* network;
+  RF24Network_* network;
   uint8_t* app_data; /**< Application's copy of the data */
   uint8_t* internal_data; /**< Our copy of the data */
   size_t len; /**< Length of the data in bytes */
@@ -43,7 +43,7 @@ typedef struct
    *
    * @param _network Which network to syncrhonize over
    */
-  void Sync_init(Sync_* sy, RF24Network* _network);
+  void Sync_init(Sync_* sy, RF24Network_* _network);
  
   /**
    * Begin the object

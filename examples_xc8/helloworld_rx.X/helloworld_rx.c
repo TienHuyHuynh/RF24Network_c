@@ -17,7 +17,7 @@
 
 
 
-#include <RF24Network_c.h>
+#include <RF24Network.h>
 #include <RF24.h>
 #include "serial.h"
 
@@ -54,7 +54,7 @@ void loop(void){
   
   while ( RF24N_available() ) {     // Is there anything ready for us?
     
-    RF24NetworkHeader header;        // If so, grab it and print it out
+    RF24NetworkHeader_ header;        // If so, grab it and print it out
     payload_t payload;
     RF24N_read( &header,&payload,sizeof(payload));
     Serial_print("Received packet #");

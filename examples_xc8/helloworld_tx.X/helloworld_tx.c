@@ -15,7 +15,7 @@
  * Every 2 seconds, send a payload to the receiver node.
  */
 
-#include <RF24Network_c.h>
+#include <RF24Network.h>
 #include <RF24.h>
 #include "serial.h"
 
@@ -59,7 +59,7 @@ void loop() {
   {
     payload_t payload;
     uint8_t ok;
-    RF24NetworkHeader header;
+    RF24NetworkHeader_ header;
         
     last_sent = now;
 

@@ -11,7 +11,7 @@
 #include <stdlib.h>
 // Framework headers
 // Library headers
-#include <RF24Network_c.h>
+#include <RF24Network.h>
 // Project headers
 // This component's header
 #include <Sync.h>
@@ -23,7 +23,7 @@
    *
    * @param _network Which network to syncrhonize over
    */
-  void Sync_init(Sync_* sy, RF24Network* _network)
+  void Sync_init(Sync_* sy, RF24Network_* _network)
   {
      sy->network=_network;
      sy->app_data=NULL;
@@ -96,7 +96,7 @@ void Sync_update(Sync_ *sy)
   {
     // TODO handle the case where this has to be broken into
     // multiple messages
-    RF24NetworkHeader header;
+    RF24NetworkHeader_ header;
     RF24NH_init(&header,/*to node*/ sy->to_node, /*type*/ 'S' /*Sync*/);
     RF24N_write_m(&header,message,sizeof(message));
   }
@@ -106,7 +106,7 @@ void Sync_update(Sync_ *sy)
   if ( RF24N_available() )
   {
     // If so, take a look at it
-    RF24NetworkHeader header;
+    RF24NetworkHeader_ header;
     RF24N_peek(&header);
 
     switch (header.type)

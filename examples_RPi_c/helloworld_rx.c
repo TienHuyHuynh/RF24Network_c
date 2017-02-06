@@ -11,8 +11,6 @@
 
 #include <RF24/RF24.h>
 #include <RF24Network/RF24Network.h>
-#include <iostream>
-#include <ctime>
 #include <stdio.h>
 #include <time.h>
 
@@ -31,9 +29,9 @@
 //RF24 radio(RPI_V2_GPIO_P1_15, BCM2835_SPI_CS0, BCM2835_SPI_SPEED_4MHZ); 
 
 // Setup for GPIO 22 CE and CE1 CSN with SPI Speed @ 8Mhz
-RF24 radio(RPI_V2_GPIO_P1_15, BCM2835_SPI_CS0, BCM2835_SPI_SPEED_8MHZ);  
+//RF24 radio;
 
-RF24Network network(radio);
+//RF24Network network;
 
 // Address of our node in Octal format
 const uint16_t this_node = 00;
@@ -47,35 +45,39 @@ unsigned long last_sent;             // When did we last send?
 unsigned long packets_sent;          // How many have we sent already
 
 
-struct payload_t {                  // Structure of our payload
+typedef struct {                  // Structure of our payload
   uint32_t ms;
   uint32_t counter;
-};
+} payload_t;
 
 int main(int argc, char** argv) 
 {
 	// Refer to RF24.h or nRF24L01 DS for settings
 
-	radio.begin();
+	RF24_init2(RPI_V2_GPIO_P1_15, BCM2835_SPI_CS0, BCM2835_SPI_SPEED_8MHZ);  
+
+	RF24N_init();
+
+	RF24_begin();
 	
 	delay(5);
-	network.begin(/*channel*/ 90, /*node address*/ this_node);
-	radio.printDetails();
+	RF24N_begin_d(/*channel*/ 90, /*node address*/ this_node);
+	RF24_printDetails();
 	
 	while(1)
 	{
 
-		  network.update();
-  		  while ( network.available() ) {     // Is there anything ready for us?
+		  RF24N_update();
+  		  while ( RF24N_available() ) {     // Is there anything ready for us?
     			
-		 	RF24NetworkHeader header;        // If so, grab it and print it out
+		 	RF24NetworkHeader_ header;        // If so, grab it and print it out
    			 payload_t payload;
-  			 network.read(header,&payload,sizeof(payload));
+  			 RF24N_read(&header,&payload,sizeof(payload));
 			
 			printf("Received payload # %lu at %lu \n",payload.counter,payload.ms);
-  }		  
+                  }		  
 		 //sleep(2);
-		 delay(2000);
+		 delay(200);
 		 //fclose(pFile);
 	}
 

@@ -25,6 +25,7 @@ ifneq "${RPI}" "1"
 RPI=$(shell cat /proc/cpuinfo | grep Hardware | grep -c BCM2709)
 endif
 
+
 ifeq "$(RPI)" "1"
 # The recommended compiler flags for the Raspberry Pi
 CCFLAGS=-Ofast -mfpu=vfp -mfloat-abi=hard -march=$(ARCH) -mtune=arm1176jzf-s -std=c++0x
@@ -33,12 +34,12 @@ endif
 
 # define all programs
 PROGRAMS = rx-test helloworld_rx helloworld_tx
-SOURCES = ${PROGRAMS:=.cpp}
+SOURCES = ${PROGRAMS:=.c}
 
 all: ${PROGRAMS}
 
 ${PROGRAMS}: ${SOURCES}
-	g++ ${CCFLAGS} -Wall -I../ $@.cpp -lrf24-bcm -lrf24network -o $@
+	gcc ${CCFLAGS} -Wall -I../ $@.c -lrf24-bcm -lrf24network -o $@
 
 clean:
 	rm -rf $(PROGRAMS)
